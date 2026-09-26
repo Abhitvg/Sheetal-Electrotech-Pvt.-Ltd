@@ -1,69 +1,162 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowRight, Factory, Settings2, ShieldCheck, Box } from "lucide-react";
+import QuoteCalculator from "@/components/QuoteCalculator";
+import CapabilitiesScroller from "@/components/CapabilitiesScroller";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="flex flex-col w-full overflow-hidden">
+      {/* 1. HERO SECTION */}
+      <section className="relative w-full h-[90vh] min-h-[600px] flex items-end pb-24 pt-32">
+        {/* Background Image Layer */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-ink/40 z-10" /> {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent z-10" />
+          <Image
+            src="/hero_factory.jpg" // We will move the generated image here
+            alt="Advanced SMT Assembly Line at Sheetal Electrotech"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+        </div>
+
+        {/* Content Container */}
+        <div className="container-wide relative z-20 w-full text-paper">
+          <div className="max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <p className="text-accent uppercase tracking-widest font-mono text-sm mb-6 flex items-center gap-3">
+                <span className="w-8 h-[1px] bg-accent inline-block"></span>
+                OEM Manufacturing Partner
+              </p>
+              
+              <h1 className="text-paper mb-8 font-display text-5xl md:text-7xl lg:text-8xl font-medium leading-[1.05]">
+                Solving Complex Manufacturing Challenges.
+              </h1>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col sm:flex-row gap-6 mb-16"
             >
-              Learning
-            </a>{" "}
-            center.
+              <button className="bg-accent text-white px-8 py-4 font-medium flex items-center justify-between gap-4 hover:bg-orange-600 transition-colors w-max group">
+                Request a Quote
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+              <button className="border border-white/30 px-8 py-4 font-medium hover:bg-white/10 transition-colors w-max">
+                Explore Facilities
+              </button>
+            </motion.div>
+          </div>
+
+          {/* Dimension-line Stat Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-white/20 pt-8"
+          >
+            <div className="flex flex-col gap-2">
+              <span className="text-3xl md:text-4xl font-display font-medium">9</span>
+              <span className="text-sm font-mono text-white/70 uppercase">In-house Facilities</span>
+            </div>
+            <div className="flex flex-col gap-2">
+              <span className="text-3xl md:text-4xl font-display font-medium">100K</span>
+              <span className="text-sm font-mono text-white/70 uppercase">Units / Day</span>
+            </div>
+            <div className="flex flex-col gap-2">
+              <span className="text-3xl md:text-4xl font-display font-medium">18+</span>
+              <span className="text-sm font-mono text-white/70 uppercase">Moulding Machines</span>
+            </div>
+            <div className="flex flex-col gap-2">
+              <span className="text-3xl md:text-4xl font-display font-medium">25+</span>
+              <span className="text-sm font-mono text-white/70 uppercase">Years Experience</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 2. THE OEM PROMISE */}
+      <section className="section-padding bg-paper">
+        <div className="container-wide">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="mb-6">We own your production end-to-end.</h2>
+              <p className="text-steel mb-8 text-lg">
+                Stop juggling multiple vendors and dealing with supply chain delays. From product design and mould manufacturing to SMT assembly and final packing, we are a fully vertically integrated OEM partner based in Daman, India.
+              </p>
+              
+              <ul className="space-y-6">
+                {[
+                  { icon: Settings2, title: "Design to Production", desc: "In-house tooling and precision molding for rigid plastics." },
+                  { icon: Factory, title: "Mass Scale Capacity", desc: "Extrusion capacity of up to 1.2M pieces per month." },
+                  { icon: ShieldCheck, title: "Verified Quality", desc: "Rigorous end-of-line testing with BIS & CE compliance." }
+                ].map((item, i) => (
+                  <li key={i} className="flex gap-4 items-start">
+                    <div className="p-3 bg-mist rounded-sm">
+                      <item.icon className="w-6 h-6 text-accent" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-ink mb-1">{item.title}</h4>
+                      <p className="text-steel text-sm">{item.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            <div className="relative h-[600px] w-full bg-mist">
+               {/* Asymmetric composition image container - we'll fill this later */}
+               <div className="absolute inset-4 bg-steel/10 flex items-center justify-center">
+                 <p className="font-mono text-sm text-steel">Placeholder: Facility Shot</p>
+               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2.2 SCROLL-LINKED FACILITIES STORYTELLING */}
+      <CapabilitiesScroller />
+
+      {/* 2.5 LIVE CAPACITY CALCULATOR */}
+      <section className="py-24 bg-mist/50">
+        <div className="container-wide">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="mb-4">Instantly verify our capacity.</h2>
+            <p className="text-steel text-lg">
+              No endless email threads. Input your target volume and category to get an immediate 
+              estimate of unit cost and lead time based on our active production lines.
+            </p>
+          </div>
+          <QuoteCalculator />
+        </div>
+      </section>
+
+      {/* 3. TRUST & LOGO WALL (Proof Strip) */}
+      <section className="py-24 bg-ink text-paper">
+        <div className="container-wide text-center">
+          <p className="font-mono text-sm uppercase tracking-widest text-white/50 mb-12">
+            Trusted by industry leaders
           </p>
+          <div className="flex flex-wrap justify-center gap-12 md:gap-24 opacity-70 grayscale">
+             {/* Text placeholders for now since we don't have SVGs */}
+             {["TATA", "Crompton", "Ledvance", "Orient", "HPCL", "UPL"].map((client, i) => (
+               <span key={i} className="text-2xl font-display font-medium tracking-wide">
+                 {client}
+               </span>
+             ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </section>
     </div>
   );
 }
