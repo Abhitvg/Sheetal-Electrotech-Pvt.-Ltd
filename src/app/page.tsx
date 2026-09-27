@@ -9,6 +9,7 @@ import DarkIndustrialTransition from "@/components/DarkIndustrialTransition";
 import VirtualProductionLine from "@/components/VirtualProductionLine";
 import TestingLabInterface from "@/components/TestingLabInterface";
 import MaterialShowcase from "@/components/MaterialShowcase";
+import StreetLightExplosionSequence from "@/components/StreetLightExplosionSequence";
 
 export default function Home() {
   return (
@@ -27,6 +28,9 @@ export default function Home() {
 
       {/* 4. TESTING LAB INTERFACE */}
       <TestingLabInterface />
+
+      {/* 4.5 STREET LIGHT EXPLOSION */}
+      <StreetLightExplosionSequence />
 
       {/* 5. LIVE CAPACITY CALCULATOR */}
       <section className="py-24 bg-gradient-premium relative overflow-hidden">
