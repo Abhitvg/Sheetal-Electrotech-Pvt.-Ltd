@@ -50,7 +50,7 @@ export default function CapabilitiesScroller() {
   });
 
   return (
-    <section ref={containerRef} className="relative bg-ink text-paper" style={{ height: "300vh" }}>
+    <section ref={containerRef} className="relative bg-mist text-ink" style={{ height: "300vh" }}>
       {/* Sticky Container */}
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         <div className="container-wide w-full h-full flex flex-col md:flex-row items-center py-24 gap-16">
@@ -132,7 +132,7 @@ export default function CapabilitiesScroller() {
                   className="absolute inset-0 overflow-hidden"
                 >
                   <motion.div style={{ scale }} className="w-full h-full relative">
-                    <div className="absolute inset-0 bg-ink/20 z-10" />
+                    <div className="absolute inset-0 bg-paper/20 z-10" />
                     <Image
                       src={facility.image}
                       alt={facility.title}

@@ -42,7 +42,7 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
       </div>
 
       {/* Spec Bar */}
-      <div className="bg-ink text-paper py-8 border-b border-white/10">
+      <div className="bg-mist text-ink py-8 border-b border-white/10">
         <div className="container-wide grid grid-cols-2 md:grid-cols-4 gap-8">
           {facility.specs.map((spec, i) => (
             <div key={i}>
@@ -91,7 +91,7 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
 
           {/* Right: Sticky RFQ Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-32 bg-ink text-paper p-8">
+            <div className="sticky top-32 bg-mist text-ink p-8">
               <p className="font-mono text-xs uppercase tracking-widest text-white/40 mb-4">
                 Ready to partner?
               </p>

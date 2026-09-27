@@ -65,7 +65,7 @@ export default function RigidPackagingPage() {
     <div className="bg-paper text-ink min-h-screen">
 
       {/* Header */}
-      <div className="bg-ink text-paper pt-40 pb-24">
+      <div className="bg-mist text-ink pt-40 pb-24">
         <div className="container-wide">
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-6 flex items-center gap-3">
             <span className="w-8 h-[1px] bg-accent inline-block" />
@@ -117,7 +117,7 @@ export default function RigidPackagingPage() {
                     onClick={() => { setActiveProduct(p); setSpecsOpen(false); }}
                     className={`px-5 py-2.5 text-sm font-medium transition-all rounded-full border ${
                       activeProduct.id === p.id 
-                        ? "bg-ink text-white border-ink shadow-sm" 
+                        ? "bg-paper text-ink border border-white/10 border-ink shadow-sm" 
                         : "bg-white text-steel border-steel/20 hover:border-steel/40 hover:text-ink"
                     }`}
                   >
@@ -192,7 +192,7 @@ export default function RigidPackagingPage() {
       </section>
 
       {/* Capabilities Strip */}
-      <section className="bg-ink text-paper py-24">
+      <section className="bg-mist text-ink py-24">
         <div className="container-wide">
           <h2 className="text-3xl md:text-5xl font-display mb-16 max-w-xl">End-to-end packaging capability.</h2>
           <div className="grid md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-white/10">

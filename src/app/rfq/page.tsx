@@ -53,7 +53,7 @@ export default function RFQPage() {
   return (
     <div className="min-h-screen bg-paper">
       {/* Header */}
-      <div className="bg-ink text-paper pt-36 pb-20">
+      <div className="bg-mist text-ink pt-36 pb-20">
         <div className="container-wide">
           <div className="max-w-3xl">
             <p className="font-mono text-accent text-sm uppercase tracking-widest mb-6 flex items-center gap-3">
@@ -198,7 +198,7 @@ export default function RFQPage() {
 
           {/* Right: Summary Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-32 bg-ink text-paper p-8">
+            <div className="sticky top-32 bg-mist text-ink p-8">
               <p className="font-mono text-xs uppercase tracking-widest text-white/40 mb-6">What happens next</p>
               <ol className="space-y-6 mb-10">
                 {[

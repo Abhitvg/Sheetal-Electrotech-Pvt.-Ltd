@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #14151a;
-  --color-paper: #faf9f6;
-  --color-steel: #3b4a54;
-  --color-accent: #e8720c;
-  --color-mist: #edebe4;
-  --color-success: #2f6d4f;
+  --color-ink: #f8fafc;
+  --color-paper: #030712;
+  --color-steel: #9ca3af;
+  --color-accent: #3b82f6;
+  --color-mist: #111827;
+  --color-success: #10b981;
 
   --font-display: var(--font-display);
   --font-body: var(--font-body);
@@ -59,5 +59,21 @@
   .fade-up.visible {
     opacity: 1;
     transform: none;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 hover:border-accent/50 transition-all duration-300 shadow-2xl;
+  }
+
+  /* Premium Gradients */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600;
+  }
+  .bg-gradient-premium {
+    @apply bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 text-white;
   }
 }

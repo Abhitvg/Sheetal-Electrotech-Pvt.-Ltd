@@ -10,7 +10,7 @@ export default function ProductsHub() {
   const [hoveredSide, setHoveredSide] = useState<"left" | "right" | null>(null);
 
   return (
-    <div className="w-full h-screen flex flex-col md:flex-row bg-ink overflow-hidden pt-20 md:pt-0">
+    <div className="w-full h-screen flex flex-col md:flex-row bg-paper overflow-hidden pt-20 md:pt-0">
       
       {/* LEFT SIDE: Rigid Packaging */}
       <Link 
@@ -23,7 +23,7 @@ export default function ProductsHub() {
       >
         {/* Image Background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <div className={`absolute inset-0 bg-ink transition-opacity duration-700 z-10 ${
+          <div className={`absolute inset-0 bg-paper transition-opacity duration-700 z-10 ${
             hoveredSide === "right" ? "opacity-80" : "opacity-30 group-hover:opacity-10"
           }`} />
           <Image
@@ -76,7 +76,7 @@ export default function ProductsHub() {
       >
         {/* Image Background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <div className={`absolute inset-0 bg-ink transition-opacity duration-700 z-10 ${
+          <div className={`absolute inset-0 bg-paper transition-opacity duration-700 z-10 ${
             hoveredSide === "left" ? "opacity-80" : "opacity-40 group-hover:opacity-10"
           }`} />
           <Image

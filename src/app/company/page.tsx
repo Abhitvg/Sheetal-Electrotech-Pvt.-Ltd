@@ -114,7 +114,7 @@ export default function CompanyPage() {
       </section>
 
       {/* Stats Banner */}
-      <section className="bg-ink text-paper py-20">
+      <section className="bg-mist text-ink py-20">
         <div className="container-wide grid grid-cols-2 md:grid-cols-4 gap-12">
           {[
             { value: "25+", label: "Years operating" },
@@ -217,7 +217,7 @@ export default function CompanyPage() {
           </div>
           <Link
             href="/rfq"
-            className="bg-white text-accent px-10 py-5 font-bold text-lg hover:bg-ink hover:text-white transition-colors flex items-center gap-3 whitespace-nowrap"
+            className="bg-white text-accent px-10 py-5 font-bold text-lg hover:bg-paper hover:text-white transition-colors flex items-center gap-3 whitespace-nowrap"
           >
             Start an RFQ <ArrowRight className="w-5 h-5" />
           </Link>

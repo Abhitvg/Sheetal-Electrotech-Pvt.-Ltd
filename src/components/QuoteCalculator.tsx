@@ -113,7 +113,7 @@ export default function QuoteCalculator() {
       </div>
 
       {/* Output / Estimate Section */}
-      <div className="bg-ink text-paper p-8 md:p-12 md:w-2/5 flex flex-col justify-between">
+      <div className="bg-mist text-ink p-8 md:p-12 md:w-2/5 flex flex-col justify-between">
         <div>
           <p className="font-mono text-sm text-white/50 uppercase tracking-widest mb-6 border-b border-white/10 pb-4">
             Real-Time Estimate

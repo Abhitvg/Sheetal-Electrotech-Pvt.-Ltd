@@ -8,7 +8,7 @@ export default function FacilitiesIndexPage() {
     <div className="bg-paper text-ink min-h-screen">
 
       {/* Header */}
-      <div className="bg-ink text-paper pt-40 pb-24">
+      <div className="bg-mist text-ink pt-40 pb-24">
         <div className="container-wide">
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-6 flex items-center gap-3">
             <span className="w-8 h-[1px] bg-accent inline-block"></span>
@@ -30,7 +30,7 @@ export default function FacilitiesIndexPage() {
             <Link
               key={facility.slug}
               href={`/facilities/${facility.slug}`}
-              className="group relative overflow-hidden bg-ink text-paper flex flex-col min-h-[380px]"
+              className="group relative overflow-hidden bg-mist text-ink flex flex-col min-h-[380px]"
             >
               {/* Background Image */}
               <div className="absolute inset-0 z-0 overflow-hidden">
@@ -85,7 +85,7 @@ export default function FacilitiesIndexPage() {
           </div>
           <Link
             href="/rfq"
-            className="bg-ink text-white px-10 py-4 font-medium flex items-center gap-3 hover:bg-accent transition-colors whitespace-nowrap"
+            className="bg-paper text-ink border border-white/10 px-10 py-4 font-medium flex items-center gap-3 hover:bg-accent transition-colors whitespace-nowrap"
           >
             Book a Factory Visit <ArrowRight className="w-4 h-4" />
           </Link>

@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-ink text-paper pt-24 pb-12 border-t border-white/10">
+    <footer className="bg-mist text-ink pt-24 pb-12 border-t border-white/10">
       <div className="container-wide">
         
         {/* Main Footer Grid */}

@@ -13,8 +13,8 @@ export default function Home() {
       <section className="relative w-full h-[90vh] min-h-[600px] flex items-end pb-24 pt-32">
         {/* Background Image Layer */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-ink/40 z-10" /> {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent z-10" />
+          <div className="absolute inset-0 bg-paper/60 backdrop-blur-sm z-10" /> {/* Glass overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-paper via-transparent to-transparent z-10" />
           <Image
             src="/images/hero_factory.jpg"
             alt="Advanced SMT Assembly Line at Sheetal Electrotech"
@@ -38,7 +38,7 @@ export default function Home() {
                 OEM Manufacturing Partner
               </p>
               
-              <h1 className="text-paper mb-8 font-display text-5xl md:text-7xl lg:text-8xl font-medium leading-[1.05]">
+              <h1 className="mb-8 font-display text-5xl md:text-7xl lg:text-8xl font-medium leading-[1.05] text-gradient">
                 Solving Complex Manufacturing Challenges.
               </h1>
             </motion.div>
@@ -49,11 +49,11 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col sm:flex-row gap-6 mb-16"
             >
-              <button className="bg-accent text-white px-8 py-4 font-medium flex items-center justify-between gap-4 hover:bg-orange-600 transition-colors w-max group">
+              <button className="bg-accent text-white px-8 py-4 font-medium flex items-center justify-between gap-4 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:bg-blue-500 transition-all w-max group rounded-full">
                 Request a Quote
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="border border-white/30 px-8 py-4 font-medium hover:bg-white/10 transition-colors w-max">
+              <button className="glass px-8 py-4 font-medium hover:bg-white/10 transition-colors w-max rounded-full text-white">
                 Explore Facilities
               </button>
             </motion.div>
@@ -66,21 +66,21 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-white/20 pt-8"
           >
-            <div className="flex flex-col gap-2">
-              <span className="text-3xl md:text-4xl font-display font-medium">9</span>
-              <span className="text-sm font-mono text-white/70 uppercase">In-house Facilities</span>
+            <div className="flex flex-col gap-2 glass-card p-6 rounded-2xl">
+              <span className="text-3xl md:text-4xl font-display font-medium text-white">9</span>
+              <span className="text-sm font-mono text-steel uppercase">In-house Facilities</span>
             </div>
-            <div className="flex flex-col gap-2">
-              <span className="text-3xl md:text-4xl font-display font-medium">100K</span>
-              <span className="text-sm font-mono text-white/70 uppercase">Units / Day</span>
+            <div className="flex flex-col gap-2 glass-card p-6 rounded-2xl">
+              <span className="text-3xl md:text-4xl font-display font-medium text-white">100K</span>
+              <span className="text-sm font-mono text-steel uppercase">Units / Day</span>
             </div>
-            <div className="flex flex-col gap-2">
-              <span className="text-3xl md:text-4xl font-display font-medium">18+</span>
-              <span className="text-sm font-mono text-white/70 uppercase">Moulding Machines</span>
+            <div className="flex flex-col gap-2 glass-card p-6 rounded-2xl">
+              <span className="text-3xl md:text-4xl font-display font-medium text-white">18+</span>
+              <span className="text-sm font-mono text-steel uppercase">Moulding Machines</span>
             </div>
-            <div className="flex flex-col gap-2">
-              <span className="text-3xl md:text-4xl font-display font-medium">25+</span>
-              <span className="text-sm font-mono text-white/70 uppercase">Years Experience</span>
+            <div className="flex flex-col gap-2 glass-card p-6 rounded-2xl">
+              <span className="text-3xl md:text-4xl font-display font-medium text-white">25+</span>
+              <span className="text-sm font-mono text-steel uppercase">Years Experience</span>
             </div>
           </motion.div>
         </div>
@@ -102,12 +102,12 @@ export default function Home() {
                   { icon: Factory, title: "Mass Scale Capacity", desc: "Extrusion capacity of up to 1.2M pieces per month." },
                   { icon: ShieldCheck, title: "Verified Quality", desc: "Rigorous end-of-line testing with BIS & CE compliance." }
                 ].map((item, i) => (
-                  <li key={i} className="flex gap-4 items-start">
-                    <div className="p-3 bg-mist rounded-sm">
+                  <li key={i} className="flex gap-4 items-start p-4 glass-card rounded-xl">
+                    <div className="p-3 bg-accent/20 rounded-lg border border-accent/30">
                       <item.icon className="w-6 h-6 text-accent" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-ink mb-1">{item.title}</h4>
+                      <h4 className="font-medium text-white mb-1">{item.title}</h4>
                       <p className="text-steel text-sm">{item.desc}</p>
                     </div>
                   </li>
@@ -132,8 +132,9 @@ export default function Home() {
       <CapabilitiesScroller />
 
       {/* 2.5 LIVE CAPACITY CALCULATOR */}
-      <section className="py-24 bg-mist/50">
-        <div className="container-wide">
+      <section className="py-24 bg-gradient-premium relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/hero_factory.jpg')] opacity-10 mix-blend-overlay bg-cover bg-center"></div>
+        <div className="container-wide relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="mb-4">Instantly verify our capacity.</h2>
             <p className="text-steel text-lg">
@@ -146,7 +147,7 @@ export default function Home() {
       </section>
 
       {/* 3. TRUST & LOGO WALL (Proof Strip) */}
-      <section className="py-24 bg-ink text-paper">
+      <section className="py-24 bg-paper text-ink border-t border-white/10">
         <div className="container-wide text-center">
           <p className="font-mono text-sm uppercase tracking-widest text-white/50 mb-12">
             Trusted by industry leaders

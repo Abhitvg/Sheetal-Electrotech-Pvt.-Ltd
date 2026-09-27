@@ -40,6 +40,7 @@ const ledProducts = [
       { label: "Input Voltage", value: "160–260V AC" },
       { label: "Certification", value: "BIS, CE, RoHS" },
     ],
+    explodedView: "/images/smart_bulb_exploded.png",
   },
   {
     id: "led-batten",
@@ -93,6 +94,7 @@ const ledProducts = [
       { label: "Surge Limit", value: "5KV" },
       { label: "Material", value: "All Die Cast" },
     ],
+    explodedView: "/images/led_exploded_view.jpg",
   },
   {
     id: "spot",
@@ -204,7 +206,7 @@ export default function LEDLightingPage() {
     <div className="bg-paper text-ink min-h-screen">
 
       {/* Header */}
-      <div className="bg-ink text-paper pt-40 pb-24">
+      <div className="bg-mist text-ink pt-40 pb-24">
         <div className="container-wide">
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-6 flex items-center gap-3">
             <span className="w-8 h-[1px] bg-accent inline-block" />
@@ -257,8 +259,8 @@ export default function LEDLightingPage() {
                     onClick={() => { setActiveProduct(p); setSpecsOpen(false); }}
                     className={`px-5 py-2.5 text-sm font-medium transition-all rounded-full border ${
                       activeProduct.id === p.id 
-                        ? "bg-ink text-white border-ink shadow-sm" 
-                        : "bg-white text-steel border-steel/20 hover:border-steel/40 hover:text-ink"
+                        ? "bg-paper text-ink border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.1)]" 
+                        : "glass text-steel border-steel/20 hover:border-steel/40 hover:text-white"
                     }`}
                   >
                     {p.name}
@@ -326,14 +328,49 @@ export default function LEDLightingPage() {
                     </AnimatePresence>
                   </div>
 
+                  {/* Product Anatomy Accordion (if available) */}
+                  {/* @ts-ignore */}
+                  {activeProduct.explodedView && (
+                    <div className="border border-steel/20 mb-8 glass-card">
+                      <button
+                        onClick={() => {
+                          const el = document.getElementById("anatomy-content");
+                          if (el) {
+                            if (el.style.height === "0px" || !el.style.height) {
+                              el.style.height = "auto";
+                            } else {
+                              el.style.height = "0px";
+                            }
+                          }
+                        }}
+                        className="w-full flex justify-between items-center px-6 py-4 font-medium hover:bg-white/5 transition-colors"
+                      >
+                        <span className="font-mono text-sm uppercase tracking-wider text-accent">Product Anatomy</span>
+                        <ChevronDown className={`w-5 h-5 text-accent transition-transform`} />
+                      </button>
+                      <div id="anatomy-content" className="overflow-hidden transition-all duration-300" style={{ height: "auto" }}>
+                        <div className="border-t border-steel/20 p-4 bg-white/5 rounded-b-xl">
+                          <Image 
+                            // @ts-ignore
+                            src={activeProduct.explodedView} 
+                            alt={`${activeProduct.name} Exploded View`} 
+                            width={800} 
+                            height={800} 
+                            className="w-full h-auto object-contain rounded-lg" 
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link
                       href="/rfq"
-                      className="bg-accent text-white px-8 py-4 font-medium flex items-center justify-center gap-3 hover:bg-orange-600 transition-colors"
+                      className="bg-accent text-white px-8 py-4 font-medium flex items-center justify-center gap-3 hover:bg-blue-500 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all rounded-full"
                     >
                       Request OEM Quote <ArrowRight className="w-4 h-4" />
                     </Link>
-                    <button className="border border-steel/30 px-8 py-4 font-medium flex items-center justify-center gap-3 hover:bg-mist transition-colors text-steel">
+                    <button className="glass px-8 py-4 font-medium flex items-center justify-center gap-3 hover:bg-white/10 transition-colors text-white rounded-full">
                       Download Datasheet <Download className="w-4 h-4" />
                     </button>
                   </div>
@@ -346,7 +383,7 @@ export default function LEDLightingPage() {
       </section>
 
       {/* Why OEM with Sheetal */}
-      <section className="bg-ink text-paper py-24">
+      <section className="bg-mist text-ink py-24">
         <div className="container-wide">
           <h2 className="text-3xl md:text-5xl font-display mb-16 max-w-xl">Why leading brands choose us for LED OEM.</h2>
           <div className="grid md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-white/10">

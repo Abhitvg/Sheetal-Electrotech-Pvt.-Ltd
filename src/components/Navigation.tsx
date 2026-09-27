@@ -30,7 +30,7 @@ export default function Navigation() {
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled || activeMegaMenu || isMobileMenuOpen
-            ? "bg-ink border-b border-white/10 py-4"
+            ? "glass-card !border-x-0 !border-t-0 py-4"
             : "bg-transparent py-6"
         }`}
         onMouseLeave={() => setActiveMegaMenu(null)}
@@ -78,10 +78,10 @@ export default function Navigation() {
           <div className="flex items-center gap-4 z-50 relative">
             <Link 
               href="/rfq" 
-              className={`hidden md:flex text-sm font-medium px-6 py-2.5 transition-colors ${
+              className={`hidden md:flex text-sm font-medium px-6 py-2.5 transition-colors rounded-full ${
                 isScrolled || activeMegaMenu
-                  ? "bg-white text-ink hover:bg-accent hover:text-white"
-                  : "bg-white/10 text-white backdrop-blur-sm border border-white/20 hover:bg-white hover:text-ink"
+                  ? "bg-accent text-white hover:bg-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+                  : "glass text-white hover:bg-white hover:text-paper"
               }`}
             >
               Request Quote
@@ -104,7 +104,7 @@ export default function Navigation() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="absolute top-full left-0 w-full bg-ink border-b border-white/10 shadow-2xl"
+              className="absolute top-full left-0 w-full glass-card !border-x-0 !border-t-0 shadow-2xl"
             >
               <div className="container-wide py-12">
                 {activeMegaMenu === "Facilities" && (
@@ -186,7 +186,7 @@ export default function Navigation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-ink z-40 lg:hidden pt-24 px-6"
+            className="fixed inset-0 bg-paper/95 backdrop-blur-xl z-40 lg:hidden pt-24 px-6"
           >
             <div className="flex flex-col gap-6 text-xl">
               {navLinks.map((link) => (

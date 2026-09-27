@@ -118,7 +118,7 @@ export default function QualityPage() {
       </section>
 
       {/* Certifications & Compliance Download Strip */}
-      <section className="bg-ink text-paper py-24">
+      <section className="bg-mist text-ink py-24">
         <div className="container-wide">
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16 border-b border-white/10 pb-8">
             <div>
