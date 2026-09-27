@@ -1,4 +1,5 @@
-import { createClient } from "@supabase/supabase-js";
+import { db } from "@/lib/firebase";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import RfqRow from "./RfqRow";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
@@ -7,25 +8,17 @@ export const metadata = {
   title: "Admin - RFQ Submissions",
 };
 
+export const revalidate = 0; // Disable static rendering for this page
+
 export default async function AdminRfqPage() {
   let rfqs: any[] = [];
   
-  if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.SUPABASE_SERVICE_ROLE_KEY
-    );
-
-    const { data, error } = await supabase
-      .from("rfq_submissions")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (data) {
-      rfqs = data;
-    } else {
-      console.error("Failed to fetch RFQs:", error);
-    }
+  try {
+    const q = query(collection(db, "rfq_submissions"), orderBy("created_at", "desc"));
+    const querySnapshot = await getDocs(q);
+    rfqs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  } catch (error) {
+    console.error("Failed to fetch RFQs:", error);
   }
 
   // Generate CSV data for export

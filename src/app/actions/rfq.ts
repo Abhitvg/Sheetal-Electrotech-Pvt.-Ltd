@@ -1,9 +1,11 @@
 "use server";
 
 import { z } from "zod";
-import { put } from "@vercel/blob";
-import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
+import { db, storage } from "@/lib/firebase";
+import { collection, addDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { headers } from "next/headers";
 
 const rfqSchema = z.object({
   categories: z.array(z.string()).min(1, "Please select at least one category"),
@@ -25,10 +27,11 @@ const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
 const MAX_REQUESTS_PER_WINDOW = 3;
 
-export async function submitRfq(formData: FormData, clientIp?: string) {
+export async function submitRfq(formData: FormData) {
   try {
     // 1. Rate Limiting
-    const ip = clientIp || "unknown";
+    const headersList = await headers();
+    const ip = headersList.get("x-forwarded-for") || "unknown";
     const now = Date.now();
     const rateData = rateLimitMap.get(ip);
 
@@ -81,13 +84,15 @@ export async function submitRfq(formData: FormData, clientIp?: string) {
          return { success: false, message: "Invalid file type. Only PDF, DXF, STEP, or DWG allowed." };
       }
 
-      if (process.env.BLOB_READ_WRITE_TOKEN) {
-        const blob = await put(`rfq-uploads/${Date.now()}-${file.name}`, file, {
-          access: "public",
-        });
-        attachmentUrls.push(blob.url);
-      } else {
-        attachmentUrls.push(`mock-url-for-${file.name}`);
+      try {
+        const storageRef = ref(storage, `rfq-uploads/${Date.now()}-${file.name}`);
+        const arrayBuffer = await file.arrayBuffer();
+        await uploadBytes(storageRef, arrayBuffer, { contentType: file.type });
+        const downloadUrl = await getDownloadURL(storageRef);
+        attachmentUrls.push(downloadUrl);
+      } catch (uploadError) {
+        console.error("Firebase upload error:", uploadError);
+        return { success: false, message: "Failed to upload file." };
       }
     }
 
@@ -109,18 +114,15 @@ export async function submitRfq(formData: FormData, clientIp?: string) {
       utm_campaign: validatedData.utm_campaign,
     };
 
-    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
-      const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL,
-        process.env.SUPABASE_SERVICE_ROLE_KEY
-      );
-
-      const { error } = await supabase.from("rfq_submissions").insert([dbRecord]);
-
-      if (error) {
-        console.error("Supabase insert error:", error);
-        throw new Error("Failed to save RFQ data.");
-      }
+    try {
+      const dbRecordWithTime = {
+        ...dbRecord,
+        created_at: new Date().toISOString(),
+      };
+      await addDoc(collection(db, "rfq_submissions"), dbRecordWithTime);
+    } catch (dbError) {
+      console.error("Firebase insert error:", dbError);
+      throw new Error("Failed to save RFQ data.");
     }
 
     // 6. Send Emails

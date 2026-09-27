@@ -130,26 +130,52 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* About Us Description */}
+    {/* About Us Description */}
       <section className="section-padding border-b border-steel/10 bg-mist/20">
         <div className="container-wide max-w-5xl">
-          <h2 className="mb-8">Welcome to Sheetal Group</h2>
-          <div className="text-steel text-lg leading-relaxed space-y-6">
-            <p>
-              The Sheetal Group, with its flagship company Sheetal Industries and its units Sheetal Electrotech Unit 1 and Unit 2, is a leading manufacturer and exporter of LED lighting solutions and rigid plastic packaging products in India. The company has in-house facilities for product designing, mould manufacturing, and blow moulding and injection moulding facilities, as well as an assembly and packing line, SMT section, and IBM plastic.
-            </p>
-            <p>
-              The Sheetal Group was founded by Surendra Singh, who has extensive expertise in the industry. The company is committed to providing high-quality products that meet the needs of customers in various industries, including automotive, electronics, pharmaceuticals, and consumer goods.
-            </p>
-            <p>
-              The LED lighting solutions offered by Sheetal Industries are energy-efficient and provide long-lasting performance, making them ideal for both residential and commercial applications. The company also offers a range of rigid plastic packaging products, including bottles, containers, and jars, that are designed to meet the specific needs of customers.
-            </p>
-            <p>
-              The company’s in-house facilities for product designing, mould manufacturing, and plastic manufacturing provide greater control over the production process, resulting in higher-quality products and faster delivery times. The company’s assembly and packing line, SMT section, and IBM plastic further enhance the efficiency and quality of the manufacturing process.
-            </p>
-            <p>
-              Overall, the Sheetal Group is a trusted and reliable manufacturer and exporter of LED lighting solutions and plastic packaging products, with a strong commitment to quality, innovation, and customer satisfaction.
-            </p>
+          <div className="grid md:grid-cols-2 gap-16">
+            <div>
+              <h2 className="mb-8">Welcome to Sheetal Group</h2>
+              <div className="text-steel text-lg leading-relaxed space-y-6">
+                <p>
+                  The Sheetal Group, with its flagship company Sheetal Industries and its units Sheetal Electrotech Unit 1 and Unit 2, is a leading manufacturer and exporter of LED lighting solutions and rigid plastic packaging products in India. The company has in-house facilities for product designing, mould manufacturing, and blow moulding and injection moulding facilities, as well as an assembly and packing line, SMT section, and IBM plastic.
+                </p>
+                <p>
+                  The Sheetal Group was founded by Surendra Singh, who has extensive expertise in the industry. The company is committed to providing high-quality products that meet the needs of customers in various industries, including automotive, electronics, pharmaceuticals, and consumer goods.
+                </p>
+                <p>
+                  The LED lighting solutions offered by Sheetal Industries are energy-efficient and provide long-lasting performance, making them ideal for both residential and commercial applications. The company also offers a range of rigid plastic packaging products, including bottles, containers, and jars, that are designed to meet the specific needs of customers.
+                </p>
+                <p>
+                  The company’s in-house facilities for product designing, mould manufacturing, and plastic manufacturing provide greater control over the production process, resulting in higher-quality products and faster delivery times.
+                </p>
+              </div>
+            </div>
+            
+            {/* Director's Statement */}
+            <div className="bg-white p-10 border border-steel/15 relative">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-mist rounded-bl-full -z-10 opacity-50" />
+              <h2 className="mb-8 text-3xl font-display text-ink">Director&apos;s Statement</h2>
+              <div className="text-steel leading-relaxed space-y-4">
+                <blockquote className="text-xl font-display italic text-ink/80 border-l-4 border-accent pl-6 mb-8">
+                  &ldquo;Effortlessly Tackling Complex Manufacturing Challenges with Cost-Effective Solutions. Committed to Innovation, Sustainability, and Customer Satisfaction.&rdquo;
+                </blockquote>
+                <p><strong>Dear valued customers,</strong></p>
+                <p>
+                  At Sheetal Group, we are committed to providing our customers with high-quality products and services that exceed their expectations. Our mission is to solve complex manufacturing challenges with ease and offer cost-effective solutions that enable our customers to achieve their goals.
+                </p>
+                <p>
+                  We are constantly innovating and improving our manufacturing processes to ensure that we remain at the forefront of the industry. Sustainability is a top priority for us, and we are always exploring new ways to reduce our environmental impact while delivering exceptional products and services.
+                </p>
+                <p>
+                  Our success is directly linked to the satisfaction of our customers, and we are committed to providing them with outstanding support and service. We understand the importance of building strong and lasting relationships with our customers and stakeholders, and we are dedicated to earning and maintaining their trust.
+                </p>
+                <div className="mt-8 pt-6 border-t border-steel/10">
+                  <p className="font-display font-medium text-lg text-ink">Surendra Singh</p>
+                  <p className="font-mono text-xs uppercase tracking-widest text-accent mt-1">Director</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
