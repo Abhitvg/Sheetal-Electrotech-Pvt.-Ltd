@@ -5,11 +5,9 @@ import { motion } from "framer-motion";
 import { ArrowRight, Factory, Settings2, ShieldCheck, Box } from "lucide-react";
 import QuoteCalculator3D from "@/components/QuoteCalculator3D";
 import HeroExplosionSequence from "@/components/HeroExplosionSequence";
-import DarkIndustrialTransition from "@/components/DarkIndustrialTransition";
-import VirtualProductionLine from "@/components/VirtualProductionLine";
-import TestingLabInterface from "@/components/TestingLabInterface";
-import MaterialShowcase from "@/components/MaterialShowcase";
-import StreetLightExplosionSequence from "@/components/StreetLightExplosionSequence";
+import PlasticEngineering from "@/components/PlasticEngineering";
+import SMTSequence from "@/components/SMTSequence";
+import AssemblySequence from "@/components/AssemblySequence";
 
 export default function Home() {
   return (
@@ -17,20 +15,14 @@ export default function Home() {
       {/* 1. CONTINUOUS 3D HERO NARRATIVE */}
       <HeroExplosionSequence />
 
-      {/* 2. FACTORY TRANSITION */}
-      <DarkIndustrialTransition />
+      {/* 2. PLASTIC ENGINEERING (Injection Moulding) */}
+      <PlasticEngineering />
 
-      {/* 2.5 MATERIAL SHOWCASE */}
-      <MaterialShowcase />
+      {/* 3. ELECTRONICS (SMT) */}
+      <SMTSequence />
 
-      {/* 3. VIRTUAL PRODUCTION LINE (Horizontal Scroll) */}
-      <VirtualProductionLine />
-
-      {/* 4. TESTING LAB INTERFACE */}
-      <TestingLabInterface />
-
-      {/* 4.5 STREET LIGHT EXPLOSION */}
-      <StreetLightExplosionSequence />
+      {/* 4. FINAL ASSEMBLY & VOLUME */}
+      <AssemblySequence />
 
       {/* 5. LIVE CAPACITY CALCULATOR */}
       <section className="py-24 bg-gradient-premium relative overflow-hidden">

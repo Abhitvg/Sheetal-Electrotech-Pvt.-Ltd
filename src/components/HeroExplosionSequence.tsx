@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { Environment, ContactShadows, Float } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
@@ -10,130 +10,61 @@ import { useEngineeringMode } from "./EngineeringModeProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function ProceduralBulb({ timeline }: { timeline: gsap.core.Timeline | null }) {
-  const { isEngineeringMode } = useEngineeringMode();
-  
-  const group = useRef<THREE.Group>(null);
-  const diffuserRef = useRef<THREE.Mesh>(null);
-  const pcbRef = useRef<THREE.Mesh>(null);
-  const heatsinkRef = useRef<THREE.Mesh>(null);
-  const driverRef = useRef<THREE.Mesh>(null);
-  const baseRef = useRef<THREE.Mesh>(null);
-
-  useEffect(() => {
-    if (!group.current || !timeline) return;
-
-    // Initial state: bulb on the right side for the hero
-    gsap.set(group.current.position, { x: 2, y: 0, z: 0 });
-    gsap.set(group.current.rotation, { x: 0.2, y: -0.5, z: -0.2 });
-
-    // Hero -> Explosion Transition (0 -> 1 progress)
-    
-    // Move to center and stand upright
-    timeline.to(group.current.position, { x: 0, y: 0, duration: 1 }, 0);
-    timeline.to(group.current.rotation, { x: 0, y: Math.PI * 2, z: 0, duration: 2, ease: "power1.inOut" }, 0);
-
-    // Explode components
-    timeline.to(diffuserRef.current!.position, { y: 2.5, duration: 1 }, 1);
-    timeline.to(pcbRef.current!.position, { y: 1.2, duration: 1 }, 1.2);
-    // Heatsink stays around 0
-    timeline.to(driverRef.current!.position, { y: -1.2, duration: 1 }, 1.4);
-    timeline.to(baseRef.current!.position, { y: -2.5, duration: 1 }, 1.6);
-
-  }, [timeline]);
-
-  return (
-    <group ref={group} dispose={null} scale={1.2}>
-      <Float speed={2} rotationIntensity={0.2} floatIntensity={0.2}>
-        
-        {/* Diffuser */}
-        <mesh ref={diffuserRef} position={[0, 1.2, 0]}>
-          <sphereGeometry args={[1, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
-          <meshPhysicalMaterial 
-            color={isEngineeringMode ? "#60a5fa" : "#ffffff"} 
-            transmission={isEngineeringMode ? 0 : 0.9} 
-            opacity={isEngineeringMode ? 0.3 : 1} 
-            metalness={0} 
-            roughness={0.1} 
-            ior={1.5} 
-            thickness={0.5} 
-            wireframe={isEngineeringMode}
-          />
-        </mesh>
-
-        {/* LED PCB */}
-        <mesh ref={pcbRef} position={[0, 1.1, 0]}>
-          <cylinderGeometry args={[0.9, 0.9, 0.05, 32]} />
-          <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#fcd34d"} metalness={0.8} roughness={0.2} wireframe={isEngineeringMode} />
-        </mesh>
-
-        {/* Heat Sink / Housing */}
-        <mesh ref={heatsinkRef} position={[0, 0, 0]}>
-          <cylinderGeometry args={[0.95, 0.6, 2, 32]} />
-          <meshStandardMaterial color={isEngineeringMode ? "#60a5fa" : "#e2e8f0"} metalness={0.2} roughness={0.5} wireframe={isEngineeringMode} />
-        </mesh>
-
-        {/* Driver */}
-        <mesh ref={driverRef} position={[0, -0.2, 0]}>
-          <boxGeometry args={[0.4, 0.8, 0.4]} />
-          <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#1e293b"} metalness={0.9} roughness={0.1} wireframe={isEngineeringMode} />
-        </mesh>
-
-        {/* B22/E27 Base */}
-        <mesh ref={baseRef} position={[0, -1.2, 0]}>
-          <cylinderGeometry args={[0.5, 0.5, 0.6, 32]} />
-          <meshStandardMaterial color={isEngineeringMode ? "#60a5fa" : "#94a3b8"} metalness={1} roughness={0.3} wireframe={isEngineeringMode} />
-          {/* Base threads/pins */}
-          <mesh position={[0, -0.4, 0]}>
-            <cylinderGeometry args={[0.2, 0.4, 0.3, 32]} />
-            <meshStandardMaterial color={isEngineeringMode ? "#60a5fa" : "#0f172a"} metalness={0.5} roughness={0.5} wireframe={isEngineeringMode} />
-          </mesh>
-        </mesh>
-
-      </Float>
-    </group>
-  );
-}
+import { ProceduralBulb } from "./ProceduralBulb";
 
 export default function HeroExplosionSequence() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [tl, setTl] = useState<gsap.core.Timeline | null>(null);
 
-  // HTML references for fading
-  const heroTextRef = useRef<HTMLDivElement>(null);
-  const engTextRef = useRef<HTMLDivElement>(null);
-  const calloutsRef = useRef<HTMLDivElement>(null);
+  // Text References
+  const text0Ref = useRef<HTMLDivElement>(null);
+  const text1Ref = useRef<HTMLDivElement>(null);
+  const text2Ref = useRef<HTMLDivElement>(null);
+  const text3Ref = useRef<HTMLDivElement>(null);
+  const text4Ref = useRef<HTMLDivElement>(null);
+  const text5Ref = useRef<HTMLDivElement>(null);
+  const text6Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
 
+    // Timeline duration is 7 steps
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top top",
-        end: "+=3000", // 300vh scroll duration
+        end: "+=5000", // 500vh scroll duration for a smooth experience
         scrub: 1,
         pin: true,
         anticipatePin: 1,
       }
     });
 
-    // Animate HTML elements in sync with the 3D timeline
-    // 0 -> 1: Hero to Center
-    timeline.to(heroTextRef.current, { opacity: 0, x: -50, duration: 0.5 }, 0);
+    // Step 0: Initial Hero Text
+    timeline.to(text0Ref.current, { opacity: 0, y: -50, duration: 0.5 }, 0.5);
     
-    // 1 -> 2: Center to Explode
-    timeline.fromTo(engTextRef.current, 
-      { opacity: 0, y: 50 }, 
-      { opacity: 1, y: 0, duration: 0.5 }, 
-      0.8
-    );
+    // Step 1: Optical Design
+    timeline.fromTo(text1Ref.current, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.5 }, 1);
+    timeline.to(text1Ref.current, { opacity: 0, x: -50, duration: 0.5 }, 1.8);
     
-    timeline.fromTo(calloutsRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.5 },
-      1.5
-    );
+    // Step 2: Electronics
+    timeline.fromTo(text2Ref.current, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.5 }, 2);
+    timeline.to(text2Ref.current, { opacity: 0, x: -50, duration: 0.5 }, 2.8);
+    
+    // Step 3: Thermal Management
+    timeline.fromTo(text3Ref.current, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.5 }, 3);
+    timeline.to(text3Ref.current, { opacity: 0, x: -50, duration: 0.5 }, 3.8);
+    
+    // Step 4: Power Electronics
+    timeline.fromTo(text4Ref.current, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.5 }, 4);
+    timeline.to(text4Ref.current, { opacity: 0, x: -50, duration: 0.5 }, 4.8);
+    
+    // Step 5: Plastic Engineering
+    timeline.fromTo(text5Ref.current, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.5 }, 5);
+    timeline.to(text5Ref.current, { opacity: 0, x: -50, duration: 0.5 }, 5.8);
+    
+    // Step 6: Final Message
+    timeline.fromTo(text6Ref.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5 }, 6);
 
     setTl(timeline);
 
@@ -145,88 +76,102 @@ export default function HeroExplosionSequence() {
   return (
     <section ref={containerRef} className="relative w-full h-screen bg-paper overflow-hidden text-ink">
       
-      {/* 3D Canvas - Pinned to background */}
+      {/* 3D Canvas */}
       <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
-          <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#0066ff" />
+        <Canvas camera={{ position: [0, 0, 8], fov: 45 }} shadows>
+          <ambientLight intensity={0.6} />
+          {/* Main Key Light */}
+          <directionalLight 
+            position={[10, 10, 5]} 
+            intensity={1.2} 
+            castShadow 
+            shadow-mapSize={[2048, 2048]}
+          />
+          {/* Cool Fill Light */}
+          <directionalLight position={[-10, -10, -5]} intensity={0.8} color="#3b82f6" />
+          {/* Dramatic Rim Light */}
+          <spotLight 
+            position={[0, 10, -10]} 
+            intensity={2} 
+            angle={0.6} 
+            penumbra={1} 
+            color="#ffffff" 
+          />
           
           <ProceduralBulb timeline={tl} />
           
           <Environment preset="studio" />
-          <ContactShadows position={[0, -3.5, 0]} opacity={0.4} scale={10} blur={2} far={4} />
+          <ContactShadows position={[0, -4.5, 0]} opacity={0.5} scale={20} blur={2.5} far={8} resolution={256} color="#0f172a" />
         </Canvas>
       </div>
 
-      {/* HTML Layer - Pointer events none so user can still drag/interact with 3D if needed */}
-      <div className="absolute inset-0 z-10 pointer-events-none flex flex-col justify-center">
+      {/* HTML Narrative Layer */}
+      <div className="absolute inset-0 z-10 pointer-events-none flex flex-col justify-center container-wide w-full h-full">
         
-        {/* HERO TEXT (Visible at 0 progress) */}
-        <div ref={heroTextRef} className="container-wide w-full h-full flex flex-col justify-center absolute inset-0">
-          <div className="max-w-2xl">
-            <h1 className="text-5xl md:text-7xl font-display font-bold leading-[1.1] mb-6">
-              ENGINEERING LIGHT.<br />
-              <span className="text-accent">MANUFACTURING SCALE.</span>
-            </h1>
-            <p className="text-steel font-mono uppercase tracking-widest text-sm mb-12">
-              Lighting | Electronics | Plastics
-            </p>
-            
-            <div className="flex items-center gap-6">
-              <button className="bg-ink text-white px-8 py-4 text-sm font-medium hover:bg-accent transition-colors pointer-events-auto">
-                Explore Capabilities
-              </button>
-              <div className="flex items-center gap-3 text-steel text-xs font-mono uppercase">
-                <span className="w-12 h-[1px] bg-steel"></span>
-                Scroll to Explore
-              </div>
-            </div>
+        {/* Step 0: Hero */}
+        <div ref={text0Ref} className="absolute inset-0 flex flex-col justify-end md:justify-center pb-32 md:pb-0 md:pl-24 pl-8 max-w-4xl">
+          <h1 className="text-5xl md:text-7xl font-display font-bold leading-[1.1] mb-6 text-ink">
+            SOLVING COMPLEX<br />
+            <span className="text-accent">MANUFACTURING CHALLENGES.</span>
+          </h1>
+          <p className="text-slate-600 font-mono text-lg md:text-xl mb-12">
+            From product design to mass production — under one roof.
+          </p>
+          <div className="flex items-center gap-3 text-slate-500 text-xs font-mono uppercase">
+            <span className="w-12 h-[1px] bg-slate-500"></span>
+            Scroll to Explore
           </div>
         </div>
 
-        {/* ENGINEERING TEXT (Fades in at 1 progress) */}
-        <div ref={engTextRef} className="container-wide w-full h-full flex flex-col justify-start pt-24 absolute inset-0 opacity-0">
-          <div className="text-center w-full">
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-ink">
-              ENGINEERED DOWN TO THE COMPONENT.
-            </h2>
-          </div>
+        {/* Step 1: Optical Design */}
+        <div ref={text1Ref} className="absolute inset-0 flex flex-col justify-end md:justify-center pb-32 md:pb-0 md:pl-24 pl-8 max-w-2xl opacity-0">
+          <p className="font-mono text-accent text-sm uppercase tracking-widest mb-2">01 / Diffuser</p>
+          <h2 className="text-5xl md:text-7xl font-display font-bold text-ink">
+            OPTICAL DESIGN
+          </h2>
         </div>
 
-        {/* CALLOUTS (Fades in at end of explosion) */}
-        <div ref={calloutsRef} className="container-wide w-full h-full hidden md:flex justify-between items-center absolute inset-0 opacity-0 pointer-events-none pb-12">
-          
-          {/* Left Side Callouts */}
-          <div className="flex flex-col gap-32 pl-12">
-            <div className="max-w-xs pointer-events-auto group">
-              <h3 className="font-mono text-sm font-bold uppercase mb-2 group-hover:text-accent transition-colors">LED PCB</h3>
-              <div className="w-8 h-[1px] bg-ink mb-3 group-hover:w-16 group-hover:bg-accent transition-all"></div>
-              <p className="text-xs text-steel font-mono">High-efficiency LED architecture. Thermal optimisation, custom CCT.</p>
-            </div>
-            
-            <div className="max-w-xs pointer-events-auto group">
-              <h3 className="font-mono text-sm font-bold uppercase mb-2 group-hover:text-accent transition-colors">DRIVER</h3>
-              <div className="w-8 h-[1px] bg-ink mb-3 group-hover:w-16 group-hover:bg-accent transition-all"></div>
-              <p className="text-xs text-steel font-mono">Constant current regulation. Surge protection up to 5KV.</p>
-            </div>
-          </div>
+        {/* Step 2: Electronics */}
+        <div ref={text2Ref} className="absolute inset-0 flex flex-col justify-end md:justify-center pb-32 md:pb-0 md:pl-24 pl-8 max-w-2xl opacity-0">
+          <p className="font-mono text-accent text-sm uppercase tracking-widest mb-2">02 / LED PCB</p>
+          <h2 className="text-5xl md:text-7xl font-display font-bold text-ink">
+            ELECTRONICS
+          </h2>
+        </div>
 
-          {/* Right Side Callouts */}
-          <div className="flex flex-col gap-48 pr-12 text-right">
-             <div className="max-w-xs pointer-events-auto group ml-auto">
-              <h3 className="font-mono text-sm font-bold uppercase mb-2 group-hover:text-accent transition-colors">DIFFUSER</h3>
-              <div className="w-8 h-[1px] bg-ink mb-3 ml-auto group-hover:w-16 group-hover:bg-accent transition-all"></div>
-              <p className="text-xs text-steel font-mono">Polycarbonate frosted cover for even 360-degree light distribution.</p>
-            </div>
-            
-            <div className="max-w-xs pointer-events-auto group ml-auto">
-              <h3 className="font-mono text-sm font-bold uppercase mb-2 group-hover:text-accent transition-colors">HEAT SINK</h3>
-              <div className="w-8 h-[1px] bg-ink mb-3 ml-auto group-hover:w-16 group-hover:bg-accent transition-all"></div>
-              <p className="text-xs text-steel font-mono">Designed for continuous operation. Aluminium heat dissipation.</p>
-            </div>
-          </div>
+        {/* Step 3: Thermal Management */}
+        <div ref={text3Ref} className="absolute inset-0 flex flex-col justify-end md:justify-center pb-32 md:pb-0 md:pl-24 pl-8 max-w-2xl opacity-0">
+          <p className="font-mono text-accent text-sm uppercase tracking-widest mb-2">03 / Heat Sink</p>
+          <h2 className="text-5xl md:text-7xl font-display font-bold text-ink">
+            THERMAL MANAGEMENT
+          </h2>
+        </div>
 
+        {/* Step 4: Power Electronics */}
+        <div ref={text4Ref} className="absolute inset-0 flex flex-col justify-end md:justify-center pb-32 md:pb-0 md:pl-24 pl-8 max-w-2xl opacity-0">
+          <p className="font-mono text-accent text-sm uppercase tracking-widest mb-2">04 / Driver</p>
+          <h2 className="text-5xl md:text-7xl font-display font-bold text-ink">
+            POWER ELECTRONICS
+          </h2>
+        </div>
+
+        {/* Step 5: Plastic Engineering */}
+        <div ref={text5Ref} className="absolute inset-0 flex flex-col justify-end md:justify-center pb-32 md:pb-0 md:pl-24 pl-8 max-w-2xl opacity-0">
+          <p className="font-mono text-accent text-sm uppercase tracking-widest mb-2">05 / Housing</p>
+          <h2 className="text-5xl md:text-7xl font-display font-bold text-ink">
+            PLASTIC ENGINEERING
+          </h2>
+        </div>
+
+        {/* Step 6: Final Message */}
+        <div ref={text6Ref} className="absolute inset-0 flex flex-col justify-center items-center text-center opacity-0 bg-paper/80 backdrop-blur-sm">
+          <h2 className="text-5xl md:text-7xl font-display font-bold text-ink mb-6">
+            WE DON'T JUST ASSEMBLE.<br />
+            <span className="text-accent">WE MANUFACTURE.</span>
+          </h2>
+          <p className="text-slate-600 font-mono text-lg uppercase tracking-widest">
+            Plastic → SMT → Assembly
+          </p>
         </div>
 
       </div>

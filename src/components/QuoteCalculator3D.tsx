@@ -11,13 +11,16 @@ import { useEngineeringMode } from "./EngineeringModeProvider";
 type Category = "LED Bulbs" | "LED Battens" | "Flood Lights" | "Custom Injection Moulding";
 
 // Primitive representations for the configurator
-function ConfiguratorModel({ category }: { category: Category }) {
+function ConfiguratorModel({ category, volume }: { category: Category, volume: number }) {
   const { isEngineeringMode } = useEngineeringMode();
   const group = useRef<THREE.Group>(null);
   
+  // Calculate spin speed based on volume (base speed + volume factor)
+  const spinSpeed = 0.002 + (volume / 200000) * 0.02;
+
   useFrame(() => {
     if (group.current) {
-      group.current.rotation.y += 0.005;
+      group.current.rotation.y += spinSpeed;
     }
   });
 
@@ -138,7 +141,7 @@ export default function QuoteCalculator3D() {
             <ambientLight intensity={isEngineeringMode ? 1.5 : 0.5} />
             <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
             <PresentationControls global rotation={[0, 0.3, 0]} polar={[-0.4, 0.2]} azimuth={[-1, 0.75]} snap={true}>
-              <ConfiguratorModel category={category} />
+              <ConfiguratorModel category={category} volume={volume} />
             </PresentationControls>
             {!isEngineeringMode && <Environment preset="studio" />}
             {!isEngineeringMode && <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={10} blur={2} far={4} />}

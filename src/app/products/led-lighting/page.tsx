@@ -4,6 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { Canvas } from "@react-three/fiber";
+import { Environment, ContactShadows, OrbitControls } from "@react-three/drei";
+import { ProceduralBulb } from "@/components/ProceduralBulb";
 import { ArrowRight, Download, ChevronDown } from "lucide-react";
 
 const ledProducts = [
@@ -237,13 +240,30 @@ export default function LEDLightingPage() {
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="absolute inset-0"
                 >
-                  <Image
-                    src={activeProduct.image}
-                    alt={activeProduct.name}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-contain p-12"
-                  />
+                  {activeProduct.id === "led-bulb" ? (
+                    <div className="w-full h-full p-4">
+                      <Canvas camera={{ position: [0, 0, 5], fov: 45 }} shadows className="w-full h-full cursor-grab active:cursor-grabbing">
+                        <ambientLight intensity={0.6} />
+                        <directionalLight position={[10, 10, 5]} intensity={1.2} castShadow shadow-mapSize={[1024, 1024]} />
+                        <directionalLight position={[-10, -10, -5]} intensity={0.8} color="#3b82f6" />
+                        
+                        <ProceduralBulb autoRotate />
+                        
+                        <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
+                        
+                        <Environment preset="studio" />
+                        <ContactShadows position={[0, -2.5, 0]} opacity={0.5} scale={10} blur={2.5} far={4} resolution={256} color="#0f172a" />
+                      </Canvas>
+                    </div>
+                  ) : (
+                    <Image
+                      src={activeProduct.image}
+                      alt={activeProduct.name}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-contain p-12"
+                    />
+                  )}
                 </motion.div>
               </AnimatePresence>
             </div>
