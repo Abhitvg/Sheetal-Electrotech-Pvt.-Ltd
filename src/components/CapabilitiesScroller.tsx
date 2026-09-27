@@ -15,7 +15,7 @@ const facilities = [
       label: "Pieces / Month",
       machine: "80-160T",
     },
-    image: "/img2/0.jpg",
+    image: "/images/moulding_factory.jpg",
   },
   {
     id: "smt",
@@ -26,7 +26,7 @@ const facilities = [
       label: "CPH Speed",
       machine: "6-Zone Reflow",
     },
-    image: "/img2/3.jpg",
+    image: "/images/hero_factory.jpg",
   },
   {
     id: "packaging",
@@ -37,7 +37,7 @@ const facilities = [
       label: "Units / Day",
       machine: "320V Testing",
     },
-    image: "/img2/6.png",
+    image: "/images/testing_lab.jpg",
   },
 ];
 

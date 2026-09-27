@@ -11,9 +11,10 @@ const ledProducts = [
     id: "led-bulb",
     name: "LED Bulbs",
     range: "3W – 20W",
-    image: "/img2/16.png",
+    image: "/images/led_bulb_product.jpg",
     bg: "bg-[#0a0a0a]",
-    description: "Standard A-type and speciality LED bulbs for residential and commercial applications. Available in E27, B22, and custom bases.",
+    description: "LED bulbs are a type of energy-efficient lighting that use light-emitting diodes (LEDs) to produce light. They are designed to replace traditional incandescent bulbs and are becoming increasingly popular due to their energy efficiency, long lifespan, and cost savings.",
+    specsImage: "/images/led-bulb_specs.png",
     specs: [
       { label: "Wattage Range", value: "3W – 20W" },
       { label: "Lumens", value: "250 – 2000 lm" },
@@ -24,12 +25,30 @@ const ledProducts = [
     ],
   },
   {
+    id: "smart-bulb",
+    name: "Smart LED Bulb",
+    range: "7W – 12W",
+    image: "/images/smart-bulb.png",
+    bg: "bg-[#14151a]",
+    description: "Smart LED bulbs are a type of light bulb that can be controlled remotely through a smartphone app or voice assistant, such as Amazon Alexa or Google Assistant. They typically connect to your home's Wi-Fi network, allowing you to turn them on or off, adjust their brightness, and even change their color using your smartphone or voice commands.",
+    specsImage: "/images/smart-bulb_specs.png",
+    specs: [
+      { label: "Wattage Range", value: "7W – 12W" },
+      { label: "Colors", value: "16 Million RGB + CCT" },
+      { label: "Connectivity", value: "Wi-Fi 2.4GHz / BLE" },
+      { label: "CRI", value: "≥80 Ra" },
+      { label: "Input Voltage", value: "160–260V AC" },
+      { label: "Certification", value: "BIS, CE, RoHS" },
+    ],
+  },
+  {
     id: "led-batten",
     name: "LED Battens",
     range: "10W – 40W",
-    image: "/img2/17.png",
+    image: "/images/led_batten_product.jpg",
     bg: "bg-[#f5f5f3]",
-    description: "Surface-mount and recessed LED battens for retail, office, and industrial lighting. Single-piece polycarbonate body, driver integrated.",
+    description: "LED batten lights are an energy-efficient alternative to traditional fluorescent tube lights. They offer bright, uniform light that is ideal for indoor lighting applications.",
+    specsImage: "/images/led-batten_specs.png",
     specs: [
       { label: "Wattage Range", value: "10W – 40W" },
       { label: "Length", value: "600mm / 1200mm / 1500mm" },
@@ -40,12 +59,13 @@ const ledProducts = [
     ],
   },
   {
-    id: "flood",
-    name: "Flood & Street Lights",
+    id: "flood-well",
+    name: "Flood & Well Light",
     range: "20W – 200W",
-    image: "/img2/8.jpg",
+    image: "/images/flood-well.png",
     bg: "bg-[#14151a]",
-    description: "High-lumen outdoor luminaires with die-cast aluminium housings and IP65 protection for industrial sites, streets, and perimeter lighting.",
+    description: "LED flood and well lights are outdoor lighting fixtures that are designed to illuminate large areas with high-intensity, directional light.",
+    specsImage: "/images/flood-well_specs.png",
     specs: [
       { label: "Wattage Range", value: "20W – 200W" },
       { label: "Lumens", value: "2000 – 22000 lm" },
@@ -53,6 +73,125 @@ const ledProducts = [
       { label: "Beam Angle", value: "60° / 90° / 120°" },
       { label: "Housing", value: "Die-cast aluminium" },
       { label: "Certification", value: "BIS, CE" },
+    ],
+  },
+  {
+    id: "street",
+    name: "LED Street Light",
+    range: "20W – 150W",
+    image: "/images/street_light.png",
+    bg: "bg-[#0a0a0a]",
+    description: "LED street lights are a type of outdoor lighting fixture that are designed to provide high-quality illumination on public streets and highways. They are designed to be energy-efficient and long-lasting, making them a popular alternative to traditional street lighting options.",
+    specsImage: "/images/street_light_specs.png",
+    specs: [
+      { label: "Wattage Range", value: "20W, 30W, 50W, 100W, 150W" },
+      { label: "CCT (K)", value: "6500K" },
+      { label: "Efficacy (lm/W)", value: "100" },
+      { label: "Beam Angle", value: "120°" },
+      { label: "Voltage (V)", value: "100-300" },
+      { label: "IP Rating", value: "IP 66" },
+      { label: "Surge Limit", value: "5KV" },
+      { label: "Material", value: "All Die Cast" },
+    ],
+  },
+  {
+    id: "spot",
+    name: "LED Spot Light",
+    range: "3W – 15W",
+    image: "/images/spot.png",
+    bg: "bg-[#1a1a1a]",
+    description: "LED spot lights are a type of LED lighting fixture that are designed to provide focused, directional illumination in a specific area. They are commonly used in homes, offices, and commercial buildings to highlight artwork, displays, and architectural features.",
+    specsImage: "/images/spot_specs.png",
+    specs: [
+      { label: "Wattage Range", value: "3W – 15W" },
+      { label: "Beam Angle", value: "15° / 24° / 36°" },
+      { label: "CCT Options", value: "3000K / 4000K" },
+      { label: "CRI", value: "≥90 Ra" },
+      { label: "Mounting", value: "Track or Surface mount" },
+      { label: "Certification", value: "BIS, CE" },
+    ],
+  },
+  {
+    id: "decorative",
+    name: "Decorative Light",
+    range: "Varies",
+    image: "/images/decorative.png",
+    bg: "bg-[#f5f5f3]",
+    description: "LED decorative lights are a type of LED lighting fixture that are designed to provide decorative and ambient lighting in various indoor settings. They are commonly used in homes, restaurants, hotels, and event venues to create an inviting and festive atmosphere.",
+    specsImage: "/images/decorative_specs.png",
+    specs: [
+      { label: "Applications", value: "Hospitality, Residential" },
+      { label: "Styles", value: "Pendant, Wall Sconce, Chandelier" },
+      { label: "CCT Options", value: "2700K / 3000K" },
+      { label: "Dimming", value: "Triac / 0-10V / DALI" },
+      { label: "Material", value: "Glass, Aluminum, Brass" },
+      { label: "Certification", value: "BIS, CE" },
+    ],
+  },
+  {
+    id: "ceiling",
+    name: "LED Ceiling Light",
+    range: "12W – 36W",
+    image: "/images/ceiling.png",
+    bg: "bg-[#0a0a0a]",
+    description: "LED ceiling lights are a type of lighting fixture that are installed onto ceilings and used to provide ambient lighting for various indoor spaces such as homes, offices, and commercial buildings. They are designed to be energy-efficient, durable, and long-lasting, making them a popular alternative to traditional lighting options.",
+    specsImage: "/images/ceiling_specs.png",
+    specs: [
+      { label: "Wattage Range", value: "12W – 36W" },
+      { label: "Shape", value: "Round, Square" },
+      { label: "Mounting", value: "Surface Mounted" },
+      { label: "Luminous Efficacy", value: "≥90 lm/W" },
+      { label: "Diffuser", value: "Polycarbonate / Acrylic" },
+      { label: "Certification", value: "BIS, CE" },
+    ],
+  },
+  {
+    id: "down-light",
+    name: "LED Down Light",
+    range: "6W – 24W",
+    image: "/images/down-light.png",
+    bg: "bg-[#f5f5f3]",
+    description: "LED downlights are a type of lighting fixture that is installed in ceilings or walls to provide directional lighting. They are a popular choice for both residential and commercial applications, as they are energy-efficient, long-lasting, and offer a range of customization options.",
+    specsImage: "/images/down-light_specs.png",
+    specs: [
+      { label: "Wattage Range", value: "6W – 24W" },
+      { label: "Cut-out Sizes", value: "3 inch - 8 inch" },
+      { label: "Mounting", value: "Recessed with spring clips" },
+      { label: "CRI", value: "≥80 Ra" },
+      { label: "Driver", value: "External/Internal Isolated" },
+      { label: "Certification", value: "BIS, CE" },
+    ],
+  },
+  {
+    id: "extension-board",
+    name: "Extension Board",
+    range: "Various",
+    image: "/images/products_led.jpg",
+    bg: "bg-[#0a0a0a]",
+    description: "High-quality, heavy-duty electrical extension boards with surge protection, multiple universal sockets, and flame-retardant casing.",
+    specs: [
+      { label: "Sockets", value: "3 / 4 / 6 way universal" },
+      { label: "Cable Length", value: "1.5m / 3m / 5m" },
+      { label: "Max Load", value: "2500W / 10A" },
+      { label: "Protection", value: "Overload & Surge protection" },
+      { label: "Housing", value: "Fire-retardant Polycarbonate" },
+      { label: "Certification", value: "BIS, CE" },
+    ],
+  },
+  {
+    id: "surface-ring",
+    name: "Surface Ring",
+    range: "Compatible",
+    image: "/images/products_led.jpg",
+    bg: "bg-[#14151a]",
+    description: "Architectural surface mounting rings for converting recessed downlights into surface-mounted fixtures on solid ceilings.",
+    specs: [
+      { label: "Compatibility", value: "3 inch - 8 inch downlights" },
+      { label: "Material", value: "Powder-coated Aluminium" },
+      { label: "Colors", value: "White / Black / Custom" },
+      { label: "Mounting", value: "Screw mount" },
+      { label: "Application", value: "Concrete ceilings" },
+      { label: "Durability", value: "Rust and corrosion resistant" },
     ],
   },
 ];
@@ -111,13 +250,15 @@ export default function LEDLightingPage() {
             <div className="flex flex-col gap-8 pt-4">
 
               {/* Product Tabs */}
-              <div className="flex gap-0 border border-steel/20 w-full">
+              <div className="flex flex-wrap gap-2 w-full">
                 {ledProducts.map((p) => (
                   <button
                     key={p.id}
                     onClick={() => { setActiveProduct(p); setSpecsOpen(false); }}
-                    className={`flex-1 py-3 text-sm font-medium transition-colors border-r last:border-r-0 border-steel/20 ${
-                      activeProduct.id === p.id ? "bg-ink text-white" : "text-steel hover:bg-mist"
+                    className={`px-5 py-2.5 text-sm font-medium transition-all rounded-full border ${
+                      activeProduct.id === p.id 
+                        ? "bg-ink text-white border-ink shadow-sm" 
+                        : "bg-white text-steel border-steel/20 hover:border-steel/40 hover:text-ink"
                     }`}
                   >
                     {p.name}
@@ -126,14 +267,16 @@ export default function LEDLightingPage() {
               </div>
 
               {/* Product Info */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeProduct.id}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.35 }}
-                >
+              <div className="grid">
+                <AnimatePresence>
+                  <motion.div
+                    key={activeProduct.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="col-start-1 row-start-1"
+                  >
                   <div className="flex items-center gap-4 mb-4">
                     <h2 className="text-4xl font-display font-medium">{activeProduct.name}</h2>
                     <span className="font-mono text-sm text-steel border border-steel/30 px-3 py-1">{activeProduct.range}</span>
@@ -157,13 +300,26 @@ export default function LEDLightingPage() {
                           exit={{ height: 0 }}
                           className="overflow-hidden"
                         >
-                          <div className="border-t border-steel/20 divide-y divide-steel/10">
-                            {activeProduct.specs.map((spec) => (
-                              <div key={spec.label} className="flex justify-between px-6 py-4">
-                                <span className="text-sm text-steel font-mono">{spec.label}</span>
-                                <span className="text-sm font-medium text-ink">{spec.value}</span>
+                          <div className="border-t border-steel/20 p-4">
+                            {/* @ts-ignore - Ignore optional specsImage typing issues temporarily */}
+                            {activeProduct.specsImage ? (
+                              <Image 
+                                src={(activeProduct as any).specsImage} 
+                                alt={`${activeProduct.name} specs`} 
+                                width={800} 
+                                height={400} 
+                                className="w-full h-auto object-contain bg-white mix-blend-multiply" 
+                              />
+                            ) : (
+                              <div className="divide-y divide-steel/10 -mx-4 -my-4">
+                                {activeProduct.specs.map((spec) => (
+                                  <div key={spec.label} className="flex justify-between px-6 py-4">
+                                    <span className="text-sm text-steel font-mono">{spec.label}</span>
+                                    <span className="text-sm font-medium text-ink">{spec.value}</span>
+                                  </div>
+                                ))}
                               </div>
-                            ))}
+                            )}
                           </div>
                         </motion.div>
                       )}
@@ -183,6 +339,7 @@ export default function LEDLightingPage() {
                   </div>
                 </motion.div>
               </AnimatePresence>
+            </div>
             </div>
           </div>
         </div>

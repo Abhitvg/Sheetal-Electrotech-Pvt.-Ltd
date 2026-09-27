@@ -16,7 +16,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-ink/40 z-10" /> {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent z-10" />
           <Image
-            src="/img2/3.jpg"
+            src="/images/hero_factory.jpg"
             alt="Advanced SMT Assembly Line at Sheetal Electrotech"
             fill
             sizes="100vw"
@@ -115,11 +115,14 @@ export default function Home() {
               </ul>
             </div>
             
-            <div className="relative h-[600px] w-full bg-mist">
-               {/* Asymmetric composition image container - we'll fill this later */}
-               <div className="absolute inset-4 bg-steel/10 flex items-center justify-center">
-                 <p className="font-mono text-sm text-steel">Placeholder: Facility Shot</p>
-               </div>
+            <div className="relative h-[600px] w-full bg-mist overflow-hidden">
+               <Image
+                 src="/images/moulding_factory.jpg"
+                 alt="Moulding Factory Facility"
+                 fill
+                 sizes="(max-width: 768px) 100vw, 50vw"
+                 className="object-cover"
+               />
             </div>
           </div>
         </div>

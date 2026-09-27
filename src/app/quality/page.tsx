@@ -55,7 +55,7 @@ export default function QualityPage() {
           {/* Left: Image/Diagram Display */}
           <div className="lg:w-1/2 relative min-h-[400px] lg:min-h-full bg-mist">
             <Image 
-              src="/img2/6.png"
+              src="/images/testing_lab.jpg"
               alt="Quality Assurance Laboratory"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

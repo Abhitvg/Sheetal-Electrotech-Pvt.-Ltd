@@ -11,7 +11,7 @@ const packagingProducts = [
     id: "cosmetic-jars",
     name: "Cosmetic Jars",
     range: "15ml – 500ml",
-    image: "/img2/20.png",
+    image: "/images/jar_product.jpg",
     bg: "bg-white",
     description: "Premium acrylic and PET cosmetic jars with hermetically sealed lids. Available in round, square, and custom geometries. Food and cosmetic grade compliant.",
     specs: [
@@ -27,7 +27,7 @@ const packagingProducts = [
     id: "pharma-bottles",
     name: "Pharma Bottles",
     range: "30ml – 2L",
-    image: "/img2/4.png",
+    image: "/images/products_packaging.jpg",
     bg: "bg-[#f0f4f8]",
     description: "High-density polyethylene bottles for pharmaceutical and nutraceutical applications. Child-resistant caps, tamper-evident seals, and full documentation.",
     specs: [
@@ -43,7 +43,7 @@ const packagingProducts = [
     id: "industrial",
     name: "Industrial Containers",
     range: "1L – 20L",
-    image: "/img2/0.jpg",
+    image: "/images/packaging_factory.jpg",
     bg: "bg-[#1a1f23]",
     description: "Heavy-wall HDPE jerrycans and pails for lubricants, agrochemicals, and industrial liquids. UN-certified options available for hazardous goods.",
     specs: [
@@ -109,13 +109,16 @@ export default function RigidPackagingPage() {
 
             {/* Right: Details */}
             <div className="flex flex-col gap-8 pt-4">
-              <div className="flex gap-0 border border-steel/20 w-full">
+              {/* Product Tabs */}
+              <div className="flex flex-wrap gap-2 w-full mb-6">
                 {packagingProducts.map((p) => (
                   <button
                     key={p.id}
                     onClick={() => { setActiveProduct(p); setSpecsOpen(false); }}
-                    className={`flex-1 py-3 text-xs font-medium transition-colors border-r last:border-r-0 border-steel/20 ${
-                      activeProduct.id === p.id ? "bg-ink text-white" : "text-steel hover:bg-mist"
+                    className={`px-5 py-2.5 text-sm font-medium transition-all rounded-full border ${
+                      activeProduct.id === p.id 
+                        ? "bg-ink text-white border-ink shadow-sm" 
+                        : "bg-white text-steel border-steel/20 hover:border-steel/40 hover:text-ink"
                     }`}
                   >
                     {p.name}
@@ -123,14 +126,17 @@ export default function RigidPackagingPage() {
                 ))}
               </div>
 
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeProduct.id}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.35 }}
-                >
+              {/* Product Info */}
+              <div className="grid">
+                <AnimatePresence>
+                  <motion.div
+                    key={activeProduct.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="col-start-1 row-start-1"
+                  >
                   <div className="flex items-center gap-4 mb-4">
                     <h2 className="text-4xl font-display font-medium">{activeProduct.name}</h2>
                     <span className="font-mono text-sm text-steel border border-steel/30 px-3 py-1">{activeProduct.range}</span>
@@ -179,6 +185,7 @@ export default function RigidPackagingPage() {
                   </div>
                 </motion.div>
               </AnimatePresence>
+            </div>
             </div>
           </div>
         </div>

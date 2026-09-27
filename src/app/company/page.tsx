@@ -16,9 +16,15 @@ const milestones = [
 ];
 
 const leadership = [
-  { name: "Sheetal Patel", role: "Founder & Managing Director", note: "25+ years in plastics and electronics manufacturing." },
-  { name: "Operations Director", role: "Plant Operations", note: "Oversees all 9 in-house facilities and 300+ person workforce." },
-  { name: "Technical Head", role: "Product Engineering", note: "Leads new product development and tooling design." },
+  { name: "Surendra Singh", role: "Chairman of Sheetal Group", note: "Founder & visionary driving Sheetal Group's expansion and strategic direction." },
+  { name: "Ajay Singh", role: "CEO of Sheetal Group", note: "Leading overall corporate operations and strategic business growth." },
+  { name: "Ishvernath Thakur", role: "CFO", note: "Overseeing financial planning, risk management, and record-keeping." },
+  { name: "Prem Singh", role: "Head of Operations", note: "Managing day-to-day manufacturing operations and production efficiency." },
+  { name: "Rajesh Nandola", role: "Head of Accountacy", note: "Responsible for accounting, audits, and financial reporting." },
+  { name: "Pankaj S Dudhekar", role: "Head of Purchase", partner: true, note: "Managing supply chain, procurement, and vendor relationships." },
+  { name: "Raju Sharma", role: "Human Resource Management", note: "Fostering company culture, recruitment, and employee relations." },
+  { name: "Suresh Prasad Arya", role: "Head of Research and Development", note: "Leading product innovation and engineering development." },
+  { name: "Manjit Yadav", role: "Head of Quality Department", note: "Ensuring strict quality control and compliance with BIS/CE standards." },
 ];
 
 export default function CompanyPage() {
@@ -28,7 +34,7 @@ export default function CompanyPage() {
       {/* Hero */}
       <div className="relative h-[75vh] min-h-[550px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/img2/8.jpg" alt="Sheetal Electrotech Team" fill sizes="100vw" className="object-cover object-top" priority />
+          <Image src="/images/company_team.jpg" alt="Sheetal Electrotech Team" fill sizes="100vw" className="object-cover object-top" priority />
           <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/30" />
         </div>
         <div className="relative z-10 container-wide text-paper pb-20 pt-36">
@@ -124,6 +130,51 @@ export default function CompanyPage() {
         </div>
       </section>
 
+      {/* About Us Description */}
+      <section className="section-padding border-b border-steel/10 bg-mist/20">
+        <div className="container-wide max-w-5xl">
+          <h2 className="mb-8">Welcome to Sheetal Group</h2>
+          <div className="text-steel text-lg leading-relaxed space-y-6">
+            <p>
+              The Sheetal Group, with its flagship company Sheetal Industries and its units Sheetal Electrotech Unit 1 and Unit 2, is a leading manufacturer and exporter of LED lighting solutions and rigid plastic packaging products in India. The company has in-house facilities for product designing, mould manufacturing, and blow moulding and injection moulding facilities, as well as an assembly and packing line, SMT section, and IBM plastic.
+            </p>
+            <p>
+              The Sheetal Group was founded by Surendra Singh, who has extensive expertise in the industry. The company is committed to providing high-quality products that meet the needs of customers in various industries, including automotive, electronics, pharmaceuticals, and consumer goods.
+            </p>
+            <p>
+              The LED lighting solutions offered by Sheetal Industries are energy-efficient and provide long-lasting performance, making them ideal for both residential and commercial applications. The company also offers a range of rigid plastic packaging products, including bottles, containers, and jars, that are designed to meet the specific needs of customers.
+            </p>
+            <p>
+              The company’s in-house facilities for product designing, mould manufacturing, and plastic manufacturing provide greater control over the production process, resulting in higher-quality products and faster delivery times. The company’s assembly and packing line, SMT section, and IBM plastic further enhance the efficiency and quality of the manufacturing process.
+            </p>
+            <p>
+              Overall, the Sheetal Group is a trusted and reliable manufacturer and exporter of LED lighting solutions and plastic packaging products, with a strong commitment to quality, innovation, and customer satisfaction.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership Team */}
+      <section className="section-padding border-b border-steel/10">
+        <div className="container-wide">
+          <div className="mb-16">
+            <h2 className="mb-4">Our Team</h2>
+            <p className="text-steel text-lg">Meet the core team members driving Sheetal Group.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {leadership.map((leader) => (
+              <div key={leader.name} className="border border-steel/15 p-8 bg-paper">
+                <h3 className="text-2xl font-display font-medium text-ink mb-2">{leader.name}</h3>
+                <p className="font-mono text-xs uppercase tracking-widest text-accent mb-4">{leader.role}</p>
+                <div className="w-8 h-[1px] bg-steel/30 mb-4" />
+                <p className="text-steel text-sm leading-relaxed">{leader.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Locations */}
       <section className="section-padding border-b border-steel/10">
         <div className="container-wide">
@@ -133,7 +184,7 @@ export default function CompanyPage() {
               {
                 city: "Daman",
                 type: "Manufacturing Hub",
-                address: "Survey No. 364/1-11, Shree Ganesh Industrial Estate, Kachigam, Daman 396210",
+                address: "Survey No. 168/28 and 168/29, Opp. Givaudan India Pvt. Ltd, Dhabel, Daman and Diu - 396210",
                 note: "All 9 production facilities. Primary R&D. Tool room. Quality lab.",
               },
               {
