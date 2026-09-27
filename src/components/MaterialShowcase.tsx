@@ -182,7 +182,7 @@ export default function MaterialShowcase() {
               <ambientLight intensity={isEngineeringMode ? 1.5 : 0.7} />
               <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
               
-              <PresentationControls global rotation={[0.2, 0.5, 0]} polar={[-0.4, 0.2]} azimuth={[-1, 0.75]} config={{ mass: 2, tension: 400 }} snap={{ mass: 4, tension: 400 }}>
+              <PresentationControls global rotation={[0.2, 0.5, 0]} polar={[-0.4, 0.2]} azimuth={[-1, 0.75]} snap={true}>
                 <MaterialModel id={activeId} />
               </PresentationControls>
               

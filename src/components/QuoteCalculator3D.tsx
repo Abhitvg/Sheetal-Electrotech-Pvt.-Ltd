@@ -137,7 +137,7 @@ export default function QuoteCalculator3D() {
           <Canvas camera={{ position: [0, 0, 7], fov: 45 }}>
             <ambientLight intensity={isEngineeringMode ? 1.5 : 0.5} />
             <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
-            <PresentationControls global rotation={[0, 0.3, 0]} polar={[-0.4, 0.2]} azimuth={[-1, 0.75]} config={{ mass: 2, tension: 400 }} snap={{ mass: 4, tension: 400 }}>
+            <PresentationControls global rotation={[0, 0.3, 0]} polar={[-0.4, 0.2]} azimuth={[-1, 0.75]} snap={true}>
               <ConfiguratorModel category={category} />
             </PresentationControls>
             {!isEngineeringMode && <Environment preset="studio" />}
