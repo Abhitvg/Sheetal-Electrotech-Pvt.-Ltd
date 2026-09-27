@@ -4,8 +4,9 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Factory, Settings2, ShieldCheck, Box } from "lucide-react";
 import QuoteCalculator from "@/components/QuoteCalculator";
-import CapabilitiesScroller from "@/components/CapabilitiesScroller";
 import HeroExplosionSequence from "@/components/HeroExplosionSequence";
+import DarkIndustrialTransition from "@/components/DarkIndustrialTransition";
+import VirtualProductionLine from "@/components/VirtualProductionLine";
 
 export default function Home() {
   return (
@@ -13,52 +14,11 @@ export default function Home() {
       {/* 1. CONTINUOUS 3D HERO NARRATIVE */}
       <HeroExplosionSequence />
 
-      {/* 2. THE OEM PROMISE */}
-      <section className="section-padding bg-paper">
-        <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="mb-6">We own your production end-to-end.</h2>
-              <p className="text-steel mb-8 text-lg">
-                Stop juggling multiple vendors and dealing with supply chain delays. From product design and mould manufacturing to SMT assembly and final packing, we are a fully vertically integrated OEM partner based in Daman, India.
-              </p>
-              
-              <ul className="space-y-6">
-                {[
-                  { icon: Settings2, title: "Design to Production", desc: "In-house tooling and precision molding for rigid plastics." },
-                  { icon: Factory, title: "Mass Scale Capacity", desc: "Extrusion capacity of up to 1.2M pieces per month." },
-                  { icon: ShieldCheck, title: "Verified Quality", desc: "Rigorous end-of-line testing with BIS & CE compliance." }
-                ].map((item, i) => (
-                  <li key={i} className="flex gap-4 items-start p-4 glass-card rounded-xl">
-                    <div className="p-3 bg-accent/20 rounded-lg border border-accent/30">
-                      <item.icon className="w-6 h-6 text-accent" />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-ink mb-1">{item.title}</h4>
-                      <p className="text-steel text-sm">{item.desc}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            <div className="relative h-[600px] w-full bg-mist overflow-hidden">
-               <Image
-                 src="/images/moulding_factory.jpg"
-                 alt="Moulding Factory Facility"
-                 fill
-                 sizes="(max-width: 768px) 100vw, 50vw"
-                 className="object-cover"
-               />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 2. FACTORY TRANSITION */}
+      <DarkIndustrialTransition />
 
-      {/* Note: 3D Product Explosion is now part of the Hero sequence above */}
-
-      {/* 2.2 SCROLL-LINKED FACILITIES STORYTELLING */}
-      <CapabilitiesScroller />
+      {/* 3. VIRTUAL PRODUCTION LINE (Horizontal Scroll) */}
+      <VirtualProductionLine />
 
       {/* 2.5 LIVE CAPACITY CALCULATOR */}
       <section className="py-24 bg-gradient-premium relative overflow-hidden">
