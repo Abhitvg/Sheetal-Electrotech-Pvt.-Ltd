@@ -23,6 +23,7 @@ export default function Navigation() {
     { name: "Products", href: "/products", hasMegaMenu: true },
     { name: "Quality", href: "/quality", hasMegaMenu: false },
     { name: "Company", href: "/company", hasMegaMenu: false },
+    { name: "Contact", href: "/contact", hasMegaMenu: false },
   ];
 
   return (

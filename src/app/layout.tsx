@@ -27,8 +27,25 @@ const fontMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Sheetal Electrotech | Premium OEM Manufacturing Partner",
-  description: "Vertically integrated OEM manufacturer & exporter of LED lighting and rigid plastic packaging.",
+  description: "Vertically integrated OEM manufacturer & exporter of LED lighting, rigid plastic packaging, and custom injection moulding solutions. Over 25 years of excellence.",
+  keywords: ["OEM manufacturing", "LED lighting manufacturer", "Rigid plastic packaging", "Injection moulding India", "SMT manufacturing", "Sheetal Electrotech"],
+  authors: [{ name: "Sheetal Electrotech" }],
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: "https://sheetalelectrotech.com",
+    title: "Sheetal Electrotech | Premium OEM Manufacturing Partner",
+    description: "Vertically integrated OEM manufacturer & exporter of LED lighting, rigid plastic packaging, and custom injection moulding solutions. Based in India, scaling globally.",
+    siteName: "Sheetal Electrotech",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sheetal Electrotech | Premium OEM Manufacturing Partner",
+    description: "Vertically integrated OEM manufacturer & exporter of LED lighting and rigid plastic packaging.",
+  },
 };
+
+import { Analytics } from "@vercel/analytics/react";
 
 export default function RootLayout({
   children,
@@ -46,6 +63,7 @@ export default function RootLayout({
             <ModeToggle />
           </SmoothScroll>
         </EngineeringModeProvider>
+        <Analytics />
       </body>
     </html>
   );

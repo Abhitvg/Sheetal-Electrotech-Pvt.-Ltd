@@ -110,10 +110,11 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
               </a>
 
               <div className="border-t border-slate-200 pt-6 space-y-3 text-sm">
-                <a href="mailto:info@sheetalgroup.co.in" className="flex items-center gap-2 text-ink/60 hover:text-accent transition-colors">
-                  info@sheetalgroup.co.in
+                <a href="mailto:info@sheetalelectrotech.com" className="flex items-center gap-2 text-ink/60 hover:text-accent transition-colors">
+                  info@sheetalelectrotech.com
                 </a>
-                <p className="text-ink/40 font-mono text-xs">+91 260-XXX-XXXX · Daman, India</p>
+                <p className="text-ink/40 font-mono text-xs">+91 93273 45295, +91 99254 39405</p>
+                <p className="text-ink/40 font-mono text-xs">Survey No. 168/28 & 168/29, Opp. Givaudan India Pvt. Ltd, Dhabel, Daman</p>
               </div>
             </div>
           </div>

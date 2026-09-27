@@ -152,4 +152,82 @@ export const facilities: Facility[] = [
       },
     ],
   },
+  {
+    slug: "ibm-plastic",
+    title: "IBM Plastic",
+    tagline: "Injection Blow Moulding for precision containers.",
+    description:
+      "Combining injection and blow moulding processes to create flawless containers. This process ensures precise neck finishes and even wall distribution, ideal for cosmetic and pharmaceutical packaging.",
+    image: "/images/packaging_factory.jpg",
+    specs: [
+      { label: "Process", value: "Injection Blow Moulding" },
+      { label: "Tolerance", value: "High precision neck finishes" },
+      { label: "Materials", value: "PET, PP, HDPE" },
+      { label: "Application", value: "Cosmetics & Pharma" },
+    ],
+    materials: ["PET", "PP", "HDPE"],
+    highlights: [
+      {
+        title: "Seamless Finish",
+        body: "IBM eliminates the pinch-off scar found in extrusion blow moulding, providing a premium finish.",
+      },
+    ],
+  },
+  {
+    slug: "manual-insertion",
+    title: "Manual Insertion",
+    tagline: "Skilled hand assembly for complex components.",
+    description:
+      "While our SMT lines handle automated placement, our dedicated manual insertion lines manage through-hole components, connectors, and custom wiring assemblies that require skilled human operators.",
+    image: "/images/moulding_factory.jpg",
+    specs: [
+      { label: "Lines", value: "Dedicated through-hole assembly" },
+      { label: "Components", value: "Connectors, capacitors, transformers" },
+      { label: "Quality Check", value: "Visual and functional testing" },
+    ],
+    highlights: [
+      {
+        title: "Skilled Workforce",
+        body: "Trained operators ensure precise component insertion and wave soldering preparation.",
+      },
+    ],
+  },
+  {
+    slug: "laser-machine",
+    title: "Laser Machine",
+    tagline: "Precision engraving and branding.",
+    description:
+      "In-line laser engraving capabilities for permanent branding, batch coding, and detailed product information on both plastic and metal surfaces.",
+    image: "/images/tool_room.jpg",
+    specs: [
+      { label: "Application", value: "Branding, Coding, Traceability" },
+      { label: "Materials", value: "Plastics, Aluminium" },
+      { label: "Speed", value: "High-speed inline processing" },
+    ],
+    highlights: [
+      {
+        title: "Permanent Marking",
+        body: "Laser engraving ensures that branding and regulatory markings never wear off during the product's lifespan.",
+      },
+    ],
+  },
+  {
+    slug: "research-development",
+    title: "Research & Development",
+    tagline: "Innovating the future of manufacturing.",
+    description:
+      "Our dedicated R&D team continuously explores new materials, driver designs, and moulding techniques to optimize product performance, durability, and cost-efficiency.",
+    image: "/images/testing_lab.jpg",
+    specs: [
+      { label: "Focus Areas", value: "Thermal management, electronics design" },
+      { label: "Prototyping", value: "Rapid 3D printing and tooling" },
+      { label: "Testing", value: "Environmental and stress simulation" },
+    ],
+    highlights: [
+      {
+        title: "Custom Solutions",
+        body: "We work directly with OEM partners to engineer bespoke solutions from the ground up.",
+      },
+    ],
+  },
 ];

@@ -36,8 +36,11 @@ export default function Footer() {
             <ul className="space-y-4 text-sm text-ink/80">
               <li><Link href="/facilities/injection-moulding" className="hover:text-accent transition-colors">Injection Moulding</Link></li>
               <li><Link href="/facilities/blow-moulding" className="hover:text-accent transition-colors">Blow Moulding</Link></li>
+              <li><Link href="/facilities/ibm-plastic" className="hover:text-accent transition-colors">IBM Plastic</Link></li>
               <li><Link href="/facilities/smt" className="hover:text-accent transition-colors">SMT & Auto Insertion</Link></li>
               <li><Link href="/facilities/assembly" className="hover:text-accent transition-colors">Assembly & Packing</Link></li>
+              <li><Link href="/facilities/manual-insertion" className="hover:text-accent transition-colors">Manual Insertion</Link></li>
+              <li><Link href="/facilities/laser-machine" className="hover:text-accent transition-colors">Lazer Machine</Link></li>
               <li><Link href="/facilities/tool-room" className="hover:text-accent transition-colors">Tool Room</Link></li>
             </ul>
           </div>
@@ -46,14 +49,14 @@ export default function Footer() {
           <div>
             <h4 className="font-mono text-xs uppercase tracking-widest text-ink/40 mb-6">Products</h4>
             <ul className="space-y-4 text-sm text-ink/80">
-              <li><Link href="/products/led" className="hover:text-accent transition-colors">LED Lighting Portfolio</Link></li>
+              <li><Link href="/products/led-lighting" className="hover:text-accent transition-colors">LED Lighting Portfolio</Link></li>
               <li><Link href="/products/rigid-packaging" className="hover:text-accent transition-colors">Rigid Plastic Packaging</Link></li>
             </ul>
             
             <h4 className="font-mono text-xs uppercase tracking-widest text-ink/40 mb-6 mt-12">Company</h4>
             <ul className="space-y-4 text-sm text-ink/80">
-              <li><Link href="/about" className="hover:text-accent transition-colors">About Us</Link></li>
-              <li><Link href="/esg" className="hover:text-accent transition-colors">ESG & Sustainability</Link></li>
+              <li><Link href="/company" className="hover:text-accent transition-colors">About Us</Link></li>
+              <li><Link href="/careers" className="hover:text-accent transition-colors">Careers</Link></li>
               <li><Link href="/quality" className="hover:text-accent transition-colors">Quality Assurance</Link></li>
             </ul>
           </div>
@@ -64,16 +67,18 @@ export default function Footer() {
             <div className="space-y-6 text-sm text-ink/80">
               <div>
                 <p className="font-medium text-ink mb-1">Daman (Manufacturing Hub)</p>
-                <p className="text-ink/60">Survey No. 364/1-11, Shree Ganesh Ind. Est.<br/>Kachigam, Daman 396210, India</p>
+                <p className="text-ink/60">Survey No. 168/28 & 168/29, Opp. Givaudan India Pvt. Ltd<br/>Dhabel, Daman and Diu – 396210</p>
               </div>
               <div>
                 <p className="font-medium text-ink mb-1">Mumbai (Corporate)</p>
                 <p className="text-ink/60">Goregaon East, Mumbai 400063, India</p>
               </div>
-              <div className="pt-4">
-                <a href="mailto:info@sheetalgroup.co.in" className="flex items-center gap-1 hover:text-accent transition-colors">
-                  info@sheetalgroup.co.in <ArrowUpRight className="w-3 h-3" />
+              <div className="pt-4 space-y-2">
+                <a href="mailto:info@sheetalelectrotech.com" className="flex items-center gap-1 hover:text-accent transition-colors">
+                  info@sheetalelectrotech.com <ArrowUpRight className="w-3 h-3" />
                 </a>
+                <p className="text-accent">+91 93273 45295</p>
+                <p className="text-accent">+91 99254 39405</p>
               </div>
             </div>
           </div>

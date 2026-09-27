@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowRight, Send, CheckCircle } from "lucide-react";
+import { useState, useRef, useEffect, Suspense } from "react";
+import { ArrowRight, Send, CheckCircle, Loader2, UploadCloud } from "lucide-react";
+import { submitRfq } from "@/app/actions/rfq";
+import { track } from "@vercel/analytics";
+import { useSearchParams } from "next/navigation";
 
 const productCategories = [
   "LED Bulbs",
@@ -15,20 +18,73 @@ const productCategories = [
   "Custom Rigid Packaging",
 ];
 
-export default function RFQPage() {
+function RFQFormContent() {
   const [submitted, setSubmitted] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
-  const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [fileName, setFileName] = useState<string | null>(null);
+  const [lastTrackedStep, setLastTrackedStep] = useState(0);
+  
+  const searchParams = useSearchParams();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const utmSource = searchParams.get("utm_source") || "";
+  const utmMedium = searchParams.get("utm_medium") || "";
+  const utmCampaign = searchParams.get("utm_campaign") || "";
+
+  useEffect(() => {
+    track("rfq_view");
+  }, []);
+
+  const trackStep = (step: number) => {
+    if (step > lastTrackedStep) {
+      track("rfq_step_reached", { step });
+      setLastTrackedStep(step);
+    }
+  };
 
   const toggleCategory = (cat: string) => {
     setSelected((prev) =>
       prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
     );
+    trackStep(1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFileName(e.target.files[0].name);
+      trackStep(3);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+    trackStep(4);
+    track("rfq_submit_attempt");
+
+    const formData = new FormData(e.currentTarget);
+    
+    // Append manually managed state
+    selected.forEach(cat => formData.append("categories", cat));
+
+    try {
+      const result = await submitRfq(formData);
+      if (result.success) {
+        setSubmitted(true);
+        track("rfq_submit_success", { categories: selected.join(",") });
+      } else {
+        setError(result.message);
+        track("rfq_submit_error", { message: result.message });
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
+      track("rfq_submit_error", { message: "Unexpected error" });
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -74,6 +130,10 @@ export default function RFQPage() {
       <div className="container-wide py-24">
         <form onSubmit={handleSubmit} className="grid lg:grid-cols-3 gap-16">
           
+          <input type="hidden" name="utm_source" value={utmSource} />
+          <input type="hidden" name="utm_medium" value={utmMedium} />
+          <input type="hidden" name="utm_campaign" value={utmCampaign} />
+
           {/* Main Form */}
           <div className="lg:col-span-2 space-y-12">
             
@@ -109,31 +169,31 @@ export default function RFQPage() {
             <div className="border-t border-steel/10 pt-12">
               <h3 className="font-display text-2xl font-medium mb-8">
                 <span className="text-accent font-mono text-sm mr-3">02</span>
-                Volume & Timeline
+                Volume & Target Delivery
               </h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-steel mb-3 uppercase tracking-wider font-mono">
                     Monthly Volume
                   </label>
-                  <select className="w-full border border-steel/20 px-4 py-3 bg-white text-ink focus:outline-none focus:border-accent">
+                  <select name="volume" required onChange={() => trackStep(2)} className="w-full border border-steel/20 px-4 py-3 bg-white text-ink focus:outline-none focus:border-accent">
                     <option value="">Select range</option>
-                    <option>1,000 – 10,000 units</option>
-                    <option>10,000 – 50,000 units</option>
-                    <option>50,000 – 100,000 units</option>
-                    <option>100,000+ units</option>
+                    <option value="1000-10000">1,000 – 10,000 units</option>
+                    <option value="10000-50000">10,000 – 50,000 units</option>
+                    <option value="50000-100000">50,000 – 100,000 units</option>
+                    <option value="100000+">100,000+ units</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-steel mb-3 uppercase tracking-wider font-mono">
                     Target Delivery
                   </label>
-                  <select className="w-full border border-steel/20 px-4 py-3 bg-white text-ink focus:outline-none focus:border-accent">
+                  <select name="timeline" required onChange={() => trackStep(2)} className="w-full border border-steel/20 px-4 py-3 bg-white text-ink focus:outline-none focus:border-accent">
                     <option value="">Select timeline</option>
-                    <option>ASAP (Rush)</option>
-                    <option>Within 4 weeks</option>
-                    <option>Within 3 months</option>
-                    <option>Planning Phase (&gt;6 months)</option>
+                    <option value="rush">ASAP (Rush)</option>
+                    <option value="4_weeks">Within 4 weeks</option>
+                    <option value="3_months">Within 3 months</option>
+                    <option value="planning">Planning Phase (&gt;6 months)</option>
                   </select>
                 </div>
               </div>
@@ -149,8 +209,20 @@ export default function RFQPage() {
                 <label className="block text-sm font-medium text-steel mb-3 uppercase tracking-wider font-mono">
                   Upload Drawings / Spec Sheet (Optional)
                 </label>
-                <div className="border-2 border-dashed border-steel/20 p-8 text-center hover:border-accent/50 transition-colors cursor-pointer">
-                  <p className="text-steel text-sm">Drop your DXF, PDF, or STEP files here</p>
+                <input 
+                  type="file" 
+                  name="file" 
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  className="hidden" 
+                  accept=".pdf,.dxf,.step,.stp,.dwg" 
+                />
+                <div 
+                  onClick={() => fileInputRef.current?.click()}
+                  className="border-2 border-dashed border-steel/20 p-8 flex flex-col items-center justify-center hover:border-accent/50 hover:bg-slate-50 transition-colors cursor-pointer"
+                >
+                  <UploadCloud className="w-6 h-6 text-steel mb-3" />
+                  <p className="text-steel text-sm">{fileName ? <span className="font-medium text-ink">{fileName}</span> : "Click to select DXF, PDF, or STEP files"}</p>
                   <p className="text-steel/50 text-xs mt-2 font-mono">Max 20MB · DXF, PDF, STEP, DWG</p>
                 </div>
               </div>
@@ -159,7 +231,9 @@ export default function RFQPage() {
                   Additional Notes
                 </label>
                 <textarea
+                  name="notes"
                   rows={5}
+                  onChange={() => trackStep(3)}
                   placeholder="Describe material requirements, colour, surface finish, packaging instructions, compliance needs..."
                   className="w-full border border-steel/20 px-4 py-3 bg-white text-ink focus:outline-none focus:border-accent resize-none placeholder:text-steel/40"
                 />
@@ -174,10 +248,10 @@ export default function RFQPage() {
               </h3>
               <div className="grid md:grid-cols-2 gap-6">
                 {[
-                  { label: "Full Name", placeholder: "Rajesh Mehta", type: "text" },
-                  { label: "Company", placeholder: "Acme Lighting Pvt. Ltd.", type: "text" },
-                  { label: "Work Email", placeholder: "r.mehta@acmelighting.com", type: "email" },
-                  { label: "Phone", placeholder: "+91 98765 43210", type: "tel" },
+                  { label: "Full Name", name: "fullName", placeholder: "Rajesh Mehta", type: "text" },
+                  { label: "Company", name: "company", placeholder: "Acme Lighting Pvt. Ltd.", type: "text" },
+                  { label: "Work Email", name: "email", placeholder: "r.mehta@acmelighting.com", type: "email" },
+                  { label: "Phone", name: "phone", placeholder: "+91 98765 43210", type: "tel" },
                 ].map((field) => (
                   <div key={field.label}>
                     <label className="block text-sm font-medium text-steel mb-3 uppercase tracking-wider font-mono">
@@ -185,13 +259,18 @@ export default function RFQPage() {
                     </label>
                     <input
                       type={field.type}
+                      name={field.name}
                       placeholder={field.placeholder}
+                      onChange={() => trackStep(4)}
                       className="w-full border border-steel/20 px-4 py-3 bg-white text-ink focus:outline-none focus:border-accent placeholder:text-steel/40"
                       required
                     />
                   </div>
                 ))}
               </div>
+              
+              {/* Honeypot for Spam Protection */}
+              <input type="text" name="website" tabIndex={-1} autoComplete="off" className="absolute left-[-9999px] top-[-9999px]" />
             </div>
 
           </div>
@@ -218,12 +297,22 @@ export default function RFQPage() {
                 ))}
               </ol>
 
+              {error && (
+               <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 text-sm">
+                 {error}
+               </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full bg-accent text-ink py-4 font-medium flex items-center justify-center gap-3 hover:bg-orange-600 transition-colors"
+                disabled={loading || selected.length === 0}
+                className="w-full bg-accent text-ink py-4 font-medium flex items-center justify-center gap-3 hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Submit RFQ
-                <Send className="w-4 h-4" />
+                {loading ? (
+                  <>Processing <Loader2 className="w-4 h-4 animate-spin" /></>
+                ) : (
+                  <>Submit RFQ <Send className="w-4 h-4" /></>
+                )}
               </button>
 
               <p className="text-xs text-ink/30 text-center mt-4 font-mono">
@@ -234,5 +323,13 @@ export default function RFQPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function RFQPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-paper pt-36 pb-20 text-center">Loading...</div>}>
+      <RFQFormContent />
+    </Suspense>
   );
 }
