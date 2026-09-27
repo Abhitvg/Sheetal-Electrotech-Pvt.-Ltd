@@ -17,7 +17,7 @@ export default function ProductsHub() {
         href="/products/rigid-packaging"
         className={`relative flex flex-col justify-center transition-all duration-700 ease-in-out cursor-pointer group ${
           hoveredSide === "left" ? "md:w-[65%]" : hoveredSide === "right" ? "md:w-[35%]" : "md:w-1/2"
-        } h-1/2 md:h-full border-b md:border-b-0 md:border-r border-white/10`}
+        } h-1/2 md:h-full border-b md:border-b-0 md:border-r border-slate-200`}
         onMouseEnter={() => setHoveredSide("left")}
         onMouseLeave={() => setHoveredSide(null)}
       >
@@ -46,17 +46,17 @@ export default function ProductsHub() {
             <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
               OEM Division 01
             </p>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium text-white mb-6 leading-tight">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium text-ink mb-6 leading-tight">
               Rigid Plastic Packaging
             </h2>
-            <p className={`text-white/70 text-lg transition-all duration-500 max-w-md mb-8 ${
+            <p className={`text-ink/70 text-lg transition-all duration-500 max-w-md mb-8 ${
               hoveredSide === "right" ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
             }`}>
               Precision-moulded cosmetic jars, pharmaceutical bottles, and industrial containers. Food-grade, sterile, and highly customizable.
             </p>
             
-            <div className={`flex items-center gap-4 text-white font-medium border border-white/20 px-8 py-4 w-max transition-all duration-300 ${
-              hoveredSide === "left" ? "bg-white text-ink" : "hover:bg-white/10"
+            <div className={`flex items-center gap-4 text-ink font-medium border border-slate-200 px-8 py-4 w-max transition-all duration-300 ${
+              hoveredSide === "left" ? "bg-white text-ink" : "hover:bg-slate-100"
             }`}>
               Explore Portfolio
               <ArrowRight className={`w-5 h-5 transition-transform ${hoveredSide === "left" ? "translate-x-1" : ""}`} />
@@ -99,17 +99,17 @@ export default function ProductsHub() {
             <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
               OEM Division 02
             </p>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium text-white mb-6 leading-tight">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium text-ink mb-6 leading-tight">
               LED Lighting Solutions
             </h2>
-            <p className={`text-white/70 text-lg transition-all duration-500 max-w-md mb-8 ${
+            <p className={`text-ink/70 text-lg transition-all duration-500 max-w-md mb-8 ${
               hoveredSide === "left" ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
             }`}>
               From 3W domestic bulbs to high-lumen industrial flood lights. Fully tested, BIS-certified, and ready for your brand label.
             </p>
             
-            <div className={`flex items-center gap-4 text-white font-medium border border-white/20 px-8 py-4 w-max transition-all duration-300 ${
-              hoveredSide === "right" ? "bg-accent border-accent text-white" : "hover:bg-white/10"
+            <div className={`flex items-center gap-4 text-ink font-medium border border-slate-200 px-8 py-4 w-max transition-all duration-300 ${
+              hoveredSide === "right" ? "bg-accent border-accent text-ink" : "hover:bg-slate-100"
             }`}>
               Explore Portfolio
               <ArrowRight className={`w-5 h-5 transition-transform ${hoveredSide === "right" ? "translate-x-1" : ""}`} />

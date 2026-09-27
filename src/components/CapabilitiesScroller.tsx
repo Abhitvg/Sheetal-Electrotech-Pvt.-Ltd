@@ -84,21 +84,21 @@ export default function CapabilitiesScroller() {
                   <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
                     0{index + 1} — {facility.title.split(' ')[0]}
                   </p>
-                  <h2 className="text-4xl md:text-6xl font-display font-medium mb-6 leading-tight text-white">
+                  <h2 className="text-4xl md:text-6xl font-display font-medium mb-6 leading-tight text-ink">
                     {facility.title}
                   </h2>
-                  <p className="text-white/60 text-lg mb-8 max-w-md">
+                  <p className="text-ink/60 text-lg mb-8 max-w-md">
                     {facility.description}
                   </p>
                   
-                  <div className="flex gap-12 border-t border-white/10 pt-8">
+                  <div className="flex gap-12 border-t border-slate-200 pt-8">
                     <div>
-                      <p className="text-3xl font-display text-white mb-1">{facility.stats.capacity}</p>
-                      <p className="text-xs font-mono text-white/40 uppercase">{facility.stats.label}</p>
+                      <p className="text-3xl font-display text-ink mb-1">{facility.stats.capacity}</p>
+                      <p className="text-xs font-mono text-ink/40 uppercase">{facility.stats.label}</p>
                     </div>
                     <div>
-                      <p className="text-3xl font-display text-white mb-1">{facility.stats.machine}</p>
-                      <p className="text-xs font-mono text-white/40 uppercase">Spec</p>
+                      <p className="text-3xl font-display text-ink mb-1">{facility.stats.machine}</p>
+                      <p className="text-xs font-mono text-ink/40 uppercase">Spec</p>
                     </div>
                   </div>
                 </motion.div>
@@ -147,7 +147,7 @@ export default function CapabilitiesScroller() {
             
             {/* View Facility Button overlay */}
             <div className="absolute bottom-6 right-6 z-20">
-               <button className="bg-paper text-ink p-4 hover:bg-accent hover:text-white transition-colors flex items-center gap-3 font-medium">
+               <button className="bg-paper text-ink p-4 hover:bg-accent hover:text-ink transition-colors flex items-center gap-3 font-medium">
                  View Facility Details
                  <ArrowRight className="w-4 h-4" />
                </button>

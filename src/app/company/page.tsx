@@ -46,10 +46,10 @@ export default function CompanyPage() {
             <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
               Est. 1999 · Daman, India
             </p>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium text-white mb-6 leading-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium text-ink mb-6 leading-tight">
               Built from the factory floor up.
             </h1>
-            <p className="text-white/70 text-xl max-w-2xl">
+            <p className="text-ink/70 text-xl max-w-2xl">
               25 years of vertical integration. One campus. The manufacturing partner that removes risk from your supply chain.
             </p>
           </motion.div>
@@ -123,8 +123,8 @@ export default function CompanyPage() {
             { value: "50+", label: "Active OEM clients" },
           ].map((stat) => (
             <div key={stat.label}>
-              <p className="text-5xl md:text-6xl font-display font-medium text-white mb-3">{stat.value}</p>
-              <p className="font-mono text-xs uppercase tracking-widest text-white/40">{stat.label}</p>
+              <p className="text-5xl md:text-6xl font-display font-medium text-ink mb-3">{stat.value}</p>
+              <p className="font-mono text-xs uppercase tracking-widest text-ink/40">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -209,15 +209,15 @@ export default function CompanyPage() {
       </section>
 
       {/* CTA Strip */}
-      <section className="py-24 bg-accent text-white">
+      <section className="py-24 bg-accent text-ink">
         <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
             <h3 className="text-3xl md:text-4xl font-display font-medium mb-2">Ready to build together?</h3>
-            <p className="text-white/80">Share your spec and get a proposal in 48 hours.</p>
+            <p className="text-ink/80">Share your spec and get a proposal in 48 hours.</p>
           </div>
           <Link
             href="/rfq"
-            className="bg-white text-accent px-10 py-5 font-bold text-lg hover:bg-paper hover:text-white transition-colors flex items-center gap-3 whitespace-nowrap"
+            className="bg-white text-accent px-10 py-5 font-bold text-lg hover:bg-paper hover:text-ink transition-colors flex items-center gap-3 whitespace-nowrap"
           >
             Start an RFQ <ArrowRight className="w-5 h-5" />
           </Link>

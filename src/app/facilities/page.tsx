@@ -17,7 +17,7 @@ export default function FacilitiesIndexPage() {
           <h1 className="text-5xl md:text-7xl font-display font-medium mb-6 max-w-3xl">
             One campus. Every capability.
           </h1>
-          <p className="text-white/60 text-xl max-w-2xl">
+          <p className="text-ink/60 text-xl max-w-2xl">
             All production operations are co-located in Daman, India. No sub-contracting, no hidden vendor dependencies — full traceability from raw material to finished goods.
           </p>
         </div>
@@ -52,16 +52,16 @@ export default function FacilitiesIndexPage() {
                 <h3 className="text-3xl font-display font-medium mb-3 group-hover:text-accent transition-colors">
                   {facility.title}
                 </h3>
-                <p className="text-white/60 text-sm mb-8 max-w-sm leading-relaxed">
+                <p className="text-ink/60 text-sm mb-8 max-w-sm leading-relaxed">
                   {facility.tagline}
                 </p>
 
                 {/* Spec mini-strip */}
-                <div className="flex gap-8 border-t border-white/10 pt-6 mb-6">
+                <div className="flex gap-8 border-t border-slate-200 pt-6 mb-6">
                   {facility.specs.slice(0, 2).map((spec) => (
                     <div key={spec.label}>
-                      <p className="text-white font-display text-xl font-medium">{spec.value}</p>
-                      <p className="text-white/40 text-xs font-mono uppercase">{spec.label}</p>
+                      <p className="text-ink font-display text-xl font-medium">{spec.value}</p>
+                      <p className="text-ink/40 text-xs font-mono uppercase">{spec.label}</p>
                     </div>
                   ))}
                 </div>
@@ -85,7 +85,7 @@ export default function FacilitiesIndexPage() {
           </div>
           <Link
             href="/rfq"
-            className="bg-paper text-ink border border-white/10 px-10 py-4 font-medium flex items-center gap-3 hover:bg-accent transition-colors whitespace-nowrap"
+            className="bg-paper text-ink border border-slate-200 px-10 py-4 font-medium flex items-center gap-3 hover:bg-accent transition-colors whitespace-nowrap"
           >
             Book a Factory Visit <ArrowRight className="w-4 h-4" />
           </Link>

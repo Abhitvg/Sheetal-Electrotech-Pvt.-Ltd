@@ -100,7 +100,7 @@ export default function QualityPage() {
                   }`}
                 >
                   <div className={`p-3 rounded-full ${
-                    activeProcess === process.id ? "bg-accent text-white" : "bg-mist text-steel"
+                    activeProcess === process.id ? "bg-accent text-ink" : "bg-mist text-steel"
                   }`}>
                     <process.icon className="w-6 h-6" />
                   </div>
@@ -120,25 +120,25 @@ export default function QualityPage() {
       {/* Certifications & Compliance Download Strip */}
       <section className="bg-mist text-ink py-24">
         <div className="container-wide">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16 border-b border-white/10 pb-8">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16 border-b border-slate-200 pb-8">
             <div>
               <h2 className="text-3xl md:text-5xl font-display font-medium mb-4">Official Certifications</h2>
-              <p className="text-white/60">Verified documents available for procurement audits.</p>
+              <p className="text-ink/60">Verified documents available for procurement audits.</p>
             </div>
-            <button className="bg-white text-ink px-6 py-3 font-medium flex items-center gap-3 hover:bg-accent hover:text-white transition-colors">
+            <button className="bg-white text-ink px-6 py-3 font-medium flex items-center gap-3 hover:bg-accent hover:text-ink transition-colors">
               Download Full Dossier <Download className="w-4 h-4" />
             </button>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Cert 1 */}
-            <div className="border border-white/20 p-8 flex flex-col gap-6 hover:bg-white/5 transition-colors group cursor-pointer">
-              <div className="w-16 h-16 bg-white/10 flex items-center justify-center rounded-sm text-white font-display text-xl font-bold">
+            <div className="border border-slate-200 p-8 flex flex-col gap-6 hover:bg-slate-50 transition-colors group cursor-pointer">
+              <div className="w-16 h-16 bg-slate-100 flex items-center justify-center rounded-sm text-ink font-display text-xl font-bold">
                 ISO
               </div>
               <div>
                 <h4 className="text-xl font-medium mb-2 group-hover:text-accent transition-colors">ISO 9001:2015</h4>
-                <p className="text-sm text-white/50 mb-6">Quality Management Systems for manufacturing and assembly operations.</p>
+                <p className="text-sm text-ink/50 mb-6">Quality Management Systems for manufacturing and assembly operations.</p>
                 <div className="flex items-center gap-2 text-sm text-accent font-medium">
                   <Download className="w-4 h-4" /> Download PDF
                 </div>
@@ -146,13 +146,13 @@ export default function QualityPage() {
             </div>
 
             {/* Cert 2 */}
-            <div className="border border-white/20 p-8 flex flex-col gap-6 hover:bg-white/5 transition-colors group cursor-pointer">
-              <div className="w-16 h-16 bg-white/10 flex items-center justify-center rounded-sm text-white font-display text-xl font-bold">
+            <div className="border border-slate-200 p-8 flex flex-col gap-6 hover:bg-slate-50 transition-colors group cursor-pointer">
+              <div className="w-16 h-16 bg-slate-100 flex items-center justify-center rounded-sm text-ink font-display text-xl font-bold">
                 BIS
               </div>
               <div>
                 <h4 className="text-xl font-medium mb-2 group-hover:text-accent transition-colors">BIS Certification</h4>
-                <p className="text-sm text-white/50 mb-6">Bureau of Indian Standards compliance for LED lighting products and drivers.</p>
+                <p className="text-sm text-ink/50 mb-6">Bureau of Indian Standards compliance for LED lighting products and drivers.</p>
                 <div className="flex items-center gap-2 text-sm text-accent font-medium">
                   <Download className="w-4 h-4" /> Download PDF
                 </div>
@@ -160,13 +160,13 @@ export default function QualityPage() {
             </div>
 
             {/* Cert 3 */}
-            <div className="border border-white/20 p-8 flex flex-col gap-6 hover:bg-white/5 transition-colors group cursor-pointer">
-              <div className="w-16 h-16 bg-white/10 flex items-center justify-center rounded-sm text-white font-display text-xl font-bold">
+            <div className="border border-slate-200 p-8 flex flex-col gap-6 hover:bg-slate-50 transition-colors group cursor-pointer">
+              <div className="w-16 h-16 bg-slate-100 flex items-center justify-center rounded-sm text-ink font-display text-xl font-bold">
                 CE
               </div>
               <div>
                 <h4 className="text-xl font-medium mb-2 group-hover:text-accent transition-colors">CE Declaration</h4>
-                <p className="text-sm text-white/50 mb-6">European conformity standards for export-ready manufactured goods.</p>
+                <p className="text-sm text-ink/50 mb-6">European conformity standards for export-ready manufactured goods.</p>
                 <div className="flex items-center gap-2 text-sm text-accent font-medium">
                   <Download className="w-4 h-4" /> Download PDF
                 </div>

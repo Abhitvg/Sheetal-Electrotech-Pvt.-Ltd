@@ -215,7 +215,7 @@ export default function LEDLightingPage() {
           <h1 className="text-5xl md:text-7xl font-display font-medium mb-6 max-w-3xl leading-tight">
             LED Lighting Solutions
           </h1>
-          <p className="text-white/60 text-xl max-w-2xl">
+          <p className="text-ink/60 text-xl max-w-2xl">
             Fully BIS-certified, white-label ready. From 3W residential bulbs to 200W industrial flood lights — all manufactured and tested in-house at our Daman campus.
           </p>
         </div>
@@ -259,8 +259,8 @@ export default function LEDLightingPage() {
                     onClick={() => { setActiveProduct(p); setSpecsOpen(false); }}
                     className={`px-5 py-2.5 text-sm font-medium transition-all rounded-full border ${
                       activeProduct.id === p.id 
-                        ? "bg-paper text-ink border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.1)]" 
-                        : "glass text-steel border-steel/20 hover:border-steel/40 hover:text-white"
+                        ? "bg-paper text-ink border border-slate-200 shadow-[0_0_15px_rgba(255,255,255,0.1)]" 
+                        : "glass text-steel border-steel/20 hover:border-steel/40 hover:text-ink"
                     }`}
                   >
                     {p.name}
@@ -343,13 +343,13 @@ export default function LEDLightingPage() {
                             }
                           }
                         }}
-                        className="w-full flex justify-between items-center px-6 py-4 font-medium hover:bg-white/5 transition-colors"
+                        className="w-full flex justify-between items-center px-6 py-4 font-medium hover:bg-slate-50 transition-colors"
                       >
                         <span className="font-mono text-sm uppercase tracking-wider text-accent">Product Anatomy</span>
                         <ChevronDown className={`w-5 h-5 text-accent transition-transform`} />
                       </button>
                       <div id="anatomy-content" className="overflow-hidden transition-all duration-300" style={{ height: "auto" }}>
-                        <div className="border-t border-steel/20 p-4 bg-white/5 rounded-b-xl">
+                        <div className="border-t border-steel/20 p-4 bg-slate-50 rounded-b-xl">
                           <Image 
                             // @ts-ignore
                             src={activeProduct.explodedView} 
@@ -366,11 +366,11 @@ export default function LEDLightingPage() {
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link
                       href="/rfq"
-                      className="bg-accent text-white px-8 py-4 font-medium flex items-center justify-center gap-3 hover:bg-blue-500 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all rounded-full"
+                      className="bg-accent text-ink px-8 py-4 font-medium flex items-center justify-center gap-3 hover:bg-blue-500 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all rounded-full"
                     >
                       Request OEM Quote <ArrowRight className="w-4 h-4" />
                     </Link>
-                    <button className="glass px-8 py-4 font-medium flex items-center justify-center gap-3 hover:bg-white/10 transition-colors text-white rounded-full">
+                    <button className="glass px-8 py-4 font-medium flex items-center justify-center gap-3 hover:bg-slate-100 transition-colors text-ink rounded-full">
                       Download Datasheet <Download className="w-4 h-4" />
                     </button>
                   </div>
@@ -393,8 +393,8 @@ export default function LEDLightingPage() {
               { title: "Surge Tested, Grid Proven", body: "Every driver is tested to survive Indian grid fluctuations up to 4kV, reducing field failure rates to near zero." },
             ].map((item) => (
               <div key={item.title} className="p-10">
-                <h4 className="font-display text-xl font-medium mb-4 text-white">{item.title}</h4>
-                <p className="text-white/60 leading-relaxed">{item.body}</p>
+                <h4 className="font-display text-xl font-medium mb-4 text-ink">{item.title}</h4>
+                <p className="text-ink/60 leading-relaxed">{item.body}</p>
               </div>
             ))}
           </div>

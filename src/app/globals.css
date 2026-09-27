@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #f8fafc;
-  --color-paper: #030712;
-  --color-steel: #9ca3af;
-  --color-accent: #3b82f6;
-  --color-mist: #111827;
+  --color-ink: #0b192c; /* Deep Navy */
+  --color-paper: #fafafa; /* Off-white */
+  --color-steel: #64748b; /* Slate 500 */
+  --color-accent: #0066ff; /* Electric Blue */
+  --color-mist: #f1f5f9; /* Slate 100 */
   --color-success: #10b981;
 
   --font-display: var(--font-display);
@@ -61,19 +61,19 @@
     transform: none;
   }
 
-  /* Glassmorphism */
+  /* Glassmorphism / Industrial */
   .glass {
-    @apply bg-white/5 backdrop-blur-md border border-white/10;
+    @apply bg-white/70 backdrop-blur-md border border-slate-200/50 shadow-sm;
   }
   .glass-card {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 hover:border-accent/50 transition-all duration-300 shadow-2xl;
+    @apply bg-white border border-slate-200 shadow-sm hover:border-accent/50 hover:shadow-md transition-all duration-300;
   }
 
   /* Premium Gradients */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-ink to-slate-500;
   }
   .bg-gradient-premium {
-    @apply bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 text-white;
+    @apply bg-gradient-to-br from-slate-100 to-white text-ink border-y border-slate-200;
   }
 }

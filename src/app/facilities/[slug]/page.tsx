@@ -34,20 +34,20 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
             Sheetal Facilities
           </p>
-          <h1 className="text-5xl md:text-7xl font-display font-medium mb-6 leading-tight text-white">
+          <h1 className="text-5xl md:text-7xl font-display font-medium mb-6 leading-tight text-ink">
             {facility.title}
           </h1>
-          <p className="text-white/70 text-xl max-w-2xl">{facility.tagline}</p>
+          <p className="text-ink/70 text-xl max-w-2xl">{facility.tagline}</p>
         </div>
       </div>
 
       {/* Spec Bar */}
-      <div className="bg-mist text-ink py-8 border-b border-white/10">
+      <div className="bg-mist text-ink py-8 border-b border-slate-200">
         <div className="container-wide grid grid-cols-2 md:grid-cols-4 gap-8">
           {facility.specs.map((spec, i) => (
             <div key={i}>
-              <p className="font-mono text-xs text-white/40 uppercase tracking-widest mb-2">{spec.label}</p>
-              <p className="text-2xl font-display font-medium text-white">{spec.value}</p>
+              <p className="font-mono text-xs text-ink/40 uppercase tracking-widest mb-2">{spec.label}</p>
+              <p className="text-2xl font-display font-medium text-ink">{spec.value}</p>
             </div>
           ))}
         </div>
@@ -92,28 +92,28 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
           {/* Right: Sticky RFQ Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-32 bg-mist text-ink p-8">
-              <p className="font-mono text-xs uppercase tracking-widest text-white/40 mb-4">
+              <p className="font-mono text-xs uppercase tracking-widest text-ink/40 mb-4">
                 Ready to partner?
               </p>
               <h3 className="text-2xl font-display mb-4">
                 Get a quote for this facility.
               </h3>
-              <p className="text-white/60 text-sm mb-8">
+              <p className="text-ink/60 text-sm mb-8">
                 Share your spec and we'll come back with a production-ready proposal in 48 hours.
               </p>
 
               <a
                 href="/rfq"
-                className="block w-full bg-accent text-white text-center py-4 font-medium hover:bg-orange-600 transition-colors mb-6"
+                className="block w-full bg-accent text-ink text-center py-4 font-medium hover:bg-orange-600 transition-colors mb-6"
               >
                 Request a Quote →
               </a>
 
-              <div className="border-t border-white/10 pt-6 space-y-3 text-sm">
-                <a href="mailto:info@sheetalgroup.co.in" className="flex items-center gap-2 text-white/60 hover:text-accent transition-colors">
+              <div className="border-t border-slate-200 pt-6 space-y-3 text-sm">
+                <a href="mailto:info@sheetalgroup.co.in" className="flex items-center gap-2 text-ink/60 hover:text-accent transition-colors">
                   info@sheetalgroup.co.in
                 </a>
-                <p className="text-white/40 font-mono text-xs">+91 260-XXX-XXXX · Daman, India</p>
+                <p className="text-ink/40 font-mono text-xs">+91 260-XXX-XXXX · Daman, India</p>
               </div>
             </div>
           </div>

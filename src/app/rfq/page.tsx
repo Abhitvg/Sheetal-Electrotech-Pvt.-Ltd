@@ -42,7 +42,7 @@ export default function RFQPage() {
           <p className="text-steel text-lg mb-8">
             Our technical team will review your specification and respond within <strong>48 business hours</strong> with a production-ready proposal.
           </p>
-          <a href="/" className="bg-accent text-white px-8 py-4 font-medium hover:bg-orange-600 transition-colors inline-flex items-center gap-3">
+          <a href="/" className="bg-accent text-ink px-8 py-4 font-medium hover:bg-orange-600 transition-colors inline-flex items-center gap-3">
             Return Home <ArrowRight className="w-4 h-4" />
           </a>
         </div>
@@ -63,7 +63,7 @@ export default function RFQPage() {
             <h1 className="text-5xl md:text-7xl font-display font-medium mb-6">
               Request a Quote.
             </h1>
-            <p className="text-white/60 text-xl max-w-2xl">
+            <p className="text-ink/60 text-xl max-w-2xl">
               Share your specification below and receive a detailed production proposal within 48 hours. No generic sales calls — a real engineering response.
             </p>
           </div>
@@ -199,7 +199,7 @@ export default function RFQPage() {
           {/* Right: Summary Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-32 bg-mist text-ink p-8">
-              <p className="font-mono text-xs uppercase tracking-widest text-white/40 mb-6">What happens next</p>
+              <p className="font-mono text-xs uppercase tracking-widest text-ink/40 mb-6">What happens next</p>
               <ol className="space-y-6 mb-10">
                 {[
                   { n: "1", title: "Technical Review", body: "Our engineering team reviews your spec within 4 hours." },
@@ -207,12 +207,12 @@ export default function RFQPage() {
                   { n: "3", title: "Production Proposal", body: "A detailed proposal with pricing, lead times, and MOQs within 48 hours." },
                 ].map((item) => (
                   <li key={item.n} className="flex gap-4">
-                    <span className="w-8 h-8 bg-accent text-white text-sm font-bold flex items-center justify-center flex-shrink-0">
+                    <span className="w-8 h-8 bg-accent text-ink text-sm font-bold flex items-center justify-center flex-shrink-0">
                       {item.n}
                     </span>
                     <div>
-                      <p className="font-medium text-white mb-1">{item.title}</p>
-                      <p className="text-white/50 text-sm">{item.body}</p>
+                      <p className="font-medium text-ink mb-1">{item.title}</p>
+                      <p className="text-ink/50 text-sm">{item.body}</p>
                     </div>
                   </li>
                 ))}
@@ -220,13 +220,13 @@ export default function RFQPage() {
 
               <button
                 type="submit"
-                className="w-full bg-accent text-white py-4 font-medium flex items-center justify-center gap-3 hover:bg-orange-600 transition-colors"
+                className="w-full bg-accent text-ink py-4 font-medium flex items-center justify-center gap-3 hover:bg-orange-600 transition-colors"
               >
                 Submit RFQ
                 <Send className="w-4 h-4" />
               </button>
 
-              <p className="text-xs text-white/30 text-center mt-4 font-mono">
+              <p className="text-xs text-ink/30 text-center mt-4 font-mono">
                 No spam. Engineers only.
               </p>
             </div>

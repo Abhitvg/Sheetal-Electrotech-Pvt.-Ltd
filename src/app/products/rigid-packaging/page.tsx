@@ -74,7 +74,7 @@ export default function RigidPackagingPage() {
           <h1 className="text-5xl md:text-7xl font-display font-medium mb-6 max-w-3xl leading-tight">
             Rigid Plastic Packaging
           </h1>
-          <p className="text-white/60 text-xl max-w-2xl">
+          <p className="text-ink/60 text-xl max-w-2xl">
             Precision blow-moulded and injection-moulded containers for cosmetics, pharmaceuticals, and industrial applications. Virgin resin, full traceability, custom geometries.
           </p>
         </div>
@@ -117,7 +117,7 @@ export default function RigidPackagingPage() {
                     onClick={() => { setActiveProduct(p); setSpecsOpen(false); }}
                     className={`px-5 py-2.5 text-sm font-medium transition-all rounded-full border ${
                       activeProduct.id === p.id 
-                        ? "bg-paper text-ink border border-white/10 border-ink shadow-sm" 
+                        ? "bg-paper text-ink border border-slate-200 border-ink shadow-sm" 
                         : "bg-white text-steel border-steel/20 hover:border-steel/40 hover:text-ink"
                     }`}
                   >
@@ -175,7 +175,7 @@ export default function RigidPackagingPage() {
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link
                       href="/rfq"
-                      className="bg-accent text-white px-8 py-4 font-medium flex items-center justify-center gap-3 hover:bg-orange-600 transition-colors"
+                      className="bg-accent text-ink px-8 py-4 font-medium flex items-center justify-center gap-3 hover:bg-orange-600 transition-colors"
                     >
                       Request OEM Quote <ArrowRight className="w-4 h-4" />
                     </Link>
@@ -202,8 +202,8 @@ export default function RigidPackagingPage() {
               { title: "100% Leak Testing", body: "Every container goes through vacuum chamber testing. Zero compromised units leave the facility." },
             ].map((item) => (
               <div key={item.title} className="p-10">
-                <h4 className="font-display text-xl font-medium mb-4 text-white">{item.title}</h4>
-                <p className="text-white/60 leading-relaxed">{item.body}</p>
+                <h4 className="font-display text-xl font-medium mb-4 text-ink">{item.title}</h4>
+                <p className="text-ink/60 leading-relaxed">{item.body}</p>
               </div>
             ))}
           </div>
