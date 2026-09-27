@@ -195,7 +195,7 @@ export default function HeroExplosionSequence() {
         </div>
 
         {/* CALLOUTS (Fades in at end of explosion) */}
-        <div ref={calloutsRef} className="container-wide w-full h-full flex justify-between items-center absolute inset-0 opacity-0 pointer-events-none pb-12">
+        <div ref={calloutsRef} className="container-wide w-full h-full hidden md:flex justify-between items-center absolute inset-0 opacity-0 pointer-events-none pb-12">
           
           {/* Left Side Callouts */}
           <div className="flex flex-col gap-32 pl-12">

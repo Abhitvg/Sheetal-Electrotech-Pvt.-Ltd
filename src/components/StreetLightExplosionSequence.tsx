@@ -168,7 +168,7 @@ export default function StreetLightExplosionSequence() {
         </div>
         
         {/* Bottom Right */}
-        <div className="self-end text-right max-w-xl bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10">
+        <div className="hidden md:block self-end text-right max-w-xl bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10">
           <h3 className={`text-2xl md:text-3xl font-display font-bold tracking-tight mb-2 ${isEngineeringMode ? 'text-white' : 'text-ink'}`}>
             Thermal Mastery
           </h3>

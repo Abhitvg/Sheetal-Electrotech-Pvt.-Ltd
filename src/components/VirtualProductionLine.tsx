@@ -110,7 +110,7 @@ export default function VirtualProductionLine() {
         style={{ width: `${stages.length * 100}vw` }}
       >
         {stages.map((stage, i) => (
-          <div key={stage.id} className="w-[100vw] h-full flex items-center justify-center p-8 md:p-24 relative">
+          <div key={stage.id} className="w-[100vw] h-full flex items-center justify-center p-6 md:p-24 relative overflow-hidden">
             
             {/* Progress indicator */}
             <div className="absolute bottom-8 left-8 md:bottom-16 md:left-16 font-mono text-steel">
@@ -124,13 +124,13 @@ export default function VirtualProductionLine() {
               </div>
             )}
 
-            <div className="grid md:grid-cols-2 gap-12 md:gap-24 w-full max-w-7xl items-center">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-24 w-full max-w-7xl items-center pt-16 md:pt-0">
               
               {/* Text Content */}
               <div className="flex flex-col relative z-10">
-                <h3 className="text-4xl md:text-6xl font-display font-bold mb-4">{stage.title}</h3>
-                <h4 className="text-xl md:text-2xl text-accent mb-6 font-medium">{stage.subtitle}</h4>
-                <p className="text-steel text-lg mb-12 max-w-md leading-relaxed">
+                <h3 className="text-3xl md:text-6xl font-display font-bold mb-2 md:mb-4">{stage.title}</h3>
+                <h4 className="text-lg md:text-2xl text-accent mb-4 md:mb-6 font-medium">{stage.subtitle}</h4>
+                <p className="text-steel text-base md:text-lg mb-6 md:mb-12 max-w-md leading-relaxed">
                   {stage.desc}
                 </p>
                 
@@ -145,7 +145,7 @@ export default function VirtualProductionLine() {
               </div>
 
               {/* Image Content */}
-              <div className="relative h-[40vh] md:h-[60vh] w-full group">
+              <div className="relative h-[25vh] md:h-[60vh] w-full group mt-4 md:mt-0">
                 <div className="absolute inset-0 border border-white/10 translate-x-4 translate-y-4 transition-transform group-hover:translate-x-6 group-hover:translate-y-6 z-0"></div>
                 <div className="absolute inset-0 bg-white/5 backdrop-blur-sm z-10">
                    {/* In real implementation, these would be valid image paths. 
