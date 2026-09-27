@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Factory, Settings2, ShieldCheck, Box } from "lucide-react";
-import QuoteCalculator from "@/components/QuoteCalculator";
+import QuoteCalculator3D from "@/components/QuoteCalculator3D";
 import HeroExplosionSequence from "@/components/HeroExplosionSequence";
 import DarkIndustrialTransition from "@/components/DarkIndustrialTransition";
 import VirtualProductionLine from "@/components/VirtualProductionLine";
@@ -35,7 +35,7 @@ export default function Home() {
               estimate of unit cost and lead time based on our active production lines.
             </p>
           </div>
-          <QuoteCalculator />
+          <QuoteCalculator3D />
         </div>
       </section>
 
