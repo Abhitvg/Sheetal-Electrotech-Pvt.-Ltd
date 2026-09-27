@@ -53,13 +53,33 @@ export default function Home() {
           <p className="font-mono text-sm uppercase tracking-widest text-ink/50 mb-12">
             Trusted by industry leaders
           </p>
-          <div className="flex flex-wrap justify-center gap-12 md:gap-24 opacity-70 grayscale">
-             {/* Text placeholders for now since we don't have SVGs */}
-             {["TATA", "Crompton", "Ledvance", "Orient", "HPCL", "UPL"].map((client, i) => (
-               <span key={i} className="text-2xl font-display font-medium tracking-wide">
-                 {client}
-               </span>
-             ))}
+          <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
+             <div className="flex items-center gap-2">
+               <ShieldCheck className="w-8 h-8 text-ink" />
+               <span className="text-2xl font-display font-bold tracking-tight">TATA</span>
+             </div>
+             <div className="flex items-center gap-2">
+               <div className="w-8 h-8 rounded-full border-4 border-ink flex items-center justify-center">
+                 <div className="w-2 h-2 bg-ink rounded-full"></div>
+               </div>
+               <span className="text-2xl font-display font-medium tracking-widest uppercase">Crompton</span>
+             </div>
+             <div className="flex items-center gap-2">
+               <Settings2 className="w-8 h-8 text-ink" />
+               <span className="text-xl font-display font-bold tracking-widest text-ink">LEDVANCE</span>
+             </div>
+             <div className="flex items-center gap-2">
+               <div className="w-6 h-6 border-2 border-ink rotate-45 flex items-center justify-center"></div>
+               <span className="text-2xl font-display font-semibold tracking-wide">Orient</span>
+             </div>
+             <div className="flex items-center gap-2">
+               <Factory className="w-8 h-8 text-ink" />
+               <span className="text-2xl font-display font-bold italic tracking-tight">HPCL</span>
+             </div>
+             <div className="flex items-center gap-2">
+               <Box className="w-8 h-8 text-ink" />
+               <span className="text-2xl font-display font-black tracking-widest">UPL</span>
+             </div>
           </div>
         </div>
       </section>
