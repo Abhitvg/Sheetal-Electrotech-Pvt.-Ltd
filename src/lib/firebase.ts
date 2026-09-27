@@ -3,13 +3,13 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCRixJp39wLsii_4W1N74xNY0d5p3NQZ7A",
-  authDomain: "sheetal-electrotech.firebaseapp.com",
-  projectId: "sheetal-electrotech",
-  storageBucket: "sheetal-electrotech.firebasestorage.app",
-  messagingSenderId: "1057777797755",
-  appId: "1:1057777797755:web:a0e40735ce32f6ae1d70de",
-  measurementId: "G-1827PKGN56"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase only if it hasn't been initialized already
