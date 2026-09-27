@@ -8,6 +8,7 @@ import HeroExplosionSequence from "@/components/HeroExplosionSequence";
 import DarkIndustrialTransition from "@/components/DarkIndustrialTransition";
 import VirtualProductionLine from "@/components/VirtualProductionLine";
 import TestingLabInterface from "@/components/TestingLabInterface";
+import MaterialShowcase from "@/components/MaterialShowcase";
 
 export default function Home() {
   return (
@@ -17,6 +18,9 @@ export default function Home() {
 
       {/* 2. FACTORY TRANSITION */}
       <DarkIndustrialTransition />
+
+      {/* 2.5 MATERIAL SHOWCASE */}
+      <MaterialShowcase />
 
       {/* 3. VIRTUAL PRODUCTION LINE (Horizontal Scroll) */}
       <VirtualProductionLine />
