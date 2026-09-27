@@ -4,6 +4,8 @@ import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
+import { EngineeringModeProvider } from "@/components/EngineeringModeProvider";
+import ModeToggle from "@/components/ModeToggle";
 
 const fontDisplay = Space_Grotesk({
   variable: "--font-display",
@@ -36,11 +38,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}>
       <body className="flex flex-col min-h-screen bg-paper text-ink font-body">
-        <SmoothScroll>
-          <Navigation />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </SmoothScroll>
+        <EngineeringModeProvider>
+          <SmoothScroll>
+            <Navigation />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+            <ModeToggle />
+          </SmoothScroll>
+        </EngineeringModeProvider>
       </body>
     </html>
   );

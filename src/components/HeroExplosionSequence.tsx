@@ -6,10 +6,13 @@ import { Environment, ContactShadows, Float } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEngineeringMode } from "./EngineeringModeProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function ProceduralBulb({ timeline }: { timeline: gsap.core.Timeline | null }) {
+  const { isEngineeringMode } = useEngineeringMode();
+  
   const group = useRef<THREE.Group>(null);
   const diffuserRef = useRef<THREE.Mesh>(null);
   const pcbRef = useRef<THREE.Mesh>(null);
@@ -47,42 +50,43 @@ function ProceduralBulb({ timeline }: { timeline: gsap.core.Timeline | null }) {
         <mesh ref={diffuserRef} position={[0, 1.2, 0]}>
           <sphereGeometry args={[1, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
           <meshPhysicalMaterial 
-            color="#ffffff" 
-            transmission={0.9} 
-            opacity={1} 
+            color={isEngineeringMode ? "#60a5fa" : "#ffffff"} 
+            transmission={isEngineeringMode ? 0 : 0.9} 
+            opacity={isEngineeringMode ? 0.3 : 1} 
             metalness={0} 
             roughness={0.1} 
             ior={1.5} 
             thickness={0.5} 
+            wireframe={isEngineeringMode}
           />
         </mesh>
 
         {/* LED PCB */}
         <mesh ref={pcbRef} position={[0, 1.1, 0]}>
           <cylinderGeometry args={[0.9, 0.9, 0.05, 32]} />
-          <meshStandardMaterial color="#fcd34d" metalness={0.8} roughness={0.2} />
+          <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#fcd34d"} metalness={0.8} roughness={0.2} wireframe={isEngineeringMode} />
         </mesh>
 
         {/* Heat Sink / Housing */}
         <mesh ref={heatsinkRef} position={[0, 0, 0]}>
           <cylinderGeometry args={[0.95, 0.6, 2, 32]} />
-          <meshStandardMaterial color="#e2e8f0" metalness={0.2} roughness={0.5} />
+          <meshStandardMaterial color={isEngineeringMode ? "#60a5fa" : "#e2e8f0"} metalness={0.2} roughness={0.5} wireframe={isEngineeringMode} />
         </mesh>
 
         {/* Driver */}
         <mesh ref={driverRef} position={[0, -0.2, 0]}>
           <boxGeometry args={[0.4, 0.8, 0.4]} />
-          <meshStandardMaterial color="#1e293b" metalness={0.9} roughness={0.1} />
+          <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#1e293b"} metalness={0.9} roughness={0.1} wireframe={isEngineeringMode} />
         </mesh>
 
         {/* B22/E27 Base */}
         <mesh ref={baseRef} position={[0, -1.2, 0]}>
           <cylinderGeometry args={[0.5, 0.5, 0.6, 32]} />
-          <meshStandardMaterial color="#94a3b8" metalness={1} roughness={0.3} />
+          <meshStandardMaterial color={isEngineeringMode ? "#60a5fa" : "#94a3b8"} metalness={1} roughness={0.3} wireframe={isEngineeringMode} />
           {/* Base threads/pins */}
           <mesh position={[0, -0.4, 0]}>
             <cylinderGeometry args={[0.2, 0.4, 0.3, 32]} />
-            <meshStandardMaterial color="#0f172a" metalness={0.5} roughness={0.5} />
+            <meshStandardMaterial color={isEngineeringMode ? "#60a5fa" : "#0f172a"} metalness={0.5} roughness={0.5} wireframe={isEngineeringMode} />
           </mesh>
         </mesh>
 

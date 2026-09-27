@@ -1,16 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #0b192c; /* Deep Navy */
-  --color-paper: #fafafa; /* Off-white */
-  --color-steel: #64748b; /* Slate 500 */
-  --color-accent: #0066ff; /* Electric Blue */
-  --color-mist: #f1f5f9; /* Slate 100 */
+  --color-ink: var(--theme-ink);
+  --color-paper: var(--theme-paper);
+  --color-steel: var(--theme-steel);
+  --color-accent: var(--theme-accent);
+  --color-mist: var(--theme-mist);
   --color-success: #10b981;
 
-  --font-display: var(--font-display);
-  --font-body: var(--font-body);
+  --font-display: var(--theme-font-display);
+  --font-body: var(--theme-font-body);
   --font-mono: var(--font-mono);
+}
+
+:root {
+  --theme-ink: #0b192c; /* Deep Navy */
+  --theme-paper: #fafafa; /* Off-white */
+  --theme-steel: #64748b; /* Slate 500 */
+  --theme-accent: #0066ff; /* Electric Blue */
+  --theme-mist: #f1f5f9; /* Slate 100 */
+
+  --theme-font-display: var(--font-display);
+  --theme-font-body: var(--font-body);
 }
 
 /* Base Styles */
@@ -25,6 +36,35 @@
   }
 
   p { @apply leading-[1.6]; }
+}
+
+/* ENGINEERING MODE */
+body.engineering-mode {
+  /* Classic CAD / Blueprint Theme */
+  --theme-ink: #ffffff; 
+  --theme-paper: #002244; 
+  --theme-steel: #60a5fa; 
+  --theme-accent: #facc15; 
+  --theme-mist: #001a33; 
+
+  --theme-font-display: var(--font-mono);
+  --theme-font-body: var(--font-mono);
+  
+  background-color: var(--theme-paper) !important;
+  background-image: 
+    linear-gradient(rgba(96, 165, 250, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96, 165, 250, 0.1) 1px, transparent 1px) !important;
+  background-size: 40px 40px !important;
+}
+
+body.engineering-mode * {
+  border-radius: 0 !important; /* Blocky */
+}
+body.engineering-mode .glass, 
+body.engineering-mode .glass-card {
+  background: rgba(0, 34, 68, 0.8) !important;
+  backdrop-filter: none !important;
+  border-color: var(--theme-steel) !important;
 }
 
 /* Reusable Utility Classes */
