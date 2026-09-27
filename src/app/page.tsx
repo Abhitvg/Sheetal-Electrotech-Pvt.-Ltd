@@ -7,6 +7,7 @@ import QuoteCalculator from "@/components/QuoteCalculator";
 import HeroExplosionSequence from "@/components/HeroExplosionSequence";
 import DarkIndustrialTransition from "@/components/DarkIndustrialTransition";
 import VirtualProductionLine from "@/components/VirtualProductionLine";
+import TestingLabInterface from "@/components/TestingLabInterface";
 
 export default function Home() {
   return (
@@ -20,7 +21,10 @@ export default function Home() {
       {/* 3. VIRTUAL PRODUCTION LINE (Horizontal Scroll) */}
       <VirtualProductionLine />
 
-      {/* 2.5 LIVE CAPACITY CALCULATOR */}
+      {/* 4. TESTING LAB INTERFACE */}
+      <TestingLabInterface />
+
+      {/* 5. LIVE CAPACITY CALCULATOR */}
       <section className="py-24 bg-gradient-premium relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/images/hero_factory.jpg')] opacity-10 mix-blend-overlay bg-cover bg-center"></div>
         <div className="container-wide relative z-10">
