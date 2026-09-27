@@ -27,9 +27,10 @@ export default function ProductsHub() {
             hoveredSide === "right" ? "opacity-80" : "opacity-30 group-hover:opacity-10"
           }`} />
           <Image
-            src="/products_packaging.jpg"
+            src="/img2/4.png"
             alt="Rigid Plastic Packaging"
             fill
+            sizes="(max-width: 768px) 100vw, 65vw"
             className="object-cover transition-transform duration-1000 group-hover:scale-105"
             priority
           />
@@ -79,9 +80,10 @@ export default function ProductsHub() {
             hoveredSide === "left" ? "opacity-80" : "opacity-40 group-hover:opacity-10"
           }`} />
           <Image
-            src="/products_led.jpg"
+            src="/img2/5.png"
             alt="LED Lighting Products"
             fill
+            sizes="(max-width: 768px) 100vw, 65vw"
             className="object-cover transition-transform duration-1000 group-hover:scale-105"
             priority
           />

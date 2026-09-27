@@ -28,7 +28,7 @@ export default function CompanyPage() {
       {/* Hero */}
       <div className="relative h-[75vh] min-h-[550px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/company_team.jpg" alt="Sheetal Electrotech Team" fill className="object-cover object-top" priority />
+          <Image src="/img2/8.jpg" alt="Sheetal Electrotech Team" fill sizes="100vw" className="object-cover object-top" priority />
           <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/30" />
         </div>
         <div className="relative z-10 container-wide text-paper pb-20 pt-36">

@@ -15,7 +15,7 @@ const facilities = [
       label: "Pieces / Month",
       machine: "80-160T",
     },
-    image: "/moulding_factory.jpg",
+    image: "/img2/0.jpg",
   },
   {
     id: "smt",
@@ -26,7 +26,7 @@ const facilities = [
       label: "CPH Speed",
       machine: "6-Zone Reflow",
     },
-    image: "/hero_factory.jpg", // Reusing hero image for SMT
+    image: "/img2/3.jpg",
   },
   {
     id: "packaging",
@@ -37,7 +37,7 @@ const facilities = [
       label: "Units / Day",
       machine: "320V Testing",
     },
-    image: "/packaging_factory.jpg",
+    image: "/img2/6.png",
   },
 ];
 
@@ -56,7 +56,7 @@ export default function CapabilitiesScroller() {
         <div className="container-wide w-full h-full flex flex-col md:flex-row items-center py-24 gap-16">
           
           {/* Left Text Content - Changes based on scroll */}
-          <div className="w-full md:w-1/2 relative h-[50vh] flex flex-col justify-center">
+          <div className="w-full md:w-1/2 relative h-[70vh] flex flex-col justify-center">
             {facilities.map((facility, index) => {
               // Calculate opacity for each text block based on scroll progress
               const step = 1 / facilities.length;
@@ -137,6 +137,7 @@ export default function CapabilitiesScroller() {
                       src={facility.image}
                       alt={facility.title}
                       fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover"
                     />
                   </motion.div>

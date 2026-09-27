@@ -16,7 +16,7 @@ export const facilities: Facility[] = [
     tagline: "Design to part in one facility.",
     description:
       "Our 18+ injection moulding machines span 80T to 160T clamping force, handling materials like PP, ABS, PET, HIPS, and PC. From prototype tooling to high-volume production runs, we maintain tight tolerances with consistent quality.",
-    image: "/moulding_factory.jpg",
+    image: "/img2/0.jpg",
     specs: [
       { label: "Clamping Force", value: "80T – 160T" },
       { label: "Machines", value: "18+" },
@@ -45,7 +45,7 @@ export const facilities: Facility[] = [
     tagline: "Hollow-form containers at industrial scale.",
     description:
       "Specializing in HDPE, PET, and PP rigid containers for cosmetic, pharmaceutical, and industrial packaging. Our blow moulding machines produce complex bottle geometries with consistent wall thickness.",
-    image: "/products_packaging.jpg",
+    image: "/img2/4.png",
     specs: [
       { label: "Materials", value: "HDPE / PET / PP" },
       { label: "Container Sizes", value: "30ml – 5L" },
@@ -74,7 +74,7 @@ export const facilities: Facility[] = [
     tagline: "The intelligence inside every luminaire.",
     description:
       "Equipped with Yamaha and Hanwha high-speed pick-and-place machines and a 6-zone reflow oven, our SMT line handles both LED light engines and driver PCBs with a pick-and-place speed of 170,000 CPH.",
-    image: "/hero_factory.jpg",
+    image: "/img2/3.jpg",
     specs: [
       { label: "Placement Speed", value: "170K CPH" },
       { label: "Reflow Oven", value: "6-Zone" },
@@ -102,7 +102,7 @@ export const facilities: Facility[] = [
     tagline: "Moulds machined. Timelines shortened.",
     description:
       "Our precision tool room houses CNC machining centres, EDM machines, and surface grinders for fabricating and maintaining all injection moulding inserts. This in-house capability is a critical strategic advantage.",
-    image: "/tool_room.jpg",
+    image: "/img2/8.jpg",
     specs: [
       { label: "CNC Centres", value: "4-Axis & 5-Axis" },
       { label: "Surface Finish", value: "Ra 0.4 µm" },
@@ -130,7 +130,7 @@ export const facilities: Facility[] = [
     tagline: "The final mile. Zero compromise.",
     description:
       "A 100,000 units/day assembly operation running fully systematic conveyor lines. Integrated end-of-line high-voltage aging machines ensure every unit is burned-in before final packaging for export.",
-    image: "/packaging_factory.jpg",
+    image: "/img2/6.png",
     specs: [
       { label: "Daily Output", value: "100K units" },
       { label: "Aging Test", value: "250V – 320V" },

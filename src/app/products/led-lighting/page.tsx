@@ -11,7 +11,7 @@ const ledProducts = [
     id: "led-bulb",
     name: "LED Bulbs",
     range: "3W – 20W",
-    image: "/led_bulb_product.jpg",
+    image: "/img2/16.png",
     bg: "bg-[#0a0a0a]",
     description: "Standard A-type and speciality LED bulbs for residential and commercial applications. Available in E27, B22, and custom bases.",
     specs: [
@@ -27,7 +27,7 @@ const ledProducts = [
     id: "led-batten",
     name: "LED Battens",
     range: "10W – 40W",
-    image: "/led_batten_product.jpg",
+    image: "/img2/17.png",
     bg: "bg-[#f5f5f3]",
     description: "Surface-mount and recessed LED battens for retail, office, and industrial lighting. Single-piece polycarbonate body, driver integrated.",
     specs: [
@@ -43,7 +43,7 @@ const ledProducts = [
     id: "flood",
     name: "Flood & Street Lights",
     range: "20W – 200W",
-    image: "/hero_factory.jpg",
+    image: "/img2/8.jpg",
     bg: "bg-[#14151a]",
     description: "High-lumen outdoor luminaires with die-cast aluminium housings and IP65 protection for industrial sites, streets, and perimeter lighting.",
     specs: [
@@ -100,6 +100,7 @@ export default function LEDLightingPage() {
                     src={activeProduct.image}
                     alt={activeProduct.name}
                     fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-contain p-12"
                   />
                 </motion.div>

@@ -16,9 +16,10 @@ export default function Home() {
           <div className="absolute inset-0 bg-ink/40 z-10" /> {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent z-10" />
           <Image
-            src="/hero_factory.jpg" // We will move the generated image here
+            src="/img2/3.jpg"
             alt="Advanced SMT Assembly Line at Sheetal Electrotech"
             fill
+            sizes="100vw"
             className="object-cover object-center"
             priority
           />

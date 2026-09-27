@@ -30,7 +30,7 @@ export default function QualityPage() {
   const [activeProcess, setActiveProcess] = useState(testingProcesses[0].id);
 
   return (
-    <div className="bg-paper min-h-screen text-ink pb-32">
+    <div className="bg-paper min-h-screen text-ink">
       
       {/* Hero Header */}
       <div className="pt-40 pb-20 px-6 container-wide">
@@ -55,9 +55,10 @@ export default function QualityPage() {
           {/* Left: Image/Diagram Display */}
           <div className="lg:w-1/2 relative min-h-[400px] lg:min-h-full bg-mist">
             <Image 
-              src="/testing_lab.jpg"
+              src="/img2/6.png"
               alt="Quality Assurance Laboratory"
               fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover opacity-90"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent" />

@@ -38,6 +38,7 @@ export default function FacilitiesIndexPage() {
                   src={facility.image}
                   alt={facility.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/50 to-transparent" />

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { facilities } from "@/data/facilities";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -26,15 +27,14 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
       {/* Hero - Full bleed with overlay */}
       <div className="relative h-[70vh] min-h-[500px] flex items-end">
         <div className="absolute inset-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={facility.image} alt={facility.title} className="w-full h-full object-cover" />
+          <Image src={facility.image} alt={facility.title} fill sizes="100vw" className="object-cover" priority />
           <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-transparent" />
         </div>
         <div className="relative z-10 container-wide text-paper pb-16 pt-32">
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
             Sheetal Facilities
           </p>
-          <h1 className="text-5xl md:text-7xl font-display font-medium mb-6 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-display font-medium mb-6 leading-tight text-white">
             {facility.title}
           </h1>
           <p className="text-white/70 text-xl max-w-2xl">{facility.tagline}</p>

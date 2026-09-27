@@ -11,7 +11,7 @@ const packagingProducts = [
     id: "cosmetic-jars",
     name: "Cosmetic Jars",
     range: "15ml – 500ml",
-    image: "/jar_product.jpg",
+    image: "/img2/20.png",
     bg: "bg-white",
     description: "Premium acrylic and PET cosmetic jars with hermetically sealed lids. Available in round, square, and custom geometries. Food and cosmetic grade compliant.",
     specs: [
@@ -27,7 +27,7 @@ const packagingProducts = [
     id: "pharma-bottles",
     name: "Pharma Bottles",
     range: "30ml – 2L",
-    image: "/products_packaging.jpg",
+    image: "/img2/4.png",
     bg: "bg-[#f0f4f8]",
     description: "High-density polyethylene bottles for pharmaceutical and nutraceutical applications. Child-resistant caps, tamper-evident seals, and full documentation.",
     specs: [
@@ -43,7 +43,7 @@ const packagingProducts = [
     id: "industrial",
     name: "Industrial Containers",
     range: "1L – 20L",
-    image: "/moulding_factory.jpg",
+    image: "/img2/0.jpg",
     bg: "bg-[#1a1f23]",
     description: "Heavy-wall HDPE jerrycans and pails for lubricants, agrochemicals, and industrial liquids. UN-certified options available for hazardous goods.",
     specs: [
@@ -100,6 +100,7 @@ export default function RigidPackagingPage() {
                     src={activeProduct.image}
                     alt={activeProduct.name}
                     fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-contain p-12"
                   />
                 </motion.div>
