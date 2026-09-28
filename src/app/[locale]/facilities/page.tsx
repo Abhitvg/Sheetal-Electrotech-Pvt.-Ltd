@@ -1,9 +1,11 @@
+import { useTranslations } from "next-intl"
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { facilities } from "@/data/facilities";
 
 export default function FacilitiesIndexPage() {
+  const t = useTranslations("FacilitiesPage");
   return (
     <div className="bg-paper text-ink min-h-screen">
 
@@ -12,13 +14,13 @@ export default function FacilitiesIndexPage() {
         <div className="container-wide">
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-6 flex items-center gap-3">
             <span className="w-8 h-[1px] bg-accent inline-block"></span>
-            9 In-House Facilities
+            {t("badge")}
           </p>
           <h1 className="text-5xl md:text-7xl font-display font-medium mb-6 max-w-3xl">
-            One campus. Every capability.
+            {t("title")}
           </h1>
           <p className="text-ink/60 text-xl max-w-2xl">
-            All production operations are co-located in Daman, India. No sub-contracting, no hidden vendor dependencies — full traceability from raw material to finished goods.
+            {t("subtitle")}
           </p>
         </div>
       </div>
@@ -67,7 +69,7 @@ export default function FacilitiesIndexPage() {
                 </div>
 
                 <div className="flex items-center gap-2 text-sm font-medium text-accent">
-                  View Facility
+                  {t("viewFacility")}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
@@ -80,14 +82,14 @@ export default function FacilitiesIndexPage() {
       <div className="bg-mist py-20 border-t border-steel/10">
         <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <h3 className="text-3xl font-display mb-2">See it in person.</h3>
-            <p className="text-steel">We welcome site visits. Our Daman campus is 3 hours from Mumbai by road.</p>
+            <h3 className="text-3xl font-display mb-2">{t("ctaTitle")}</h3>
+            <p className="text-steel">{t("ctaSubtitle")}</p>
           </div>
           <Link
             href="/rfq"
             className="bg-paper text-ink border border-slate-200 px-10 py-4 font-medium flex items-center gap-3 hover:bg-accent transition-colors whitespace-nowrap"
           >
-            Book a Factory Visit <ArrowRight className="w-4 h-4" />
+            {t("ctaButton")} <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>

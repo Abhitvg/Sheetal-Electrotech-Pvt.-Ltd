@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/routing";
 
 export default function Navigation() {
+  const tMega = useTranslations("MegaMenu");
   const t = useTranslations("Navigation");
   const pathname = usePathname();
   const isHomepage = pathname === "/";
@@ -124,7 +125,7 @@ export default function Navigation() {
                       <h3 className="text-ink mb-4">9 In-House Facilities</h3>
                       <p className="text-ink/60 text-sm mb-6">Fully vertically integrated manufacturing hub based in Daman, India.</p>
                       <Link href="/facilities" className="text-accent flex items-center gap-2 text-sm font-medium hover:text-ink transition-colors">
-                        View All Facilities <ArrowRight className="w-4 h-4" />
+                        {tMega("viewAllFacilities")} <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
                     <div className="col-span-3 grid grid-cols-3 gap-8">
@@ -160,7 +161,7 @@ export default function Navigation() {
                       <h3 className="text-ink mb-4">OEM Product Lines</h3>
                       <p className="text-ink/60 text-sm mb-6">White-label manufacturing for tier-1 lighting brands.</p>
                       <Link href="/products" className="text-accent flex items-center gap-2 text-sm font-medium hover:text-ink transition-colors">
-                        Explore Catalog <ArrowRight className="w-4 h-4" />
+                        {tMega("exploreCatalog")} <ArrowRight className="w-4 h-4" />
                       </Link>
                     </div>
                     <div className="col-span-3 grid grid-cols-2 gap-12 border-l border-slate-200 pl-12">

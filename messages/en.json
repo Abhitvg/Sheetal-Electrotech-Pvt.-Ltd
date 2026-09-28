@@ -86,5 +86,50 @@
     "badge": "Client Success",
     "title": "What Our Partners Say",
     "subtitle": "Long-term relationships built on reliability, precision, and trust."
+  },
+  "MegaMenu": {
+    "facilities": "9 In-House Facilities",
+    "facilitiesDesc": "Fully vertically integrated manufacturing hub based in Daman, India.",
+    "viewAllFacilities": "View All Facilities",
+    "coreProduction": "Core Production",
+    "finishing": "Finishing & Assembly",
+    "supporting": "Supporting Ops",
+    "moulding": "Plastic Injection Moulding",
+    "blow": "Blow Moulded Containers",
+    "smt": "SMT & Auto Insertion",
+    "assembly": "Assembly & Packaging",
+    "quality": "Quality Testing Lab",
+    "toolRoom": "In-House Tool Room",
+    "about": "About Sheetal Group",
+    "products": "OEM Product Lines",
+    "productsDesc": "White-label manufacturing for tier-1 lighting brands.",
+    "exploreCatalog": "Explore Catalog",
+    "led": "LED Lighting",
+    "bulbs": "LED Bulbs (3W – 50W)",
+    "battens": "LED Battens",
+    "panels": "LED Panels & Downlights",
+    "flood": "Flood Lights & Street Lights",
+    "packaging": "Rigid Packaging",
+    "jars": "Cosmetic Jars",
+    "pharma": "Pharmaceutical Bottles",
+    "industrial": "Industrial Containers"
+  },
+  "FacilitiesPage": {
+    "badge": "9 In-House Facilities",
+    "title": "One campus. Every capability.",
+    "subtitle": "All production operations are co-located in Daman, India. No sub-contracting, no hidden vendor dependencies — full traceability from raw material to finished goods.",
+    "viewFacility": "View Facility",
+    "ctaTitle": "See it in person.",
+    "ctaSubtitle": "We welcome site visits. Our Daman campus is 3 hours from Mumbai by road.",
+    "ctaButton": "Book a Factory Visit"
+  },
+  "ProductsPage": {
+    "div1": "OEM Division 01",
+    "div1Title": "Rigid Plastic Packaging",
+    "div1Desc": "Precision-moulded cosmetic jars, pharmaceutical bottles, and industrial containers. Food-grade, sterile, and highly customizable.",
+    "div2": "OEM Division 02",
+    "div2Title": "LED Lighting Solutions",
+    "div2Desc": "From 3W domestic bulbs to high-lumen industrial flood lights. Fully tested, BIS-certified, and ready for your brand label.",
+    "explore": "Explore Portfolio"
   }
 }
