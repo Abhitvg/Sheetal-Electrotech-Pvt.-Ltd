@@ -6,6 +6,7 @@ import { ChevronDown, Menu, X, ArrowRight } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/routing";
+import Image from "next/image";
 
 export default function Navigation() {
   const tMega = useTranslations("MegaMenu");
