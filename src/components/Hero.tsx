@@ -67,7 +67,7 @@ export default function Hero() {
       {/* Background Image with Parallax */}
       <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
         <Image
-          src="/images/legacy/sheetal.gif"
+          src="/images/legacy/1-jpg.webp"
           alt="Sheetal Electrotech Manufacturing Facility"
           fill
           className="object-cover"
