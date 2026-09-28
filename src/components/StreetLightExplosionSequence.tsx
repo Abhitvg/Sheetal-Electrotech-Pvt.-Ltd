@@ -66,64 +66,106 @@ function ProceduralStreetLight() {
     <group ref={group} dispose={null} scale={1.2}>
       <Float speed={2} rotationIntensity={0.2} floatIntensity={0.2}>
         
-        {/* LENS (Bottom cover) */}
+        {/* LENS (Bottom cover - curved toughened glass) */}
         <mesh ref={lensRef} position={[0, -0.4, 0]}>
           <boxGeometry args={[2.8, 0.1, 4.8]} />
+          {/* We add a curved inner bubble to the glass */}
+          <mesh position={[0, 0.05, 0]}>
+            <sphereGeometry args={[1.3, 32, 32, 0, Math.PI, 0, Math.PI]} rotation={[Math.PI, 0, 0]} />
+            <meshPhysicalMaterial color={isEngineeringMode ? "#60a5fa" : "#ffffff"} transmission={wireframe ? 0 : 0.9} opacity={0.5} roughness={0.1} wireframe={wireframe} />
+          </mesh>
           <meshPhysicalMaterial 
             color={isEngineeringMode ? "#60a5fa" : "#ffffff"} 
-            transmission={wireframe ? 0 : 0.9} 
+            transmission={wireframe ? 0 : 0.95} 
             opacity={wireframe ? 0.3 : 1} 
             ior={1.5} 
             thickness={0.5} 
+            roughness={0.05}
+            clearcoat={1}
             wireframe={wireframe} 
           />
         </mesh>
 
         {/* LED BOARD & CHIPS */}
         <group ref={ledBoardRef} position={[0, -0.2, 0]}>
-          {/* Board */}
+          {/* Metal Core PCB */}
           <mesh>
             <boxGeometry args={[2.6, 0.05, 4.6]} />
-            <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#10b981"} metalness={0.5} roughness={0.8} wireframe={wireframe} />
+            <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#ffffff"} metalness={0.8} roughness={0.2} wireframe={wireframe} />
           </mesh>
-          {/* Chips Grid (Mock) */}
+          {/* Reflective Cups for LEDs */}
           {Array.from({ length: 6 }).map((_, row) => 
             Array.from({ length: 4 }).map((_, col) => (
-              <mesh key={`${row}-${col}`} position={[-0.9 + col * 0.6, -0.05, -1.5 + row * 0.6]}>
-                <boxGeometry args={[0.2, 0.05, 0.2]} />
-                <meshStandardMaterial color={isEngineeringMode ? "#ffffff" : "#fbbf24"} emissive={isEngineeringMode ? "#000" : "#fef3c7"} emissiveIntensity={0.5} wireframe={wireframe} />
-              </mesh>
+              <group key={`chip-${row}-${col}`} position={[-0.9 + col * 0.6, -0.05, -1.5 + row * 0.6]}>
+                {/* Yellow Phosphor LED Chip */}
+                <mesh position={[0, 0, 0]}>
+                  <boxGeometry args={[0.2, 0.02, 0.2]} />
+                  <meshStandardMaterial color={isEngineeringMode ? "#ffffff" : "#fbbf24"} emissive={isEngineeringMode ? "#000" : "#fef3c7"} emissiveIntensity={0.5} wireframe={wireframe} />
+                </mesh>
+                {/* Silver Reflector Ring */}
+                <mesh position={[0, 0.02, 0]} rotation={[Math.PI/2, 0, 0]}>
+                  <torusGeometry args={[0.15, 0.05, 16, 32]} />
+                  <meshStandardMaterial color={isEngineeringMode ? mainColor : "#cbd5e1"} metalness={1} roughness={0.1} wireframe={wireframe} />
+                </mesh>
+              </group>
             ))
           )}
         </group>
 
         {/* HEATSINK & MAIN HOUSING (Middle) */}
         <group ref={heatSinkRef} position={[0, 0, 0]}>
-          {/* Main Block */}
+          {/* Main Die-Cast Block with chamfered look */}
           <mesh>
             <boxGeometry args={[3, 0.4, 5]} />
             <meshStandardMaterial color={mainColor} metalness={0.8} roughness={0.2} wireframe={wireframe} />
           </mesh>
-          {/* Fins (Top) */}
-          {Array.from({ length: 8 }).map((_, i) => (
-            <mesh key={i} position={[-1.05 + i * 0.3, 0.3, 0]}>
-              <boxGeometry args={[0.05, 0.4, 4.8]} />
+          {/* Heavy Cooling Fins (Top) */}
+          {Array.from({ length: 12 }).map((_, i) => (
+            <mesh key={`hs-fin-${i}`} position={[-1.35 + i * 0.245, 0.4, 0]}>
+              <boxGeometry args={[0.08, 0.6, 4.8]} />
               <meshStandardMaterial color={mainColor} metalness={0.8} roughness={0.2} wireframe={wireframe} />
             </mesh>
           ))}
+          {/* Side Bezels */}
+          <mesh position={[1.55, 0.2, 0]}>
+             <boxGeometry args={[0.1, 0.8, 5]} />
+             <meshStandardMaterial color={mainColor} metalness={0.8} roughness={0.2} wireframe={wireframe} />
+          </mesh>
+          <mesh position={[-1.55, 0.2, 0]}>
+             <boxGeometry args={[0.1, 0.8, 5]} />
+             <meshStandardMaterial color={mainColor} metalness={0.8} roughness={0.2} wireframe={wireframe} />
+          </mesh>
         </group>
 
         {/* LED DRIVER (Inside / Top cavity) */}
-        <mesh ref={driverRef} position={[0, 0.2, -1.5]}>
-          <boxGeometry args={[1.5, 0.3, 1]} />
-          <meshStandardMaterial color={accentColor} metalness={0.6} roughness={0.4} wireframe={wireframe} />
-        </mesh>
+        <group ref={driverRef} position={[0, 0.2, -1.5]}>
+          {/* Driver Metal Enclosure */}
+          <mesh>
+            <boxGeometry args={[1.6, 0.35, 1.2]} />
+            <meshStandardMaterial color={accentColor} metalness={0.9} roughness={0.3} wireframe={wireframe} />
+          </mesh>
+          {/* Wiring block / connector */}
+          <mesh position={[0, 0, -0.65]}>
+            <boxGeometry args={[0.6, 0.2, 0.2]} />
+            <meshStandardMaterial color={isEngineeringMode ? mainColor : "#0f172a"} roughness={0.8} wireframe={wireframe} />
+          </mesh>
+        </group>
 
         {/* MOUNTING BRACKET (Back) */}
-        <mesh ref={bracketRef} position={[0, 0, -3.2]} rotation={[Math.PI / 2, 0, 0]}>
-          <cylinderGeometry args={[0.3, 0.3, 1.5, 32]} />
-          <meshStandardMaterial color={isEngineeringMode ? mainColor : "#94a3b8"} metalness={0.9} roughness={0.3} wireframe={wireframe} />
-        </mesh>
+        <group ref={bracketRef} position={[0, 0, -3.2]} rotation={[Math.PI / 2, 0, 0]}>
+          {/* Pipe receiver */}
+          <mesh>
+            <cylinderGeometry args={[0.35, 0.35, 1.5, 32]} />
+            <meshStandardMaterial color={isEngineeringMode ? mainColor : "#64748b"} metalness={0.9} roughness={0.3} wireframe={wireframe} />
+          </mesh>
+          {/* Mounting bolts */}
+          {[-0.4, 0, 0.4].map(y => (
+            <mesh key={`bolt-${y}`} position={[0, y, 0.3]} rotation={[Math.PI/2, 0, 0]}>
+              <cylinderGeometry args={[0.08, 0.08, 0.2, 16]} />
+              <meshStandardMaterial color={isEngineeringMode ? mainColor : "#f8fafc"} metalness={1} roughness={0.2} wireframe={wireframe} />
+            </mesh>
+          ))}
+        </group>
 
       </Float>
     </group>

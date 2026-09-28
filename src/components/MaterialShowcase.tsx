@@ -49,51 +49,131 @@ function MaterialModel({ id }: { id: MaterialId }) {
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
       {id === "polycarbonate" && (
-        <mesh scale={1.5}>
-          <torusGeometry args={[1, 0.4, 32, 64]} />
-          <meshPhysicalMaterial 
-            color={isEngineeringMode ? "#60a5fa" : "#ffffff"} 
-            transmission={wireframe ? 0 : 0.9} 
-            opacity={wireframe ? 0.3 : 1}
-            roughness={0.1}
-            ior={1.5}
-            thickness={2}
-            wireframe={wireframe}
-          />
-        </mesh>
+        <group scale={2}>
+          {/* Main Diffuser Dome */}
+          <mesh position={[0, 0, 0]}>
+            <sphereGeometry args={[1, 64, 64, 0, Math.PI * 2, 0, Math.PI / 2.2]} />
+            <meshPhysicalMaterial 
+              color={isEngineeringMode ? "#60a5fa" : "#ffffff"} 
+              transmission={wireframe ? 0 : 0.95} 
+              opacity={wireframe ? 0.3 : 1}
+              roughness={0.15}
+              ior={1.5}
+              thickness={0.8}
+              clearcoat={1}
+              wireframe={wireframe}
+            />
+          </mesh>
+          {/* Internal Optical Ribs for Light Diffusion */}
+          {Array.from({ length: 24 }).map((_, i) => (
+            <mesh key={`rib-${i}`} position={[0, -0.1, 0]} rotation={[0, (i * Math.PI) / 12, 0]}>
+              <boxGeometry args={[1.9, 0.4, 0.05]} />
+              <meshPhysicalMaterial 
+                color={isEngineeringMode ? "#60a5fa" : "#ffffff"} 
+                transmission={wireframe ? 0 : 0.9} 
+                opacity={0.8}
+                roughness={0.3}
+                wireframe={wireframe}
+              />
+            </mesh>
+          ))}
+          {/* Base Mounting Ring */}
+          <mesh position={[0, -0.2, 0]}>
+            <cylinderGeometry args={[0.98, 0.98, 0.1, 64]} />
+            <meshPhysicalMaterial 
+              color={isEngineeringMode ? "#60a5fa" : "#f1f5f9"} 
+              transmission={0}
+              roughness={0.5}
+              wireframe={wireframe}
+            />
+          </mesh>
+        </group>
       )}
 
       {id === "aluminum" && (
-        <mesh scale={1.5}>
-          <cylinderGeometry args={[1, 1, 1.5, 32, 1, false]} />
-          <meshStandardMaterial 
-            color={isEngineeringMode ? "#60a5fa" : "#e2e8f0"} 
-            metalness={0.8} 
-            roughness={0.2}
-            wireframe={wireframe} 
-          />
-        </mesh>
+        <group scale={1.5}>
+          {/* Heavy Base Plate */}
+          <mesh position={[0, -0.4, 0]}>
+            <boxGeometry args={[2.5, 0.2, 2.5]} />
+            <meshStandardMaterial 
+              color={isEngineeringMode ? "#60a5fa" : "#cbd5e1"} 
+              metalness={0.9} 
+              roughness={0.2}
+              wireframe={wireframe} 
+            />
+          </mesh>
+          {/* Complex Heat Sink Fins */}
+          {Array.from({ length: 11 }).map((_, i) => (
+            <mesh key={`alu-fin-${i}`} position={[-1 + i * 0.2, 0.3, 0]}>
+              <boxGeometry args={[0.06, 1.2, 2.3]} />
+              <meshStandardMaterial 
+                color={isEngineeringMode ? "#60a5fa" : "#94a3b8"} 
+                metalness={0.8} 
+                roughness={0.3}
+                wireframe={wireframe} 
+              />
+            </mesh>
+          ))}
+          {/* Cross Support Rib */}
+          <mesh position={[0, 0.3, 0]}>
+            <boxGeometry args={[2.3, 1, 0.1]} />
+            <meshStandardMaterial 
+              color={isEngineeringMode ? "#60a5fa" : "#94a3b8"} 
+              metalness={0.8} 
+              roughness={0.3}
+              wireframe={wireframe} 
+            />
+          </mesh>
+        </group>
       )}
 
       {id === "pcb" && (
-        <mesh scale={1.5}>
-          <boxGeometry args={[2, 0.1, 1.5]} />
-          <meshStandardMaterial 
-            color={isEngineeringMode ? "#facc15" : "#10b981"} 
-            metalness={0.3} 
-            roughness={0.7}
-            wireframe={wireframe}
-          />
-          {/* Mock components on PCB */}
-          <mesh position={[-0.5, 0.1, 0]}>
-             <boxGeometry args={[0.3, 0.1, 0.3]} />
-             <meshStandardMaterial color={isEngineeringMode ? "#60a5fa" : "#1e293b"} wireframe={wireframe} />
+        <group scale={2} rotation={[-0.2, 0, 0]}>
+          {/* Main Board */}
+          <mesh position={[0, 0, 0]}>
+            <cylinderGeometry args={[1, 1, 0.05, 64]} />
+            <meshStandardMaterial 
+              color={isEngineeringMode ? "#facc15" : "#022c22"} 
+              metalness={0.2} 
+              roughness={0.8}
+              wireframe={wireframe}
+            />
           </mesh>
-          <mesh position={[0.5, 0.1, -0.2]}>
-             <boxGeometry args={[0.4, 0.15, 0.4]} />
-             <meshStandardMaterial color={isEngineeringMode ? "#60a5fa" : "#334155"} wireframe={wireframe} />
+          {/* Copper Traces (Concentric rings) */}
+          {Array.from({ length: 4 }).map((_, i) => (
+            <mesh key={`trace-${i}`} position={[0, 0.026, 0]}>
+              <torusGeometry args={[0.3 + i * 0.15, 0.02, 16, 64]} />
+              <meshStandardMaterial color={isEngineeringMode ? "#ffffff" : "#d97706"} metalness={1} roughness={0.3} />
+            </mesh>
+          ))}
+          {/* Surface Mount LED Chips */}
+          {Array.from({ length: 12 }).map((_, i) => {
+            const angle = (i * Math.PI) / 6;
+            const r = 0.6;
+            return (
+              <group key={`led-${i}`} position={[Math.cos(angle) * r, 0.03, Math.sin(angle) * r]} rotation={[0, -angle, 0]}>
+                <mesh>
+                  <boxGeometry args={[0.15, 0.02, 0.15]} />
+                  <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#ffffff"} />
+                </mesh>
+                <mesh position={[0, 0.015, 0]}>
+                  <boxGeometry args={[0.1, 0.01, 0.1]} />
+                  <meshStandardMaterial color="#fbbf24" emissive={wireframe ? "#000" : "#fef3c7"} emissiveIntensity={0.5} />
+                </mesh>
+              </group>
+            )
+          })}
+          {/* Center Driver IC */}
+          <mesh position={[0, 0.05, 0]}>
+            <boxGeometry args={[0.3, 0.08, 0.3]} />
+            <meshStandardMaterial color="#1e293b" metalness={0.2} roughness={0.7} />
           </mesh>
-        </mesh>
+          {/* Power Connector */}
+          <mesh position={[0, 0.06, 0.8]}>
+             <boxGeometry args={[0.2, 0.1, 0.15]} />
+             <meshStandardMaterial color="#f8fafc" />
+          </mesh>
+        </group>
       )}
     </Float>
   );
