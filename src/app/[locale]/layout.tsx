@@ -7,6 +7,7 @@ import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
+import { EngineeringModeProvider } from "@/components/EngineeringModeProvider";
 
 const fontDisplay = Space_Grotesk({
   variable: "--font-display",
@@ -67,9 +68,11 @@ export default async function RootLayout({
     <html lang={locale} className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}>
       <body className="flex flex-col min-h-screen bg-paper text-ink font-body">
         <NextIntlClientProvider messages={messages}>
-          <Navigation />
-          <main className="flex-grow">{children}</main>
-          <Footer />
+          <EngineeringModeProvider>
+            <Navigation />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </EngineeringModeProvider>
         </NextIntlClientProvider>
         <Analytics />
       </body>
