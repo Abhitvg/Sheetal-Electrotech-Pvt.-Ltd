@@ -29,7 +29,7 @@ export default function ProductsHub() {
             hoveredSide === "right" ? "opacity-80" : "opacity-30 group-hover:opacity-10"
           }`} />
           <Image
-            src="/images/legacy/1-jpg.webp"
+            src="/images/packaging_factory.jpg"
             alt={t("div1Title")}
             fill
             sizes="(max-width: 768px) 100vw, 65vw"
