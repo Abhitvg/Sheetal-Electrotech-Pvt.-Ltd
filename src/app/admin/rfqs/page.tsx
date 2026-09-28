@@ -39,7 +39,7 @@ export default async function AdminRfqPage() {
   const dataUri = `data:text/csv;charset=utf-8,${encodeURIComponent(csvContent)}`;
 
   return (
-    <div className="min-h-screen bg-mist p-8">
+    <div className="bg-mist p-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>

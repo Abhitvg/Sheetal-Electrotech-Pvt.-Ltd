@@ -11,6 +11,8 @@
   --font-display: var(--theme-font-display);
   --font-body: var(--theme-font-body);
   --font-mono: var(--font-mono);
+
+  --animate-marquee: marquee 30s linear infinite;
 }
 
 :root {
@@ -38,39 +40,14 @@
   p { @apply leading-[1.6]; }
 }
 
-/* ENGINEERING MODE */
-body.engineering-mode {
-  /* Classic CAD / Blueprint Theme */
-  --theme-ink: #ffffff; 
-  --theme-paper: #002244; 
-  --theme-steel: #60a5fa; 
-  --theme-accent: #facc15; 
-  --theme-mist: #001a33; 
-
-  --theme-font-display: var(--font-mono);
-  --theme-font-body: var(--font-mono);
-  
-  background-color: var(--theme-paper) !important;
-  background-image: 
-    linear-gradient(rgba(96, 165, 250, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(96, 165, 250, 0.1) 1px, transparent 1px) !important;
-  background-size: 40px 40px !important;
-}
-
-body.engineering-mode * {
-  border-radius: 0 !important; /* Blocky */
-}
-body.engineering-mode .glass, 
-body.engineering-mode .glass-card {
-  background: rgba(0, 34, 68, 0.8) !important;
-  backdrop-filter: none !important;
-  border-color: var(--theme-steel) !important;
-}
-
 /* Reusable Utility Classes */
 @layer utilities {
   .container-wide {
     @apply max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24;
+  }
+
+  .container-narrow {
+    @apply max-w-3xl mx-auto px-6 md:px-12;
   }
   
   .section-padding {
@@ -90,17 +67,6 @@ body.engineering-mode .glass-card {
     @apply outline-2 outline-offset-2 outline-accent;
   }
 
-  /* Smooth fade-up for scroll-in animations */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .fade-up.visible {
-    opacity: 1;
-    transform: none;
-  }
-
   /* Glassmorphism / Industrial */
   .glass {
     @apply bg-white/70 backdrop-blur-md border border-slate-200/50 shadow-sm;
@@ -116,4 +82,29 @@ body.engineering-mode .glass-card {
   .bg-gradient-premium {
     @apply bg-gradient-to-br from-slate-100 to-white text-ink border-y border-slate-200;
   }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-8 py-3.5 bg-accent text-white font-display font-bold text-sm uppercase tracking-wider hover:bg-blue-600 transition-all duration-300 rounded-sm;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-8 py-3.5 border border-ink text-ink font-display font-medium text-sm uppercase tracking-wider hover:bg-ink hover:text-paper transition-all duration-300 rounded-sm;
+  }
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
 }

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Manrope, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import SmoothScroll from "@/components/SmoothScroll";
-import { EngineeringModeProvider } from "@/components/EngineeringModeProvider";
-import ModeToggle from "@/components/ModeToggle";
+import {NextIntlClientProvider} from 'next-intl';
+import {getMessages} from 'next-intl/server';
+import {notFound} from 'next/navigation';
+import {routing} from '@/i18n/routing';
 
 const fontDisplay = Space_Grotesk({
   variable: "--font-display",
@@ -47,22 +48,29 @@ export const metadata: Metadata = {
 
 import { Analytics } from "@vercel/analytics/react";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{locale: string}>;
 }>) {
+  const { locale } = await params;
+  
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
+
+  const messages = await getMessages();
+
   return (
-    <html lang="en" className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}>
+    <html lang={locale} className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}>
       <body className="flex flex-col min-h-screen bg-paper text-ink font-body">
-        <EngineeringModeProvider>
-          <SmoothScroll>
-            <Navigation />
-            <main className="flex-grow">{children}</main>
-            <Footer />
-            <ModeToggle />
-          </SmoothScroll>
-        </EngineeringModeProvider>
+        <NextIntlClientProvider messages={messages}>
+          <Navigation />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </NextIntlClientProvider>
         <Analytics />
       </body>
     </html>

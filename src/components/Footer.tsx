@@ -1,7 +1,9 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { ArrowUpRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
+  const t = useTranslations("Footer");
   return (
     <footer className="bg-mist text-ink pt-24 pb-12 border-t border-slate-200">
       <div className="container-wide">
@@ -20,7 +22,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-ink/60 text-sm max-w-sm">
-              A vertically integrated OEM manufacturing partner for global lighting and packaging brands. Based in India, scaling globally.
+              {t("description")}
             </p>
             
             {/* Certifications Mini-Strip */}
@@ -49,15 +51,15 @@ export default function Footer() {
           <div>
             <h4 className="font-mono text-xs uppercase tracking-widest text-ink/40 mb-6">Products</h4>
             <ul className="space-y-4 text-sm text-ink/80">
-              <li><Link href="/products/led-lighting" className="hover:text-accent transition-colors">LED Lighting Portfolio</Link></li>
-              <li><Link href="/products/rigid-packaging" className="hover:text-accent transition-colors">Rigid Plastic Packaging</Link></li>
+              <li><Link href="/products/led-lighting" className="hover:text-accent transition-colors">{t("links.led")}</Link></li>
+              <li><Link href="/products/rigid-packaging" className="hover:text-accent transition-colors">{t("links.packaging")}</Link></li>
             </ul>
             
             <h4 className="font-mono text-xs uppercase tracking-widest text-ink/40 mb-6 mt-12">Company</h4>
             <ul className="space-y-4 text-sm text-ink/80">
-              <li><Link href="/company" className="hover:text-accent transition-colors">About Us</Link></li>
-              <li><Link href="/careers" className="hover:text-accent transition-colors">Careers</Link></li>
-              <li><Link href="/quality" className="hover:text-accent transition-colors">Quality Assurance</Link></li>
+              <li><Link href="/company" className="hover:text-accent transition-colors">{t("links.about")}</Link></li>
+              <li><Link href="/careers" className="hover:text-accent transition-colors">{t("links.careers")}</Link></li>
+              <li><Link href="/quality" className="hover:text-accent transition-colors">{t("links.quality")}</Link></li>
             </ul>
           </div>
 
@@ -89,8 +91,8 @@ export default function Footer() {
         <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-ink/40">
           <p>© {new Date().getFullYear()} Sheetal Electrotech Pvt. Ltd. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="hover:text-ink transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-ink transition-colors">Terms of Service</Link>
+            <Link href="/privacy" className="hover:text-ink transition-colors">{t("links.privacy")}</Link>
+            <Link href="/terms" className="hover:text-ink transition-colors">{t("links.terms")}</Link>
           </div>
         </div>
       </div>

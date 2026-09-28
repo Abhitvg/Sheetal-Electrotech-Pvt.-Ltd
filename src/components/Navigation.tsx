@@ -1,11 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X, ArrowRight } from "lucide-react";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 export default function Navigation() {
+  const t = useTranslations("Navigation");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
@@ -19,11 +22,12 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
-    { name: "Facilities", href: "/facilities", hasMegaMenu: true },
-    { name: "Products", href: "/products", hasMegaMenu: true },
-    { name: "Quality", href: "/quality", hasMegaMenu: false },
-    { name: "Company", href: "/company", hasMegaMenu: false },
-    { name: "Contact", href: "/contact", hasMegaMenu: false },
+    { name: t("facilities"), href: "/facilities", hasMegaMenu: true },
+    { name: t("products"), href: "/products", hasMegaMenu: true },
+    { name: t("quality"), href: "/quality", hasMegaMenu: false },
+    { name: t("company"), href: "/company", hasMegaMenu: false },
+    { name: t("blog"), href: "/blog", hasMegaMenu: false },
+    { name: t("contact"), href: "/contact", hasMegaMenu: false },
   ];
 
   return (
@@ -41,12 +45,12 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 z-50 relative">
             <div className={`w-8 h-8 rounded-sm flex items-center justify-center font-display font-bold text-lg ${
-              isScrolled || activeMegaMenu || isMobileMenuOpen ? "bg-accent text-ink" : "bg-white text-ink"
+              isScrolled || activeMegaMenu || isMobileMenuOpen ? "bg-accent text-white" : "bg-white text-ink"
             }`}>
               SE
             </div>
             <span className={`font-display font-bold tracking-tight text-xl ${
-              isScrolled || activeMegaMenu || isMobileMenuOpen ? "text-ink" : "text-ink"
+              isScrolled || activeMegaMenu || isMobileMenuOpen ? "text-ink" : "text-white"
             }`}>
               Sheetal Group
             </span>
@@ -63,7 +67,7 @@ export default function Navigation() {
                 <Link
                   href={link.href}
                   className={`flex items-center gap-1 text-sm font-medium transition-colors hover:text-accent ${
-                    isScrolled || activeMegaMenu ? "text-ink/80" : "text-ink"
+                    isScrolled || activeMegaMenu ? "text-ink/80" : "text-white/90"
                   }`}
                 >
                   {link.name}
@@ -77,19 +81,22 @@ export default function Navigation() {
 
           {/* CTA & Mobile Toggle */}
           <div className="flex items-center gap-4 z-50 relative">
+            <div className="hidden md:block">
+              <LanguageSwitcher />
+            </div>
             <Link 
               href="/rfq" 
               className={`hidden md:flex text-sm font-medium px-6 py-2.5 transition-colors rounded-full ${
                 isScrolled || activeMegaMenu
-                  ? "bg-accent text-ink hover:bg-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]"
-                  : "glass text-ink hover:bg-white hover:text-paper"
+                  ? "bg-accent text-white hover:bg-blue-600"
+                  : "bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white hover:text-ink"
               }`}
             >
-              Request Quote
+              {t("requestQuote")}
             </Link>
             
             <button 
-              className="lg:hidden text-ink"
+              className={`lg:hidden ${isScrolled || isMobileMenuOpen ? "text-ink" : "text-white"}`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X /> : <Menu />}

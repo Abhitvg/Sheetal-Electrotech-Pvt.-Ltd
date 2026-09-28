@@ -1,0 +1,40 @@
+{
+  "Navigation": {
+    "facilities": "Facilities",
+    "products": "Products",
+    "quality": "Quality",
+    "company": "Company",
+    "blog": "Blog",
+    "contact": "Contact",
+    "requestQuote": "Request Quote"
+  },
+  "Hero": {
+    "badge": "ISO 9001:2015 • BIS Certified",
+    "titlePrefix": "Solving Complex",
+    "titleHighlight": "Manufacturing",
+    "titleSuffix": "Challenges.",
+    "subtitle": "From product design to mass production — vertically integrated OEM manufacturing for LED lighting & rigid plastic packaging under one roof.",
+    "ctaQuote": "Request Quote",
+    "ctaExplore": "Explore Facilities",
+    "scroll": "Scroll",
+    "stats": {
+      "years": "Years of Excellence",
+      "pieces": "Pieces / Month",
+      "components": "Components / Hour",
+      "countries": "Countries Exported"
+    }
+  },
+  "Footer": {
+    "description": "Vertically integrated OEM manufacturing partner for LED lighting and rigid plastic packaging.",
+    "links": {
+      "about": "About Us",
+      "careers": "Careers",
+      "quality": "Quality Policy",
+      "contact": "Contact",
+      "led": "LED Lighting",
+      "packaging": "Rigid Packaging",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy"
+    }
+  }
+}
