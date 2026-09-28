@@ -12,7 +12,7 @@ const ledProducts = [
     name: "LED Bulbs",
     range: "3W – 20W",
     image: "/images/legacy/10-3.webp",
-    bg: "bg-[#0a0a0a]",
+    bg: "bg-[#3d4231]",
     description: "LED bulbs are a type of energy-efficient lighting that use light-emitting diodes (LEDs) to produce light. They are designed to replace traditional incandescent bulbs and are becoming increasingly popular due to their energy efficiency, long lifespan, and cost savings.",
     specsImage: "/images/led-bulb_specs.png",
     specs: [
@@ -29,7 +29,7 @@ const ledProducts = [
     name: "Smart LED Bulb",
     range: "7W – 12W",
     image: "/images/legacy/4-3.webp",
-    bg: "bg-[#14151a]",
+    bg: "bg-[#3d4231]",
     description: "Smart LED bulbs are a type of light bulb that can be controlled remotely through a smartphone app or voice assistant, such as Amazon Alexa or Google Assistant. They typically connect to your home's Wi-Fi network, allowing you to turn them on or off, adjust their brightness, and even change their color using your smartphone or voice commands.",
     specsImage: "/images/smart-bulb_specs.png",
     specs: [
@@ -47,7 +47,7 @@ const ledProducts = [
     name: "LED Battens",
     range: "10W – 40W",
     image: "/images/legacy/10-3.webp",
-    bg: "bg-[#f5f5f3]",
+    bg: "bg-[#3d4231]",
     description: "LED batten lights are an energy-efficient alternative to traditional fluorescent tube lights. They offer bright, uniform light that is ideal for indoor lighting applications.",
     specsImage: "/images/led-batten_specs.png",
     specs: [
@@ -64,7 +64,7 @@ const ledProducts = [
     name: "Flood & Well Light",
     range: "20W – 200W",
     image: "/images/legacy/9-2.webp",
-    bg: "bg-[#14151a]",
+    bg: "bg-[#767676]",
     description: "LED flood and well lights are outdoor lighting fixtures that are designed to illuminate large areas with high-intensity, directional light.",
     specsImage: "/images/flood-well_specs.png",
     specs: [
@@ -81,7 +81,7 @@ const ledProducts = [
     name: "LED Street Light",
     range: "20W – 150W",
     image: "/images/legacy/1-3.webp",
-    bg: "bg-[#0a0a0a]",
+    bg: "bg-[#3d4231]",
     description: "LED street lights are a type of outdoor lighting fixture that are designed to provide high-quality illumination on public streets and highways. They are designed to be energy-efficient and long-lasting, making them a popular alternative to traditional street lighting options.",
     specsImage: "/images/street_light_specs.png",
     specs: [
@@ -101,7 +101,7 @@ const ledProducts = [
     name: "LED Spot Light",
     range: "3W – 15W",
     image: "/images/legacy/3-3.webp",
-    bg: "bg-[#1a1a1a]",
+    bg: "bg-[#3d4231]",
     description: "LED spot lights are a type of LED lighting fixture that are designed to provide focused, directional illumination in a specific area. They are commonly used in homes, offices, and commercial buildings to highlight artwork, displays, and architectural features.",
     specsImage: "/images/spot_specs.png",
     specs: [
@@ -118,7 +118,7 @@ const ledProducts = [
     name: "Decorative Light",
     range: "Varies",
     image: "/images/legacy/Photo11.webp",
-    bg: "bg-[#f5f5f3]",
+    bg: "bg-[#fefefe]",
     description: "LED decorative lights are a type of LED lighting fixture that are designed to provide decorative and ambient lighting in various indoor settings. They are commonly used in homes, restaurants, hotels, and event venues to create an inviting and festive atmosphere.",
     specsImage: "/images/decorative_specs.png",
     specs: [
@@ -135,7 +135,7 @@ const ledProducts = [
     name: "LED Ceiling Light",
     range: "12W – 36W",
     image: "/images/legacy/ceiling-jpg.webp",
-    bg: "bg-[#0a0a0a]",
+    bg: "bg-[#fdfdfd]",
     description: "LED ceiling lights are a type of lighting fixture that are installed onto ceilings and used to provide ambient lighting for various indoor spaces such as homes, offices, and commercial buildings. They are designed to be energy-efficient, durable, and long-lasting, making them a popular alternative to traditional lighting options.",
     specsImage: "/images/ceiling_specs.png",
     specs: [
@@ -152,7 +152,7 @@ const ledProducts = [
     name: "LED Down Light",
     range: "6W – 24W",
     image: "/images/legacy/Photo1.webp",
-    bg: "bg-[#f5f5f3]",
+    bg: "bg-white",
     description: "LED downlights are a type of lighting fixture that is installed in ceilings or walls to provide directional lighting. They are a popular choice for both residential and commercial applications, as they are energy-efficient, long-lasting, and offer a range of customization options.",
     specsImage: "/images/down-light_specs.png",
     specs: [
@@ -169,7 +169,7 @@ const ledProducts = [
     name: "Extension Board",
     range: "Various",
     image: "/images/legacy/exension-board-jpg.webp",
-    bg: "bg-[#0a0a0a]",
+    bg: "bg-[#394234]",
     description: "High-quality, heavy-duty electrical extension boards with surge protection, multiple universal sockets, and flame-retardant casing.",
     specs: [
       { label: "Sockets", value: "3 / 4 / 6 way universal" },
@@ -185,7 +185,7 @@ const ledProducts = [
     name: "Surface Ring",
     range: "Compatible",
     image: "/images/products_led.jpg",
-    bg: "bg-[#14151a]",
+    bg: "bg-[#030303]",
     description: "Architectural surface mounting rings for converting recessed downlights into surface-mounted fixtures on solid ceilings.",
     specs: [
       { label: "Compatibility", value: "3 inch - 8 inch downlights" },
@@ -201,7 +201,7 @@ const ledProducts = [
     name: "LED High Power Bulb",
     range: "30W – 150W",
     image: "/images/led_bulb_product.jpg",
-    bg: "bg-[#14151a]",
+    bg: "bg-[#040404]",
     description: "High-wattage LED bulbs designed for large spaces such as warehouses, industrial sheds, and high-ceiling environments. Excellent thermal management ensures continuous high-lumen output.",
     specs: [
       { label: "Wattage Range", value: "30W, 40W, 50W, 80W, 100W, 150W" },
@@ -216,7 +216,7 @@ const ledProducts = [
     name: "LED Strip Lights",
     range: "5m – 50m rolls",
     image: "/images/products_led.jpg",
-    bg: "bg-[#0a0a0a]",
+    bg: "bg-[#030303]",
     description: "Flexible LED strip lights for cove lighting, architectural accents, and decorative applications. Available in various IP ratings for indoor and outdoor use.",
     specs: [
       { label: "LED Type", value: "SMD 2835 / 5050" },
@@ -231,7 +231,7 @@ const ledProducts = [
     name: "LED Candle Bulb",
     range: "3W – 7W",
     image: "/images/led_bulb_product.jpg",
-    bg: "bg-[#f5f5f3]",
+    bg: "bg-[#040404]",
     description: "Elegant LED candle bulbs designed for chandeliers and decorative wall sconces. Available in clear and frosted finishes to match classic aesthetic preferences.",
     specs: [
       { label: "Wattage Range", value: "3W, 5W, 7W" },
@@ -246,7 +246,7 @@ const ledProducts = [
     name: "LED Emergency Bulb",
     range: "9W – 15W",
     image: "/images/smart-bulb.png",
-    bg: "bg-[#1a1a1a]",
+    bg: "bg-white",
     description: "Inverter LED bulbs with a built-in lithium-ion battery. Automatically switches to battery power during grid outages, providing up to 4 hours of backup lighting.",
     specs: [
       { label: "Wattage", value: "9W, 12W, 15W" },
@@ -261,7 +261,7 @@ const ledProducts = [
     name: "LED Down Lighter",
     range: "3W – 18W",
     image: "/images/down-light.png",
-    bg: "bg-[#0a0a0a]",
+    bg: "bg-white",
     description: "Deep-recessed LED down lighters with specialized reflectors for low glare and high visual comfort. Ideal for premium residential and commercial spaces.",
     specs: [
       { label: "Wattage Range", value: "3W, 6W, 12W, 15W, 18W" },
