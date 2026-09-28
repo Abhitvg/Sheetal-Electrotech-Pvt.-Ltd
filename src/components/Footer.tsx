@@ -1,6 +1,7 @@
 import { Link } from "@/i18n/routing";
 import { ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 export default function Footer() {
   const t = useTranslations("Footer");
@@ -13,9 +14,14 @@ export default function Footer() {
           
           {/* Brand Col */}
           <div className="flex flex-col gap-6">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-sm bg-accent text-ink flex items-center justify-center font-display font-bold text-lg">
-                SE
+            <Link href="/" className="flex items-center gap-3">
+              <div className="relative w-10 h-10 flex-shrink-0">
+                <Image 
+                  src="/images/logo.webp" 
+                  alt="Sheetal Group Logo" 
+                  fill 
+                  className="object-contain"
+                />
               </div>
               <span className="font-display font-bold tracking-tight text-xl text-ink">
                 Sheetal Group

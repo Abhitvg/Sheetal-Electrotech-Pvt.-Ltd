@@ -47,11 +47,15 @@ export default function Navigation() {
         <div className="container-wide flex justify-between items-center">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 z-50 relative">
-            <div className={`w-8 h-8 rounded-sm flex items-center justify-center font-display font-bold text-lg ${
-              !isHomepage || isScrolled || activeMegaMenu || isMobileMenuOpen ? "bg-accent text-white" : "bg-white text-ink"
-            }`}>
-              SE
+          <Link href="/" className="flex items-center gap-3 z-50 relative">
+            <div className="relative w-10 h-10 flex-shrink-0">
+              <Image 
+                src="/images/logo.webp" 
+                alt="Sheetal Group Logo" 
+                fill 
+                className="object-contain"
+                priority
+              />
             </div>
             <span className={`font-display font-bold tracking-tight text-xl ${
               !isHomepage || isScrolled || activeMegaMenu || isMobileMenuOpen ? "text-ink" : "text-white"
