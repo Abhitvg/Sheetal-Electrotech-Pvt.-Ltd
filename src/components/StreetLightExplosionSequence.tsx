@@ -70,8 +70,8 @@ function ProceduralStreetLight() {
         <mesh ref={lensRef} position={[0, -0.4, 0]}>
           <boxGeometry args={[2.8, 0.1, 4.8]} />
           {/* We add a curved inner bubble to the glass */}
-          <mesh position={[0, 0.05, 0]}>
-            <sphereGeometry args={[1.3, 32, 32, 0, Math.PI, 0, Math.PI]} rotation={[Math.PI, 0, 0]} />
+          <mesh position={[0, 0.05, 0]} rotation={[Math.PI, 0, 0]}>
+            <sphereGeometry args={[1.3, 32, 32, 0, Math.PI, 0, Math.PI]} />
             <meshPhysicalMaterial color={isEngineeringMode ? "#60a5fa" : "#ffffff"} transmission={wireframe ? 0 : 0.9} opacity={0.5} roughness={0.1} wireframe={wireframe} />
           </mesh>
           <meshPhysicalMaterial 

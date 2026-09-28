@@ -163,12 +163,12 @@ function ConfiguratorModel({ category, volume }: { category: Category, volume: n
             {[-0.8, 0.8].map(x => 
               [-0.55, 0.55].map(y => (
                 <group key={`boss-${x}-${y}`} position={[x, y, 0.2]}>
-                  <mesh>
-                    <cylinderGeometry args={[0.15, 0.15, 0.4, 16]} rotation={[Math.PI/2, 0, 0]} />
+                  <mesh rotation={[Math.PI/2, 0, 0]}>
+                    <cylinderGeometry args={[0.15, 0.15, 0.4, 16]} />
                     <meshStandardMaterial color={isEngineeringMode ? mainColor : "#f8fafc"} roughness={0.3} wireframe={wireframe} />
                   </mesh>
-                  <mesh position={[0, 0, 0.21]}>
-                    <cylinderGeometry args={[0.08, 0.08, 0.45, 16]} rotation={[Math.PI/2, 0, 0]} />
+                  <mesh position={[0, 0, 0.21]} rotation={[Math.PI/2, 0, 0]}>
+                    <cylinderGeometry args={[0.08, 0.08, 0.45, 16]} />
                     <meshStandardMaterial color={isEngineeringMode ? "#1e293b" : "#94a3b8"} roughness={0.5} wireframe={wireframe} />
                   </mesh>
                 </group>
