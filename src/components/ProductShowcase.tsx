@@ -1,53 +1,56 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-const products = [
-  {
-    category: "LED Bulbs",
-    description: "Energy-efficient LED bulbs from 5W to 50W. B22 & E27 bases.",
-    image: "/images/led-bulb.png",
-    href: "/products/led-lighting",
-  },
-  {
-    category: "LED Battens",
-    description: "Slim-profile batten lights for commercial & residential use.",
-    image: "/images/led-batten.png",
-    href: "/products/led-lighting",
-  },
-  {
-    category: "Street Lights",
-    description: "High-power LED street lights with IP65 rating for outdoor use.",
-    image: "/images/street_light.png",
-    href: "/products/led-lighting",
-  },
-  {
-    category: "Downlights & Spots",
-    description: "Precision-engineered recessed and surface-mount fixtures.",
-    image: "/images/down-light.png",
-    href: "/products/led-lighting",
-  },
-  {
-    category: "Smart Bulbs",
-    description: "WiFi-enabled smart lighting with app control and voice support.",
-    image: "/images/smart-bulb.png",
-    href: "/products/led-lighting",
-  },
-  {
-    category: "Rigid Packaging",
-    description: "Custom injection-moulded packaging for FMCG and pharma.",
-    image: "/images/jar_product.jpg",
-    href: "/products/rigid-packaging",
-  },
-];
 
 export default function ProductShowcase() {
+  const t = useTranslations("ProductShowcase");
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const products = [
+    {
+      category: "LED Bulbs",
+      description: "Energy-efficient LED bulbs from 5W to 50W. B22 & E27 bases.",
+      image: "/images/led-bulb.png",
+      href: "/products/led-lighting",
+    },
+    {
+      category: "LED Battens",
+      description: "Slim-profile batten lights for commercial & residential use.",
+      image: "/images/led-batten.png",
+      href: "/products/led-lighting",
+    },
+    {
+      category: "Street Lights",
+      description: "High-power LED street lights with IP65 rating for outdoor use.",
+      image: "/images/street_light.png",
+      href: "/products/led-lighting",
+    },
+    {
+      category: "Downlights & Spots",
+      description: "Precision-engineered recessed and surface-mount fixtures.",
+      image: "/images/down-light.png",
+      href: "/products/led-lighting",
+    },
+    {
+      category: "Smart Bulbs",
+      description: "WiFi-enabled smart lighting with app control and voice support.",
+      image: "/images/smart-bulb.png",
+      href: "/products/led-lighting",
+    },
+    {
+      category: t("packaging"),
+      description: "Custom injection-moulded packaging for FMCG and pharma.",
+      image: "/images/jar_product.jpg",
+      href: "/products/rigid-packaging",
+    },
+  ];
 
   return (
     <section className="py-24 md:py-32 bg-mist" id="products">

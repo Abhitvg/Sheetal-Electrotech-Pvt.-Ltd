@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { motion, useInView } from "framer-motion";
 
 const logos = [
@@ -19,6 +20,7 @@ const logos = [
 ];
 
 export default function TrustWall() {
+  const t = useTranslations("TrustWall");
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { motion, useInView } from "framer-motion";
 import { Factory, Layers, Globe, ShieldCheck, Wrench, Zap } from "lucide-react";
 
@@ -38,6 +39,7 @@ const reasons = [
 ];
 
 export default function WhyChooseUs() {
+  const t = useTranslations("WhyChooseUs");
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 

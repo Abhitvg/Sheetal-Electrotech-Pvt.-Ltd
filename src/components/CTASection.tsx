@@ -1,12 +1,14 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Phone, Mail } from "lucide-react";
 
 export default function CTASection() {
+  const t = useTranslations("CTA");
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -32,17 +34,16 @@ export default function CTASection() {
           className="max-w-3xl"
         >
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
-            Start Manufacturing
+            {t("badge")}
           </p>
           <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-6 leading-tight">
-            Ready to Scale Your{" "}
+            {t("titlePrefix")} {" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-              Production?
+              {t("titleHighlight")}
             </span>
           </h2>
           <p className="text-white/70 text-lg mb-12 max-w-xl leading-relaxed">
-            Whether you need 5,000 units or 500,000 — our vertically integrated facility
-            is ready. Get a custom quote with pricing and lead time estimates in 24 hours.
+            {t("subtitle")}
           </p>
 
           <div className="flex flex-wrap gap-4 mb-12">
@@ -50,14 +51,14 @@ export default function CTASection() {
               href="/rfq"
               className="group flex items-center gap-3 px-8 py-4 bg-accent text-white font-display font-bold text-sm uppercase tracking-wider hover:bg-blue-600 transition-all duration-300 rounded-sm"
             >
-              Start RFQ Process
+              {t("rfqButton")}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="/contact"
               className="flex items-center gap-3 px-8 py-4 border border-white/30 text-white font-display font-medium text-sm uppercase tracking-wider hover:bg-white/10 transition-all duration-300 rounded-sm"
             >
-              Contact Sales
+              {t("contactButton")}
             </Link>
           </div>
 

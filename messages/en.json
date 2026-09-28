@@ -36,5 +36,55 @@
       "terms": "Terms of Service",
       "privacy": "Privacy Policy"
     }
+  },
+  "CTA": {
+    "badge": "Start Manufacturing",
+    "titlePrefix": "Ready to Scale Your ",
+    "titleHighlight": "Production?",
+    "subtitle": "Whether you need 5,000 units or 500,000 — our vertically integrated facility is ready. Get a custom quote with pricing and lead time estimates in 24 hours.",
+    "rfqButton": "Start RFQ Process",
+    "contactButton": "Contact Sales"
+  },
+  "TrustWall": {
+    "subtitle": "OEM Partner for",
+    "title": "Trusted by India's leading electrical brands."
+  },
+  "ProductShowcase": {
+    "badge": "Our Products",
+    "title": "Engineered for Performance.",
+    "subtitle": "We manufacture high-precision components and complete assemblies for demanding industries.",
+    "led": "LED Lighting",
+    "ledDesc": "Housing, drivers, and complete turnkey assembly.",
+    "packaging": "Rigid Packaging",
+    "packagingDesc": "Bottles, caps, and custom molded containers.",
+    "explore": "Explore Catalog"
+  },
+  "Capabilities": {
+    "badge": "Core Capabilities",
+    "title": "9 Facilities. 1 Campus.",
+    "subtitle": "Every step of the manufacturing process happens here. No outsourcing, complete quality control.",
+    "c1Title": "Tooling & Molding",
+    "c1Desc": "High precision injection and blow molding.",
+    "c2Title": "SMT Electronics",
+    "c2Desc": "PCB assembly with automated placement.",
+    "c3Title": "Assembly & Testing",
+    "c3Desc": "End-to-end product assembly and QA.",
+    "explore": "Explore Facilities"
+  },
+  "WhyChooseUs": {
+    "badge": "The Sheetal Advantage",
+    "title": "Why Partner With Us?",
+    "subtitle": "We eliminate supply chain fragmentation by bringing every capability under one roof.",
+    "w1Title": "Vertical Integration",
+    "w1Desc": "From raw plastic and aluminum to the finished boxed product.",
+    "w2Title": "Quality Control",
+    "w2Desc": "In-house testing lab ensures every batch meets global standards.",
+    "w3Title": "Scale & Speed",
+    "w3Desc": "High-volume capacity ensures we meet your aggressive timelines."
+  },
+  "Testimonials": {
+    "badge": "Client Success",
+    "title": "What Our Partners Say",
+    "subtitle": "Long-term relationships built on reliability, precision, and trust."
   }
 }

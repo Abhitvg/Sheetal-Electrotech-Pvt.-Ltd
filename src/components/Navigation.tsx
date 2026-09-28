@@ -5,10 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X, ArrowRight } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 
 export default function Navigation() {
   const t = useTranslations("Navigation");
+  const pathname = usePathname();
+  const isHomepage = pathname === "/";
+  
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
@@ -34,7 +37,7 @@ export default function Navigation() {
     <>
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          isScrolled || activeMegaMenu || isMobileMenuOpen
+          !isHomepage || isScrolled || activeMegaMenu || isMobileMenuOpen
             ? "glass-card !border-x-0 !border-t-0 py-4"
             : "bg-transparent py-6"
         }`}
@@ -45,12 +48,12 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 z-50 relative">
             <div className={`w-8 h-8 rounded-sm flex items-center justify-center font-display font-bold text-lg ${
-              isScrolled || activeMegaMenu || isMobileMenuOpen ? "bg-accent text-white" : "bg-white text-ink"
+              !isHomepage || isScrolled || activeMegaMenu || isMobileMenuOpen ? "bg-accent text-white" : "bg-white text-ink"
             }`}>
               SE
             </div>
             <span className={`font-display font-bold tracking-tight text-xl ${
-              isScrolled || activeMegaMenu || isMobileMenuOpen ? "text-ink" : "text-white"
+              !isHomepage || isScrolled || activeMegaMenu || isMobileMenuOpen ? "text-ink" : "text-white"
             }`}>
               Sheetal Group
             </span>
@@ -67,7 +70,7 @@ export default function Navigation() {
                 <Link
                   href={link.href}
                   className={`flex items-center gap-1 text-sm font-medium transition-colors hover:text-accent ${
-                    isScrolled || activeMegaMenu ? "text-ink/80" : "text-white/90"
+                    !isHomepage || isScrolled || activeMegaMenu ? "text-ink/80" : "text-white/90"
                   }`}
                 >
                   {link.name}
@@ -87,7 +90,7 @@ export default function Navigation() {
             <Link 
               href="/rfq" 
               className={`hidden md:flex text-sm font-medium px-6 py-2.5 transition-colors rounded-full ${
-                isScrolled || activeMegaMenu
+                !isHomepage || isScrolled || activeMegaMenu
                   ? "bg-accent text-white hover:bg-blue-600"
                   : "bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white hover:text-ink"
               }`}
@@ -96,7 +99,7 @@ export default function Navigation() {
             </Link>
             
             <button 
-              className={`lg:hidden ${isScrolled || isMobileMenuOpen ? "text-ink" : "text-white"}`}
+              className={`lg:hidden ${!isHomepage || isScrolled || isMobileMenuOpen ? "text-ink" : "text-white"}`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X /> : <Menu />}
