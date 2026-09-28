@@ -34,7 +34,7 @@ export default function CompanyPage() {
       {/* Hero */}
       <div className="relative h-[75vh] min-h-[550px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/company_team.jpg" alt="Sheetal Electrotech Team" fill sizes="100vw" className="object-cover object-top" priority />
+          <Image src="/images/legacy/IMG_8752-removebg-preview.png" alt="Sheetal Electrotech Team" fill sizes="100vw" className="object-cover object-top" priority />
           <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/30" />
         </div>
         <div className="relative z-10 container-wide text-paper pb-20 pt-36">
@@ -138,17 +138,11 @@ export default function CompanyPage() {
               <h2 className="mb-8">Welcome to Sheetal Group</h2>
               <div className="text-steel text-lg leading-relaxed space-y-6">
                 <p>
-                  The Sheetal Group, with its flagship company Sheetal Industries and its units Sheetal Electrotech Unit 1 and Unit 2, is a leading manufacturer and exporter of LED lighting solutions and rigid plastic packaging products in India. The company has in-house facilities for product designing, mould manufacturing, and blow moulding and injection moulding facilities, as well as an assembly and packing line, SMT section, and IBM plastic.
-                </p>
-                <p>
-                  The Sheetal Group was founded by Surendra Singh, who has extensive expertise in the industry. The company is committed to providing high-quality products that meet the needs of customers in various industries, including automotive, electronics, pharmaceuticals, and consumer goods.
-                </p>
-                <p>
-                  The LED lighting solutions offered by Sheetal Industries are energy-efficient and provide long-lasting performance, making them ideal for both residential and commercial applications. The company also offers a range of rigid plastic packaging products, including bottles, containers, and jars, that are designed to meet the specific needs of customers.
-                </p>
-                <p>
-                  The company’s in-house facilities for product designing, mould manufacturing, and plastic manufacturing provide greater control over the production process, resulting in higher-quality products and faster delivery times.
-                </p>
+                  Sheetal Group is a leading manufacturer and supplier of plastic products, LED lighting, and electronics with over 25 years of experience in the industry. Founded by Surendra Singh, the company has established itself as a trusted name in the market, thanks to its commitment to quality, innovation, and customer satisfaction. With expertise in injection molding, blow molding, extrusion, and other plastic manufacturing processes, Sheetal Group offers a wide range of high-quality plastic products that cater to various industries and applications. From automotive components to consumer goods, their products are known for their durability, functionality, and cost-effectiveness. In addition to plastic products, Sheetal Group also specializes in LED lighting and electronics. Their cutting-edge LED lighting solutions are designed to be energy-efficient, long-lasting, and environmentally friendly, making them an ideal choice for commercial and residential applications. What sets Sheetal Group apart from its competitors is its ability to develop new and innovative products with the lowest possible cost, thanks to the expertise of its founder and skilled team. Whether you need custom plastic products, LED lighting solutions, or electronics, Sheetal Group has the expertise and experience to deliver quality products that meet your needs. At Sheetal Group, our mission is to provide our customers with the best possible products and services, while maintaining the highest standards of quality, safety, and sustainability.
+</p>
+                
+                
+                
               </div>
             </div>
             

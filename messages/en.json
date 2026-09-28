@@ -72,15 +72,19 @@
     "explore": "Explore Facilities"
   },
   "WhyChooseUs": {
-    "badge": "The Sheetal Advantage",
-    "title": "Why Partner With Us?",
-    "subtitle": "We eliminate supply chain fragmentation by bringing every capability under one roof.",
-    "w1Title": "Vertical Integration",
-    "w1Desc": "From raw plastic and aluminum to the finished boxed product.",
-    "w2Title": "Quality Control",
-    "w2Desc": "In-house testing lab ensures every batch meets global standards.",
-    "w3Title": "Scale & Speed",
-    "w3Desc": "High-volume capacity ensures we meet your aggressive timelines."
+    "badge": "Service Options",
+    "title": "Solving complex manufacturing challenges with ease",
+    "subtitle": "Sheetal Electrotech offer a wide range of services to its customers, including:",
+    "w1Title": "Product design and development",
+    "w1Desc": "To help customers create new products or improve existing ones. This involves using advanced software and tools to design and prototype products before production.",
+    "w2Title": "Manufacturing and production",
+    "w2Desc": "Produce products efficiently, which can help customers meet their demand requirements. Can also scale production up or down as needed, depending on market demand.",
+    "w3Title": "Quality control and testing",
+    "w3Desc": "To ensure that products meet specific standards and regulations. This helps to ensure that products are safe and reliable.",
+    "w4Title": "Supply chain management",
+    "w4Desc": "The supply chain, including sourcing raw materials and components, managing inventory, and coordinating logistics to ensure on-time delivery of products.",
+    "w5Title": "After-Sales Support",
+    "w5Desc": "To customers, including technical support, repairs, and maintenance, to ensure that the product continues to perform at its best."
   },
   "Testimonials": {
     "badge": "Client Success",

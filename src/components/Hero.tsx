@@ -67,12 +67,12 @@ export default function Hero() {
       {/* Background Image with Parallax */}
       <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
         <Image
-          src="/images/hero_manufacturing.jpg"
+          src="/images/legacy/sheetal.gif"
           alt="Sheetal Electrotech Manufacturing Facility"
           fill
           className="object-cover"
           priority
-          quality={90}
+          unoptimized
         />
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-[#0b192c]/90 via-[#0b192c]/70 to-[#0b192c]/40"

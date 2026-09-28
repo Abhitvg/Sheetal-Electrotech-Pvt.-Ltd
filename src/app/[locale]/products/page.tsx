@@ -29,7 +29,7 @@ export default function ProductsHub() {
             hoveredSide === "right" ? "opacity-80" : "opacity-30 group-hover:opacity-10"
           }`} />
           <Image
-            src="/images/products_packaging.jpg"
+            src="/images/legacy/1-jpg.webp"
             alt={t("div1Title")}
             fill
             sizes="(max-width: 768px) 100vw, 65vw"
@@ -82,7 +82,7 @@ export default function ProductsHub() {
             hoveredSide === "left" ? "opacity-80" : "opacity-40 group-hover:opacity-10"
           }`} />
           <Image
-            src="/images/products_led.jpg"
+            src="/images/legacy/8-jpg.webp"
             alt="LED Lighting Products"
             fill
             sizes="(max-width: 768px) 100vw, 65vw"

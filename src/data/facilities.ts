@@ -15,8 +15,8 @@ export const facilities: Facility[] = [
     title: "Plastic Injection Moulding",
     tagline: "Design to part in one facility.",
     description:
-      "Our 18+ injection moulding machines span 80T to 160T clamping force, handling materials like PP, ABS, PET, HIPS, and PC. From prototype tooling to high-volume production runs, we maintain tight tolerances with consistent quality.",
-    image: "/images/moulding_factory.jpg",
+      "It involves injecting molten plastic material into a mold cavity under high pressure, which then cools and solidifies to form a precise, high-quality plastic part.",
+    image: "/images/legacy/Photo1.webp",
     specs: [
       { label: "Clamping Force", value: "80T – 160T" },
       { label: "Machines", value: "18+" },
@@ -44,8 +44,8 @@ export const facilities: Facility[] = [
     title: "Blow Moulding",
     tagline: "Hollow-form containers at industrial scale.",
     description:
-      "Specializing in HDPE, PET, and PP rigid containers for cosmetic, pharmaceutical, and industrial packaging. Our blow moulding machines produce complex bottle geometries with consistent wall thickness.",
-    image: "/images/packaging_factory.jpg",
+      "A plastic blow molding machine is a type of manufacturing equipment used to produce hollow plastic products such as bottles, containers, and tanks. The process involves melting plastic resin and then blowing it into a mold to create a desired shape.",
+    image: "/images/legacy/Photo5.webp",
     specs: [
       { label: "Materials", value: "HDPE / PET / PP" },
       { label: "Container Sizes", value: "30ml – 5L" },
@@ -73,8 +73,8 @@ export const facilities: Facility[] = [
     title: "SMT & Auto Insertion",
     tagline: "The intelligence inside every luminaire.",
     description:
-      "Equipped with Yamaha and Hanwha high-speed pick-and-place machines and a 6-zone reflow oven, our SMT line handles both LED light engines and driver PCBs with a pick-and-place speed of 170,000 CPH.",
-    image: "/images/hero_factory.jpg",
+      "Surface Mount Technology machine is a type of electronic manufacturing equipment used in the production of printed circuit boards. SMT machines are used to place surface-mount devices onto a PCB.",
+    image: "/images/legacy/Photo3.webp",
     specs: [
       { label: "Placement Speed", value: "170K CPH" },
       { label: "Reflow Oven", value: "6-Zone" },
@@ -97,12 +97,12 @@ export const facilities: Facility[] = [
     ],
   },
   {
-    slug: "tool-room",
-    title: "In-House Tool Room",
+    slug: "extruder",
+    title: "Extruder Machine Plastic",
     tagline: "Moulds machined. Timelines shortened.",
     description:
-      "Our precision tool room houses CNC machining centres, EDM machines, and surface grinders for fabricating and maintaining all injection moulding inserts. This in-house capability is a critical strategic advantage.",
-    image: "/images/tool_room.jpg",
+      "The extrusion machine is a versatile tool for producing a wide range of plastic products, including batten, with a high degree of precision and consistency.",
+    image: "/images/legacy/Photo2.webp",
     specs: [
       { label: "CNC Centres", value: "4-Axis & 5-Axis" },
       { label: "Surface Finish", value: "Ra 0.4 µm" },
@@ -129,8 +129,8 @@ export const facilities: Facility[] = [
     title: "Assembly & Packaging",
     tagline: "The final mile. Zero compromise.",
     description:
-      "A 100,000 units/day assembly operation running fully systematic conveyor lines. Integrated end-of-line high-voltage aging machines ensure every unit is burned-in before final packaging for export.",
-    image: "/images/testing_lab.jpg",
+      "The assembly and packing line is a key component of modern manufacturing, allowing for the rapid production and delivery of high-quality goods to customers around the world.",
+    image: "/images/legacy/Photo4.webp",
     specs: [
       { label: "Daily Output", value: "100K units" },
       { label: "Aging Test", value: "250V – 320V" },
@@ -157,8 +157,8 @@ export const facilities: Facility[] = [
     title: "IBM Plastic",
     tagline: "Injection Blow Moulding for precision containers.",
     description:
-      "Combining injection and blow moulding processes to create flawless containers. This process ensures precise neck finishes and even wall distribution, ideal for cosmetic and pharmaceutical packaging.",
-    image: "/images/packaging_factory.jpg",
+      "Injection blow molding (IBM) is a manufacturing process used to produce hollow plastic parts. It is a variation of blow molding, which is used to create hollow objects from thermoplastic materials such as pe, pp, and ps.",
+    image: "/images/legacy/Photo5.webp",
     specs: [
       { label: "Process", value: "Injection Blow Moulding" },
       { label: "Tolerance", value: "High precision neck finishes" },
@@ -178,8 +178,8 @@ export const facilities: Facility[] = [
     title: "Manual Insertion",
     tagline: "Skilled hand assembly for complex components.",
     description:
-      "While our SMT lines handle automated placement, our dedicated manual insertion lines manage through-hole components, connectors, and custom wiring assemblies that require skilled human operators.",
-    image: "/images/moulding_factory.jpg",
+      "Manual insertion is ideal for low-volume or custom products, while automatic insertion is more efficient for high-volume production runs.",
+    image: "/images/legacy/Photo1.webp",
     specs: [
       { label: "Lines", value: "Dedicated through-hole assembly" },
       { label: "Components", value: "Connectors, capacitors, transformers" },
@@ -198,7 +198,7 @@ export const facilities: Facility[] = [
     tagline: "Precision engraving and branding.",
     description:
       "In-line laser engraving capabilities for permanent branding, batch coding, and detailed product information on both plastic and metal surfaces.",
-    image: "/images/tool_room.jpg",
+    image: "/images/legacy/Photo2.webp",
     specs: [
       { label: "Application", value: "Branding, Coding, Traceability" },
       { label: "Materials", value: "Plastics, Aluminium" },
@@ -216,8 +216,8 @@ export const facilities: Facility[] = [
     title: "Research & Development",
     tagline: "Innovating the future of manufacturing.",
     description:
-      "Our dedicated R&D team continuously explores new materials, driver designs, and moulding techniques to optimize product performance, durability, and cost-efficiency.",
-    image: "/images/testing_lab.jpg",
+      "R&D efforts in LED lighting and plastic materials are focused on creating sustainable, energy-efficient, and cost-effective lighting solutions that can meet the growing demand for eco-friendly products.",
+    image: "/images/legacy/Photo4.webp",
     specs: [
       { label: "Focus Areas", value: "Thermal management, electronics design" },
       { label: "Prototyping", value: "Rapid 3D printing and tooling" },
