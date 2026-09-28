@@ -31,60 +31,149 @@ function ConfiguratorModel({ category, volume }: { category: Category, volume: n
   return (
     <group ref={group}>
       <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+        
+        {/* 1. LED Bulbs (High Fidelity) */}
         {category === "LED Bulbs" && (
-          <group scale={1.5} position={[0, 0.5, 0]}>
+          <group scale={1.2} position={[0, 0, 0]}>
+            {/* Diffuser */}
             <mesh position={[0, 1.2, 0]}>
-              <sphereGeometry args={[1, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
-              <meshPhysicalMaterial color={mainColor} transmission={wireframe ? 0 : 0.9} opacity={wireframe ? 0.3 : 1} ior={1.5} thickness={0.5} wireframe={wireframe} />
+              <sphereGeometry args={[1, 64, 64, 0, Math.PI * 2, 0, Math.PI / 2]} />
+              <meshPhysicalMaterial 
+                color={mainColor} 
+                transmission={wireframe ? 0 : 0.95} 
+                opacity={wireframe ? 0.3 : 1} 
+                metalness={0} roughness={0.25} ior={1.5} thickness={0.5} clearcoat={1} wireframe={wireframe} 
+              />
             </mesh>
+            {/* PCB */}
+            <mesh position={[0, 1.1, 0]}>
+              <cylinderGeometry args={[0.92, 0.92, 0.05, 64]} />
+              <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#ffffff"} wireframe={wireframe} />
+            </mesh>
+            {/* Heatsink Body */}
             <mesh position={[0, 0, 0]}>
-              <cylinderGeometry args={[0.95, 0.6, 2, 32]} />
-              <meshStandardMaterial color={isEngineeringMode ? mainColor : "#e2e8f0"} roughness={0.5} wireframe={wireframe} />
+              <cylinderGeometry args={[0.95, 0.55, 2, 64]} />
+              <meshStandardMaterial color={isEngineeringMode ? mainColor : "#f1f5f9"} roughness={0.2} wireframe={wireframe} />
             </mesh>
+            {/* Heatsink Fins */}
+            {Array.from({ length: 8 }).map((_, i) => (
+              <mesh key={`fin-${i}`} position={[0, 0.4 - i * 0.15, 0]}>
+                <cylinderGeometry args={[0.9, 0.85, 0.05, 32]} />
+                <meshStandardMaterial color={isEngineeringMode ? mainColor : "#e2e8f0"} metalness={wireframe ? 0 : 0.9} roughness={0.4} wireframe={wireframe} />
+              </mesh>
+            ))}
+            {/* Base */}
             <mesh position={[0, -1.2, 0]}>
-              <cylinderGeometry args={[0.5, 0.5, 0.6, 32]} />
-              <meshStandardMaterial color={isEngineeringMode ? mainColor : "#94a3b8"} metalness={1} roughness={0.3} wireframe={wireframe} />
+              <cylinderGeometry args={[0.5, 0.45, 0.6, 32]} />
+              <meshStandardMaterial color={isEngineeringMode ? mainColor : "#cbd5e1"} metalness={wireframe ? 0 : 1} roughness={0.3} wireframe={wireframe} />
             </mesh>
           </group>
         )}
 
+        {/* 2. LED Battens (High Fidelity) */}
         {category === "LED Battens" && (
-          <group scale={1.2}>
+          <group scale={1}>
+            {/* Polycarbonate Extrusion (Diffuser) */}
             <mesh position={[0, 0.2, 0]}>
-              <boxGeometry args={[4, 0.4, 0.6]} />
-              <meshPhysicalMaterial color={mainColor} transmission={wireframe ? 0 : 0.8} opacity={wireframe ? 0.3 : 1} wireframe={wireframe} />
+              <cylinderGeometry args={[0.4, 0.4, 4, 32, 1, false, 0, Math.PI]} />
+              <meshPhysicalMaterial color={mainColor} transmission={wireframe ? 0 : 0.85} opacity={wireframe ? 0.3 : 1} roughness={0.3} ior={1.5} thickness={0.5} wireframe={wireframe} />
+              <group rotation={[Math.PI / 2, 0, Math.PI / 2]}> {/* rotate cylinder to be horizontal */} </group>
             </mesh>
-            <mesh position={[0, -0.2, 0]}>
-              <boxGeometry args={[4, 0.4, 0.8]} />
-              <meshStandardMaterial color={isEngineeringMode ? mainColor : "#e2e8f0"} roughness={0.5} wireframe={wireframe} />
+            {/* Aluminum Extrusion (Housing) */}
+            <mesh position={[0, -0.1, 0]}>
+              <boxGeometry args={[4.1, 0.2, 0.82]} />
+              <meshStandardMaterial color={isEngineeringMode ? mainColor : "#cbd5e1"} metalness={0.8} roughness={0.2} wireframe={wireframe} />
+            </mesh>
+            {/* End Caps */}
+            <mesh position={[2.05, 0.05, 0]}>
+              <boxGeometry args={[0.1, 0.5, 0.82]} />
+              <meshStandardMaterial color={isEngineeringMode ? mainColor : "#f8fafc"} roughness={0.8} wireframe={wireframe} />
+            </mesh>
+            <mesh position={[-2.05, 0.05, 0]}>
+              <boxGeometry args={[0.1, 0.5, 0.82]} />
+              <meshStandardMaterial color={isEngineeringMode ? mainColor : "#f8fafc"} roughness={0.8} wireframe={wireframe} />
+            </mesh>
+            {/* Internal LED Strip (Visible through diffuser) */}
+            <mesh position={[0, 0.05, 0]}>
+              <boxGeometry args={[3.9, 0.02, 0.2]} />
+              <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#ffcc00"} emissive={wireframe ? "#000000" : "#ffcc00"} emissiveIntensity={0.5} wireframe={wireframe} />
             </mesh>
           </group>
         )}
 
+        {/* 3. Flood Lights (High Fidelity) */}
         {category === "Flood Lights" && (
-          <group scale={1.5} rotation={[0.3, 0, 0]}>
-            <mesh position={[0, 0, 0.3]}>
-              <boxGeometry args={[2.5, 2, 0.1]} />
-              <meshPhysicalMaterial color={mainColor} transmission={wireframe ? 0 : 0.9} wireframe={wireframe} />
+          <group scale={1.2} rotation={[0.4, 0, 0]}>
+            {/* Toughened Glass Front */}
+            <mesh position={[0, 0, 0.4]}>
+              <boxGeometry args={[2.8, 2.2, 0.05]} />
+              <meshPhysicalMaterial color={mainColor} transmission={wireframe ? 0 : 0.98} roughness={0.05} ior={1.5} thickness={0.1} clearcoat={1} wireframe={wireframe} />
             </mesh>
+            {/* Main Die-cast Aluminum Housing */}
             <mesh position={[0, 0, 0]}>
-              <boxGeometry args={[2.8, 2.3, 0.6]} />
-              <meshStandardMaterial color={accentColor} metalness={0.8} roughness={0.2} wireframe={wireframe} />
+              <boxGeometry args={[3, 2.4, 0.8]} />
+              <meshStandardMaterial color={accentColor} metalness={0.7} roughness={0.3} wireframe={wireframe} />
             </mesh>
-            {/* Mounting bracket */}
-            <mesh position={[0, -1.3, -0.2]} rotation={[0, 0, 0]}>
-              <boxGeometry args={[1.5, 0.2, 0.8]} />
-              <meshStandardMaterial color={isEngineeringMode ? mainColor : "#94a3b8"} metalness={1} wireframe={wireframe} />
+            {/* Heavy Heat Sink Fins (Back) */}
+            {Array.from({ length: 11 }).map((_, i) => (
+              <mesh key={`flood-fin-${i}`} position={[-1.2 + i * 0.24, 0, -0.6]}>
+                <boxGeometry args={[0.05, 2.2, 0.4]} />
+                <meshStandardMaterial color={accentColor} metalness={0.7} roughness={0.3} wireframe={wireframe} />
+              </mesh>
+            ))}
+            {/* Reflector & LED Array */}
+            <mesh position={[0, 0, 0.35]}>
+              <boxGeometry args={[2.5, 1.9, 0.1]} />
+              <meshStandardMaterial color={isEngineeringMode ? mainColor : "#ffffff"} metalness={1} roughness={0.2} wireframe={wireframe} />
+            </mesh>
+            {Array.from({ length: 48 }).map((_, i) => (
+              <mesh key={`flood-led-${i}`} position={[-1 + (i % 8) * 0.28, 0.7 - Math.floor(i / 8) * 0.28, 0.41]}>
+                <boxGeometry args={[0.1, 0.1, 0.02]} />
+                <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#ffcc00"} emissive={wireframe ? "#000000" : "#ffaa00"} emissiveIntensity={0.8} wireframe={wireframe} />
+              </mesh>
+            ))}
+            {/* Adjustable Mounting Bracket */}
+            <mesh position={[0, -1.4, 0]} rotation={[0.2, 0, 0]}>
+              <boxGeometry args={[2, 0.15, 1]} />
+              <meshStandardMaterial color={isEngineeringMode ? mainColor : "#475569"} metalness={0.8} roughness={0.5} wireframe={wireframe} />
             </mesh>
           </group>
         )}
 
+        {/* 4. Custom Injection Moulding (High Fidelity Part) */}
         {category === "Custom Injection Moulding" && (
           <group scale={1.5}>
-            <mesh>
-              <torusKnotGeometry args={[1, 0.3, 100, 16]} />
-              <meshStandardMaterial color={mainColor} roughness={0.1} wireframe={wireframe} />
+            {/* A complex engineered enclosure-like part */}
+            {/* Main Body */}
+            <mesh position={[0, 0, 0]}>
+              <boxGeometry args={[2, 1.5, 0.1]} />
+              <meshStandardMaterial color={isEngineeringMode ? mainColor : "#f8fafc"} roughness={0.3} wireframe={wireframe} />
             </mesh>
+            {/* Extruded Rim */}
+            <mesh position={[0, 0, 0.2]}>
+              <boxGeometry args={[2, 1.5, 0.4]} />
+              <meshStandardMaterial color={isEngineeringMode ? mainColor : "#f8fafc"} roughness={0.3} wireframe={wireframe} />
+            </mesh>
+            {/* Hollow Center */}
+            <mesh position={[0, 0, 0.2]}>
+              <boxGeometry args={[1.8, 1.3, 0.42]} />
+              <meshStandardMaterial color={isEngineeringMode ? "#1e293b" : "#e2e8f0"} roughness={0.5} wireframe={wireframe} />
+            </mesh>
+            {/* Screw Bosses */}
+            {[-0.8, 0.8].map(x => 
+              [-0.55, 0.55].map(y => (
+                <group key={`boss-${x}-${y}`} position={[x, y, 0.2]}>
+                  <mesh>
+                    <cylinderGeometry args={[0.15, 0.15, 0.4, 16]} rotation={[Math.PI/2, 0, 0]} />
+                    <meshStandardMaterial color={isEngineeringMode ? mainColor : "#f8fafc"} roughness={0.3} wireframe={wireframe} />
+                  </mesh>
+                  <mesh position={[0, 0, 0.21]}>
+                    <cylinderGeometry args={[0.08, 0.08, 0.45, 16]} rotation={[Math.PI/2, 0, 0]} />
+                    <meshStandardMaterial color={isEngineeringMode ? "#1e293b" : "#94a3b8"} roughness={0.5} wireframe={wireframe} />
+                  </mesh>
+                </group>
+              ))
+            )}
           </group>
         )}
       </Float>
