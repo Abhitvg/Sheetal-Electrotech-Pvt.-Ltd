@@ -14,8 +14,8 @@ function PCBSimulation({ timeline }: { timeline: gsap.core.Timeline | null }) {
   const { isEngineeringMode } = useEngineeringMode();
   
   const pcbRef = useRef<THREE.Group>(null);
-  const componentRef = useRef<THREE.Mesh>(null);
-  const solderPasteRef = useRef<THREE.Mesh>(null);
+  const componentRef = useRef<THREE.Group>(null);
+  const solderPasteRef = useRef<THREE.Group>(null);
 
   useEffect(() => {
     if (!timeline || !pcbRef.current || !componentRef.current || !solderPasteRef.current) return;
@@ -47,42 +47,110 @@ function PCBSimulation({ timeline }: { timeline: gsap.core.Timeline | null }) {
 
   }, [timeline]);
 
+  // Procedural SMD components scattered on the board
+  const smds = Array.from({ length: 15 }).map((_, i) => ({
+    id: i,
+    x: Math.random() * 3 - 1.5,
+    z: Math.random() * 3 - 1.5,
+    type: Math.random() > 0.5 ? 'resistor' : 'capacitor',
+    rotation: Math.random() > 0.5 ? Math.PI / 2 : 0
+  }));
+
   return (
     <group ref={pcbRef}>
       <Float speed={1} rotationIntensity={0.1} floatIntensity={0.1}>
         
-        {/* PCB Board */}
+        {/* FR4 PCB Board */}
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[4, 0.1, 4]} />
-          <meshStandardMaterial color={isEngineeringMode ? "#1e293b" : "#10b981"} metalness={0.2} roughness={0.8} wireframe={isEngineeringMode} />
+          <meshStandardMaterial color={isEngineeringMode ? "#1e293b" : "#065f46"} metalness={0.1} roughness={0.9} wireframe={isEngineeringMode} />
         </mesh>
         
-        {/* Copper Pads */}
-        <mesh position={[0, 0.051, 0]}>
-          <boxGeometry args={[0.6, 0.01, 1.2]} />
-          <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#d97706"} metalness={1} roughness={0.2} wireframe={isEngineeringMode} />
-        </mesh>
-
-        {/* Solder Paste */}
-        <mesh ref={solderPasteRef} position={[0, 0.055, 0]}>
-          <boxGeometry args={[0.5, 0.02, 1.0]} />
-          <meshStandardMaterial color={isEngineeringMode ? "#94a3b8" : "#94a3b8"} metalness={1} roughness={0.1} wireframe={isEngineeringMode} />
-        </mesh>
-
-        {/* SMT Component (e.g. Microchip) */}
-        <mesh ref={componentRef}>
-          <boxGeometry args={[0.8, 0.1, 0.8]} />
-          <meshStandardMaterial color={isEngineeringMode ? "#60a5fa" : "#334155"} metalness={0.5} roughness={0.5} wireframe={isEngineeringMode} />
-          {/* Chip pins */}
-          <mesh position={[0.4, -0.05, 0]}>
-             <boxGeometry args={[0.1, 0.1, 0.6]} />
-             <meshStandardMaterial color="#94a3b8" metalness={1} roughness={0.2} />
+        {/* Background Copper Traces (Visual approximation) */}
+        {Array.from({ length: 8 }).map((_, i) => (
+          <mesh key={`trace-${i}`} position={[-1.5 + i * 0.4, 0.051, 0]}>
+            <boxGeometry args={[0.02, 0.01, 3.8]} />
+            <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#10b981"} metalness={0.5} roughness={0.5} />
           </mesh>
-          <mesh position={[-0.4, -0.05, 0]}>
-             <boxGeometry args={[0.1, 0.1, 0.6]} />
-             <meshStandardMaterial color="#94a3b8" metalness={1} roughness={0.2} />
+        ))}
+
+        {/* Scattered tiny SMDs already placed */}
+        {smds.map(smd => (
+           <group key={`smd-${smd.id}`} position={[smd.x, 0.06, smd.z]} rotation={[0, smd.rotation, 0]}>
+             {/* Solder pads */}
+             <mesh position={[0.2, -0.01, 0]}><boxGeometry args={[0.15, 0.01, 0.2]} /><meshStandardMaterial color="#94a3b8" metalness={1} roughness={0.2} /></mesh>
+             <mesh position={[-0.2, -0.01, 0]}><boxGeometry args={[0.15, 0.01, 0.2]} /><meshStandardMaterial color="#94a3b8" metalness={1} roughness={0.2} /></mesh>
+             {/* Component Body */}
+             <mesh position={[0, 0.02, 0]}>
+               <boxGeometry args={[0.3, 0.06, 0.15]} />
+               <meshStandardMaterial color={smd.type === 'resistor' ? "#1e293b" : "#d97706"} roughness={0.5} />
+             </mesh>
+             {/* Contacts */}
+             <mesh position={[0.15, 0.02, 0]}><boxGeometry args={[0.05, 0.061, 0.151]} /><meshStandardMaterial color="#cbd5e1" metalness={0.8} /></mesh>
+             <mesh position={[-0.15, 0.02, 0]}><boxGeometry args={[0.05, 0.061, 0.151]} /><meshStandardMaterial color="#cbd5e1" metalness={0.8} /></mesh>
+           </group>
+        ))}
+
+        {/* Central Copper Pads for the main IC */}
+        <group position={[0, 0.051, 0]}>
+          {[-0.3, -0.1, 0.1, 0.3].map((z, i) => (
+            <group key={`pad-${i}`}>
+              <mesh position={[0.5, 0, z]}>
+                <boxGeometry args={[0.3, 0.01, 0.1]} />
+                <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#d97706"} metalness={1} roughness={0.2} wireframe={isEngineeringMode} />
+              </mesh>
+              <mesh position={[-0.5, 0, z]}>
+                <boxGeometry args={[0.3, 0.01, 0.1]} />
+                <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#d97706"} metalness={1} roughness={0.2} wireframe={isEngineeringMode} />
+              </mesh>
+            </group>
+          ))}
+        </group>
+
+        {/* Solder Paste for the main IC */}
+        <group ref={solderPasteRef} position={[0, 0.055, 0]}>
+          {[-0.3, -0.1, 0.1, 0.3].map((z, i) => (
+            <group key={`paste-${i}`}>
+              <mesh position={[0.5, 0, z]}>
+                <boxGeometry args={[0.25, 0.02, 0.08]} />
+                <meshStandardMaterial color={isEngineeringMode ? "#94a3b8" : "#94a3b8"} metalness={1} roughness={0.1} wireframe={isEngineeringMode} />
+              </mesh>
+              <mesh position={[-0.5, 0, z]}>
+                <boxGeometry args={[0.25, 0.02, 0.08]} />
+                <meshStandardMaterial color={isEngineeringMode ? "#94a3b8" : "#94a3b8"} metalness={1} roughness={0.1} wireframe={isEngineeringMode} />
+              </mesh>
+            </group>
+          ))}
+        </group>
+
+        {/* SMT Component (Main IC Microchip SOIC-8 style) */}
+        <group ref={componentRef} position={[0, 0, 0]}>
+          {/* Black Epoxy Body */}
+          <mesh position={[0, 0.1, 0]}>
+            <boxGeometry args={[0.8, 0.15, 1.0]} />
+            <meshStandardMaterial color={isEngineeringMode ? "#60a5fa" : "#1e293b"} metalness={0.1} roughness={0.8} wireframe={isEngineeringMode} />
           </mesh>
-        </mesh>
+          {/* IC Dot (Pin 1 indicator) */}
+          <mesh position={[-0.2, 0.18, -0.3]}>
+            <cylinderGeometry args={[0.05, 0.05, 0.01, 16]} />
+            <meshStandardMaterial color="#334155" roughness={0.9} />
+          </mesh>
+          {/* Gull-wing Legs */}
+          {[-0.3, -0.1, 0.1, 0.3].map((z, i) => (
+            <group key={`leg-${i}`}>
+              {/* Right leg */}
+              <mesh position={[0.45, 0.05, z]} rotation={[0, 0, -Math.PI/6]}>
+                <boxGeometry args={[0.2, 0.02, 0.05]} />
+                <meshStandardMaterial color="#94a3b8" metalness={1} roughness={0.2} />
+              </mesh>
+              {/* Left leg */}
+              <mesh position={[-0.45, 0.05, z]} rotation={[0, 0, Math.PI/6]}>
+                <boxGeometry args={[0.2, 0.02, 0.05]} />
+                <meshStandardMaterial color="#94a3b8" metalness={1} roughness={0.2} />
+              </mesh>
+            </group>
+          ))}
+        </group>
 
       </Float>
     </group>

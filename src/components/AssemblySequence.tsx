@@ -22,24 +22,38 @@ function ConveyorBulb({ position, delay }: { position: [number, number, number],
   });
 
   return (
-    <group ref={group} position={position} scale={0.5}>
+    <group ref={group} position={position} scale={0.6}>
+      {/* Diffuser */}
       <mesh position={[0, 1.2, 0]}>
-        <sphereGeometry args={[1, 16, 16, 0, Math.PI * 2, 0, Math.PI / 2]} />
+        <sphereGeometry args={[1, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
         <meshPhysicalMaterial 
           color={isEngineeringMode ? "#60a5fa" : "#ffffff"} 
-          transmission={isEngineeringMode ? 0 : 0.9} 
+          transmission={isEngineeringMode ? 0 : 0.95} 
           opacity={isEngineeringMode ? 0.3 : 1} 
-          roughness={0.2} 
-          wireframe={isEngineeringMode}
+          metalness={0} roughness={0.25} ior={1.5} thickness={0.5} clearcoat={1} wireframe={isEngineeringMode} 
         />
       </mesh>
-      <mesh position={[0, 0, 0]}>
-        <cylinderGeometry args={[0.95, 0.6, 2, 16]} />
-        <meshStandardMaterial color={isEngineeringMode ? "#60a5fa" : "#e2e8f0"} roughness={0.5} wireframe={isEngineeringMode} />
+      {/* PCB */}
+      <mesh position={[0, 1.1, 0]}>
+        <cylinderGeometry args={[0.92, 0.92, 0.05, 32]} />
+        <meshStandardMaterial color={isEngineeringMode ? "#facc15" : "#ffffff"} wireframe={isEngineeringMode} />
       </mesh>
+      {/* Heatsink Body */}
+      <mesh position={[0, 0, 0]}>
+        <cylinderGeometry args={[0.95, 0.55, 2, 32]} />
+        <meshStandardMaterial color={isEngineeringMode ? "#3b82f6" : "#f1f5f9"} roughness={0.2} wireframe={isEngineeringMode} />
+      </mesh>
+      {/* Heatsink Fins */}
+      {Array.from({ length: 8 }).map((_, i) => (
+        <mesh key={`fin-${i}`} position={[0, 0.4 - i * 0.15, 0]}>
+          <cylinderGeometry args={[0.9, 0.85, 0.05, 16]} />
+          <meshStandardMaterial color={isEngineeringMode ? "#3b82f6" : "#e2e8f0"} metalness={isEngineeringMode ? 0 : 0.9} roughness={0.4} wireframe={isEngineeringMode} />
+        </mesh>
+      ))}
+      {/* Base */}
       <mesh position={[0, -1.2, 0]}>
-        <cylinderGeometry args={[0.5, 0.5, 0.6, 16]} />
-        <meshStandardMaterial color={isEngineeringMode ? "#60a5fa" : "#94a3b8"} wireframe={isEngineeringMode} />
+        <cylinderGeometry args={[0.5, 0.45, 0.6, 16]} />
+        <meshStandardMaterial color={isEngineeringMode ? "#1d4ed8" : "#cbd5e1"} metalness={isEngineeringMode ? 0 : 1} roughness={0.3} wireframe={isEngineeringMode} />
       </mesh>
     </group>
   );
