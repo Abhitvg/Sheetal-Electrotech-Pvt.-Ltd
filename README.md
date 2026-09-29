@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sheetal Electrotech — Web Platform
 
-## Getting Started
+Next.js website for Sheetal Electrotech Private Limited.
 
-First, run the development server:
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Production RFQ configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The RFQ workflow uses Neon Postgres for submissions, Vercel Blob for optional drawings/CAD attachments, and Resend for email notifications.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Set these variables in the deployment environment:
 
-## Learn More
+```text
+DATABASE_URL=
+RESEND_API_KEY=
+BLOB_READ_WRITE_TOKEN=
+RFQ_SALES_EMAIL=info@sheetalelectrotech.com
+RFQ_FROM_EMAIL=info@sheetalelectrotech.com
+```
 
-To learn more about Next.js, take a look at the following resources:
+Run `database/schema.sql` once against the Neon database before enabling the RFQ pipeline.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`RFQ_SALES_EMAIL` and `RFQ_FROM_EMAIL` default to the company's official `info@sheetalelectrotech.com` address when omitted.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Canonical routes
 
-## Deploy on Vercel
+Public pages use locale-prefixed canonical URLs:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `/en/*`
+- `/hi/*`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Legacy unlocalized routes are permanently redirected to their English equivalents by `src/proxy.ts`.
+
+## Build
+
+```bash
+npm run build
+```
