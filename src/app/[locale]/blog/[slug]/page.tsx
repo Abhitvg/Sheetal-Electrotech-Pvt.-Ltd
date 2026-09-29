@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
 import { blogPosts } from "@/data/blog";
 import { notFound } from "next/navigation";

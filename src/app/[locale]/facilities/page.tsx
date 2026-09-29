@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl"
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 import { facilities } from "@/data/facilities";
 

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Mail, MapPin, Phone, Send, Clock, ArrowLeft } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({

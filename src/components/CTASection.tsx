@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Phone, Mail } from "lucide-react";
 
