@@ -1,9 +1,11 @@
 import { Link } from "@/i18n/routing";
+import type { Metadata } from "next";
+import { getPageCopy, localizedMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Privacy Policy | Sheetal Electrotech",
-  description: "Privacy Policy for Sheetal Electrotech Pvt. Ltd.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return localizedMetadata(locale, "/privacy", getPageCopy("privacy"));
+}
 
 export default function PrivacyPage() {
   return (
