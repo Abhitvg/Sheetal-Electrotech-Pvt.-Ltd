@@ -13,8 +13,8 @@ export default function CompanyPage() {
       {/* Hero */}
       <div className="relative h-[75vh] min-h-[550px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/legacy/IMG_8752-removebg-preview.png" alt="Sheetal Electrotech Team" fill sizes="100vw" className="object-cover object-top" priority />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/30" />
+          <Image src="/images/facilities/photo4.webp" alt="Sheetal Electrotech Factory" fill sizes="100vw" className="object-cover object-center" priority />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink/75 to-ink/30" />
         </div>
         <div className="relative z-10 container-wide text-paper pb-20 pt-36">
           <motion.div
@@ -25,22 +25,35 @@ export default function CompanyPage() {
             <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
               Est. 1999 · Daman, India
             </p>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium text-ink mb-6 leading-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium text-white mb-6 leading-tight">
               Built from the factory floor up.
             </h1>
-            <p className="text-ink/70 text-xl max-w-2xl">
-              25 years of vertical integration. One campus. The manufacturing partner that removes risk from your supply chain.
+            <p className="text-white/80 text-xl max-w-2xl mb-8 leading-relaxed">
+              25+ years of manufacturing expertise across LED lighting, electronics and rigid plastic packaging.
             </p>
+            <Link
+              href="/facilities"
+              className="inline-flex items-center gap-2 bg-white text-ink px-6 py-3 font-medium hover:bg-accent hover:text-white transition-colors"
+            >
+              Explore Capabilities <ArrowRight className="w-4 h-4" />
+            </Link>
           </motion.div>
         </div>
       </div>
 
-      {/* Positioning Statement */}
-      <section className="section-padding border-b border-steel/10">
-        <div className="container-wide max-w-4xl">
-          <p className="text-3xl md:text-5xl font-display font-medium leading-[1.3] text-ink">
-            We don't sell products. We <em className="not-italic text-accent">own production</em> — from mould design through final packing — so your brand never has to juggle five vendors again.
-          </p>
+      {/* Stats Banner directly below */}
+      <section className="bg-mist text-ink py-16 border-b border-steel/10">
+        <div className="container-wide grid grid-cols-1 md:grid-cols-3 gap-12">
+          {[
+            { value: companyFacts.experience, label: "Years of Experience" },
+            { value: companyFacts.manufacturingArea, label: "Sq. Ft. Manufacturing Area" },
+            { value: companyFacts.capabilities, label: "In-House Capabilities" },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <p className="text-5xl md:text-6xl font-display font-medium text-ink mb-3">{stat.value}</p>
+              <p className="font-mono text-xs uppercase tracking-widest text-ink/60">{stat.label}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -92,21 +105,7 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* Stats Banner */}
-      <section className="bg-mist text-ink py-20">
-        <div className="container-wide grid grid-cols-2 md:grid-cols-4 gap-12">
-          {[
-            { value: companyFacts.experience, label: "Years operating" },
-            { value: companyFacts.capabilities, label: "In-house capabilities" },
-            { value: companyFacts.manufacturingArea, label: "Sq. ft. manufacturing" },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <p className="text-5xl md:text-6xl font-display font-medium text-ink mb-3">{stat.value}</p>
-              <p className="font-mono text-xs uppercase tracking-widest text-ink/40">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+
 
     {/* About Us Description */}
       <section className="section-padding border-b border-steel/10 bg-mist/20">
@@ -116,11 +115,11 @@ export default function CompanyPage() {
               <h2 className="mb-8">Welcome to Sheetal Group</h2>
               <div className="text-steel text-lg leading-relaxed space-y-6">
                 <p>
-                  Sheetal Group is an established manufacturer and supplier of plastic products, LED lighting, and electronics with over 25 years of experience in the industry. Founded by Surendra Singh, the company has established itself as a trusted name in the market, thanks to its commitment to quality, innovation, and customer satisfaction. With expertise in injection molding, blow molding, extrusion, and other plastic manufacturing processes, Sheetal Group offers a wide range of high-quality plastic products that cater to various industries and applications. From automotive components to consumer goods, their products are known for their durability, functionality, and cost-effectiveness. In addition to plastic products, Sheetal Group also specializes in LED lighting and electronics. Their cutting-edge LED lighting solutions are designed to be energy-efficient, long-lasting, and environmentally friendly, making them an ideal choice for commercial and residential applications. What sets Sheetal Group apart from its competitors is its ability to develop new and innovative products with competitive costs, thanks to the expertise of its founder and skilled team. Whether you need custom plastic products, LED lighting solutions, or electronics, Sheetal Group has the expertise and experience to deliver quality products that meet your needs. At Sheetal Group, our mission is to provide our customers with high-quality products and services, while maintaining the highest standards of quality, safety, and sustainability.
-</p>
-                
-                
-                
+                  Sheetal Group is an established manufacturer of plastic products, LED lighting, and electronics with 25+ years of operational experience. Founded by Surendra Singh in 1999, the company operates a vertically integrated facility combining injection molding, blow molding, extrusion, and related manufacturing processes.
+                </p>
+                <p>
+                  We provide a broad range of custom and standardized plastic components, alongside technical manufacturing of energy-efficient LED lighting and electronic assemblies. Our dedicated tool room and strict quality management systems allow us to maintain precision and consistency across all our core capabilities.
+                </p>
               </div>
             </div>
             
@@ -130,21 +129,15 @@ export default function CompanyPage() {
               <h2 className="mb-8 text-3xl font-display text-ink">Director&apos;s Statement</h2>
               <div className="text-steel leading-relaxed space-y-4">
                 <blockquote className="text-xl font-display italic text-ink/80 border-l-4 border-accent pl-6 mb-8">
-                  &ldquo;Effortlessly Tackling Complex Manufacturing Challenges with Cost-Effective Solutions. Committed to Innovation, Sustainability, and Customer Satisfaction.&rdquo;
+                  &ldquo;Our mission is to solve complex manufacturing challenges with ease and offer cost-effective solutions that enable our customers to achieve their goals.&rdquo;
                 </blockquote>
                 <p><strong>Dear valued customers,</strong></p>
                 <p>
-                  At Sheetal Group, we are committed to providing our customers with high-quality products and services that exceed their expectations. Our mission is to solve complex manufacturing challenges with ease and offer cost-effective solutions that enable our customers to achieve their goals.
-                </p>
-                <p>
-                  We are constantly innovating and improving our manufacturing processes to ensure that we remain at the forefront of the industry. Sustainability is a top priority for us, and we are always exploring new ways to reduce our environmental impact while delivering exceptional products and services.
-                </p>
-                <p>
-                  Our success is directly linked to the satisfaction of our customers, and we are committed to providing them with outstanding support and service. We understand the importance of building strong and lasting relationships with our customers and stakeholders, and we are dedicated to earning and maintaining their trust.
+                  At Sheetal Group, we are committed to providing our customers with high-quality products and services that exceed their expectations. Our success is directly linked to the satisfaction of our customers, and we are committed to providing them with outstanding support and service.
                 </p>
                 <div className="mt-8 pt-6 border-t border-steel/10">
                   <p className="font-display font-medium text-lg text-ink">Surendra Singh</p>
-                  <p className="font-mono text-xs uppercase tracking-widest text-accent mt-1">Director</p>
+                  <p className="font-mono text-xs uppercase tracking-widest text-accent mt-1">Founder</p>
                 </div>
               </div>
             </div>
