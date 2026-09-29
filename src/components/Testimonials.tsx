@@ -22,11 +22,11 @@ export default function Testimonials() {
               <Settings2 className="w-10 h-10 text-accent/40 mx-auto mb-8" />
 
               <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-8 max-w-3xl mx-auto leading-tight">
-                Built Around Customer Requirements
+                Built for Long-Term Manufacturing Partnerships
               </h2>
 
               <p className="text-xl md:text-2xl text-white/70 leading-relaxed font-body max-w-2xl mx-auto">
-                Manufacturing capabilities structured around product specifications, development requirements and production needs.
+                Our integrated manufacturing capabilities are designed to support OEM requirements from product development through production and assembly.
               </p>
             </div>
           </div>

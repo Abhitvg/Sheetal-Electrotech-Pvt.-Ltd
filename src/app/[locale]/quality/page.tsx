@@ -3,26 +3,32 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, CheckCircle2, ShieldCheck, Zap } from "lucide-react";
+import { CheckCircle2, ShieldCheck, Zap, Factory } from "lucide-react";
 
 const testingProcesses = [
   {
-    id: "visual",
-    title: "Visual & Dimensional Inspection",
+    id: "incoming",
+    title: "Incoming Inspection",
     icon: ShieldCheck,
-    description: "Every component is meticulously inspected for structural integrity, finish, and precise dimensional tolerances before proceeding to assembly.",
+    description: "Rigorous material verification before any component enters the production line, ensuring base materials meet quality thresholds.",
   },
   {
-    id: "functional",
-    title: "Functional Testing",
-    icon: Zap,
-    description: "Finished products undergo comprehensive functional testing to ensure they perform reliably under expected operating conditions.",
+    id: "process",
+    title: "Process Control",
+    icon: Factory,
+    description: "In-line quality checks during injection moulding, SMT, and fabrication to maintain exact tolerances and manufacturing standards.",
   },
   {
-    id: "compliance",
-    title: "Standards Compliance",
+    id: "assembly",
+    title: "Assembly Inspection",
     icon: CheckCircle2,
-    description: "Our quality assurance team verifies that products meet all documented specifications and applicable industry standards prior to dispatch.",
+    description: "Continuous monitoring at assembly stations to verify correct insertion, structural integrity, and proper component fitting.",
+  },
+  {
+    id: "final",
+    title: "Final Testing",
+    icon: Zap,
+    description: "Comprehensive functional, electrical, and visual validation on finished products prior to packaging and dispatch.",
   },
 ];
 
@@ -40,7 +46,7 @@ export default function QualityPage() {
             Quality & Compliance
           </p>
           <h1 className="text-5xl md:text-7xl font-display font-medium mb-8">
-            Engineered for reliability.<br />Tested for reality.
+            Built into every stage of manufacturing.
           </h1>
           <p className="text-steel text-xl max-w-2xl">
             We don't just manufacture; we validate. Our in-house testing and robust inspection processes support compliance with domestic BIS standards and our own internal quality metrics.
@@ -55,7 +61,7 @@ export default function QualityPage() {
           {/* Left: Image/Diagram Display */}
           <div className="lg:w-1/2 relative min-h-[400px] lg:min-h-full bg-mist">
             <Image 
-              src="/images/legacy/inspection.png"
+              src="/images/testing_lab.jpg"
               alt="Quality Assurance Laboratory"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -86,7 +92,7 @@ export default function QualityPage() {
 
           {/* Right: Selection Menu */}
           <div className="lg:w-1/2 p-8 lg:p-16">
-            <h3 className="font-display text-2xl mb-8">In-House Validation Protocols</h3>
+            <h3 className="font-display text-2xl mb-8">Manufacturing Quality Process</h3>
             
             <div className="space-y-4">
               {testingProcesses.map((process) => (
@@ -122,20 +128,32 @@ export default function QualityPage() {
         <div className="container-wide">
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16 border-b border-slate-200 pb-8">
             <div>
-              <h2 className="text-3xl md:text-5xl font-display font-medium mb-4">Quality & Compliance</h2>
-              <p className="text-ink/60">Our manufacturing processes are supported by documented quality and compliance requirements.</p>
+              <h2 className="text-3xl md:text-5xl font-display font-medium mb-4">Certifications</h2>
+              <p className="text-ink/60">Our manufacturing capabilities are supported by industry-recognized quality standards.</p>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-8">
-            <div className="border border-slate-200 p-8 flex flex-col gap-6 bg-white max-w-3xl">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="border border-slate-200 p-8 flex flex-col gap-6 bg-white">
               <div className="w-16 h-16 bg-slate-100 flex items-center justify-center rounded-sm text-ink font-display text-xl font-bold">
-                <ShieldCheck className="w-8 h-8 text-ink/70" />
+                ISO
               </div>
               <div>
-                <h4 className="text-xl font-medium mb-2">Compliance Documentation</h4>
+                <h4 className="text-xl font-medium mb-2">ISO 9001:2015</h4>
                 <p className="text-base text-ink/70 leading-relaxed">
-                  Certification and compliance documentation can be provided upon request for procurement audits.
+                  Certified Quality Management System covering our design, manufacturing and supply operations.
+                </p>
+              </div>
+            </div>
+            
+            <div className="border border-slate-200 p-8 flex flex-col gap-6 bg-white">
+              <div className="w-16 h-16 bg-slate-100 flex items-center justify-center rounded-sm text-ink font-display text-xl font-bold">
+                BIS
+              </div>
+              <div>
+                <h4 className="text-xl font-medium mb-2">BIS Certified</h4>
+                <p className="text-base text-ink/70 leading-relaxed">
+                  Products manufactured in compliance with Bureau of Indian Standards requirements for safety and performance.
                 </p>
               </div>
             </div>

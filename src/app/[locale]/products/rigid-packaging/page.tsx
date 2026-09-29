@@ -78,9 +78,24 @@ export default function RigidPackagingPage() {
         </div>
       </div>
 
+      {/* Manufacturing Capabilities Banner */}
+      <section className="bg-mist text-ink py-12 border-b border-steel/10">
+        <div className="container-wide">
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-6 text-sm md:text-xl font-display font-medium text-center text-ink/70">
+            <span className="text-ink">Injection Moulding</span>
+            <span className="text-accent">→</span>
+            <span className="text-ink">IBM</span>
+            <span className="text-accent">→</span>
+            <span className="text-ink">Blow Moulding</span>
+            <span className="text-accent">→</span>
+            <span className="text-ink">Assembly</span>
+          </div>
+        </div>
+      </section>
+
       {/* Subcategories */}
-      <div className="container-wide py-20 border-b border-steel/10">
-        <div className="mb-12 text-center">
+      <div className="container-wide py-24 border-b border-steel/10">
+        <div className="mb-16 text-center">
           <h2 className="text-3xl md:text-4xl font-display font-medium text-ink">What We Manufacture</h2>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -99,24 +114,6 @@ export default function RigidPackagingPage() {
           ))}
         </div>
       </div>
-
-      {/* Manufacturing Capabilities Banner */}
-      <section className="bg-mist text-ink py-16">
-        <div className="container-wide">
-          <h3 className="font-mono text-xs uppercase tracking-widest text-ink/50 mb-8 text-center">Packaging Manufacturing Process</h3>
-          <div className="flex flex-wrap justify-center items-center gap-4 text-lg md:text-xl font-display font-medium text-center">
-            <span>Injection Moulding</span>
-            <span className="text-accent">→</span>
-            <span>Injection Blow Moulding</span>
-            <span className="text-accent">→</span>
-            <span>Blow Moulding</span>
-            <span className="text-accent">→</span>
-            <span>Assembly & Packing</span>
-            <span className="text-accent">→</span>
-            <span>Quality Control</span>
-          </div>
-        </div>
-      </section>
 
       {/* Why Sheetal */}
       <section className="container-wide py-24 border-b border-steel/10">

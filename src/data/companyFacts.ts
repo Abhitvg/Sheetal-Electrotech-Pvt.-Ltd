@@ -91,7 +91,7 @@ export const companyTimeline = [
   { year: "1999", title: "Founded", body: "Sheetal Electrotech established in Daman with an initial focus on rigid plastic packaging." },
   { year: "2004", title: "LED Manufacturing Begins", body: "Early adoption of LED technology as a manufacturing focus. First OEM contracts signed." },
   { year: "2010", title: "SMT Line Commissioned", body: "First in-house Surface Mount Technology line operational, enabling vertical integration of electronics assembly." },
-  { year: "2014", title: "ISO 9001 Certified", body: "Quality Management System formally certified, unlocking tier-1 OEM partnerships." },
+  { year: "2014", title: "ISO 9001 Certified", body: "Quality Management System formally certified, supporting the company's growing OEM manufacturing capabilities." },
   { year: "2018", title: "Integrated Campus", body: "Completion of the integrated Daman campus with multiple in-house manufacturing operations." },
   { year: "Today", title: "Scaling Forward", body: "Continuing to expand capabilities and onboard new OEM partners." },
 ] as const;

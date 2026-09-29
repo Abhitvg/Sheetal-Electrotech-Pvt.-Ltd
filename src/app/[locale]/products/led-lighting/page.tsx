@@ -7,56 +7,55 @@ import { ArrowRight } from "lucide-react";
 const subCategories = [
   {
     title: "LED Bulbs",
-    description: "Standard and high-power LED bulbs for residential and industrial use.",
+    description: "Energy-efficient LED bulbs from 5W to 50W. Available in B22 & E27 bases for residential and commercial use.",
     href: "/products/led-lighting/bulbs",
     image: "/images/legacy/Photo13.webp"
   },
   {
     title: "LED Battens",
-    description: "Linear LED lighting solutions in various lengths and IP ratings.",
+    description: "Slim-profile linear LED lighting solutions in various lengths and wattages for uniform illumination.",
     href: "/products/led-lighting/battens",
     image: "/images/legacy/10-3.webp"
-  }
-,
+  },
   {
     title: "LED Downlights & Panels",
-    description: "Sleek downlights and ceiling panels.",
+    description: "Precision-engineered recessed and surface-mount downlights and ceiling panels.",
     href: "/products/led-lighting/downlights",
     image: "/images/legacy/Photo13.webp"
   },
   {
     title: "LED Street Lights",
-    description: "Durable and bright street luminaires.",
+    description: "High-power, durable LED street luminaires with IP65 weather-resistant rating for outdoor infrastructure.",
     href: "/products/led-lighting/street-lights",
     image: "/images/legacy/4-3.webp"
   },
   {
     title: "LED Flood Lights",
-    description: "High-power flood lights for outdoors.",
+    description: "High-intensity flood lights for architectural, industrial, and outdoor area illumination.",
     href: "/products/led-lighting/flood-lights",
     image: "/images/legacy/10-3.webp"
   },
   {
     title: "LED Spot Lights",
-    description: "Precision spot lighting.",
+    description: "Directional precision spot lighting for retail, accent, and architectural applications.",
     href: "/products/led-lighting/spot-lights",
     image: "/images/legacy/Photo13.webp"
   },
   {
     title: "Decorative Lighting",
-    description: "Aesthetic LED fixtures.",
+    description: "Aesthetic LED fixtures designed for ambient and decorative interior lighting.",
     href: "/products/led-lighting/decorative-lights",
     image: "/images/legacy/4-3.webp"
   },
   {
     title: "Smart LED Lighting",
-    description: "IoT enabled smart lighting.",
+    description: "WiFi-enabled smart lighting with app control, dimming, and voice assistant support.",
     href: "/products/led-lighting/smart-led",
     image: "/images/legacy/10-3.webp"
   },
   {
     title: "LED Strip Lights",
-    description: "Flexible LED strips.",
+    description: "Flexible, high-density LED strips for cove lighting, under-cabinet, and accent applications.",
     href: "/products/led-lighting/strip-lights",
     image: "/images/legacy/Photo13.webp"
   }

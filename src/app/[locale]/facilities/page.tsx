@@ -61,10 +61,13 @@ export default function FacilitiesIndexPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-transparent" />
                   </div>
                 ) : (
-                  <div className="absolute inset-0 z-0 overflow-hidden">
-                    {/* Technical abstract pattern background */}
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-                    <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 to-slate-800/80" />
+                  <div className="absolute inset-0 z-0 overflow-hidden bg-[#0b192c]">
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+                    {/* Large capability number in background */}
+                    <div className="absolute -right-8 -bottom-8 text-[200px] font-display font-bold text-white/5 leading-none select-none">
+                      {String(i + 1).padStart(2, "0")}
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent to-[#0b192c]/90" />
                   </div>
                 )}
 

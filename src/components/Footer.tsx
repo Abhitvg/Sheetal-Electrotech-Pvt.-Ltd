@@ -33,8 +33,8 @@ export default function Footer() {
             
             {/* Certifications Mini-Strip */}
             <div className="mt-4 flex gap-4">
-              <div className="border border-slate-200 px-3 py-1.5 text-xs font-mono text-ink/70">In-house Testing</div>
-              <div className="border border-slate-200 px-3 py-1.5 text-xs font-mono text-ink/70">Compliance Documented</div>
+              <div className="border border-slate-200 px-3 py-1.5 text-xs font-mono text-ink/70">ISO 9001:2015</div>
+              <div className="border border-slate-200 px-3 py-1.5 text-xs font-mono text-ink/70">BIS Certified</div>
             </div>
           </div>
 
