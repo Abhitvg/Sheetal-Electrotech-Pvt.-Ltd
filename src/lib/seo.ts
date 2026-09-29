@@ -253,11 +253,13 @@ export function localizedMetadata(
       url: localizedUrl(currentLocale, path),
       title,
       description,
+      images: [{ url: "/images/logo.webp", alt: "Sheetal Electrotech" }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: ["/images/logo.webp"],
     },
   };
 }
