@@ -2,11 +2,23 @@ import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { companyFacts } from "@/data/companyFacts";
+import type { Metadata } from "next";
+import { localizedMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "LED Bulb Manufacturer in India | OEM/ODM Services | Sheetal Electrotech",
-  description: "Established LED bulb manufacturer in India offering OEM/ODM services. Complete in-house manufacturing, SMT, and assembly. ISO & BIS certified.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const copy = {
+    en: {
+      title: "LED Bulb Manufacturer in India | OEM/ODM | Sheetal Electrotech",
+      description: "Explore Sheetal Electrotech's LED bulb manufacturing capabilities in India, including in-house moulding, SMT and final assembly."
+    },
+    hi: {
+      title: "भारत में एलईडी बल्ब निर्माता | OEM/ODM | शीतल इलेक्ट्रो-टेक",
+      description: "भारत में शीतल इलेक्ट्रो-टेक की एलईडी बल्ब विनिर्माण क्षमताओं को देखें, जिनमें इन-हाउस मोल्डिंग, SMT और अंतिम असेंबली शामिल हैं।"
+    }
+  };
+  return localizedMetadata(locale, "/led-bulb-manufacturer-india", copy);
+}
 
 export default function LEDBulbManufacturerIndia() {
   return (
