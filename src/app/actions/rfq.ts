@@ -69,6 +69,11 @@ export async function submitRfq(formData: FormData) {
 
     const validatedData = rfqSchema.parse(rawData);
 
+    if (!process.env.DATABASE_URL || !process.env.RESEND_API_KEY) {
+      console.error("RFQ production environment is incomplete");
+      return { success: false, message: "RFQ service is temporarily unavailable." };
+    }
+
     // 4. File Upload (Vercel Blob)
     const file = formData.get("file") as File | null;
     let attachmentUrls: string[] = [];
@@ -126,15 +131,11 @@ export async function submitRfq(formData: FormData) {
 
     const adminLink = "https://sheetalelectrotech.com/admin/rfqs";
     // 6. Send Emails
-    if (!process.env.RESEND_API_KEY) {
-      console.error("RESEND_API_KEY is not configured");
-      return { success: false, message: "RFQ service is temporarily unavailable." };
-    }
-
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     // To Sales
-      await resend.emails.send({
+      const emailResults = await Promise.allSettled([
+        resend.emails.send({
         from: "Sheetal Electrotech RFQ <info@sheetalelectrotech.com>",
         to: process.env.RFQ_SALES_EMAIL || "info@sheetalelectrotech.com",
         subject: `New RFQ — ${validatedData.company} (${validatedData.categories.join(", ")})`,
@@ -155,10 +156,10 @@ Attachments: ${attachmentUrls.join(", ")}
 Submitted: ${new Date().toISOString()}
 
 View in admin: ${adminLink}`,
-      });
+      }),
 
       // To Customer
-      await resend.emails.send({
+      resend.emails.send({
         from: "Sheetal Electrotech <info@sheetalelectrotech.com>",
         to: validatedData.email,
         subject: "We've received your RFQ — Sheetal Electrotech",
@@ -174,7 +175,16 @@ Here's what happens next:
 If you have drawings or specs you didn't attach, just reply to this email and we'll add them to your request.
 
 — Sheetal Electrotech`,
-    });
+      }),
+      ]);
+
+      if (emailResults.some((result) => result.status === "rejected")) {
+        console.error("RFQ email delivery failed:", emailResults);
+        return {
+          success: true,
+          message: "RFQ received and saved. We will contact you using the details provided.",
+        };
+      }
 
     return { success: true, message: "RFQ submitted successfully." };
 
