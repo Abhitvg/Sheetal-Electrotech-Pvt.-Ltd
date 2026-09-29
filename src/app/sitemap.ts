@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { insights } from '@/data/insights'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://sheetalelectrotech.com';
@@ -48,8 +49,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
+  const allRoutes = [...routes, ...insights.map((post) => `/insights/${post.slug}`)];
 
-  routes.forEach((route) => {
+  allRoutes.forEach((route) => {
     locales.forEach((locale) => {
       sitemapEntries.push({
         url: `${baseUrl}/${locale}${route}`,
