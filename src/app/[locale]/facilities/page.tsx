@@ -4,13 +4,12 @@ import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 import { facilities } from "@/data/facilities";
 import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
+import { getPageCopy, localizedMetadata } from "@/lib/seo";
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
-  const t = await getTranslations({ locale, namespace: 'Metadata.facilities' });
-  return {
-    title: t('title'),
-    description: t('description'),
-  };
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return localizedMetadata(locale, "/facilities", getPageCopy("facilities"));
 }
 export default function FacilitiesIndexPage() {
   const t = useTranslations("FacilitiesPage");
