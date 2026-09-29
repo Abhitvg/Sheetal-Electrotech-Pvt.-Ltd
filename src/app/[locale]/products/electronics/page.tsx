@@ -1,6 +1,13 @@
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
+import { getPageCopy, localizedMetadata } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return localizedMetadata(locale, "/products/electronics", getPageCopy("electronics"));
+}
 
 const subCategories = [
   {
