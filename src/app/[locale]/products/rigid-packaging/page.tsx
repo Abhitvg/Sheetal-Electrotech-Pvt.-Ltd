@@ -10,24 +10,28 @@ const subCategories = [
     title: "Plastic Bottles",
     description: "Blow-moulded and injection blow-moulded bottles.",
     href: "/products/rigid-packaging/bottles",
+    image: "/images/products_packaging.jpg",
     icon: Box
   },
   {
     title: "Jars & Containers",
     description: "Wide-mouth jars and rigid containers for diverse applications.",
     href: "/products/rigid-packaging/jars",
+    image: "/images/jar_product.jpg",
     icon: Package
   },
   {
     title: "Custom Packaging",
     description: "Custom-moulded packaging designed around specific product requirements.",
     href: "/products/rigid-packaging/custom",
+    image: "/images/packaging_factory.jpg",
     icon: Layers
   },
   {
     title: "Injection-Moulded Components",
     description: "Precision mechanical plastic parts, housings, and enclosures.",
     href: "/products/rigid-packaging/components",
+    image: "/images/moulding_factory.jpg",
     icon: Hexagon
   }
 ];
@@ -38,7 +42,7 @@ export default function RigidPackagingPage() {
       {/* Hero */}
       <div className="relative h-[65vh] min-h-[500px] flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/facilities/hero-company.png" alt="Sheetal Electrotech Factory" fill sizes="100vw" className="object-cover object-center" priority />
+          <Image src="/images/packaging_factory.jpg" alt="Rigid plastic packaging manufacturing" fill sizes="100vw" className="object-cover object-center" priority />
           <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/20" />
         </div>
         <div className="relative z-10 container-wide text-white pt-20">
@@ -101,8 +105,16 @@ export default function RigidPackagingPage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {subCategories.map((cat) => (
             <Link key={cat.title} href={cat.href} className="group block bg-white border border-steel/15 hover:border-accent/30 transition-all overflow-hidden flex flex-col h-full">
-              <div className="h-48 relative bg-mist p-6 flex flex-shrink-0 items-center justify-center">
-                <cat.icon className="w-16 h-16 text-steel/50 group-hover:text-accent transition-colors duration-500 group-hover:scale-110 transform" strokeWidth={1} />
+              <div className="h-48 relative bg-mist flex-shrink-0 overflow-hidden">
+                <Image
+                  src={cat.image}
+                  alt={cat.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
+                <cat.icon className="absolute bottom-4 right-4 w-8 h-8 text-white/90" strokeWidth={1.5} />
               </div>
               <div className="p-6 flex flex-col flex-grow text-center">
                 <h3 className="text-lg font-display font-bold text-ink mb-3 group-hover:text-accent transition-colors">
