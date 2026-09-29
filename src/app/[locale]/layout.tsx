@@ -8,6 +8,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { EngineeringModeProvider } from "@/components/EngineeringModeProvider";
+import OrganizationSchema from "@/components/OrganizationSchema";
 import { getPageCopy, localizedMetadata } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -58,6 +59,7 @@ export default async function RootLayout({
       <body className="flex flex-col min-h-screen bg-paper text-ink font-body">
         <NextIntlClientProvider messages={messages}>
           <EngineeringModeProvider>
+            <OrganizationSchema />
             <Navigation />
             <main className="flex-grow">{children}</main>
             <Footer />
