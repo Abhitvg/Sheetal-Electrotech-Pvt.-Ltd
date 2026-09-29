@@ -16,14 +16,33 @@ const authMiddleware = withAuth(
   }
 );
 
+const legacyRoutes: Record<string, string> = {
+  '/': '/en',
+  '/company': '/en/company',
+  '/products': '/en/products',
+  '/facilities': '/en/facilities',
+  '/quality': '/en/quality',
+  '/careers': '/en/careers',
+  '/insights': '/en/insights',
+  '/contact': '/en/contact',
+  '/rfq': '/en/rfq',
+  '/gallery': '/en/gallery',
+  '/privacy': '/en/privacy',
+  '/terms': '/en/terms',
+};
+
 export default function proxy(req: NextRequest) {
-  // If the request is for the admin section, run auth middleware first
-  // It will fallback to intlMiddleware on success
+  const legacyTarget = legacyRoutes[req.nextUrl.pathname];
+
+  if (legacyTarget) {
+    return Response.redirect(new URL(legacyTarget, req.url), 308);
+  }
+
+  // Admin remains protected while locale routes continue through next-intl.
   if (req.nextUrl.pathname.startsWith('/admin') || req.nextUrl.pathname.match(/^\/(en|hi)\/admin/)) {
     return (authMiddleware as any)(req);
   }
 
-  // Otherwise just use intl middleware
   return intlMiddleware(req);
 }
 
