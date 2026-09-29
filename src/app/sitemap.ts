@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/facilities/tool-room',
     '/quality',
     '/careers',
-    '/blog',
+    '/insights',
     '/contact',
     '/rfq',
     '/privacy',

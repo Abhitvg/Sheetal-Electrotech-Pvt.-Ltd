@@ -27,8 +27,8 @@ const reasons = [
   },
   {
     icon: DollarSign,
-    title: "Cost Engineering",
-    description: "Integrated processes designed to improve manufacturing efficiency and reduce dependence on multiple external vendors.",
+    title: "Manufacturing Efficiency",
+    description: "Integrated processes designed to support efficient manufacturing and coordinated production.",
   },
   {
     icon: Users,

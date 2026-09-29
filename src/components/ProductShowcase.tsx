@@ -16,7 +16,7 @@ export default function ProductShowcase() {
   const products = [
     {
       category: "LED Bulbs",
-      description: "Energy-efficient LED bulbs from 5W to 50W. B22 & E27 bases.",
+      description: "LED bulbs available across multiple formats and applications.",
       image: "/images/led-bulb.png",
       href: "/products/led-lighting",
     },
@@ -28,7 +28,7 @@ export default function ProductShowcase() {
     },
     {
       category: "Street Lights",
-      description: "High-power LED street lights with IP65 rating for outdoor use.",
+      description: "LED street lighting solutions for outdoor applications.",
       image: "/images/street_light.png",
       href: "/products/led-lighting",
     },
@@ -40,13 +40,13 @@ export default function ProductShowcase() {
     },
     {
       category: "Smart Bulbs",
-      description: "WiFi-enabled smart lighting with app control and voice support.",
+      description: "Smart LED lighting products for connected applications.",
       image: "/images/smart-bulb.png",
       href: "/products/led-lighting",
     },
     {
       category: t("packaging"),
-      description: "Custom injection-moulded packaging for FMCG and pharma.",
+      description: "Custom rigid plastic packaging developed around customer requirements.",
       image: "/images/jar_product.jpg",
       href: "/products/rigid-packaging",
     },

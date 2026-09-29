@@ -31,7 +31,7 @@ export default function Navigation() {
     { name: t("products"), href: "/products", hasMegaMenu: true },
     { name: t("quality"), href: "/quality", hasMegaMenu: false },
     { name: t("company"), href: "/company", hasMegaMenu: false },
-    { name: t("blog"), href: "/blog", hasMegaMenu: false },
+    { name: t("insights"), href: "/insights", hasMegaMenu: false },
     { name: t("contact"), href: "/contact", hasMegaMenu: false },
   ];
 

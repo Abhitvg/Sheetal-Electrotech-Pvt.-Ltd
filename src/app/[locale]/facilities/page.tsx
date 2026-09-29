@@ -57,8 +57,8 @@ export default function FacilitiesIndexPage() {
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    {/* Improved gradient overlay for readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[rgba(7,20,40,0.88)] via-[rgba(7,20,40,0.35)] to-[rgba(7,20,40,0.15)]" />
+                    {/* Improved gradient overlay for readability - stronger contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-transparent" />
                   </div>
                 ) : (
                   <div className="absolute inset-0 z-0 overflow-hidden">

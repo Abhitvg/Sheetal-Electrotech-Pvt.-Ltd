@@ -84,10 +84,12 @@ export default function Footer() {
                 <p className="font-medium text-ink mb-1">Daman (Manufacturing Hub)</p>
                 <p className="text-ink/60">Survey No. 168/28 & 168/29, Opp. Givaudan India Pvt. Ltd<br/>Dhabel, Daman and Diu – 396210</p>
               </div>
+              {/*
               <div>
                 <p className="font-medium text-ink mb-1">Mumbai (Corporate)</p>
                 <p className="text-ink/60">Goregaon East, Mumbai 400063, India</p>
               </div>
+              */}
               <div className="pt-4 space-y-2">
                 <a href="mailto:info@sheetalelectrotech.com" className="flex items-center gap-1 hover:text-accent transition-colors">
                   info@sheetalelectrotech.com <ArrowUpRight className="w-3 h-3" />

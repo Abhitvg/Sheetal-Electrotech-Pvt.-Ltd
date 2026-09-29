@@ -36,7 +36,7 @@ const capabilities = [
   {
     step: "04",
     title: "Testing Lab",
-    subtitle: "BIS & ISO certified",
+    subtitle: "Quality & Compliance",
     metric: "Quality Control & Testing",
     image: "/images/testing_lab.jpg",
     href: "/quality",
@@ -71,7 +71,7 @@ export default function CapabilitiesSection() {
             Vertically Integrated
           </p>
           <h2 className="text-4xl md:text-6xl font-display font-bold text-ink mb-6">
-            End-to-End Manufacturing
+            Integrated Manufacturing
           </h2>
           <p className="text-steel text-lg max-w-2xl">
             Integrated manufacturing capabilities spanning moulding, electronics, assembly, testing and tooling
