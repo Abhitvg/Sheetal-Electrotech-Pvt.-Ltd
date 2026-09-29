@@ -4,9 +4,12 @@ import { insights } from "@/data/insights";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { localizedMetadata } from "@/lib/seo";
+import { routing } from "@/i18n/routing";
 
 export function generateStaticParams() {
-  return insights.map((post) => ({ slug: post.slug }));
+  return routing.locales.flatMap((locale) =>
+    insights.map((post) => ({ locale, slug: post.slug }))
+  );
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
@@ -19,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   });
 }
 
-export default async function InsightPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function InsightPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { slug } = await params;
   const post = insights.find((p) => p.slug === slug);
 
