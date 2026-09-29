@@ -11,7 +11,7 @@ npm run dev
 
 ## Production RFQ configuration
 
-The RFQ workflow uses Neon Postgres for submissions, Vercel Blob for optional drawings/CAD attachments, and Resend for email notifications.
+The RFQ workflow uses Neon Postgres for submissions, private Vercel Blob storage for optional drawings/CAD attachments, and Resend for email notifications. Admin attachment access is authenticated.
 
 Set these variables in the deployment environment:
 
@@ -21,6 +21,9 @@ RESEND_API_KEY=
 BLOB_READ_WRITE_TOKEN=
 RFQ_SALES_EMAIL=info@sheetalelectrotech.com
 RFQ_FROM_EMAIL=info@sheetalelectrotech.com
+ADMIN_USERNAME=
+ADMIN_PASSWORD=
+NEXTAUTH_SECRET=
 ```
 
 Run `database/schema.sql` once against the Neon database before enabling the RFQ pipeline.
