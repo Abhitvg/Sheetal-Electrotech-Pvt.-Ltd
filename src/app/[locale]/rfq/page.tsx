@@ -102,6 +102,50 @@ function RFQFormContent() {
             <input type="hidden" name="utm_medium" value={utmMedium} />
             <input type="hidden" name="utm_campaign" value={utmCampaign} />
 
+            <input type="hidden" name="website" value="" />
+
+            <fieldset className="space-y-4">
+              <legend className="block text-sm font-medium text-ink uppercase tracking-wider">
+                Manufacturing Requirement <span className="text-accent">*</span>
+              </legend>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {["LED Lighting", "Electronics", "Rigid Plastic Packaging", "Custom OEM Manufacturing"].map((category) => (
+                  <label key={category} className="flex items-center gap-3 border border-steel/20 bg-paper px-4 py-3 cursor-pointer hover:border-accent/50">
+                    <input type="checkbox" name="categories" value={category} className="accent-accent" />
+                    <span className="text-sm text-ink">{category}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-3">
+                <label className="block text-sm font-medium text-ink uppercase tracking-wider">
+                  Monthly Volume <span className="text-accent">*</span>
+                </label>
+                <select required name="volume" className="w-full bg-paper border border-steel/20 px-4 py-4 text-ink focus:border-accent focus:ring-1 focus:ring-accent outline-none">
+                  <option value="">Select volume</option>
+                  <option value="Below 10,000 units">Below 10,000 units</option>
+                  <option value="10,000–50,000 units">10,000–50,000 units</option>
+                  <option value="50,000–100,000 units">50,000–100,000 units</option>
+                  <option value="100,000+ units">100,000+ units</option>
+                </select>
+              </div>
+
+              <div className="space-y-3">
+                <label className="block text-sm font-medium text-ink uppercase tracking-wider">
+                  Target Timeline <span className="text-accent">*</span>
+                </label>
+                <select required name="timeline" className="w-full bg-paper border border-steel/20 px-4 py-4 text-ink focus:border-accent focus:ring-1 focus:ring-accent outline-none">
+                  <option value="">Select timeline</option>
+                  <option value="Within 1 month">Within 1 month</option>
+                  <option value="1–3 months">1–3 months</option>
+                  <option value="3–6 months">3–6 months</option>
+                  <option value="6+ months">6+ months</option>
+                </select>
+              </div>
+            </div>
+
             {/* Error Message */}
             {error && (
               <div className="bg-red-50 text-red-700 p-4 rounded-sm border border-red-200">
