@@ -1,11 +1,9 @@
-import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
+import { getPageCopy, localizedMetadata } from "@/lib/seo";
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
-  const t = await getTranslations({ locale, namespace: 'Metadata.gallery' });
-  return {
-    title: t('title'),
-    description: t('description'),
-  };
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return localizedMetadata(locale, "/gallery", getPageCopy("gallery"));
 }
 
 export default function GalleryLayout({ children }: { children: React.ReactNode }) {
