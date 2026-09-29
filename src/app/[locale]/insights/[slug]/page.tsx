@@ -9,14 +9,14 @@ export function generateStaticParams() {
   return insights.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
+  const { locale, slug } = await params;
   const post = insights.find((p) => p.slug === slug);
   if (!post) return { title: "Insight Not Found" };
-  return {
-    title: `${post.title} | Sheetal Electrotech Insights`,
-    description: post.excerpt,
-  };
+  return localizedMetadata(locale, `/insights/${slug}`, {
+    en: { title: `${post.title} | Sheetal Electrotech Insights`, description: post.excerpt },
+    hi: { title: `${post.title} | शीतल इलेक्ट्रो-टेक अंतर्दृष्टि`, description: post.excerpt },
+  });
 }
 
 export default async function InsightPage({ params }: { params: Promise<{ slug: string }> }) {
