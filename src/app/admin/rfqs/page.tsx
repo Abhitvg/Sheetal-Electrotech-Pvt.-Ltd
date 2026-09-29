@@ -18,7 +18,7 @@ export default async function AdminRfqPage() {
       rfqs = await sql`
         SELECT id, created_at, status, product_categories, monthly_volume,
                target_delivery, additional_notes, full_name, company,
-               work_email, phone, attachment_urls, utm_source, internal_notes
+               work_email, phone, attachment_urls, attachment_paths, utm_source, internal_notes
         FROM rfq_submissions
         ORDER BY created_at DESC
       `;
