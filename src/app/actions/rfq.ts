@@ -135,7 +135,7 @@ export async function submitRfq(formData: FormData) {
 
     // To Sales
       await resend.emails.send({
-        from: "RFQ System <rfq@sheetalelectrotech.com>",
+        from: "Sheetal Electrotech RFQ <info@sheetalelectrotech.com>",
         to: process.env.RFQ_SALES_EMAIL || "info@sheetalelectrotech.com",
         subject: `New RFQ — ${validatedData.company} (${validatedData.categories.join(", ")})`,
         text: `New RFQ submitted on the website.
@@ -159,7 +159,7 @@ View in admin: ${adminLink}`,
 
       // To Customer
       await resend.emails.send({
-        from: "Sheetal Electrotech <rfq@sheetalelectrotech.com>",
+        from: "Sheetal Electrotech <info@sheetalelectrotech.com>",
         to: validatedData.email,
         subject: "We've received your RFQ — Sheetal Electrotech",
         text: `Hi ${validatedData.fullName},
