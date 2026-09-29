@@ -2,6 +2,8 @@ import { Link } from "@/i18n/routing";
 import { ArrowLeft, ArrowRight, Package } from "lucide-react";
 import { insights } from "@/data/insights";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { localizedMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return insights.map((post) => ({ slug: post.slug }));
