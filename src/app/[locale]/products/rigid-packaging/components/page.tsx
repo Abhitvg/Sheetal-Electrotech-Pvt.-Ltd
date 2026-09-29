@@ -1,6 +1,7 @@
 import ProductSubCategoryTemplate from "@/components/ProductSubCategoryTemplate";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import { localizedMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
