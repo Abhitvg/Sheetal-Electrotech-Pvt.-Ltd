@@ -1,10 +1,12 @@
 import ProductSubCategoryTemplate from "@/components/ProductSubCategoryTemplate";
 import { getTranslations } from "next-intl/server";
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import { localizedMetadata } from "@/lib/seo";
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Products.extension-boards' });
-  return { title: `${t('title')} | Sheetal Electrotech` };
+  return localizedMetadata(locale, "/products/electronics/extension-boards", { en: { title: t("title"), description: t("description") }, hi: { title: t("title"), description: t("description") } });
 }
 
 export default async function Page({ params: { locale } }: { params: { locale: string } }) {
