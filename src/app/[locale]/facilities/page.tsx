@@ -49,29 +49,29 @@ export default function FacilitiesIndexPage() {
                   alt={facility.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-black/10" />
               </div>
 
               {/* Content */}
-              <div className="relative z-10 p-10 flex flex-col justify-end h-full">
-                <p className="font-mono text-accent text-xs uppercase tracking-widest mb-4">
+              <div className="relative z-10 p-10 flex flex-col justify-end h-full text-white">
+                <p className="font-mono text-white/70 text-xs uppercase tracking-widest mb-4">
                   {String(i + 1).padStart(2, "0")}
                 </p>
                 <h3 className="text-3xl font-display font-medium mb-3 group-hover:text-accent transition-colors">
                   {facility.title}
                 </h3>
-                <p className="text-ink/60 text-sm mb-8 max-w-sm leading-relaxed">
+                <p className="text-white/80 text-sm mb-8 max-w-sm leading-relaxed">
                   {facility.tagline}
                 </p>
 
                 {/* Spec mini-strip */}
-                <div className="flex gap-8 border-t border-slate-200 pt-6 mb-6">
+                <div className="flex gap-8 border-t border-white/20 pt-6 mb-6">
                   {facility.specs.slice(0, 2).map((spec) => (
                     <div key={spec.label}>
-                      <p className="text-ink font-display text-xl font-medium">{spec.value}</p>
-                      <p className="text-ink/40 text-xs font-mono uppercase">{spec.label}</p>
+                      <p className="text-white font-display text-xl font-medium">{spec.value}</p>
+                      <p className="text-white/50 text-xs font-mono uppercase">{spec.label}</p>
                     </div>
                   ))}
                 </div>
@@ -83,6 +83,32 @@ export default function FacilitiesIndexPage() {
               </div>
             </Link>
           ))}
+        </div>
+      </div>
+
+      {/* Built Around Manufacturing Capability */}
+      <div className="bg-ink text-white py-24 text-center">
+        <div className="container-wide max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-display font-medium mb-6">
+            Built Around Manufacturing Capability
+          </h2>
+          <p className="text-white/70 text-lg mb-10 leading-relaxed">
+            From moulding and extrusion to electronics assembly, R&D and tooling, our facility structure supports multiple stages of product development and manufacturing.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              href="/products"
+              className="bg-white text-ink px-8 py-4 font-medium hover:bg-accent hover:text-white transition-colors"
+            >
+              Explore Products
+            </Link>
+            <Link
+              href="/contact"
+              className="bg-transparent border border-white/30 text-white px-8 py-4 font-medium hover:bg-white/10 transition-colors"
+            >
+              Request a Quote
+            </Link>
+          </div>
         </div>
       </div>
 

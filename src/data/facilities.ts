@@ -40,7 +40,7 @@ export const facilities: Facility[] = [
   {
     slug: "manual-insertion",
     title: "Manual Insertion",
-    tagline: "Skilled hand assembly for complex components.",
+    tagline: "Manual component insertion and assembly operations.",
     description: "Manual insertion is ideal for low-volume or custom products, while automatic insertion is more efficient for high-volume production runs.",
     image: "/images/facilities/manual-insertion.webp",
     specs: [],
@@ -49,7 +49,7 @@ export const facilities: Facility[] = [
   {
     slug: "research-development",
     title: "R&D",
-    tagline: "Innovating the future of manufacturing.",
+    tagline: "Product development, prototyping and manufacturing process support.",
     description: "R&D efforts in LED lighting and plastic materials are focused on creating sustainable, energy-efficient, and cost-effective lighting solutions that can meet the growing demand for eco-friendly products.",
     image: "/images/facilities/research-development.webp",
     specs: [],
@@ -76,7 +76,7 @@ export const facilities: Facility[] = [
   {
     slug: "assembly-packing",
     title: "Assembly & Packing",
-    tagline: "The final mile.",
+    tagline: "Product assembly, inspection and packing operations.",
     description: "The assembly and packing line is a key component of modern manufacturing, allowing for the rapid production and delivery of high-quality goods to customers around the world.",
     image: "/images/facilities/assembly-packing.webp",
     specs: [],
@@ -85,7 +85,7 @@ export const facilities: Facility[] = [
   {
     slug: "tool-room",
     title: "Tool Room",
-    tagline: "In-house precision mould manufacturing.",
+    tagline: "Tooling and mould support for in-house manufacturing and product development.",
     description: "Our fully equipped tool room designs and manufactures moulds in-house using CNC machining, EDM, and precision grinding, supporting in-house tooling and faster product development.",
     image: "/images/facilities/tool-room.webp",
     specs: [],
