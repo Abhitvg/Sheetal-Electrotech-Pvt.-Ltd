@@ -242,6 +242,140 @@
       "p2_s2_v": "इंजेक्शन / ब्लो मोल्डिंग",
       "p2_s3_l": "अनुप्रयोग",
       "p2_s3_v": "OEM विशिष्ट"
-    }
+    },
+    "downlights": {
+      "title": "LED Downlights & Panels (HI)",
+      "description": "Sleek downlights and ceiling panels. (HI)",
+      "p1_name": "उत्पाद 1",
+      "p1_range": "Various",
+      "p1_s1_l": "सामग्री",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "आयाम",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "अनुप्रयोग",
+      "p1_s3_v": "Various"
+    },
+    "street-lights": {
+      "title": "LED Street Lights (HI)",
+      "description": "Durable and bright street luminaires. (HI)",
+      "p1_name": "उत्पाद 1",
+      "p1_range": "Various",
+      "p1_s1_l": "सामग्री",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "आयाम",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "अनुप्रयोग",
+      "p1_s3_v": "Various"
+    },
+    "flood-lights": {
+      "title": "LED Flood Lights (HI)",
+      "description": "High-power flood lights for outdoors. (HI)",
+      "p1_name": "उत्पाद 1",
+      "p1_range": "Various",
+      "p1_s1_l": "सामग्री",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "आयाम",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "अनुप्रयोग",
+      "p1_s3_v": "Various"
+    },
+    "spot-lights": {
+      "title": "LED Spot Lights (HI)",
+      "description": "Precision spot lighting. (HI)",
+      "p1_name": "उत्पाद 1",
+      "p1_range": "Various",
+      "p1_s1_l": "सामग्री",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "आयाम",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "अनुप्रयोग",
+      "p1_s3_v": "Various"
+    },
+    "decorative-lights": {
+      "title": "Decorative Lighting (HI)",
+      "description": "Aesthetic LED fixtures. (HI)",
+      "p1_name": "उत्पाद 1",
+      "p1_range": "Various",
+      "p1_s1_l": "सामग्री",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "आयाम",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "अनुप्रयोग",
+      "p1_s3_v": "Various"
+    },
+    "smart-led": {
+      "title": "Smart LED Lighting (HI)",
+      "description": "IoT enabled smart lighting. (HI)",
+      "p1_name": "उत्पाद 1",
+      "p1_range": "Various",
+      "p1_s1_l": "सामग्री",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "आयाम",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "अनुप्रयोग",
+      "p1_s3_v": "Various"
+    },
+    "strip-lights": {
+      "title": "LED Strip Lights (HI)",
+      "description": "Flexible LED strips. (HI)",
+      "p1_name": "उत्पाद 1",
+      "p1_range": "Various",
+      "p1_s1_l": "सामग्री",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "आयाम",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "अनुप्रयोग",
+      "p1_s3_v": "Various"
+    },
+    "containers": {
+      "title": "Containers (HI)",
+      "description": "Durable storage containers. (HI)",
+      "p1_name": "उत्पाद 1",
+      "p1_range": "Various",
+      "p1_s1_l": "सामग्री",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "आयाम",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "अनुप्रयोग",
+      "p1_s3_v": "Various"
+    },
+    "custom": {
+      "title": "Custom Packaging (HI)",
+      "description": "Tailored packaging designs. (HI)",
+      "p1_name": "उत्पाद 1",
+      "p1_range": "Various",
+      "p1_s1_l": "सामग्री",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "आयाम",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "अनुप्रयोग",
+      "p1_s3_v": "Various"
+    },
+    "components": {
+      "title": "Injection-Moulded Components (HI)",
+      "description": "High-precision components. (HI)",
+      "p1_name": "उत्पाद 1",
+      "p1_range": "Various",
+      "p1_s1_l": "सामग्री",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "आयाम",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "अनुप्रयोग",
+      "p1_s3_v": "Various"
+    },
+    "extension-boards": {
+      "title": "Extension Boards (HI)",
+      "description": "Safe and durable power extensions. (HI)",
+      "p1_name": "उत्पाद 1",
+      "p1_range": "Various",
+      "p1_s1_l": "सामग्री",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "आयाम",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "अनुप्रयोग",
+      "p1_s3_v": "Various"
+    },
+    "electronics": "इलेक्ट्रॉनिक्स",
+    "electronicsDesc": "इन-हाउस निर्मित विश्वसनीय इलेक्ट्रॉनिक उत्पाद।"
   }
 }

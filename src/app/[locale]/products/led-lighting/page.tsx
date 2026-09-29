@@ -17,6 +17,49 @@ const subCategories = [
     href: "/products/led-lighting/battens",
     image: "/images/legacy/10-3.webp"
   }
+,
+  {
+    title: "LED Downlights & Panels",
+    description: "Sleek downlights and ceiling panels.",
+    href: "/products/led-lighting/downlights",
+    image: "/images/legacy/Photo13.webp"
+  },
+  {
+    title: "LED Street Lights",
+    description: "Durable and bright street luminaires.",
+    href: "/products/led-lighting/street-lights",
+    image: "/images/legacy/4-3.webp"
+  },
+  {
+    title: "LED Flood Lights",
+    description: "High-power flood lights for outdoors.",
+    href: "/products/led-lighting/flood-lights",
+    image: "/images/legacy/10-3.webp"
+  },
+  {
+    title: "LED Spot Lights",
+    description: "Precision spot lighting.",
+    href: "/products/led-lighting/spot-lights",
+    image: "/images/legacy/Photo13.webp"
+  },
+  {
+    title: "Decorative Lighting",
+    description: "Aesthetic LED fixtures.",
+    href: "/products/led-lighting/decorative-lights",
+    image: "/images/legacy/4-3.webp"
+  },
+  {
+    title: "Smart LED Lighting",
+    description: "IoT enabled smart lighting.",
+    href: "/products/led-lighting/smart-led",
+    image: "/images/legacy/10-3.webp"
+  },
+  {
+    title: "LED Strip Lights",
+    description: "Flexible LED strips.",
+    href: "/products/led-lighting/strip-lights",
+    image: "/images/legacy/Photo13.webp"
+  }
 ];
 
 export default function LEDLightingPage() {

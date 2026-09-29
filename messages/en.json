@@ -241,6 +241,140 @@
       "p2_s2_v": "Injection / Blow Moulding",
       "p2_s3_l": "Applications",
       "p2_s3_v": "OEM Specific"
-    }
+    },
+    "downlights": {
+      "title": "LED Downlights & Panels",
+      "description": "Sleek downlights and ceiling panels.",
+      "p1_name": "Product 1",
+      "p1_range": "Various",
+      "p1_s1_l": "Material",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "Dimensions",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "Applications",
+      "p1_s3_v": "Various"
+    },
+    "street-lights": {
+      "title": "LED Street Lights",
+      "description": "Durable and bright street luminaires.",
+      "p1_name": "Product 1",
+      "p1_range": "Various",
+      "p1_s1_l": "Material",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "Dimensions",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "Applications",
+      "p1_s3_v": "Various"
+    },
+    "flood-lights": {
+      "title": "LED Flood Lights",
+      "description": "High-power flood lights for outdoors.",
+      "p1_name": "Product 1",
+      "p1_range": "Various",
+      "p1_s1_l": "Material",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "Dimensions",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "Applications",
+      "p1_s3_v": "Various"
+    },
+    "spot-lights": {
+      "title": "LED Spot Lights",
+      "description": "Precision spot lighting.",
+      "p1_name": "Product 1",
+      "p1_range": "Various",
+      "p1_s1_l": "Material",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "Dimensions",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "Applications",
+      "p1_s3_v": "Various"
+    },
+    "decorative-lights": {
+      "title": "Decorative Lighting",
+      "description": "Aesthetic LED fixtures.",
+      "p1_name": "Product 1",
+      "p1_range": "Various",
+      "p1_s1_l": "Material",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "Dimensions",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "Applications",
+      "p1_s3_v": "Various"
+    },
+    "smart-led": {
+      "title": "Smart LED Lighting",
+      "description": "IoT enabled smart lighting.",
+      "p1_name": "Product 1",
+      "p1_range": "Various",
+      "p1_s1_l": "Material",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "Dimensions",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "Applications",
+      "p1_s3_v": "Various"
+    },
+    "strip-lights": {
+      "title": "LED Strip Lights",
+      "description": "Flexible LED strips.",
+      "p1_name": "Product 1",
+      "p1_range": "Various",
+      "p1_s1_l": "Material",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "Dimensions",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "Applications",
+      "p1_s3_v": "Various"
+    },
+    "containers": {
+      "title": "Containers",
+      "description": "Durable storage containers.",
+      "p1_name": "Product 1",
+      "p1_range": "Various",
+      "p1_s1_l": "Material",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "Dimensions",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "Applications",
+      "p1_s3_v": "Various"
+    },
+    "custom": {
+      "title": "Custom Packaging",
+      "description": "Tailored packaging designs.",
+      "p1_name": "Product 1",
+      "p1_range": "Various",
+      "p1_s1_l": "Material",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "Dimensions",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "Applications",
+      "p1_s3_v": "Various"
+    },
+    "components": {
+      "title": "Injection-Moulded Components",
+      "description": "High-precision components.",
+      "p1_name": "Product 1",
+      "p1_range": "Various",
+      "p1_s1_l": "Material",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "Dimensions",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "Applications",
+      "p1_s3_v": "Various"
+    },
+    "extension-boards": {
+      "title": "Extension Boards",
+      "description": "Safe and durable power extensions.",
+      "p1_name": "Product 1",
+      "p1_range": "Various",
+      "p1_s1_l": "Material",
+      "p1_s1_v": "Standard",
+      "p1_s2_l": "Dimensions",
+      "p1_s2_v": "Standard",
+      "p1_s3_l": "Applications",
+      "p1_s3_v": "Various"
+    },
+    "electronics": "Electronics & Accessories",
+    "electronicsDesc": "Reliable electronic products manufactured in-house."
   }
 }

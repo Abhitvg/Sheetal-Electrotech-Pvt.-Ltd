@@ -1,73 +1,38 @@
-"use client";
-
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 
 const subCategories = [
   {
-    title: "Plastic Bottles",
-    description: "Blow-moulded and injection-stretch blow-moulded bottles.",
-    href: "/products/rigid-packaging/bottles",
-    image: "/images/legacy/Photo7.webp"
-  },
-  {
-    title: "Jars & Containers",
-    description: "Wide-mouth jars and custom containers for cosmetics and food.",
-    href: "/products/rigid-packaging/jars",
-    image: "/images/legacy/Photo8.webp"
-  }
-,
-  {
-    title: "Containers",
-    description: "Durable storage containers.",
-    href: "/products/rigid-packaging/containers",
+    title: "Extension Boards",
+    description: "Safe and durable power extensions.",
+    href: "/products/electronics/extension-boards",
     image: "/images/legacy/4-3.webp"
-  },
-  {
-    title: "Custom Packaging",
-    description: "Tailored packaging designs.",
-    href: "/products/rigid-packaging/custom",
-    image: "/images/legacy/10-3.webp"
-  },
-  {
-    title: "Injection-Moulded Components",
-    description: "High-precision components.",
-    href: "/products/rigid-packaging/components",
-    image: "/images/legacy/Photo13.webp"
   }
 ];
 
-export default function RigidPackagingPage() {
+export default function ElectronicsPage() {
   return (
     <div className="min-h-screen bg-paper pb-24">
-      {/* Header */}
       <div className="bg-mist text-ink pt-32 pb-16 border-b border-steel/10">
         <div className="container-wide">
           <Link href="/products" className="text-steel hover:text-accent text-sm font-mono uppercase tracking-widest mb-4 inline-block">
             ← Back to Products
           </Link>
           <h1 className="text-5xl md:text-7xl font-display font-medium mb-6">
-            Rigid Plastic Packaging
+            Electronics & Accessories
           </h1>
           <p className="text-steel text-xl max-w-2xl">
-            Precision-moulded rigid plastic containers manufactured in ISO-certified cleanroom conditions for the chemical, pharma, and FMCG sectors.
+            Reliable electronic products manufactured in-house.
           </p>
         </div>
       </div>
-
-      {/* Subcategories */}
       <div className="container-wide py-16">
         <div className="grid md:grid-cols-2 gap-8">
           {subCategories.map((cat) => (
             <Link key={cat.title} href={cat.href} className="group block bg-white border border-steel/15 hover:border-accent/30 transition-all overflow-hidden">
               <div className="h-64 relative bg-mist p-8 flex items-center justify-center">
-                <Image
-                  src={cat.image}
-                  alt={cat.title}
-                  fill
-                  className="object-contain p-8 group-hover:scale-105 transition-transform duration-500"
-                />
+                <Image src={cat.image} alt={cat.title} fill className="object-contain p-8 group-hover:scale-105 transition-transform duration-500" />
               </div>
               <div className="p-8">
                 <h2 className="text-2xl font-display font-bold text-ink mb-2 flex items-center justify-between">
