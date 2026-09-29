@@ -3,8 +3,16 @@ import { facilities } from "@/data/facilities";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
+import { routing } from "@/i18n/routing";
+
 export function generateStaticParams() {
-  return facilities.map((f) => ({ slug: f.slug }));
+  const params = [];
+  for (const locale of routing.locales) {
+    for (const f of facilities) {
+      params.push({ locale, slug: f.slug });
+    }
+  }
+  return params;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

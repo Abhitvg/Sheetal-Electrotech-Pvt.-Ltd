@@ -58,7 +58,7 @@ export default function RigidPackagingPage() {
               Precision moulding for packaging and components.
             </p>
             <p className="text-lg text-white/75 max-w-2xl mb-8 leading-relaxed">
-              Injection moulding, blow moulding and IBM capabilities supporting bottles, containers, jars and custom packaging.
+              Injection moulding, blow moulding and injection blow moulding (IBM) capabilities supporting bottles, containers, jars and custom packaging.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -107,7 +107,7 @@ export default function RigidPackagingPage() {
           <div className="flex flex-wrap justify-center items-center gap-4 text-lg md:text-xl font-display font-medium text-center">
             <span>Injection Moulding</span>
             <span className="text-accent">→</span>
-            <span>IBM</span>
+            <span>Injection Blow Moulding</span>
             <span className="text-accent">→</span>
             <span>Blow Moulding</span>
             <span className="text-accent">→</span>

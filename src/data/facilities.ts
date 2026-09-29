@@ -21,8 +21,8 @@ export const facilities: Facility[] = [
   },
   {
     slug: "ibm-plastic",
-    title: "IBM Plastic",
-    tagline: "Injection Blow Moulding for precision containers.",
+    title: "Injection Blow Moulding",
+    tagline: "Injection Blow Moulding (IBM) for precision containers.",
     description: "Injection blow molding (IBM) is a manufacturing process used to produce hollow plastic parts. It is a variation of blow molding, which is used to create hollow objects from thermoplastic materials such as pe, pp, and ps.",
     image: "/images/facilities/ibm-plastic.webp",
     specs: [],
@@ -58,7 +58,7 @@ export const facilities: Facility[] = [
   {
     slug: "blow-moulding",
     title: "Blow Moulding",
-    tagline: "Hollow-form containers at industrial scale.",
+    tagline: "Manufacturing of hollow plastic containers through blow moulding.",
     description: "A plastic blow molding machine is a type of manufacturing equipment used to produce hollow plastic products such as bottles, containers, and tanks. The process involves melting plastic resin and then blowing it into a mold to create a desired shape.",
     image: "/images/facilities/blow-moulding.webp",
     specs: [],
@@ -67,7 +67,7 @@ export const facilities: Facility[] = [
   {
     slug: "smt",
     title: "SMT",
-    tagline: "The intelligence inside every luminaire.",
+    tagline: "Surface-mount technology for electronic assembly and lighting products.",
     description: "Surface Mount Technology machine is a type of electronic manufacturing equipment used in the production of printed circuit boards. SMT machines are used to place surface-mount devices onto a PCB.",
     image: "/images/facilities/smt.webp",
     specs: [],
@@ -76,7 +76,7 @@ export const facilities: Facility[] = [
   {
     slug: "assembly-packing",
     title: "Assembly & Packing",
-    tagline: "The final mile. Zero compromise.",
+    tagline: "The final mile.",
     description: "The assembly and packing line is a key component of modern manufacturing, allowing for the rapid production and delivery of high-quality goods to customers around the world.",
     image: "/images/facilities/assembly-packing.webp",
     specs: [],

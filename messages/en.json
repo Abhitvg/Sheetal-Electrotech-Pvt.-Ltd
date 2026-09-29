@@ -119,12 +119,12 @@
   },
   "FacilitiesPage": {
     "badge": "9 In-House Facilities",
-    "title": "One campus. Every capability.",
-    "subtitle": "All production operations are co-located in Daman, India. No sub-contracting, no hidden vendor dependencies — full traceability from raw material to finished goods.",
+    "title": "One campus. Multiple capabilities.",
+    "subtitle": "Our Daman manufacturing setup brings key production and development capabilities together across LED lighting, electronics and rigid plastic packaging.",
     "viewFacility": "View Facility",
-    "ctaTitle": "See it in person.",
-    "ctaSubtitle": "We welcome site visits. Our Daman campus is 3 hours from Mumbai by road.",
-    "ctaButton": "Book a Factory Visit"
+    "ctaTitle": "Visit Our Manufacturing Facility",
+    "ctaSubtitle": "Interested in seeing our manufacturing capabilities? Contact our team to discuss a factory visit to our Daman facility.",
+    "ctaButton": "Plan a Factory Visit"
   },
   "ProductsPage": {
     "div1": "OEM Division 01",
