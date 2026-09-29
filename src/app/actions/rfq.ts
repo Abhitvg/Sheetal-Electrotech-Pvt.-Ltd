@@ -76,7 +76,7 @@ export async function submitRfq(formData: FormData) {
 
     // 4. File Upload (Vercel Blob)
     const file = formData.get("file") as File | null;
-    let attachmentUrls: string[] = [];
+    let attachmentPaths: string[] = [];
 
     if (file && file.size > 0) {
       if (file.size > 20 * 1024 * 1024) {
@@ -89,10 +89,11 @@ export async function submitRfq(formData: FormData) {
       }
 
       try {
-        const blob = await put(`rfq-uploads/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`, file, {
-          access: 'public',
+        const pathname = `rfq-uploads/${crypto.randomUUID()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
+        const blob = await put(pathname, file, {
+          access: "private",
         });
-        attachmentUrls.push(blob.url);
+        attachmentPaths.push(blob.pathname);
       } catch (uploadError) {
         console.error("Vercel Blob upload error:", uploadError);
         return { success: false, message: "Failed to upload file." };
@@ -104,7 +105,7 @@ export async function submitRfq(formData: FormData) {
         const sql = neon(process.env.DATABASE_URL);
         await sql`
           INSERT INTO rfq_submissions 
-           (product_categories, monthly_volume, target_delivery, additional_notes, full_name, company, work_email, phone, attachment_urls, utm_source, utm_medium, utm_campaign)
+           (product_categories, monthly_volume, target_delivery, additional_notes, full_name, company, work_email, phone, attachment_urls, attachment_paths, utm_source, utm_medium, utm_campaign)
            VALUES (
              ${validatedData.categories}, 
              ${validatedData.volume}, 
@@ -114,7 +115,8 @@ export async function submitRfq(formData: FormData) {
              ${validatedData.company}, 
              ${validatedData.email}, 
              ${validatedData.phone}, 
-             ${attachmentUrls}, 
+             ${attachmentPaths}, 
+             ${attachmentPaths}, 
              ${validatedData.utm_source}, 
              ${validatedData.utm_medium}, 
              ${validatedData.utm_campaign}
@@ -151,7 +153,7 @@ Target delivery: ${validatedData.timeline}
 Notes:
 ${validatedData.notes || "None"}
 
-Attachments: ${attachmentUrls.join(", ")}
+Attachments: ${attachmentPaths.length ? attachmentPaths.join(", ") : "None"}
 
 Submitted: ${new Date().toISOString()}
 
