@@ -60,7 +60,7 @@ function createCompanyProfile() {
     // Quality & Certifications
     doc.fontSize(24).text('Quality & Certifications', { underline: true });
     doc.moveDown();
-    doc.fontSize(12).text('- ISO 9001:2015');
+    doc.fontSize(12).text('- Quality Control Process');
     doc.text('- BIS Certified');
     doc.addPage();
 

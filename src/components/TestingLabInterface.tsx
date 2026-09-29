@@ -48,7 +48,7 @@ export default function TestingLabInterface() {
             </div>
             <div className="flex gap-4">
               <span className="text-xs text-accent bg-accent/10 px-2 py-1 rounded">BIS COMPLIANT</span>
-              <span className="text-xs text-accent bg-accent/10 px-2 py-1 rounded">ISO 9001:2015</span>
+              <span className="text-xs text-accent bg-accent/10 px-2 py-1 rounded">Quality Control</span>
             </div>
           </div>
 

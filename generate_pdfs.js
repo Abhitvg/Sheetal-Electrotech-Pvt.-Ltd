@@ -12,7 +12,7 @@ doc1.fontSize(24).text('Sheetal Electrotech - Company Profile', { align: 'center
 doc1.moveDown();
 doc1.fontSize(14).text('Overview: Sheetal Electrotech Private Limited is a leading OEM manufacturer.');
 doc1.text('Experience: 25+ years');
-doc1.text('Certifications: ISO 9001:2015, BIS Certified');
+doc1.text('Standards: Documented Quality Control');
 doc1.text('Facilities: Injection Moulding, IBM Plastic, Extrusion, Manual Insertion, R&D, Blow Moulding, SMT, Assembly & Packing, Tool Room.');
 doc1.end();
 

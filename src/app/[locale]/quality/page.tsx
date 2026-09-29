@@ -122,34 +122,23 @@ export default function QualityPage() {
         <div className="container-wide">
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16 border-b border-slate-200 pb-8">
             <div>
-              <h2 className="text-3xl md:text-5xl font-display font-medium mb-4">Official Certifications</h2>
-              <p className="text-ink/60">Maintained and available upon request for procurement audits.</p>
+              <h2 className="text-3xl md:text-5xl font-display font-medium mb-4">Quality & Compliance</h2>
+              <p className="text-ink/60">Our manufacturing processes are supported by documented quality and compliance requirements.</p>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {/* Cert 1 */}
-            <div className="border border-slate-200 p-8 flex flex-col gap-6 bg-white">
+          <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-8">
+            <div className="border border-slate-200 p-8 flex flex-col gap-6 bg-white max-w-3xl">
               <div className="w-16 h-16 bg-slate-100 flex items-center justify-center rounded-sm text-ink font-display text-xl font-bold">
-                ISO
+                <ShieldCheck className="w-8 h-8 text-ink/70" />
               </div>
               <div>
-                <h4 className="text-xl font-medium mb-2">ISO 9001:2015 Certified</h4>
-                <p className="text-sm text-ink/50">Quality Management Systems for manufacturing and assembly operations.</p>
+                <h4 className="text-xl font-medium mb-2">Compliance Documentation</h4>
+                <p className="text-base text-ink/70 leading-relaxed">
+                  Certification and compliance documentation can be provided upon request for procurement audits.
+                </p>
               </div>
             </div>
-
-            {/* Cert 2 */}
-            <div className="border border-slate-200 p-8 flex flex-col gap-6 bg-white">
-              <div className="w-16 h-16 bg-slate-100 flex items-center justify-center rounded-sm text-ink font-display text-xl font-bold">
-                BIS
-              </div>
-              <div>
-                <h4 className="text-xl font-medium mb-2">BIS Certified</h4>
-                <p className="text-sm text-ink/50">Bureau of Indian Standards compliance for LED lighting products and drivers.</p>
-              </div>
-            </div>
-
           </div>
         </div>
       </section>

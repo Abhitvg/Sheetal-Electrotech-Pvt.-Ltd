@@ -49,7 +49,7 @@ export default function LEDBulbManufacturerIndia() {
                 "In-house Tool Room & Injection Moulding",
                 "Automated SMT & Component Insertion",
                 "Advanced Photometric & Surge Testing",
-                "BIS Certified & ISO 9001:2015 Compliant",
+                "Robust Quality Control u0026 Testing",
                 "White-label OEM Branding & Custom Packaging"
               ].map((item, i) => (
                 <li key={i} className="flex items-center gap-3 text-ink font-medium">

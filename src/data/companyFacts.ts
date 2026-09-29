@@ -11,7 +11,7 @@ export const companyFacts = {
   manufacturingAreaLabel: "Sq. Ft. Manufacturing Area",
   capabilities: "9",
   capabilitiesLabel: "In-House Capabilities",
-  certifications: ["ISO 9001:2015", "BIS Certified"] as const,
+  certifications: ["Documented Quality Standards"] as const,
 } as const;
 
 /**
