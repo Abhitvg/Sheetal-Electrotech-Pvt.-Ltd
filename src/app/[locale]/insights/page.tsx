@@ -1,11 +1,13 @@
 import { Link } from "@/i18n/routing";
 import { ArrowRight, BookOpen, Factory, Settings2, Package } from "lucide-react";
 import { insights } from "@/data/insights";
+import type { Metadata } from "next";
+import { getPageCopy, localizedMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Insights & Knowledge | Sheetal Electrotech",
-  description: "Practical information on LED lighting, manufacturing, product development and the technologies behind our products.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return localizedMetadata(locale, "/insights", getPageCopy("insights"));
+}
 
 const CATEGORY_ICONS: Record<string, any> = {
   "LED Knowledge": BookOpen,
