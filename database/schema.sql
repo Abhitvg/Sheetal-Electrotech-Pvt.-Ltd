@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS rfq_submissions (
   work_email VARCHAR(255) NOT NULL,
   phone VARCHAR(100),
   attachment_urls TEXT[],
+  attachment_paths TEXT[],
   utm_source VARCHAR(255),
   utm_medium VARCHAR(255),
   utm_campaign VARCHAR(255),
@@ -21,6 +22,9 @@ CREATE TABLE IF NOT EXISTS rfq_submissions (
 
 ALTER TABLE rfq_submissions
   ADD COLUMN IF NOT EXISTS internal_notes TEXT;
+
+ALTER TABLE rfq_submissions
+  ADD COLUMN IF NOT EXISTS attachment_paths TEXT[];
 
 CREATE INDEX IF NOT EXISTS rfq_submissions_created_at_idx
   ON rfq_submissions (created_at DESC);
