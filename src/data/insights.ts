@@ -159,6 +159,109 @@ We understand that quality is of the utmost importance when it comes to injectio
 
 In addition to our expertise in injection blow moulding, we also offer a wide range of other plastic manufacturing services, including standard extrusion and injection moulding. Whatever the requirements may be, we have the expertise and experience to deliver quality components that meet exact specifications, supporting end-to-end manufacturing for our clients.
     `
+  },
+  {
+    slug: "understanding-led-colors-and-cct",
+    title: "Understanding LED Colors and Color Temperature (CCT)",
+    excerpt: "Learn how Correlated Color Temperature (CCT) determines the warmth or coolness of white LED light, and how to select the right color for different spaces.",
+    category: "LED Knowledge",
+    relatedProducts: [
+      { name: "LED Bulbs", href: "/products/led-lighting/bulbs" },
+      { name: "Downlights", href: "/products/led-lighting/downlights" },
+      { name: "Smart LED", href: "/products/led-lighting/smart-led" }
+    ],
+    content: `
+## What is Color Temperature?
+
+In LED lighting, the "color" of white light is measured in Kelvin (K) and is known as Correlated Color Temperature (CCT). Unlike traditional incandescent bulbs that primarily emitted a warm, yellowish light, LEDs can be manufactured to produce white light across a broad spectrum of temperatures.
+
+## The Kelvin Scale
+
+The Kelvin scale for residential and commercial lighting typically ranges from 2700K to 6500K:
+
+*   **Warm White (2700K - 3000K):** Produces a yellowish, cozy light similar to traditional incandescent bulbs. Ideal for living rooms, bedrooms, and hospitality environments where a relaxing atmosphere is desired.
+*   **Natural/Neutral White (4000K - 4500K):** Produces a clean, neutral white light. This is an excellent choice for kitchens, bathrooms, offices, and retail spaces where accurate visibility without harshness is required.
+*   **Cool White / Daylight (5000K - 6500K):** Produces a crisp, bluish-white light that mimics daylight. It is highly invigorating and provides maximum contrast, making it perfect for industrial settings, hospitals, garages, and task-heavy environments.
+
+## Choosing the Right Color
+
+Selecting the appropriate color temperature depends entirely on the application:
+* For areas requiring relaxation and comfort, stick to Warm White.
+* For work environments and task-oriented spaces, Neutral White provides the best balance of clarity and comfort.
+* For precision tasks or outdoor security (like Street Lights and Flood Lights), Cool White or Daylight is usually preferred to maximize visibility and alertness.
+    `
+  },
+  {
+    slug: "what-is-ip-rating",
+    title: "What is an IP Rating? Understanding Ingress Protection",
+    excerpt: "Decode IP ratings (like IP65 or IP20) to understand how well an LED lighting fixture is protected against dust and water intrusion.",
+    category: "LED Knowledge",
+    relatedProducts: [
+      { name: "Street Lights", href: "/products/led-lighting/street-lights" },
+      { name: "Flood Lights", href: "/products/led-lighting/flood-lights" },
+      { name: "Strip Lights", href: "/products/led-lighting/strip-lights" }
+    ],
+    content: `
+## Defining Ingress Protection (IP)
+
+An IP (Ingress Protection) rating is an international standard used to define the levels of sealing effectiveness of electrical enclosures against intrusion from foreign bodies (like tools, dirt, and dust) and moisture. 
+
+For LED lighting, understanding the IP rating is critical to ensuring the fixture will survive its intended environment without failing prematurely or posing a safety hazard.
+
+## How to Read an IP Rating
+
+An IP rating consists of the letters "IP" followed by two numbers (e.g., IP65).
+
+*   **The First Digit (0-6):** Indicates the level of protection against solid objects and dust. A rating of 6 means the fixture is completely dust-tight.
+*   **The Second Digit (0-9):** Indicates the level of protection against liquids (water). A rating of 5 means the fixture is protected against low-pressure water jets from any direction.
+
+## Common IP Ratings in Lighting
+
+*   **IP20:** Protected against solid objects larger than 12.5mm (like fingers) but offers no protection against water. Suitable for standard indoor environments like living rooms and offices (e.g., standard LED Bulbs and indoor Battens).
+*   **IP44:** Protected against solid objects larger than 1mm and water splashing from any direction. Suitable for bathrooms or covered outdoor areas.
+*   **IP65:** Completely dust-tight and protected against low-pressure water jets. This is the standard requirement for outdoor lighting such as Street Lights, Flood Lights, and exposed architectural lighting.
+*   **IP67 / IP68:** Dust-tight and capable of temporary or continuous immersion in water. Used for specialized applications like underwater pool lighting.
+
+When selecting outdoor lighting products from Sheetal Electrotech, verifying the IP rating ensures you are deploying fixtures engineered for environmental resilience.
+    `
+  },
+  {
+    slug: "what-are-lumens",
+    title: "What are Lumens? Measuring Light Output",
+    excerpt: "Why watts are no longer the best way to measure brightness, and how to use lumens to select the right LED lighting for your space.",
+    category: "LED Knowledge",
+    relatedProducts: [
+      { name: "LED Bulbs", href: "/products/led-lighting/bulbs" },
+      { name: "Downlights", href: "/products/led-lighting/downlights" },
+      { name: "Flood Lights", href: "/products/led-lighting/flood-lights" }
+    ],
+    content: `
+## The Shift from Watts to Lumens
+
+For decades, consumers bought light bulbs based on wattage (e.g., a 60W or 100W bulb). However, wattage is simply a measure of how much electrical power the bulb consumes, not how bright it is. 
+
+With the advent of energy-efficient LED technology, a 10W LED can produce the same amount of light as a 60W incandescent bulb. Because of this massive difference in efficiency, the industry shifted to using **Lumens (lm)** as the standard measurement for brightness.
+
+## What is a Lumen?
+
+A lumen is a unit of measurement that quantifies the total amount of visible light emitted by a source. Put simply: **Lumens equal brightness.** The higher the lumen rating, the brighter the light will appear.
+
+## Understanding Luminous Efficacy
+
+When comparing LED products, engineers look at "Luminous Efficacy"—a metric that divides the total lumen output by the wattage consumed (Lumens per Watt, or lm/W). A higher lm/W ratio means the light is more efficient, converting more electricity directly into visible light rather than wasting it as heat.
+
+Sheetal Electrotech prioritizes high luminous efficacy in our LED manufacturing, ensuring our products deliver maximum brightness for minimal power consumption.
+
+## How Many Lumens Do You Need?
+
+The required lumen output depends on the size of the space and its intended use:
+*   **Reading / Task Lighting:** 400 - 800 lumens
+*   **Living Rooms:** 1,500 - 3,000 lumens total
+*   **Kitchens / Workspaces:** 3,000 - 6,000 lumens total
+*   **Outdoor Flood Lights:** 5,000 - 20,000+ lumens depending on area coverage
+
+When selecting lighting, always check the lumen output first to guarantee the fixture will adequately illuminate your target area.
+    `
   }
 ];
 
