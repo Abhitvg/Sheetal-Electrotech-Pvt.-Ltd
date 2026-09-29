@@ -13,7 +13,7 @@ export const facilities: Facility[] = [
   {
     slug: "injection-moulding",
     title: "Injection Moulding",
-    tagline: "Design to part in one facility.",
+    tagline: "Injection moulding for precision plastic components and products.",
     description: "It involves injecting molten plastic material into a mold cavity under high pressure, which then cools and solidifies to form a precise, high-quality plastic part.",
     image: "/images/facilities/injection-moulding.webp",
     specs: [],

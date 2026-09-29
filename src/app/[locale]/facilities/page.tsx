@@ -36,53 +36,60 @@ export default function FacilitiesIndexPage() {
       {/* Facilities Grid */}
       <div className="container-wide py-24">
         <div className="grid md:grid-cols-2 gap-6">
-          {facilities.map((facility, i) => (
-            <Link
-              key={facility.slug}
-              href={`/facilities/${facility.slug}`}
-              className="group relative overflow-hidden bg-mist text-ink flex flex-col min-h-[380px]"
-            >
-              {/* Background Image */}
-              <div className="absolute inset-0 z-0 overflow-hidden">
-                <Image
-                  src={facility.image}
-                  alt={facility.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-black/10" />
-              </div>
+          {facilities.map((facility, i) => {
+            const hasRealPhoto = !facility.image.includes("placeholder.webp");
 
-              {/* Content */}
-              <div className="relative z-10 p-10 flex flex-col justify-end h-full text-white">
-                <p className="font-mono text-white/70 text-xs uppercase tracking-widest mb-4">
-                  {String(i + 1).padStart(2, "0")}
-                </p>
-                <h3 className="text-3xl font-display font-medium mb-3 group-hover:text-accent transition-colors">
-                  {facility.title}
-                </h3>
-                <p className="text-white/80 text-sm mb-8 max-w-sm leading-relaxed">
-                  {facility.tagline}
-                </p>
+            return (
+              <Link
+                key={facility.slug}
+                href={`/facilities/${facility.slug}`}
+                className={`group relative overflow-hidden flex flex-col min-h-[380px] ${
+                  hasRealPhoto ? "bg-mist" : "bg-slate-900"
+                }`}
+              >
+                {/* Background */}
+                {hasRealPhoto ? (
+                  <div className="absolute inset-0 z-0 overflow-hidden">
+                    <Image
+                      src={facility.image}
+                      alt={facility.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    {/* Improved gradient overlay for readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[rgba(7,20,40,0.88)] via-[rgba(7,20,40,0.35)] to-[rgba(7,20,40,0.15)]" />
+                  </div>
+                ) : (
+                  <div className="absolute inset-0 z-0 overflow-hidden">
+                    {/* Technical abstract pattern background */}
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 to-slate-800/80" />
+                  </div>
+                )}
 
-                {/* Spec mini-strip */}
-                <div className="flex gap-8 border-t border-white/20 pt-6 mb-6">
-                  {facility.specs.slice(0, 2).map((spec) => (
-                    <div key={spec.label}>
-                      <p className="text-white font-display text-xl font-medium">{spec.value}</p>
-                      <p className="text-white/50 text-xs font-mono uppercase">{spec.label}</p>
-                    </div>
-                  ))}
+                {/* Content */}
+                <div className="relative z-10 p-10 flex flex-col justify-end h-full">
+                  <p className="font-mono text-white/50 text-[11px] uppercase tracking-widest mb-4">
+                    {String(i + 1).padStart(2, "0")}
+                  </p>
+                  
+                  <h3 className="text-2xl md:text-[28px] font-display font-medium mb-3 text-white group-hover:text-blue-400 transition-colors">
+                    {facility.title}
+                  </h3>
+                  
+                  <p className="text-white/75 text-[15px] mb-8 max-w-sm leading-relaxed">
+                    {facility.tagline}
+                  </p>
+
+                  <div className="border-t border-white/20 pt-5 mt-auto flex items-center gap-2 text-[13px] font-medium text-blue-400">
+                    {t("viewFacility")}
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </div>
-
-                <div className="flex items-center gap-2 text-sm font-medium text-accent">
-                  {t("viewFacility")}
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       </div>
 
