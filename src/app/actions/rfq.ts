@@ -115,7 +115,7 @@ export async function submitRfq(formData: FormData) {
              ${validatedData.company}, 
              ${validatedData.email}, 
              ${validatedData.phone}, 
-             ${attachmentPaths}, 
+             [], 
              ${attachmentPaths}, 
              ${validatedData.utm_source}, 
              ${validatedData.utm_medium}, 
