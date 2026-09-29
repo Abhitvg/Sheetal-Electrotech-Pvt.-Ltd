@@ -2,11 +2,11 @@
 
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { companyFacts } from "@/data/companyFacts";
+import LegacyFacilityImage from "@/components/LegacyFacilityImage";
 
 const capabilities = [
   {
@@ -14,7 +14,11 @@ const capabilities = [
     title: "Injection Moulding",
     subtitle: "Precision plastic moulding",
     metric: "Injection & Precision Moulding",
-    image: "/images/legacy/manufacturing.png",
+    candidates: [
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8394-768x512.jpeg",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8394.jpeg",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8394.jpg",
+    ],
     href: "/facilities/injection-moulding",
   },
   {
@@ -22,7 +26,14 @@ const capabilities = [
     title: "SMT & Electronics",
     subtitle: "PCB assembly",
     metric: "SMT & Component Assembly",
-    image: "/images/legacy/Photo1.webp",
+    candidates: [
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8730.png",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8730.jpg",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8730.jpeg",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8730-768x512.png",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8730-768x512.jpg",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8730-768x512.jpeg",
+    ],
     href: "/facilities/smt",
   },
   {
@@ -30,24 +41,45 @@ const capabilities = [
     title: "Assembly & Packing",
     subtitle: "Product assembly",
     metric: "Assembly & Packing",
-    image: "/images/legacy/Photo2.webp",
+    candidates: [
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8803.png",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8803.jpg",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8803.jpeg",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8803-768x512.png",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8803-768x512.jpg",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8803-768x512.jpeg",
+    ],
     href: "/facilities/assembly-packing",
   },
   {
     step: "04",
-    title: "Testing Lab",
-    subtitle: "Quality testing & inspection",
-    metric: "Quality Control & Inspection",
-    image: "/images/legacy/inspection.png",
-    href: "/quality",
+    title: "Manual Insertion",
+    subtitle: "Through-hole component assembly",
+    metric: "Manual Component Insertion",
+    candidates: [
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8686.png",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8686.jpg",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8686.jpeg",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8686-768x512.png",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8686-768x512.jpg",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8686-768x512.jpeg",
+    ],
+    href: "/facilities/manual-insertion",
   },
   {
     step: "05",
-    title: "Tool Room",
-    subtitle: "In-house mould design",
-    metric: "Tooling & Product Development",
-    image: "/images/legacy/product-design.png",
-    href: "/facilities/tool-room",
+    title: "R&D / Product Development",
+    subtitle: "Product development",
+    metric: "R&D & Engineering",
+    candidates: [
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8742.png",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8742.jpg",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8742.jpeg",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8742-768x512.png",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8742-768x512.jpg",
+      "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8742-768x512.jpeg",
+    ],
+    href: "/facilities/research-development",
   },
 ];
 
@@ -90,11 +122,11 @@ export default function CapabilitiesSection() {
             >
               <Link href={cap.href} className="group block relative overflow-hidden rounded-sm bg-ink h-[400px]">
                 {/* Image */}
-                <Image
-                  src={cap.image}
+                <LegacyFacilityImage
+                  candidates={cap.candidates}
                   alt={cap.title}
-                  fill
-                  className="object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
+                  eager={i < 3}
+                  className="absolute inset-0 h-full w-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
                 />
 
                 {/* Gradient Overlay */}
