@@ -37,8 +37,8 @@ export default function RfqRow({ rfq }: { rfq: any }) {
       </td>
       <td className="p-4 align-top max-w-xs">
         <p className="text-steel text-xs line-clamp-3 mb-2">{rfq.additional_notes || "No notes."}</p>
-        {rfq.attachment_urls && rfq.attachment_urls.length > 0 && (
-          <a href={rfq.attachment_urls[0]} target="_blank" rel="noreferrer" className="text-accent text-xs hover:underline">
+        {rfq.attachment_paths && rfq.attachment_paths.length > 0 && (
+          <a href={`/api/admin/rfq-file?id=${rfq.id}`} target="_blank" rel="noreferrer" className="text-accent text-xs hover:underline">
             View Attachment
           </a>
         )}
