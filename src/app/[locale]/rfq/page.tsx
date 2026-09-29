@@ -116,7 +116,7 @@ function RFQFormContent() {
                 </label>
                 <input
                   required
-                  name="name"
+                  name="fullName"
                   type="text"
                   className="w-full bg-paper border border-steel/20 px-4 py-4 text-ink focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all"
                   placeholder="John Doe"
@@ -170,10 +170,10 @@ function RFQFormContent() {
               </label>
               <textarea
                 required
-                name="details"
+                name="notes"
                 rows={6}
                 className="w-full bg-paper border border-steel/20 px-4 py-4 text-ink focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all resize-none"
-                placeholder="Describe your manufacturing needs, expected volumes, materials, etc."
+                placeholder="Describe the product, materials, specifications, expected quantities, and any other requirements."
               />
             </div>
 
@@ -190,7 +190,7 @@ function RFQFormContent() {
                   {fileName ? fileName : "Upload Files"}
                 </p>
                 <p className="text-steel text-sm">
-                  {fileName ? "Click to change file" : "Drop BOM, CAD, or specs here (Max 10MB)"}
+                  {fileName ? "Click to change file" : "Upload a PDF, DXF, STEP, or DWG file (Max 20MB)"}
                 </p>
                 <input
                   ref={fileInputRef}
