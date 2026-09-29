@@ -14,7 +14,7 @@ const rfqSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
   company: z.string().min(1, "Company name is required"),
   email: z.string().email("Invalid email address"),
-  phone: z.string().min(1, "Phone number is required"),
+  phone: z.string().max(100).optional(),
   honeypot: z.string().max(0, "Spam detected").optional(),
   utm_source: z.string().optional(),
   utm_medium: z.string().optional(),
@@ -51,20 +51,20 @@ export async function submitRfq(formData: FormData) {
     }
 
     // 3. Parse and validate
-    const categories = formData.getAll("categories") as string[];
+    const categories = formData.getAll("categories").map(String);
     const rawData = {
       categories,
-      volume: formData.get("volume") as string,
-      timeline: formData.get("timeline") as string,
-      notes: formData.get("notes") as string,
-      fullName: formData.get("fullName") as string,
-      company: formData.get("company") as string,
-      email: formData.get("email") as string,
-      phone: formData.get("phone") as string,
-      honeypot: honeypot as string,
-      utm_source: formData.get("utm_source") as string || "",
-      utm_medium: formData.get("utm_medium") as string || "",
-      utm_campaign: formData.get("utm_campaign") as string || "",
+      volume: String(formData.get("volume") ?? ""),
+      timeline: String(formData.get("timeline") ?? ""),
+      notes: String(formData.get("notes") ?? ""),
+      fullName: String(formData.get("fullName") ?? ""),
+      company: String(formData.get("company") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      phone: String(formData.get("phone") ?? ""),
+      honeypot,
+      utm_source: String(formData.get("utm_source") ?? ""),
+      utm_medium: String(formData.get("utm_medium") ?? ""),
+      utm_campaign: String(formData.get("utm_campaign") ?? ""),
     };
 
     const validatedData = rfqSchema.parse(rawData);
@@ -116,14 +116,15 @@ export async function submitRfq(formData: FormData) {
            )
         `;
       } else {
-        console.warn("DATABASE_URL not set. Skipping database insert.");
+        console.error("DATABASE_URL is not configured");
+        return { success: false, message: "RFQ service is temporarily unavailable." };
       }
     } catch (dbError) {
       console.error("Postgres insert error:", dbError);
       throw new Error("Failed to save RFQ data.");
     }
 
-    const adminLink = "https://sheetal-electrotech-pvt-ltd.vercel.app/admin/rfqs";
+    const adminLink = "https://sheetalelectrotech.com/admin/rfqs";
     // 6. Send Emails
     if (!process.env.RESEND_API_KEY) {
       console.error("RESEND_API_KEY is not configured");
@@ -135,7 +136,7 @@ export async function submitRfq(formData: FormData) {
     // To Sales
       await resend.emails.send({
         from: "RFQ System <rfq@sheetalelectrotech.com>",
-        to: "sales@sheetalelectrotech.com", // update to actual sales email
+        to: process.env.RFQ_SALES_EMAIL || "info@sheetalelectrotech.com",
         subject: `New RFQ — ${validatedData.company} (${validatedData.categories.join(", ")})`,
         text: `New RFQ submitted on the website.
 
