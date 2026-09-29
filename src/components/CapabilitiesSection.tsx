@@ -31,7 +31,7 @@ const capabilities = [
     subtitle: "Product assembly",
     metric: "End-to-End Process",
     image: "/images/packaging_factory.jpg",
-    href: "/facilities/assembly",
+    href: "/facilities/assembly-packing",
   },
   {
     step: "04",
