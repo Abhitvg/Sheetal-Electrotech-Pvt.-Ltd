@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.sheetalelectrotech.com';
+  const baseUrl = 'https://sheetalelectrotech.com';
   const locales = ['en', 'hi'];
   
   const routes = [
