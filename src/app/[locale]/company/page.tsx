@@ -16,8 +16,8 @@ const milestones = [
 ];
 
 const leadership = [
-  { name: "Surendra Singh", role: "Chairman of Sheetal Group", note: "Founder & visionary driving Sheetal Group's expansion and strategic direction." },
-  { name: "Ajay Singh", role: "CEO of Sheetal Group", note: "Leading overall corporate operations and strategic business growth." },
+  { name: "Surendra Singh", role: "Chairman of Sheetal Group", note: "Founder & visionary driving Sheetal Group's expansion and strategic direction.", photo: "/images/team/surendra-singh.png" },
+  { name: "Ajay Singh", role: "CEO of Sheetal Group", note: "Leading overall corporate operations and strategic business growth.", photo: "/images/team/ajay-singh.png" },
   { name: "Ishvernath Thakur", role: "CFO", note: "Overseeing financial planning, risk management, and record-keeping." },
   { name: "Prem Singh", role: "Head of Operations", note: "Managing day-to-day manufacturing operations and production efficiency." },
   { name: "Rajesh Nandola", role: "Head of Accountacy", note: "Responsible for accounting, audits, and financial reporting." },
@@ -181,9 +181,40 @@ export default function CompanyPage() {
             <h2 className="mb-4">Our Team</h2>
             <p className="text-steel text-lg">Meet the core team members driving Sheetal Group.</p>
           </div>
+
+          {/* Directors — with photos */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+            {leadership.filter(l => l.photo).map((leader) => (
+              <motion.div
+                key={leader.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6 }}
+                className="bg-white border border-steel/15 overflow-hidden group"
+              >
+                <div className="relative w-full aspect-[4/5] overflow-hidden">
+                  <Image
+                    src={leader.photo!}
+                    alt={leader.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-700"
+                  />
+                </div>
+                <div className="p-8">
+                  <h3 className="text-2xl font-display font-medium text-ink mb-1">{leader.name}</h3>
+                  <p className="font-mono text-xs uppercase tracking-widest text-accent mb-4">{leader.role}</p>
+                  <div className="w-8 h-[1px] bg-steel/30 mb-4" />
+                  <p className="text-steel text-sm leading-relaxed">{leader.note}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
           
+          {/* Rest of Team — text cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {leadership.map((leader) => (
+            {leadership.filter(l => !l.photo).map((leader) => (
               <div key={leader.name} className="border border-steel/15 p-8 bg-paper">
                 <h3 className="text-2xl font-display font-medium text-ink mb-2">{leader.name}</h3>
                 <p className="font-mono text-xs uppercase tracking-widest text-accent mb-4">{leader.role}</p>
