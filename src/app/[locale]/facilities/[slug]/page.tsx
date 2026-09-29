@@ -2,6 +2,7 @@ import Image from "next/image";
 import { facilities } from "@/data/facilities";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { localizedMetadata } from "@/lib/seo";
 
 import { routing } from "@/i18n/routing";
 
