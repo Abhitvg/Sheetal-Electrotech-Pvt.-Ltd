@@ -209,7 +209,9 @@
       "p2_name": "LED Down Light (Series 3)",
       "p2_desc": "High-quality LED Down Light (Series 3) manufactured to exact specifications.",
       "p3_name": "Led Ceiling Light",
-      "p3_desc": "High-quality Led Ceiling Light manufactured to exact specifications."
+      "p3_desc": "High-quality Led Ceiling Light manufactured to exact specifications.",
+      "p4_name": "Surface Ring",
+      "p4_desc": "High-quality Surface Ring manufactured to exact specifications."
     },
     "street-lights": {
       "title": "LED Street Lights",

@@ -210,7 +210,9 @@
       "p2_name": "LED Down Light (Series 3)",
       "p2_desc": "सटीक विशिष्टताओं के अनुसार निर्मित उच्च गुणवत्ता वाला LED Down Light (Series 3)।",
       "p3_name": "Led Ceiling Light",
-      "p3_desc": "सटीक विशिष्टताओं के अनुसार निर्मित उच्च गुणवत्ता वाला Led Ceiling Light।"
+      "p3_desc": "सटीक विशिष्टताओं के अनुसार निर्मित उच्च गुणवत्ता वाला Led Ceiling Light।",
+      "p4_name": "Surface Ring",
+      "p4_desc": "सटीक विशिष्टताओं के अनुसार निर्मित उच्च गुणवत्ता वाला Surface Ring।"
     },
     "street-lights": {
       "title": "LED Street Lights (HI)",

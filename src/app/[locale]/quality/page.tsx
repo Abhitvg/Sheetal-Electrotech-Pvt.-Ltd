@@ -3,26 +3,26 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, CheckCircle2, FlaskConical, ShieldCheck, Zap } from "lucide-react";
+import { Download, CheckCircle2, ShieldCheck, Zap } from "lucide-react";
 
 const testingProcesses = [
   {
-    id: "lumen",
-    title: "Lumen & Integrating Sphere",
-    icon: FlaskConical,
-    description: "Every batch of LED chips undergoes rigorous photometric testing in our integrating spheres to guarantee color temperature consistency and exact lumen output, preventing batch-to-batch variation.",
-  },
-  {
-    id: "surge",
-    title: "High-Voltage Surge Testing",
-    icon: Zap,
-    description: "Our lighting drivers are stressed with up to 4kV surge testing to simulate severe grid fluctuations, ensuring the components will survive real-world Indian electrical grid conditions.",
-  },
-  {
-    id: "leak",
-    title: "Vacuum Leak Detection",
+    id: "visual",
+    title: "Visual & Dimensional Inspection",
     icon: ShieldCheck,
-    description: "For rigid packaging, samples are tested in negative pressure vacuum chambers to ensure caps and threads are 100% hermetically sealed for cosmetics and pharmaceuticals.",
+    description: "Every component is meticulously inspected for structural integrity, finish, and precise dimensional tolerances before proceeding to assembly.",
+  },
+  {
+    id: "functional",
+    title: "Functional Testing",
+    icon: Zap,
+    description: "Finished products undergo comprehensive functional testing to ensure they perform reliably under expected operating conditions.",
+  },
+  {
+    id: "compliance",
+    title: "Standards Compliance",
+    icon: CheckCircle2,
+    description: "Our quality assurance team verifies that products meet all documented specifications and applicable industry standards prior to dispatch.",
   },
 ];
 
@@ -43,7 +43,7 @@ export default function QualityPage() {
             Engineered for reliability.<br />Tested for reality.
           </h1>
           <p className="text-steel text-xl max-w-2xl">
-            We don't just manufacture; we validate. Our in-house testing laboratories ensure that every product leaving Daman meets strict international compliance and domestic BIS standards.
+            We don't just manufacture; we validate. Our in-house testing ensures that every product leaving Daman meets strict domestic BIS standards and our own internal quality metrics.
           </p>
         </div>
       </div>
@@ -55,7 +55,7 @@ export default function QualityPage() {
           {/* Left: Image/Diagram Display */}
           <div className="lg:w-1/2 relative min-h-[400px] lg:min-h-full bg-mist">
             <Image 
-              src="/images/testing_lab.jpg"
+              src="/images/legacy/inspection.png"
               alt="Quality Assurance Laboratory"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -125,12 +125,9 @@ export default function QualityPage() {
               <h2 className="text-3xl md:text-5xl font-display font-medium mb-4">Official Certifications</h2>
               <p className="text-ink/60">Verified documents available for procurement audits.</p>
             </div>
-            <button className="bg-white text-ink px-6 py-3 font-medium flex items-center gap-3 hover:bg-accent hover:text-ink transition-colors">
-              Download Full Dossier <Download className="w-4 h-4" />
-            </button>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
             {/* Cert 1 */}
             <div className="border border-slate-200 p-8 flex flex-col gap-6 hover:bg-slate-50 transition-colors group cursor-pointer">
               <div className="w-16 h-16 bg-slate-100 flex items-center justify-center rounded-sm text-ink font-display text-xl font-bold">
@@ -153,20 +150,6 @@ export default function QualityPage() {
               <div>
                 <h4 className="text-xl font-medium mb-2 group-hover:text-accent transition-colors">BIS Certification</h4>
                 <p className="text-sm text-ink/50 mb-6">Bureau of Indian Standards compliance for LED lighting products and drivers.</p>
-                <div className="flex items-center gap-2 text-sm text-accent font-medium">
-                  <Download className="w-4 h-4" /> Download PDF
-                </div>
-              </div>
-            </div>
-
-            {/* Cert 3 */}
-            <div className="border border-slate-200 p-8 flex flex-col gap-6 hover:bg-slate-50 transition-colors group cursor-pointer">
-              <div className="w-16 h-16 bg-slate-100 flex items-center justify-center rounded-sm text-ink font-display text-xl font-bold">
-                CE
-              </div>
-              <div>
-                <h4 className="text-xl font-medium mb-2 group-hover:text-accent transition-colors">CE Declaration</h4>
-                <p className="text-sm text-ink/50 mb-6">European conformity standards for export-ready manufactured goods.</p>
                 <div className="flex items-center gap-2 text-sm text-accent font-medium">
                   <Download className="w-4 h-4" /> Download PDF
                 </div>

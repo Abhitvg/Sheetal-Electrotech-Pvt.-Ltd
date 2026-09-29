@@ -63,7 +63,7 @@ function RFQFormContent() {
           </div>
           <h2 className="text-4xl font-display font-medium text-ink mb-4">RFQ Received.</h2>
           <p className="text-steel text-lg mb-8">
-            Our technical team will review your specification and respond within <strong>48 business hours</strong> with a production-ready proposal.
+            Our technical team will review your specification and respond promptly with a production-ready proposal.
           </p>
           <a href="/" className="bg-accent text-white px-8 py-4 font-medium hover:bg-orange-600 transition-colors inline-flex items-center gap-3">
             Return Home <ArrowRight className="w-4 h-4" />
@@ -87,7 +87,7 @@ function RFQFormContent() {
               Request a Quote
             </h1>
             <p className="text-steel text-lg md:text-xl max-w-2xl leading-relaxed">
-              Share your requirements below and receive a detailed production proposal within 48 hours. No generic sales calls — a real engineering response.
+              Share your requirements below and receive a detailed production proposal. No generic sales calls — a real engineering response.
             </p>
           </div>
         </div>

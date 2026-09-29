@@ -55,7 +55,7 @@ export default function ContactPage() {
                   Message Sent Successfully!
                 </h3>
                 <p className="text-steel mb-6">
-                  Thank you for reaching out. Our team will respond within 24 business hours.
+                  Thank you for reaching out. Our team will respond as soon as possible.
                 </p>
                 <button
                   onClick={() => { setSubmitted(false); setFormState({ name: "", email: "", phone: "", company: "", subject: "", message: "" }); }}

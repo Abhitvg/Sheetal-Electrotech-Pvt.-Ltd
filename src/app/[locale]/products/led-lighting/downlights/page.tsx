@@ -42,6 +42,14 @@ export default async function Page({ params: { locale } }: { params: { locale: s
       image: "/images/products/led-ceiling-light.png",
       specs: [],
       applications: []
+    },
+    {
+      id: "surface-ring",
+      name: t("p4_name"),
+      description: t("p4_desc"),
+      image: "/images/products/surface-ring.png",
+      specs: [],
+      applications: []
     }
   ];
 
