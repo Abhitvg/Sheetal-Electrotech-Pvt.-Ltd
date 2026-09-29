@@ -2,9 +2,8 @@
 
 import { z } from "zod";
 import { Resend } from "resend";
-import { db, storage } from "@/lib/firebase";
-import { collection, addDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { put } from "@vercel/blob";
+import { neon } from "@neondatabase/serverless";
 import { headers } from "next/headers";
 
 const rfqSchema = z.object({
@@ -85,46 +84,46 @@ export async function submitRfq(formData: FormData) {
       }
 
       try {
-        const storageRef = ref(storage, `rfq-uploads/${Date.now()}-${file.name}`);
-        const arrayBuffer = await file.arrayBuffer();
-        await uploadBytes(storageRef, arrayBuffer, { contentType: file.type });
-        const downloadUrl = await getDownloadURL(storageRef);
-        attachmentUrls.push(downloadUrl);
+        const blob = await put(`rfq-uploads/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`, file, {
+          access: 'public',
+        });
+        attachmentUrls.push(blob.url);
       } catch (uploadError) {
-        console.error("Firebase upload error:", uploadError);
+        console.error("Vercel Blob upload error:", uploadError);
         return { success: false, message: "Failed to upload file." };
       }
     }
 
-    // 5. Persist to DB
-    const adminLink = "https://sheetal-electrotech-pvt-ltd.vercel.app/admin/rfqs";
-    const dbRecord = {
-      status: 'new',
-      product_categories: validatedData.categories,
-      monthly_volume: validatedData.volume,
-      target_delivery: validatedData.timeline,
-      additional_notes: validatedData.notes || "",
-      full_name: validatedData.fullName,
-      company: validatedData.company,
-      work_email: validatedData.email,
-      phone: validatedData.phone,
-      attachment_urls: attachmentUrls,
-      utm_source: validatedData.utm_source,
-      utm_medium: validatedData.utm_medium,
-      utm_campaign: validatedData.utm_campaign,
-    };
-
     try {
-      const dbRecordWithTime = {
-        ...dbRecord,
-        created_at: new Date().toISOString(),
-      };
-      await addDoc(collection(db, "rfq_submissions"), dbRecordWithTime);
+      if (process.env.DATABASE_URL) {
+        const sql = neon(process.env.DATABASE_URL);
+        await sql`
+          INSERT INTO rfq_submissions 
+           (product_categories, monthly_volume, target_delivery, additional_notes, full_name, company, work_email, phone, attachment_urls, utm_source, utm_medium, utm_campaign)
+           VALUES (
+             ${validatedData.categories}, 
+             ${validatedData.volume}, 
+             ${validatedData.timeline}, 
+             ${validatedData.notes || ""}, 
+             ${validatedData.fullName}, 
+             ${validatedData.company}, 
+             ${validatedData.email}, 
+             ${validatedData.phone}, 
+             ${attachmentUrls}, 
+             ${validatedData.utm_source}, 
+             ${validatedData.utm_medium}, 
+             ${validatedData.utm_campaign}
+           )
+        `;
+      } else {
+        console.warn("DATABASE_URL not set. Skipping database insert.");
+      }
     } catch (dbError) {
-      console.error("Firebase insert error:", dbError);
+      console.error("Postgres insert error:", dbError);
       throw new Error("Failed to save RFQ data.");
     }
 
+    const adminLink = "https://sheetal-electrotech-pvt-ltd.vercel.app/admin/rfqs";
     // 6. Send Emails
     if (process.env.RESEND_API_KEY) {
       const resend = new Resend(process.env.RESEND_API_KEY);
