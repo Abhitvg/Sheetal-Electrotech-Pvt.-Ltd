@@ -125,10 +125,14 @@ export async function submitRfq(formData: FormData) {
 
     const adminLink = "https://sheetal-electrotech-pvt-ltd.vercel.app/admin/rfqs";
     // 6. Send Emails
-    if (process.env.RESEND_API_KEY) {
-      const resend = new Resend(process.env.RESEND_API_KEY);
+    if (!process.env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not configured");
+      return { success: false, message: "RFQ service is temporarily unavailable." };
+    }
 
-      // To Sales
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    // To Sales
       await resend.emails.send({
         from: "RFQ System <rfq@sheetalelectrotech.com>",
         to: "sales@sheetalelectrotech.com", // update to actual sales email
@@ -162,15 +166,14 @@ View in admin: ${adminLink}`,
 Thanks for reaching out. We've received your specification for ${validatedData.categories.join(", ")} and our engineering team is reviewing it now.
 
 Here's what happens next:
-1. Technical review — within 4 hours
+1. Technical review
 2. Capability check against our in-house facilities
-3. A detailed production proposal with pricing, lead times, and MOQs — within 48 hours
+3. A detailed production proposal with pricing, lead times, and MOQs
 
 If you have drawings or specs you didn't attach, just reply to this email and we'll add them to your request.
 
 — Sheetal Electrotech`,
-      });
-    }
+    });
 
     return { success: true, message: "RFQ submitted successfully." };
 

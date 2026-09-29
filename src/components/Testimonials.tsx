@@ -25,7 +25,7 @@ const testimonials = [
     rating: 5,
   },
   {
-    quote: "From a 5,000-unit pilot run to 200,000+ monthly — Sheetal scaled with us seamlessly. Their capacity planning and transparent communication make them feel like an extension of our own team.",
+    quote: "From a pilot run to mass production — Sheetal scaled with us seamlessly. Their capacity planning and transparent communication make them feel like an extension of our own team.",
     author: "Supply Chain Manager",
     company: "International Lighting OEM",
     rating: 5,

@@ -67,6 +67,12 @@ export default function Footer() {
               <li><Link href="/careers" className="hover:text-accent transition-colors">{t("links.careers")}</Link></li>
               <li><Link href="/quality" className="hover:text-accent transition-colors">{t("links.quality")}</Link></li>
             </ul>
+
+            <h4 className="font-mono text-xs uppercase tracking-widest text-ink/40 mb-6 mt-12">Resources</h4>
+            <ul className="space-y-4 text-sm text-ink/80">
+              <li><a href="/resources/company-profile.pdf" target="_blank" className="hover:text-accent transition-colors">Company Profile (PDF)</a></li>
+              <li><a href="/resources/product-catalogue.pdf" target="_blank" className="hover:text-accent transition-colors">Product Catalogue (PDF)</a></li>
+            </ul>
           </div>
 
           {/* Contact Col */}

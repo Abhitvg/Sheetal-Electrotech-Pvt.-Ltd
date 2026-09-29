@@ -16,13 +16,23 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate submission
-    await new Promise((r) => setTimeout(r, 1500));
+    setErrorMsg("");
+    
+    const formData = new FormData(e.currentTarget);
+    const { submitContact } = await import("@/app/actions/contact");
+    const result = await submitContact(formData);
+    
     setIsSubmitting(false);
-    setSubmitted(true);
+    if (result.success) {
+      setSubmitted(true);
+    } else {
+      setErrorMsg(result.message);
+    }
   };
 
   return (
@@ -75,6 +85,7 @@ export default function ContactPage() {
                     <label className="block text-sm font-medium text-ink mb-2">Full Name *</label>
                     <input
                       type="text"
+                      name="name"
                       required
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
@@ -86,6 +97,7 @@ export default function ContactPage() {
                     <label className="block text-sm font-medium text-ink mb-2">Email *</label>
                     <input
                       type="email"
+                      name="email"
                       required
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
@@ -97,6 +109,7 @@ export default function ContactPage() {
                     <label className="block text-sm font-medium text-ink mb-2">Phone</label>
                     <input
                       type="tel"
+                      name="phone"
                       value={formState.phone}
                       onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
                       className="w-full px-4 py-3 border border-slate-200 rounded-sm text-ink bg-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
@@ -107,6 +120,7 @@ export default function ContactPage() {
                     <label className="block text-sm font-medium text-ink mb-2">Company</label>
                     <input
                       type="text"
+                      name="company"
                       value={formState.company}
                       onChange={(e) => setFormState({ ...formState, company: e.target.value })}
                       className="w-full px-4 py-3 border border-slate-200 rounded-sm text-ink bg-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
@@ -118,6 +132,7 @@ export default function ContactPage() {
                 <div className="mb-6">
                   <label className="block text-sm font-medium text-ink mb-2">Subject *</label>
                   <select
+                    name="subject"
                     required
                     value={formState.subject}
                     onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
@@ -135,6 +150,7 @@ export default function ContactPage() {
                 <div className="mb-8">
                   <label className="block text-sm font-medium text-ink mb-2">Message *</label>
                   <textarea
+                    name="message"
                     required
                     rows={5}
                     value={formState.message}
@@ -143,6 +159,12 @@ export default function ContactPage() {
                     placeholder="Tell us about your requirements..."
                   />
                 </div>
+
+                {errorMsg && (
+                  <div className="mb-6 p-4 bg-red-50 text-red-600 border border-red-200 rounded-sm text-sm">
+                    {errorMsg}
+                  </div>
+                )}
 
                 <button
                   type="submit"

@@ -37,13 +37,13 @@ export default function QualityPage() {
         <div className="max-w-4xl">
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-6 flex items-center gap-3">
             <span className="w-8 h-[1px] bg-accent inline-block"></span>
-            Zero Defect Policy
+            Quality & Compliance
           </p>
           <h1 className="text-5xl md:text-7xl font-display font-medium mb-8">
             Engineered for reliability.<br />Tested for reality.
           </h1>
           <p className="text-steel text-xl max-w-2xl">
-            We don't just manufacture; we validate. Our in-house testing ensures that every product leaving Daman meets strict domestic BIS standards and our own internal quality metrics.
+            We don't just manufacture; we validate. Our in-house testing and robust inspection processes support compliance with domestic BIS standards and our own internal quality metrics.
           </p>
         </div>
       </div>
@@ -123,36 +123,30 @@ export default function QualityPage() {
           <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16 border-b border-slate-200 pb-8">
             <div>
               <h2 className="text-3xl md:text-5xl font-display font-medium mb-4">Official Certifications</h2>
-              <p className="text-ink/60">Verified documents available for procurement audits.</p>
+              <p className="text-ink/60">Maintained and available upon request for procurement audits.</p>
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
             {/* Cert 1 */}
-            <div className="border border-slate-200 p-8 flex flex-col gap-6 hover:bg-slate-50 transition-colors group cursor-pointer">
+            <div className="border border-slate-200 p-8 flex flex-col gap-6 bg-white">
               <div className="w-16 h-16 bg-slate-100 flex items-center justify-center rounded-sm text-ink font-display text-xl font-bold">
                 ISO
               </div>
               <div>
-                <h4 className="text-xl font-medium mb-2 group-hover:text-accent transition-colors">ISO 9001:2015</h4>
-                <p className="text-sm text-ink/50 mb-6">Quality Management Systems for manufacturing and assembly operations.</p>
-                <div className="flex items-center gap-2 text-sm text-accent font-medium">
-                  <Download className="w-4 h-4" /> Download PDF
-                </div>
+                <h4 className="text-xl font-medium mb-2">ISO 9001:2015 Certified</h4>
+                <p className="text-sm text-ink/50">Quality Management Systems for manufacturing and assembly operations.</p>
               </div>
             </div>
 
             {/* Cert 2 */}
-            <div className="border border-slate-200 p-8 flex flex-col gap-6 hover:bg-slate-50 transition-colors group cursor-pointer">
+            <div className="border border-slate-200 p-8 flex flex-col gap-6 bg-white">
               <div className="w-16 h-16 bg-slate-100 flex items-center justify-center rounded-sm text-ink font-display text-xl font-bold">
                 BIS
               </div>
               <div>
-                <h4 className="text-xl font-medium mb-2 group-hover:text-accent transition-colors">BIS Certification</h4>
-                <p className="text-sm text-ink/50 mb-6">Bureau of Indian Standards compliance for LED lighting products and drivers.</p>
-                <div className="flex items-center gap-2 text-sm text-accent font-medium">
-                  <Download className="w-4 h-4" /> Download PDF
-                </div>
+                <h4 className="text-xl font-medium mb-2">BIS Certified</h4>
+                <p className="text-sm text-ink/50">Bureau of Indian Standards compliance for LED lighting products and drivers.</p>
               </div>
             </div>
 

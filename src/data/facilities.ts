@@ -17,7 +17,6 @@ export const facilities: Facility[] = [
     description: "It involves injecting molten plastic material into a mold cavity under high pressure, which then cools and solidifies to form a precise, high-quality plastic part.",
     image: "/images/facilities/injection-moulding.webp",
     specs: [],
-    materials: ["PP", "ABS", "PET", "HIPS", "PC", "LDPE"],
     highlights: []
   },
   {
@@ -27,7 +26,6 @@ export const facilities: Facility[] = [
     description: "Injection blow molding (IBM) is a manufacturing process used to produce hollow plastic parts. It is a variation of blow molding, which is used to create hollow objects from thermoplastic materials such as pe, pp, and ps.",
     image: "/images/facilities/ibm-plastic.webp",
     specs: [],
-    materials: ["PET", "PP", "HDPE"],
     highlights: []
   },
   {
@@ -64,7 +62,6 @@ export const facilities: Facility[] = [
     description: "A plastic blow molding machine is a type of manufacturing equipment used to produce hollow plastic products such as bottles, containers, and tanks. The process involves melting plastic resin and then blowing it into a mold to create a desired shape.",
     image: "/images/facilities/blow-moulding.webp",
     specs: [],
-    materials: ["HDPE", "PET", "PP"],
     highlights: []
   },
   {
@@ -89,7 +86,7 @@ export const facilities: Facility[] = [
     slug: "tool-room",
     title: "Tool Room",
     tagline: "In-house precision mould manufacturing.",
-    description: "Our fully equipped tool room designs and manufactures all moulds in-house using CNC machining, EDM, and precision grinding, enabling rapid prototyping and eliminating vendor dependency.",
+    description: "Our fully equipped tool room designs and manufactures moulds in-house using CNC machining, EDM, and precision grinding, supporting in-house tooling and faster product development.",
     image: "/images/facilities/tool-room.webp",
     specs: [],
     highlights: []

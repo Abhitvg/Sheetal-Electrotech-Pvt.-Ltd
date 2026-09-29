@@ -80,7 +80,7 @@ export const coreTeam = [
   { name: "Pankaj S Dudhekar", role: "Head of Purchase", note: "Managing supply chain, procurement, and vendor relationships." },
   { name: "Raju Sharma", role: "Human Resource Management", note: "Fostering company culture, recruitment, and employee relations." },
   { name: "Suresh Prasad Arya", role: "Head of Research and Development", note: "Leading product innovation and engineering development." },
-  { name: "Manjit Yadav", role: "Head of Quality Department", note: "Ensuring strict quality control and compliance with BIS/CE standards." },
+  { name: "Manjit Yadav", role: "Head of Quality Department", note: "Ensuring strict quality control and compliance with BIS standards." },
 ] as const;
 
 /**

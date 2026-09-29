@@ -42,16 +42,18 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
       </div>
 
       {/* Spec Bar */}
-      <div className="bg-mist text-ink py-8 border-b border-slate-200">
-        <div className="container-wide grid grid-cols-2 md:grid-cols-4 gap-8">
-          {facility.specs.map((spec, i) => (
-            <div key={i}>
-              <p className="font-mono text-xs text-ink/40 uppercase tracking-widest mb-2">{spec.label}</p>
-              <p className="text-2xl font-display font-medium text-ink">{spec.value}</p>
-            </div>
-          ))}
+      {facility.specs && facility.specs.length > 0 && (
+        <div className="bg-mist text-ink py-8 border-b border-slate-200">
+          <div className="container-wide grid grid-cols-2 md:grid-cols-4 gap-8">
+            {facility.specs.map((spec, i) => (
+              <div key={i}>
+                <p className="font-mono text-xs text-ink/40 uppercase tracking-widest mb-2">{spec.label}</p>
+                <p className="text-2xl font-display font-medium text-ink">{spec.value}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Main Content */}
       <div className="container-wide py-24">
@@ -61,7 +63,7 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
           <div className="lg:col-span-2">
             <p className="text-steel text-xl leading-relaxed mb-12">{facility.description}</p>
 
-            {facility.materials && (
+            {facility.materials && facility.materials.length > 0 && (
               <div className="mb-12">
                 <h3 className="font-mono text-sm uppercase tracking-widest text-steel mb-6">
                   Materials Processed
@@ -77,16 +79,18 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
             )}
 
             {/* Highlights */}
-            <div className="space-y-0 divide-y divide-steel/10">
-              {facility.highlights.map((h, i) => (
-                <div key={i} className="py-8 grid md:grid-cols-3 gap-4">
-                  <div>
-                    <h4 className="font-medium text-ink text-lg">{h.title}</h4>
+            {facility.highlights && facility.highlights.length > 0 && (
+              <div className="space-y-0 divide-y divide-steel/10">
+                {facility.highlights.map((h, i) => (
+                  <div key={i} className="py-8 grid md:grid-cols-3 gap-4">
+                    <div>
+                      <h4 className="font-medium text-ink text-lg">{h.title}</h4>
+                    </div>
+                    <p className="md:col-span-2 text-steel leading-relaxed">{h.body}</p>
                   </div>
-                  <p className="md:col-span-2 text-steel leading-relaxed">{h.body}</p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Right: Sticky RFQ Sidebar */}
@@ -99,7 +103,7 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
                 Get a quote for this facility.
               </h3>
               <p className="text-ink/60 text-sm mb-8">
-                Share your spec and we'll come back with a production-ready proposal in 48 hours.
+                Share your spec and we'll come back with a production-ready proposal.
               </p>
 
               <a

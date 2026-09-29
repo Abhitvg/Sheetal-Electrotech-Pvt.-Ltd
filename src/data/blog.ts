@@ -110,7 +110,7 @@ Buyers increasingly demand recyclable packaging. We've transitioned our standard
 
 ## 4. Customization at Scale
 
-OEM buyers want differentiated products. Our in-house tool room enables custom housing designs with MOQs as low as 5,000 units — making differentiation accessible to mid-sized brands.
+OEM buyers want differentiated products. Our in-house tool room enables custom housing designs with flexible MOQs — making differentiation accessible to mid-sized brands.
 
 ## 5. Export Market Growth
 

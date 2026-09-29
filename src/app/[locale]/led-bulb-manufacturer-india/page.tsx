@@ -5,7 +5,7 @@ import { companyFacts } from "@/data/companyFacts";
 
 export const metadata = {
   title: "LED Bulb Manufacturer in India | OEM/ODM Services | Sheetal Electrotech",
-  description: "Leading LED bulb manufacturer in India offering OEM/ODM services. Complete in-house manufacturing, SMT, and assembly. ISO & BIS certified.",
+  description: "Established LED bulb manufacturer in India offering OEM/ODM services. Complete in-house manufacturing, SMT, and assembly. ISO & BIS certified.",
 };
 
 export default function LEDBulbManufacturerIndia() {
@@ -22,7 +22,7 @@ export default function LEDBulbManufacturerIndia() {
               Premium LED Bulb Manufacturer in India
             </h1>
             <p className="text-steel text-xl leading-relaxed mb-10 max-w-2xl">
-              Sheetal Electrotech is a leading OEM manufacturer of LED bulbs, offering end-to-end production capabilities from housing injection to SMT and final assembly in our {companyFacts.manufacturingArea} facility.
+              Sheetal Electrotech is an established OEM manufacturer of LED bulbs, offering end-to-end production capabilities from housing injection to SMT and final assembly in our {companyFacts.manufacturingArea} facility.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link href="/rfq" className="bg-accent text-white px-8 py-4 font-medium hover:bg-orange-600 transition-colors inline-flex items-center gap-3">
