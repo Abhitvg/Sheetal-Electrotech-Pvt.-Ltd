@@ -16,14 +16,14 @@ export function generateStaticParams() {
   return params;
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
+  const { locale, slug } = await params;
   const facility = facilities.find((f) => f.slug === slug);
   if (!facility) return {};
-  return {
-    title: `${facility.title} | Sheetal Electrotech Facilities`,
-    description: facility.description,
-  };
+  return localizedMetadata(locale, `/facilities/${slug}`, {
+    en: { title: `${facility.title} | Sheetal Electrotech Facilities`, description: facility.description },
+    hi: { title: `${facility.title} | शीतल इलेक्ट्रो-टेक सुविधाएं`, description: facility.description },
+  });
 }
 
 export default async function FacilityDetailPage({ params }: { params: Promise<{ slug: string }> }) {
