@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin/'],
     },
-    sitemap: 'https://www.sheetalelectrotech.com/sitemap.xml',
+    sitemap: 'https://sheetalelectrotech.com/sitemap.xml',
   }
 }
