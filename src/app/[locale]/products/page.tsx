@@ -82,7 +82,7 @@ export default function ProductsHub() {
             hoveredSide === "left" ? "opacity-80" : "opacity-40 group-hover:opacity-10"
           }`} />
           <Image
-            src="/images/legacy/8-jpg.webp"
+            src="/images/products_led.jpg"
             alt="LED Lighting Products"
             fill
             sizes="(max-width: 768px) 100vw, 65vw"
