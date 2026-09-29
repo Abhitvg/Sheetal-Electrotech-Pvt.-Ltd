@@ -36,7 +36,7 @@ const capabilities = [
   {
     step: "04",
     title: "Testing Lab",
-    subtitle: "BIS & ISO certified",
+    subtitle: "Quality testing & inspection",
     metric: "Quality Control & Testing",
     image: "/images/testing_lab.jpg",
     href: "/quality",
