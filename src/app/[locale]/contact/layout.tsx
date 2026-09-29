@@ -1,9 +1,11 @@
 import { ReactNode } from "react";
+import type { Metadata } from "next";
+import { getPageCopy, localizedMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Contact Us | Sheetal Electrotech",
-  description: "Get in touch with Sheetal Electrotech for manufacturing inquiries, quotes, or partnerships.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return localizedMetadata(locale, "/contact", getPageCopy("contact"));
+}
 
 export default function ContactLayout({ children }: { children: ReactNode }) {
   return <>{children}</>;
