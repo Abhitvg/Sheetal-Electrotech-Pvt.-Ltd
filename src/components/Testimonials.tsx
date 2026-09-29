@@ -9,7 +9,7 @@ const testimonials = [
   {
     quote: "Sheetal Electrotech has been our go-to manufacturing partner for over 8 years. Their vertical integration means we get consistent quality from mould to finished product, with lead times that beat the competition.",
     author: "Procurement Head",
-    company: "National Lighting Manufacturer (Client identity withheld)",
+    company: "National Lighting Manufacturer",
     rating: 5,
   },
   {
