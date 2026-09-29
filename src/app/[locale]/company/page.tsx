@@ -204,6 +204,22 @@ export default function CompanyPage() {
         </div>
       </section>
 
+      {/* Certifications */}
+      <section className="section-padding bg-mist/30">
+        <div className="container-wide text-center">
+          <h2 className="mb-4">Our Certifications</h2>
+          <p className="text-steel text-lg mb-12">Committed to the highest standards of manufacturing quality.</p>
+          <div className="flex flex-wrap justify-center gap-6">
+            {companyFacts.certifications.map((cert) => (
+              <div key={cert} className="bg-white border border-steel/15 px-8 py-4 font-mono text-sm uppercase tracking-widest text-ink flex items-center gap-3 shadow-sm">
+                <div className="w-2 h-2 rounded-full bg-accent" />
+                {cert}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Locations */}
       <section className="section-padding border-b border-steel/10">
         <div className="container-wide">
@@ -242,7 +258,7 @@ export default function CompanyPage() {
         <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
             <h3 className="text-3xl md:text-4xl font-display font-medium mb-2">Ready to build together?</h3>
-            <p className="text-ink/80">Share your spec and get a proposal in 48 hours.</p>
+            <p className="text-ink/80">Submit your requirements and our team will get back to you with the next steps.</p>
           </div>
           <Link
             href="/rfq"
