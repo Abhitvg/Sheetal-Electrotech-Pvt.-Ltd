@@ -109,10 +109,10 @@ export default function AssemblySequence() {
     "COMPONENTS",
     "ASSEMBLY",
     "AGING",
-    "320V TEST",
+    "TESTING",
     "PACKAGING",
     "SHIPMENT",
-    "100,000+ UNITS / DAY"
+    "INTEGRATED MANUFACTURING"
   ];
 
   useEffect(() => {

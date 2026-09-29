@@ -18,7 +18,7 @@ const materials = {
       { label: "Heat Deflection", value: "135°C" },
       { label: "Impact Strength", value: "850 J/m" },
     ],
-    desc: "Used in all our LED diffusers and batten covers to ensure maximum lumen output while hiding internal LED dotting. UV stabilized to prevent yellowing over a 10-year lifespan."
+    desc: "Used in our LED diffusers and batten covers to ensure maximum lumen output while hiding internal LED dotting. UV stabilized to resist yellowing."
   },
   aluminum: {
     title: "ADC12 Die-Cast Aluminum",
@@ -28,7 +28,7 @@ const materials = {
       { label: "Tensile Strength", value: "310 MPa" },
       { label: "Corrosion Res.", value: "Excellent" },
     ],
-    desc: "Precision die-cast heat sinks designed for maximum surface area. Ensures junction temperatures remain below critical thresholds for 50,000+ hour operational life."
+    desc: "Precision die-cast heat sinks designed for maximum surface area. Ensures junction temperatures remain below critical thresholds to maximize operational life."
   },
   pcb: {
     title: "FR4 / Metal Core PCB",

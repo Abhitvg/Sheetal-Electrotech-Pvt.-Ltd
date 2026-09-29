@@ -27,10 +27,10 @@ Most LED lighting brands rely on 3-5 different suppliers for components: one for
 
 ## The Sheetal Electrotech Approach
 
-At Sheetal Electrotech, we've invested 25+ years in building a truly vertically integrated manufacturing ecosystem. Under one 50,000+ sq. ft. roof in Daman, we operate:
+At Sheetal Electrotech, we've invested 25+ years in building a truly vertically integrated manufacturing ecosystem. Under one roof in Daman, we operate:
 
 1. **Injection Moulding (80T–160T)** — We mould our own housings, diffusers, and packaging
-2. **SMT & Auto Insertion** — Fuji and Hanwha high-speed lines for PCB assembly
+2. **SMT & Auto Insertion** — High-speed lines for PCB assembly
 3. **Manual Insertion** — For through-hole components
 4. **Assembly Lines** — Automated and semi-automated final assembly
 5. **Testing Lab** — 100% quality control with BIS and ISO certification
@@ -38,10 +38,10 @@ At Sheetal Electrotech, we've invested 25+ years in building a truly vertically 
 
 ## The Results
 
-Our clients consistently report:
-- **30-40% shorter lead times** compared to multi-vendor setups
-- **15-20% lower total cost** when accounting for logistics and rejection rates
-- **Near-zero defect rates** thanks to end-to-end quality control
+Our integrated approach helps clients achieve:
+- **Shorter lead times** compared to multi-vendor setups
+- **Improved cost efficiency** when accounting for logistics and coordination
+- **Higher quality consistency** thanks to end-to-end quality control
 
 ## Conclusion
 
@@ -55,17 +55,17 @@ When you choose a vertically integrated partner, you're not just buying componen
   },
   {
     slug: "smt-quality-control",
-    title: "How Our SMT Lines Achieve 99.97% First-Pass Yield",
+    title: "How Our SMT Lines Achieve Consistent Quality",
     excerpt: "An inside look at our automated optical inspection, reflow profiling, and statistical process control that delivers near-perfect electronics assembly.",
     content: `
 ## The Challenge of High-Volume Electronics
 
-Surface Mount Technology (SMT) assembly at scale is unforgiving. When you're placing 170,000+ components per hour, even a 0.1% defect rate means hundreds of faulty boards daily.
+Surface Mount Technology (SMT) assembly at scale requires precision. When placing large volumes of components, consistent quality control becomes critical.
 
 ## Our SMT Process
 
 ### Pick and Place
-Our Fuji and Hanwha pick-and-place machines achieve placement accuracy of ±0.03mm. Component feeders are bar-code verified to prevent wrong-part errors.
+Our high-speed pick-and-place machines achieve precise component placement. Component feeders are verified to prevent wrong-part errors.
 
 ### Reflow Soldering
 Thermal profiling is calibrated for each product variant. Our nitrogen-atmosphere reflow ovens reduce oxidation and improve solder joint quality.

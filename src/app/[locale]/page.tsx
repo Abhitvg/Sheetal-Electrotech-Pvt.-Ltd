@@ -1,33 +1,37 @@
 import Hero from "@/components/Hero";
-import CapabilitiesSection from "@/components/CapabilitiesSection";
-import WhyChooseUs from "@/components/WhyChooseUs";
+import CompanyIntro from "@/components/CompanyIntro";
 import ProductShowcase from "@/components/ProductShowcase";
-import TrustWall from "@/components/TrustWall";
+import WhySheetal from "@/components/WhySheetal";
+import CapabilitiesSection from "@/components/CapabilitiesSection";
+import IndustriesServed from "@/components/IndustriesServed";
 import Testimonials from "@/components/Testimonials";
 import CTASection from "@/components/CTASection";
 
 export default function Home() {
   return (
     <div className="flex flex-col w-full">
-      {/* 1. CINEMATIC HERO */}
+      {/* 1. HERO */}
       <Hero />
 
-      {/* 2. TRUST WALL */}
-      <TrustWall />
+      {/* 2. COMPANY INTRO — Who is Sheetal + What We Manufacture */}
+      <CompanyIntro />
 
-      {/* 3. CAPABILITIES */}
-      <CapabilitiesSection />
-
-      {/* 4. WHY CHOOSE US */}
-      <WhyChooseUs />
-
-      {/* 5. PRODUCT SHOWCASE */}
+      {/* 3. PRODUCT SHOWCASE */}
       <ProductShowcase />
 
-      {/* 6. TESTIMONIALS */}
+      {/* 4. WHY SHEETAL */}
+      <WhySheetal />
+
+      {/* 5. MANUFACTURING CAPABILITIES */}
+      <CapabilitiesSection />
+
+      {/* 6. INDUSTRIES SERVED */}
+      <IndustriesServed />
+
+      {/* 7. TESTIMONIALS */}
       <Testimonials />
 
-      {/* 7. CTA */}
+      {/* 8. REQUEST QUOTE */}
       <CTASection />
     </div>
   );

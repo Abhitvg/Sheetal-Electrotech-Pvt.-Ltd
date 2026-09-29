@@ -7,12 +7,13 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-// We'll map the labels inside the component now so we can use translations
+import { companyFacts } from "@/data/companyFacts";
+
+// Only verified stats — sourced from companyFacts
 const statsConfig = [
   { value: 25, suffix: "+", key: "years" },
-  { value: 1.2, suffix: "M", key: "pieces", decimals: 1 },
-  { value: 170, suffix: "K", key: "components" },
-  { value: 5, suffix: "+", key: "countries" },
+  { value: 30, suffix: "K+", key: "area" },
+  { value: 9, suffix: "", key: "capabilities" },
 ];
 
 function AnimatedCounter({ value, suffix, decimals = 0 }: { value: number; suffix: string; decimals?: number }) {
@@ -158,7 +159,7 @@ export default function Hero() {
           {statsConfig.map((stat, i) => (
             <div key={i} className="text-white">
               <p className="text-3xl md:text-4xl font-display font-bold mb-1">
-                <AnimatedCounter value={stat.value} suffix={stat.suffix} decimals={stat.decimals} />
+                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
               </p>
               <p className="text-white/50 text-sm font-mono uppercase tracking-wider">
                 {t(`stats.${stat.key}`)}

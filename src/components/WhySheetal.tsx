@@ -1,0 +1,92 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Layers, Settings, ShieldCheck, TrendingUp, DollarSign, Users } from "lucide-react";
+
+const reasons = [
+  {
+    icon: Layers,
+    title: "Vertical Integration",
+    description: "Multiple manufacturing processes within one coordinated ecosystem — from mould design through electronics assembly to finished goods.",
+  },
+  {
+    icon: Settings,
+    title: "OEM Manufacturing",
+    description: "Manufacturing aligned to customer specifications and application requirements. Your brand, our production.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Quality Control",
+    description: "Quality checks integrated throughout the manufacturing process, from incoming material inspection to final product testing.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Scalable Production",
+    description: "Manufacturing infrastructure supporting different product types and production volumes as requirements evolve.",
+  },
+  {
+    icon: DollarSign,
+    title: "Cost Engineering",
+    description: "Integrated processes designed to improve manufacturing efficiency and reduce dependence on multiple external vendors.",
+  },
+  {
+    icon: Users,
+    title: "Single Manufacturing Partner",
+    description: "Reduce coordination across multiple suppliers by bringing key manufacturing processes together under one roof.",
+  },
+];
+
+export default function WhySheetal() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section className="py-24 md:py-32 bg-mist/30" id="why-sheetal">
+      <div className="container-wide">
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mb-16"
+        >
+          <p className="font-mono text-accent text-sm uppercase tracking-widest mb-3">
+            Why Sheetal
+          </p>
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-ink mb-6">
+            Solving complex manufacturing challenges with ease.
+          </h2>
+          <p className="text-steel text-lg">
+            Sheetal Electrotech offers a range of integrated manufacturing services designed around customer requirements.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {reasons.map((reason, i) => {
+            const Icon = reason.icon;
+            return (
+              <motion.div
+                key={reason.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="group p-8 border border-steel/15 bg-white hover:border-accent/30 transition-all duration-300"
+              >
+                <div className="w-12 h-12 bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
+                  <Icon className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="text-xl font-display font-bold text-ink mb-3">
+                  {reason.title}
+                </h3>
+                <p className="text-steel text-sm leading-relaxed">
+                  {reason.description}
+                </p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}

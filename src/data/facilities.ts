@@ -19,8 +19,8 @@ export const facilities: Facility[] = [
     image: "/images/legacy/Photo1.webp",
     specs: [
       { label: "Clamping Force", value: "80T – 160T" },
-      { label: "Machines", value: "18+" },
-      { label: "Monthly Capacity", value: "1.2M pieces" },
+      { label: "Process", value: "Multi-cavity moulds" },
+      { label: "Tooling", value: "In-house tool room" },
       { label: "Tooling Lead Time", value: "4 – 6 weeks" },
     ],
     materials: ["PP", "ABS", "PET", "HIPS", "PC", "LDPE"],
@@ -49,7 +49,7 @@ export const facilities: Facility[] = [
     specs: [
       { label: "Materials", value: "HDPE / PET / PP" },
       { label: "Container Sizes", value: "30ml – 5L" },
-      { label: "Monthly Capacity", value: "800K units" },
+      { label: "Capability", value: "Bottles, containers, jars" },
       { label: "Neck Finishes", value: "28mm, 38mm, custom" },
     ],
     materials: ["HDPE", "PET", "PP"],
@@ -76,8 +76,8 @@ export const facilities: Facility[] = [
       "Surface Mount Technology machine is a type of electronic manufacturing equipment used in the production of printed circuit boards. SMT machines are used to place surface-mount devices onto a PCB.",
     image: "/images/legacy/Photo3.webp",
     specs: [
-      { label: "Placement Speed", value: "170K CPH" },
-      { label: "Reflow Oven", value: "6-Zone" },
+      { label: "Technology", value: "Surface Mount" },
+      { label: "Reflow Oven", value: "Multi-Zone" },
       { label: "Smallest Component", value: "0201 (0.6mm×0.3mm)" },
       { label: "Inspection", value: "Automated AOI" },
     ],
@@ -132,8 +132,8 @@ export const facilities: Facility[] = [
       "The assembly and packing line is a key component of modern manufacturing, allowing for the rapid production and delivery of high-quality goods to customers around the world.",
     image: "/images/legacy/Photo4.webp",
     specs: [
-      { label: "Daily Output", value: "100K units" },
-      { label: "Aging Test", value: "250V – 320V" },
+      { label: "Process", value: "End-to-end assembly" },
+      { label: "Testing", value: "Full voltage burn-in" },
       { label: "Carton Lines", value: "Automated" },
       { label: "Packing Standards", value: "Export-grade" },
     ],

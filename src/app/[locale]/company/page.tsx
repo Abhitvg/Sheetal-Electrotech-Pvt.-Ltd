@@ -4,28 +4,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin } from "lucide-react";
-
-const milestones = [
-  { year: "1999", title: "Founded", body: "Sheetal Electrotech established in Daman with a single injection moulding machine and a focus on rigid plastic packaging." },
-  { year: "2004", title: "LED Transition Begins", body: "Early adoption of LED technology as a manufacturing focus, well ahead of market inflection. First OEM contracts signed." },
-  { year: "2010", title: "SMT Line Commissioned", body: "First in-house Surface Mount Technology line operational. This vertical integration eliminates PCB vendor dependency." },
-  { year: "2014", title: "ISO 9001 Certified", body: "Quality Management System formally certified. Unlocks tier-1 OEM contracts with major Indian brands." },
-  { year: "2018", title: "9-Facility Campus", body: "Completion of our integrated Daman campus spanning all 9 in-house operations on a single footprint." },
-  { year: "2022", title: "Export Scale-Up", body: "International OEM supply agreements signed. CE marking obtained. Export capacity exceeds 30% of total output." },
-  { year: "Today", title: "100K Units/Day", body: "Operating at full campus capacity. Actively onboarding new OEM partners for the next growth phase." },
-];
-
-const leadership = [
-  { name: "Surendra Singh", role: "Chairman of Sheetal Group", note: "Founder & visionary driving Sheetal Group's expansion and strategic direction.", photo: "/images/team/surendra-singh.png" },
-  { name: "Ajay Singh", role: "CEO of Sheetal Group", note: "Leading overall corporate operations and strategic business growth.", photo: "/images/team/ajay-singh.png" },
-  { name: "Ishvernath Thakur", role: "CFO", note: "Overseeing financial planning, risk management, and record-keeping." },
-  { name: "Prem Singh", role: "Head of Operations", note: "Managing day-to-day manufacturing operations and production efficiency." },
-  { name: "Rajesh Nandola", role: "Head of Accountacy", note: "Responsible for accounting, audits, and financial reporting." },
-  { name: "Pankaj S Dudhekar", role: "Head of Purchase", partner: true, note: "Managing supply chain, procurement, and vendor relationships." },
-  { name: "Raju Sharma", role: "Human Resource Management", note: "Fostering company culture, recruitment, and employee relations." },
-  { name: "Suresh Prasad Arya", role: "Head of Research and Development", note: "Leading product innovation and engineering development." },
-  { name: "Manjit Yadav", role: "Head of Quality Department", note: "Ensuring strict quality control and compliance with BIS/CE standards." },
-];
+import { companyFacts, companyTimeline, leadershipTeam, coreTeam } from "@/data/companyFacts";
 
 export default function CompanyPage() {
   return (
@@ -78,7 +57,7 @@ export default function CompanyPage() {
             <div className="hidden md:block absolute left-[120px] top-0 bottom-0 w-[1px] bg-steel/20" />
 
             <div className="space-y-0 divide-y divide-steel/10 md:divide-none">
-              {milestones.map((m, i) => (
+              {companyTimeline.map((m, i) => (
                 <motion.div
                   key={m.year}
                   initial={{ opacity: 0, x: -20 }}
@@ -117,10 +96,9 @@ export default function CompanyPage() {
       <section className="bg-mist text-ink py-20">
         <div className="container-wide grid grid-cols-2 md:grid-cols-4 gap-12">
           {[
-            { value: "25+", label: "Years operating" },
-            { value: "9", label: "In-house facilities" },
-            { value: "300+", label: "Team members" },
-            { value: "50+", label: "Active OEM clients" },
+            { value: companyFacts.experience, label: "Years operating" },
+            { value: companyFacts.capabilities, label: "In-house capabilities" },
+            { value: companyFacts.manufacturingArea, label: "Sq. ft. manufacturing" },
           ].map((stat) => (
             <div key={stat.label}>
               <p className="text-5xl md:text-6xl font-display font-medium text-ink mb-3">{stat.value}</p>
@@ -184,7 +162,7 @@ export default function CompanyPage() {
 
           {/* Directors — with photos */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
-            {leadership.filter(l => l.photo).map((leader) => (
+            {leadershipTeam.map((leader) => (
               <motion.div
                 key={leader.name}
                 initial={{ opacity: 0, y: 24 }}
@@ -214,7 +192,7 @@ export default function CompanyPage() {
           
           {/* Rest of Team — text cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {leadership.filter(l => !l.photo).map((leader) => (
+            {coreTeam.map((leader) => (
               <div key={leader.name} className="border border-steel/15 p-8 bg-paper">
                 <h3 className="text-2xl font-display font-medium text-ink mb-2">{leader.name}</h3>
                 <p className="font-mono text-xs uppercase tracking-widest text-accent mb-4">{leader.role}</p>

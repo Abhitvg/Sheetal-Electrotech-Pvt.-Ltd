@@ -250,11 +250,11 @@ export default function SMTSequence() {
 
         <div ref={step4Ref} className="absolute inset-0 flex flex-col justify-center items-center opacity-0 bg-ink/80 backdrop-blur-sm">
           <h2 className="text-5xl md:text-7xl font-display font-bold text-white mb-6">
-            170,000 COMPONENTS<br />
-            <span className="text-accent">PER HOUR.</span>
+            INTEGRATED ELECTRONICS<br />
+            <span className="text-accent">MANUFACTURING.</span>
           </h2>
           <p className="text-steel font-mono text-lg uppercase tracking-widest">
-            Fuji & Hanwha High-Speed Lines
+            In-House PCB Assembly
           </p>
         </div>
 

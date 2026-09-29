@@ -173,8 +173,8 @@ export default function Navigation() {
                       <div>
                         <p className="font-mono text-ink/40 text-xs uppercase mb-4">LED Lighting</p>
                         <ul className="space-y-3">
-                          <li><Link href="/products/led-lighting" className="text-ink/80 hover:text-accent text-sm">LED Bulbs (3W – 50W)</Link></li>
-                          <li><Link href="/products/led-lighting" className="text-ink/80 hover:text-accent text-sm">LED Battens</Link></li>
+                          <li><Link href="/products/led-lighting/bulbs" className="text-ink/80 hover:text-accent text-sm">LED Bulbs (3W – 150W)</Link></li>
+                          <li><Link href="/products/led-lighting/battens" className="text-ink/80 hover:text-accent text-sm">LED Battens</Link></li>
                           <li><Link href="/products/led-lighting" className="text-ink/80 hover:text-accent text-sm">LED Panels & Downlights</Link></li>
                           <li><Link href="/products/led-lighting" className="text-ink/80 hover:text-accent text-sm">Flood Lights & Street Lights</Link></li>
                         </ul>
@@ -182,8 +182,8 @@ export default function Navigation() {
                       <div>
                         <p className="font-mono text-ink/40 text-xs uppercase mb-4">Rigid Packaging</p>
                         <ul className="space-y-3">
-                          <li><Link href="/products/rigid-packaging" className="text-ink/80 hover:text-accent text-sm">Cosmetic Jars</Link></li>
-                          <li><Link href="/products/rigid-packaging" className="text-ink/80 hover:text-accent text-sm">Pharmaceutical Bottles</Link></li>
+                          <li><Link href="/products/rigid-packaging/jars" className="text-ink/80 hover:text-accent text-sm">Cosmetic Jars</Link></li>
+                          <li><Link href="/products/rigid-packaging/bottles" className="text-ink/80 hover:text-accent text-sm">Pharmaceutical Bottles</Link></li>
                           <li><Link href="/products/rigid-packaging" className="text-ink/80 hover:text-accent text-sm">Industrial Containers</Link></li>
                         </ul>
                       </div>

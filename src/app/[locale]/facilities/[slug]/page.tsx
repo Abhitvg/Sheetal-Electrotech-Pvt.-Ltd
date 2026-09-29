@@ -34,10 +34,10 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
             Sheetal Facilities
           </p>
-          <h1 className="text-5xl md:text-7xl font-display font-medium mb-6 leading-tight text-ink">
+          <h1 className="text-5xl md:text-7xl font-display font-medium mb-6 leading-tight text-white">
             {facility.title}
           </h1>
-          <p className="text-ink/70 text-xl max-w-2xl">{facility.tagline}</p>
+          <p className="text-white/70 text-xl max-w-2xl">{facility.tagline}</p>
         </div>
       </div>
 

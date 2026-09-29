@@ -6,29 +6,30 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
+import { companyFacts } from "@/data/companyFacts";
 
 const capabilities = [
   {
     step: "01",
     title: "Injection Moulding",
-    subtitle: "80–160T capacity",
-    metric: "1.2M pieces/month",
+    subtitle: "Precision plastic moulding",
+    metric: "Integrated Manufacturing",
     image: "/images/moulding_factory.jpg",
     href: "/facilities/injection-moulding",
   },
   {
     step: "02",
-    title: "SMT & Auto Insertion",
-    subtitle: "Fuji & Hanwha lines",
-    metric: "170K components/hr",
+    title: "SMT & Electronics",
+    subtitle: "PCB assembly",
+    metric: "In-House Electronics",
     image: "/images/smt_electronics.jpg",
     href: "/facilities/smt",
   },
   {
     step: "03",
     title: "Assembly & Packing",
-    subtitle: "Automated lines",
-    metric: "500K units/month",
+    subtitle: "Product assembly",
+    metric: "End-to-End Process",
     image: "/images/packaging_factory.jpg",
     href: "/facilities/assembly",
   },
@@ -36,7 +37,7 @@ const capabilities = [
     step: "04",
     title: "Testing Lab",
     subtitle: "BIS & ISO certified",
-    metric: "100% QC tested",
+    metric: "100% QC Tested",
     image: "/images/testing_lab.jpg",
     href: "/quality",
   },
@@ -44,7 +45,7 @@ const capabilities = [
     step: "05",
     title: "Tool Room",
     subtitle: "In-house mould design",
-    metric: "Rapid prototyping",
+    metric: "Rapid Prototyping",
     image: "/images/tool_room.jpg",
     href: "/facilities/tool-room",
   },
@@ -73,8 +74,8 @@ export default function CapabilitiesSection() {
             End-to-End Manufacturing
           </h2>
           <p className="text-steel text-lg max-w-2xl">
-            From raw plastic pellets to finished, tested products — every step happens
-            in our 50,000+ sq. ft. facility in Daman, India.
+            From raw material to finished, tested products — every step happens
+            in our {companyFacts.manufacturingArea} sq. ft. facility in Daman, India.
           </p>
         </motion.div>
 

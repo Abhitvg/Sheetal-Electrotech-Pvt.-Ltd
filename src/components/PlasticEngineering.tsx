@@ -208,7 +208,7 @@ export default function PlasticEngineering() {
         </h2>
         <div className="w-full h-[1px] bg-steel/30 mb-8"></div>
         <p className="text-3xl md:text-5xl font-mono text-steel uppercase tracking-widest">
-          1.2M PIECES / MONTH
+          INTEGRATED MANUFACTURING
         </p>
       </div>
 

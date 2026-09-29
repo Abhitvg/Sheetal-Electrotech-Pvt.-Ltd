@@ -3,7 +3,15 @@ import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 import { facilities } from "@/data/facilities";
+import { getTranslations } from "next-intl/server";
 
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale, namespace: 'Metadata.facilities' });
+  return {
+    title: t('title'),
+    description: t('description'),
+  };
+}
 export default function FacilitiesIndexPage() {
   const t = useTranslations("FacilitiesPage");
   return (

@@ -84,8 +84,8 @@ export default function DarkIndustrialTransition() {
             <span className="text-sm font-mono text-steel uppercase tracking-widest">PRODUCTION FACILITIES</span>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <span className="text-4xl md:text-6xl font-display font-medium text-white">100,000+</span>
-            <span className="text-sm font-mono text-steel uppercase tracking-widest">UNITS / DAY</span>
+            <span className="text-4xl md:text-6xl font-display font-medium text-white">25+</span>
+            <span className="text-sm font-mono text-steel uppercase tracking-widest">YEARS OF EXCELLENCE</span>
           </div>
         </div>
       </div>
