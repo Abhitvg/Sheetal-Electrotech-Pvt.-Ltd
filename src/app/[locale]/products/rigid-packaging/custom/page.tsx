@@ -16,11 +16,7 @@ export default async function Page({ params: { locale } }: { params: { locale: s
       name: t("p1_name"),
       range: t("p1_range"),
       image: "/images/legacy/Photo13.webp",
-      specs: [
-        { label: t("p1_s1_l"), value: t("p1_s1_v") },
-        { label: t("p1_s2_l"), value: t("p1_s2_v") },
-        { label: t("p1_s3_l"), value: t("p1_s3_v") },
-      ],
+      specs: [],
     }
   ];
 

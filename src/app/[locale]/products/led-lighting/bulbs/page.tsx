@@ -7,42 +7,49 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   return { title: `${t('title')} | Sheetal Electrotech` };
 }
 
-export default async function LEDBulbsPage({ params: { locale } }: { params: { locale: string } }) {
+export default async function Page({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'Products.bulbs' });
-  
+
   const products = [
     {
-      id: "led-bulb-standard",
+      id: "led-bulb",
+      name: t("p0_name"),
+      description: t("p0_desc"),
+      image: "/images/products/led-bulb.png",
+      specs: [],
+      applications: []
+    },
+    {
+      id: "led-bulb-2",
       name: t("p1_name"),
-      range: t("p1_range"),
-      image: "/images/legacy/Photo13.webp",
-      specs: [
-        { label: t("p1_s1_l"), value: t("p1_s1_v") },
-        { label: t("p1_s2_l"), value: t("p1_s2_v") },
-        { label: t("p1_s3_l"), value: t("p1_s3_v") },
-      ],
+      description: t("p1_desc"),
+      image: "/images/products/led-bulb-2.png",
+      specs: [],
+      applications: []
     },
     {
-      id: "led-bulb-premium",
+      id: "led-high-power-bulb",
       name: t("p2_name"),
-      range: t("p2_range"),
-      image: "/images/legacy/Photo15.webp",
-      specs: [
-        { label: t("p2_s1_l"), value: t("p2_s1_v") },
-        { label: t("p2_s2_l"), value: t("p2_s2_v") },
-        { label: t("p2_s3_l"), value: t("p2_s3_v") },
-      ],
+      description: t("p2_desc"),
+      image: "/images/products/led-high-power-bulb.png",
+      specs: [],
+      applications: []
     },
     {
-      id: "high-power-bulb",
+      id: "led-emergency-bulb",
       name: t("p3_name"),
-      range: t("p3_range"),
-      image: "/images/legacy/po-jpg.webp",
-      specs: [
-        { label: t("p3_s1_l"), value: t("p3_s1_v") },
-        { label: t("p3_s2_l"), value: t("p3_s2_v") },
-        { label: t("p3_s3_l"), value: t("p3_s3_v") },
-      ],
+      description: t("p3_desc"),
+      image: "/images/products/led-emergency-bulb.webp",
+      specs: [],
+      applications: []
+    },
+    {
+      id: "led-candle-bulb",
+      name: t("p4_name"),
+      description: t("p4_desc"),
+      image: "/images/products/led-candle-bulb.png",
+      specs: [],
+      applications: []
     }
   ];
 

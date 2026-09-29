@@ -12,15 +12,36 @@ export default async function Page({ params: { locale } }: { params: { locale: s
 
   const products = [
     {
-      id: "product-1",
+      id: "led-down-light",
+      name: t("p0_name"),
+      description: t("p0_desc"),
+      image: "/images/products/led-down-light.webp",
+      specs: [],
+      applications: []
+    },
+    {
+      id: "led-down-lighter",
       name: t("p1_name"),
-      range: t("p1_range"),
-      image: "/images/legacy/Photo13.webp",
-      specs: [
-        { label: t("p1_s1_l"), value: t("p1_s1_v") },
-        { label: t("p1_s2_l"), value: t("p1_s2_v") },
-        { label: t("p1_s3_l"), value: t("p1_s3_v") },
-      ],
+      description: t("p1_desc"),
+      image: "/images/products/led-down-lighter.webp",
+      specs: [],
+      applications: []
+    },
+    {
+      id: "led-down-light-3",
+      name: t("p2_name"),
+      description: t("p2_desc"),
+      image: "/images/products/led-down-light-3.webp",
+      specs: [],
+      applications: []
+    },
+    {
+      id: "led-ceiling-light",
+      name: t("p3_name"),
+      description: t("p3_desc"),
+      image: "/images/products/led-ceiling-light.png",
+      specs: [],
+      applications: []
     }
   ];
 

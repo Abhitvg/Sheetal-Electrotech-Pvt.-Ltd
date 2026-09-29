@@ -12,15 +12,12 @@ export default async function Page({ params: { locale } }: { params: { locale: s
 
   const products = [
     {
-      id: "product-1",
-      name: t("p1_name"),
-      range: t("p1_range"),
-      image: "/images/legacy/Photo13.webp",
-      specs: [
-        { label: t("p1_s1_l"), value: t("p1_s1_v") },
-        { label: t("p1_s2_l"), value: t("p1_s2_v") },
-        { label: t("p1_s3_l"), value: t("p1_s3_v") },
-      ],
+      id: "led-street-light-2",
+      name: t("p0_name"),
+      description: t("p0_desc"),
+      image: "/images/products/led-street-light-2.png",
+      specs: [],
+      applications: []
     }
   ];
 
