@@ -1,5 +1,4 @@
-import { db } from "@/lib/firebase";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { neon } from "@neondatabase/serverless";
 import RfqRow from "./RfqRow";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
@@ -12,30 +11,44 @@ export const revalidate = 0; // Disable static rendering for this page
 
 export default async function AdminRfqPage() {
   let rfqs: any[] = [];
-  
+
   try {
-    const q = query(collection(db, "rfq_submissions"), orderBy("created_at", "desc"));
-    const querySnapshot = await getDocs(q);
-    rfqs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    if (process.env.DATABASE_URL) {
+      const sql = neon(process.env.DATABASE_URL);
+      rfqs = await sql`
+        SELECT id, created_at, status, product_categories, monthly_volume,
+               target_delivery, additional_notes, full_name, company,
+               work_email, phone, attachment_urls, utm_source, internal_notes
+        FROM rfq_submissions
+        ORDER BY created_at DESC
+      `;
+    } else {
+      console.error("DATABASE_URL is not configured");
+    }
   } catch (error) {
     console.error("Failed to fetch RFQs:", error);
   }
 
   // Generate CSV data for export
+  const csvEscape = (value: unknown) => {
+    const text = String(value ?? "");
+    return `"${text.replace(/"/g, '""')}"`;
+  };
+
   const csvHeaders = ["Date", "Company", "Contact", "Email", "Phone", "Status", "Volume", "Timeline", "Source"];
-  const csvRows = rfqs.map(r => [
-    new Date(r.created_at).toLocaleDateString(),
-    `"${r.company}"`,
-    `"${r.full_name}"`,
+  const csvRows = rfqs.map((r) => [
+    new Date(r.created_at).toISOString(),
+    r.company,
+    r.full_name,
     r.work_email,
     r.phone,
     r.status,
-    `"${r.monthly_volume}"`,
-    `"${r.target_delivery}"`,
-    r.utm_source || "direct"
-  ].join(","));
-  
-  const csvContent = [csvHeaders.join(","), ...csvRows].join("\\n");
+    r.monthly_volume,
+    r.target_delivery,
+    r.utm_source || "direct",
+  ].map(csvEscape).join(","));
+
+  const csvContent = [csvHeaders.map(csvEscape).join(","), ...csvRows].join("\\n");
   const dataUri = `data:text/csv;charset=utf-8,${encodeURIComponent(csvContent)}`;
 
   return (
