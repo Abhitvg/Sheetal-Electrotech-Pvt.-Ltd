@@ -25,7 +25,7 @@ export default function IndustriesServed() {
             Industries
           </p>
           <h2 className="text-4xl md:text-5xl font-display font-bold text-ink mb-6">
-            Industries We Serve
+            Industries & Applications
           </h2>
           <p className="text-steel text-lg">
             Manufacturing solutions across multiple industry verticals.

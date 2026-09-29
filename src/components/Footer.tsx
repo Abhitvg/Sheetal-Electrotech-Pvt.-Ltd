@@ -48,7 +48,7 @@ export default function Footer() {
               <li><Link href="/facilities/smt" className="hover:text-accent transition-colors">SMT & Auto Insertion</Link></li>
               <li><Link href="/facilities/assembly" className="hover:text-accent transition-colors">Assembly & Packing</Link></li>
               <li><Link href="/facilities/manual-insertion" className="hover:text-accent transition-colors">Manual Insertion</Link></li>
-              <li><Link href="/facilities/laser-machine" className="hover:text-accent transition-colors">Lazer Machine</Link></li>
+              <li><Link href="/facilities/laser-machine" className="hover:text-accent transition-colors">Laser Machine</Link></li>
               <li><Link href="/facilities/tool-room" className="hover:text-accent transition-colors">Tool Room</Link></li>
             </ul>
           </div>

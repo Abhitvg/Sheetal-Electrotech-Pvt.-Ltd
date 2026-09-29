@@ -62,7 +62,7 @@ export const industriesServed = [
   { name: "Pharmaceutical", description: "Rigid packaging for pharmaceutical applications." },
   { name: "Packaging", description: "Custom plastic packaging solutions." },
   { name: "Consumer Products", description: "Plastic and electronic consumer products." },
-  { name: "Automotive", description: "Components and applications for the automotive sector." },
+  
 ] as const;
 
 /**

@@ -24,7 +24,7 @@
     }
   },
   "Footer": {
-    "description": "Vertically integrated OEM manufacturing partner for LED lighting and rigid plastic packaging.",
+    "description": "Vertically integrated manufacturing partner for LED lighting, electronics and rigid plastic packaging.",
     "links": {
       "about": "About Us",
       "careers": "Careers",
@@ -40,7 +40,7 @@
     "badge": "Start Manufacturing",
     "titlePrefix": "Ready to Scale Your ",
     "titleHighlight": "Production?",
-    "subtitle": "Whether you need 5,000 units or 500,000 — our vertically integrated facility is ready. Get a custom quote with pricing and lead time estimates in 24 hours.",
+    "subtitle": "Whether you are developing a new product or scaling an existing production requirement, our manufacturing team can work with your specifications. Submit your requirements and our team will get back to you with the next steps.",
     "rfqButton": "Start RFQ Process",
     "contactButton": "Contact Sales"
   },

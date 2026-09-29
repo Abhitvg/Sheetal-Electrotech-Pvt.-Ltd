@@ -68,7 +68,7 @@ export default function ProductShowcase() {
               Product Portfolio
             </p>
             <h2 className="text-4xl md:text-6xl font-display font-bold text-ink">
-              200+ SKUs. Ready to Scale.
+              A Diverse Product Portfolio.
             </h2>
           </div>
           <Link

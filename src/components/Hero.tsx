@@ -16,42 +16,6 @@ const statsConfig = [
   { value: 9, suffix: "", key: "capabilities" },
 ];
 
-function AnimatedCounter({ value, suffix, decimals = 0 }: { value: number; suffix: string; decimals?: number }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          const duration = 2000;
-          const startTime = Date.now();
-          const animate = () => {
-            const elapsed = Date.now() - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(eased * value);
-            if (progress < 1) requestAnimationFrame(animate);
-          };
-          requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0.5 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [value, hasAnimated]);
-
-  return (
-    <span ref={ref}>
-      {decimals > 0 ? count.toFixed(decimals) : Math.round(count)}
-      {suffix}
-    </span>
-  );
-}
-
 export default function Hero() {
   const t = useTranslations("Hero");
   const containerRef = useRef<HTMLDivElement>(null);
@@ -159,7 +123,7 @@ export default function Hero() {
           {statsConfig.map((stat, i) => (
             <div key={i} className="text-white">
               <p className="text-3xl md:text-4xl font-display font-bold mb-1">
-                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                <span>{stat.value}{stat.suffix}</span>
               </p>
               <p className="text-white/50 text-sm font-mono uppercase tracking-wider">
                 {t(`stats.${stat.key}`)}
