@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { facilities } from "@/data/facilities";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { localizedMetadata } from "@/lib/seo";
+import LegacyFacilityImage from "@/components/LegacyFacilityImage";
 
 import { routing } from "@/i18n/routing";
 
@@ -36,7 +36,12 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
       {/* Hero - Full bleed with overlay */}
       <div className="relative h-[70vh] min-h-[500px] flex items-end">
         <div className="absolute inset-0">
-          <Image src={facility.image} alt={facility.title} fill sizes="100vw" className="object-cover" priority />
+          <LegacyFacilityImage
+            candidates={[facility.image, ...(facility.fallbackImages ?? [])]}
+            alt={facility.title}
+            eager
+            className="absolute inset-0 h-full w-full object-cover"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-transparent" />
         </div>
         <div className="relative z-10 container-wide text-paper pb-16 pt-32">
