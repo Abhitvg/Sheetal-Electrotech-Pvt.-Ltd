@@ -130,7 +130,7 @@ export default function CapabilitiesSection() {
                 />
 
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0b192c] via-[#0b192c]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0b192c]/95 via-[#0b192c]/40 to-[#0b192c]/5" />
 
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-8">
