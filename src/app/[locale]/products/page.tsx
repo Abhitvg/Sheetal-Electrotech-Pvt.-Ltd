@@ -15,7 +15,7 @@ const copy = {
     viewPackaging: "Explore Rigid Packaging",
     rfq: "Discuss an OEM requirement",
     portfolio: "Portfolio architecture",
-    portfolioTitle: "Three product families. One manufacturing partner.",
+    portfolioTitle: "Core product families. One manufacturing partner.",
     portfolioText: "Move from a standard product catalogue to a specification-led OEM conversation. Share your target product, application and requirements with our team.",
     led: "LED Lighting",
     ledDesc: "Bulbs, battens, downlights, street lights, flood lights, spot lights, decorative lighting, smart LED and strip lights.",
