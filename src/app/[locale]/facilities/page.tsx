@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl"
-import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
+import LegacyFacilityImage from "@/components/LegacyFacilityImage";
 import { facilities } from "@/data/facilities";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
@@ -36,7 +36,7 @@ export default function FacilitiesIndexPage() {
       <div className="container-wide py-24">
         <div className="grid md:grid-cols-2 gap-6">
           {facilities.map((facility, i) => {
-            const hasRealPhoto = !facility.image.includes("placeholder.webp");
+            const hasRealPhoto = true;
 
             return (
               <Link
@@ -49,12 +49,10 @@ export default function FacilitiesIndexPage() {
                 {/* Background */}
                 {hasRealPhoto ? (
                   <div className="absolute inset-0 z-0 overflow-hidden">
-                    <Image
-                      src={facility.image}
+                    <LegacyFacilityImage
+                      candidates={[facility.image, ...(facility.fallbackImages ?? [])]}
                       alt={facility.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     {/* Improved gradient overlay for readability - stronger contrast */}
                     <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-transparent" />
