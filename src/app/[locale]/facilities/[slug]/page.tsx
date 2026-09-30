@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { localizedMetadata } from "@/lib/seo";
 import LegacyFacilityImage from "@/components/LegacyFacilityImage";
-import { ArrowRight, Factory, Gauge, Layers3, ShieldCheck } from "lucide-react";
+import { ArrowRight, Factory, Gauge, Layers3 } from "lucide-react";
 
 import { routing } from "@/i18n/routing";
 
@@ -108,7 +108,7 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
 
             {facility.approvedBrands && facility.approvedBrands.length > 0 && (
               <div className="mt-14 pt-10 border-t border-steel/10">
-                <p className="font-mono text-xs uppercase tracking-widest text-steel mb-5">Brands referenced in approved legacy material</p>
+                <p className="font-mono text-xs uppercase tracking-widest text-steel mb-5">Selected brands referenced in company material</p>
                 <div className="flex flex-wrap gap-3">
                   {facility.approvedBrands.map((brand) => (
                     <span key={brand} className="px-4 py-2 border border-steel/20 bg-paper font-display text-sm">{brand}</span>
