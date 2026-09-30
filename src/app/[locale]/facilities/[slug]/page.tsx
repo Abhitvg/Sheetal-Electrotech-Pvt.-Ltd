@@ -69,7 +69,7 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
                   <div className="flex items-start gap-4 bg-mist border border-steel/10 p-5">
                     <Gauge className="w-5 h-5 text-accent shrink-0 mt-1" />
                     <div>
-                      <p className="font-mono text-xs uppercase tracking-widest text-steel/70 mb-1">Legacy capacity reference</p>
+                      <p className="font-mono text-xs uppercase tracking-widest text-steel/70 mb-1">Production capacity</p>
                       <p className="text-steel leading-relaxed">{facility.capacityNote}</p>
                     </div>
                   </div>
@@ -108,7 +108,7 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
 
             {facility.approvedBrands && facility.approvedBrands.length > 0 && (
               <div className="mt-14 pt-10 border-t border-steel/10">
-                <p className="font-mono text-xs uppercase tracking-widest text-steel mb-5">Selected brands referenced in company material</p>
+                <p className="font-mono text-xs uppercase tracking-widest text-steel mb-5">Selected brands</p>
                 <div className="flex flex-wrap gap-3">
                   {facility.approvedBrands.map((brand) => (
                     <span key={brand} className="px-4 py-2 border border-steel/20 bg-paper font-display text-sm">{brand}</span>
