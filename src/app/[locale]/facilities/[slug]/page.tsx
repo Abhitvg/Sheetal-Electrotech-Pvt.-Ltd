@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { localizedMetadata } from "@/lib/seo";
 import LegacyFacilityImage from "@/components/LegacyFacilityImage";
+import { ArrowRight, Factory, Gauge, Layers3, ShieldCheck } from "lucide-react";
 
 import { routing } from "@/i18n/routing";
 
@@ -54,6 +55,70 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
           <p className="text-white/70 text-xl max-w-2xl">{facility.tagline}</p>
         </div>
       </div>
+
+      {(facility.capacityNote || facility.applications || facility.approvedBrands || facility.portfolio) && (
+        <section className="bg-white border-b border-slate-200">
+          <div className="container-wide py-20">
+            <div className="grid lg:grid-cols-[1.15fr_.85fr] gap-12 items-start">
+              <div>
+                <p className="font-mono text-accent text-xs uppercase tracking-[.2em] mb-4">Capability Profile</p>
+                <h2 className="text-3xl md:text-5xl font-display font-medium leading-tight mb-6">
+                  {facility.legacyHeading || "Built for practical production requirements."}
+                </h2>
+                {facility.capacityNote && (
+                  <div className="flex items-start gap-4 bg-mist border border-steel/10 p-5">
+                    <Gauge className="w-5 h-5 text-accent shrink-0 mt-1" />
+                    <div>
+                      <p className="font-mono text-xs uppercase tracking-widest text-steel/70 mb-1">Legacy capacity reference</p>
+                      <p className="text-steel leading-relaxed">{facility.capacityNote}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="grid grid-cols-2 gap-px bg-slate-200 border border-slate-200">
+                {(facility.applications || []).map((item) => (
+                  <div key={item} className="bg-paper p-5">
+                    <Factory className="w-5 h-5 text-accent mb-4" />
+                    <p className="font-display text-lg">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {facility.portfolio && facility.portfolio.length > 0 && (
+              <div className="mt-16">
+                <div className="flex items-end justify-between gap-6 mb-8">
+                  <div>
+                    <p className="font-mono text-accent text-xs uppercase tracking-widest mb-2">What the capability supports</p>
+                    <h3 className="text-2xl md:text-3xl font-display font-medium">Extrusion portfolio</h3>
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-3 gap-5">
+                  {facility.portfolio.map((item, i) => (
+                    <div key={item.title} className="border border-steel/15 bg-paper p-7">
+                      <span className="font-mono text-xs text-accent">0{i + 1}</span>
+                      <h4 className="font-display text-xl font-medium mt-7 mb-3">{item.title}</h4>
+                      <p className="text-steel leading-relaxed">{item.body}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {facility.approvedBrands && facility.approvedBrands.length > 0 && (
+              <div className="mt-14 pt-10 border-t border-steel/10">
+                <p className="font-mono text-xs uppercase tracking-widest text-steel mb-5">Brands referenced in approved legacy material</p>
+                <div className="flex flex-wrap gap-3">
+                  {facility.approvedBrands.map((brand) => (
+                    <span key={brand} className="px-4 py-2 border border-steel/20 bg-paper font-display text-sm">{brand}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Spec Bar */}
       {facility.specs && facility.specs.length > 0 && (
@@ -109,31 +174,26 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
 
           {/* Right: Sticky RFQ Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-32 bg-mist text-ink p-8">
-              <p className="font-mono text-xs uppercase tracking-widest text-ink/40 mb-4">
-                Ready to partner?
-              </p>
-              <h3 className="text-2xl font-display mb-4">
-                Get a quote for this facility.
-              </h3>
-              <p className="text-ink/60 text-sm mb-8">
-                Share your spec and we'll come back with a production-ready proposal.
-              </p>
-
-              <a
-                href="/rfq"
-                className="block w-full bg-accent text-ink text-center py-4 font-medium hover:bg-orange-600 transition-colors mb-6"
-              >
-                Request a Quote →
-              </a>
-
-              <div className="border-t border-slate-200 pt-6 space-y-3 text-sm">
-                <a href="mailto:info@sheetalelectrotech.com" className="flex items-center gap-2 text-ink/60 hover:text-accent transition-colors">
-                  info@sheetalelectrotech.com
+            <div className="sticky top-32 space-y-5">
+              <div className="bg-mist text-ink p-8">
+                <p className="font-mono text-xs uppercase tracking-widest text-ink/40 mb-4">Ready to partner?</p>
+                <h3 className="text-2xl font-display mb-4">Get a quote for this capability.</h3>
+                <p className="text-ink/60 text-sm mb-8">Share your specification, target volume and application with our team.</p>
+                <a href="/rfq" className="flex items-center justify-center gap-3 w-full bg-accent text-ink text-center py-4 font-medium hover:bg-orange-600 transition-colors">
+                  Request a Quote <ArrowRight className="w-4 h-4" />
                 </a>
-                <p className="text-ink/40 font-mono text-xs">+91 93273 45295, +91 99254 39405</p>
-                <p className="text-ink/40 font-mono text-xs">Survey No. 168/28 & 168/29, Opp. Givaudan India Pvt. Ltd, Dhabel, Daman</p>
               </div>
+              {facility.slug === "extrusion" && (
+                <div className="border border-steel/15 p-7 bg-white">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Layers3 className="w-5 h-5 text-accent" />
+                    <p className="font-display font-medium">Specification-led discussion</p>
+                  </div>
+                  <p className="text-sm text-steel leading-relaxed">
+                    For extrusion enquiries, include profile drawings, dimensions, material preference, application and expected volumes where available.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
