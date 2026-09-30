@@ -34,7 +34,7 @@ export default function FacilitiesIndexPage() {
 
       {/* Facilities Grid */}
       <div className="container-wide py-24">
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {facilities.map((facility, i) => {
             const hasRealPhoto = true;
 
@@ -55,7 +55,7 @@ export default function FacilitiesIndexPage() {
                       className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     {/* Improved gradient overlay for readability - stronger contrast */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/45 to-ink/5" />
                   </div>
                 ) : (
                   <div className="absolute inset-0 z-0 overflow-hidden bg-[#0b192c]">
