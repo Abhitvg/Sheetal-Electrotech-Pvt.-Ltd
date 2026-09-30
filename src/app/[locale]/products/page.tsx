@@ -1,125 +1,317 @@
 "use client";
 
-import { useState } from "react";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
-import { ArrowRight } from "lucide-react";
+import { useLocale } from "next-intl";
+import { ArrowRight, ArrowUpRight, Boxes, Cpu, Lightbulb, PackageCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
+const copy = {
+  en: {
+    eyebrow: "Product portfolio · OEM manufacturing",
+    title: "Products built around your requirements.",
+    intro: "Explore Sheetal Electrotech's product portfolio across LED lighting, electronics and rigid plastic packaging — backed by integrated manufacturing capabilities in Daman.",
+    viewLed: "Explore LED Lighting",
+    viewPackaging: "Explore Rigid Packaging",
+    rfq: "Discuss an OEM requirement",
+    portfolio: "Portfolio architecture",
+    portfolioTitle: "Three product families. One manufacturing partner.",
+    portfolioText: "Move from a standard product catalogue to a specification-led OEM conversation. Share your target product, application and requirements with our team.",
+    led: "LED Lighting",
+    ledDesc: "Bulbs, battens, downlights, street lights, flood lights, spot lights, decorative lighting, smart LED and strip lights.",
+    packaging: "Rigid Plastic Packaging",
+    packagingDesc: "Bottles, jars, containers, custom packaging and injection-moulded components.",
+    electronics: "Electronics",
+    electronicsDesc: "Electronic products and accessories supported by in-house SMT and assembly capabilities.",
+    oem: "Custom OEM",
+    oemDesc: "A manufacturing pathway connecting product requirements with moulding, electronics, assembly and packing capabilities.",
+    ledEyebrow: "01 / LED lighting",
+    ledTitle: "Lighting for everyday, commercial and outdoor applications.",
+    exploreAll: "View LED portfolio",
+    packagingEyebrow: "02 / Rigid plastic packaging",
+    packagingTitle: "Packaging and components shaped around the application.",
+    packagingAll: "View packaging portfolio",
+    capabilities: "Manufacturing backbone",
+    capabilitiesTitle: "The product catalogue is only the front end.",
+    capabilitiesText: "Behind every product family is an integrated manufacturing setup spanning moulding, electronics, R&D, assembly and tooling.",
+    viewFacilities: "Explore manufacturing facilities",
+    productsInHouse: "In-house capabilities",
+    productCategories: "Core product categories",
+    ctaEyebrow: "Ready to build?",
+    ctaTitle: "Bring us your specification.",
+    ctaText: "Share a drawing, product reference or requirement. We'll route it to the relevant manufacturing capability for discussion.",
+    requestQuote: "Request a Quote",
+  },
+  hi: {
+    eyebrow: "उत्पाद पोर्टफोलियो · OEM विनिर्माण",
+    title: "आपकी आवश्यकताओं के अनुसार तैयार उत्पाद।",
+    intro: "दमन में एकीकृत विनिर्माण क्षमताओं के साथ LED लाइटिंग, इलेक्ट्रॉनिक्स और कठोर प्लास्टिक पैकेजिंग में शीतल इलेक्ट्रो-टेक का उत्पाद पोर्टफोलियो देखें।",
+    viewLed: "LED लाइटिंग देखें",
+    viewPackaging: "कठोर पैकेजिंग देखें",
+    rfq: "OEM आवश्यकता पर चर्चा करें",
+    portfolio: "उत्पाद संरचना",
+    portfolioTitle: "तीन उत्पाद परिवार। एक विनिर्माण भागीदार।",
+    portfolioText: "मानक कैटलॉग से आगे बढ़कर स्पेसिफिकेशन-आधारित OEM चर्चा करें। अपने उत्पाद, उपयोग और आवश्यकताएं हमारी टीम के साथ साझा करें।",
+    led: "LED लाइटिंग",
+    ledDesc: "बल्ब, बैटन, डाउनलाइट, स्ट्रीट लाइट, फ्लड लाइट, स्पॉट लाइट, डेकोरेटिव, स्मार्ट LED और स्ट्रिप लाइट।",
+    packaging: "कठोर प्लास्टिक पैकेजिंग",
+    packagingDesc: "बोतलें, जार, कंटेनर, कस्टम पैकेजिंग और इंजेक्शन-मोल्डेड घटक।",
+    electronics: "इलेक्ट्रॉनिक्स",
+    electronicsDesc: "इन-हाउस SMT और असेंबली क्षमताओं द्वारा समर्थित इलेक्ट्रॉनिक उत्पाद और एक्सेसरीज़।",
+    oem: "कस्टम OEM",
+    oemDesc: "उत्पाद आवश्यकताओं को मोल्डिंग, इलेक्ट्रॉनिक्स, असेंबली और पैकिंग क्षमताओं से जोड़ने वाला विनिर्माण मार्ग।",
+    ledEyebrow: "01 / LED लाइटिंग",
+    ledTitle: "दैनिक, वाणिज्यिक और आउटडोर अनुप्रयोगों के लिए लाइटिंग।",
+    exploreAll: "LED पोर्टफोलियो देखें",
+    packagingEyebrow: "02 / कठोर प्लास्टिक पैकेजिंग",
+    packagingTitle: "एप्लिकेशन के अनुसार आकार दिए गए पैकेजिंग और घटक।",
+    packagingAll: "पैकेजिंग पोर्टफोलियो देखें",
+    capabilities: "विनिर्माण आधार",
+    capabilitiesTitle: "उत्पाद कैटलॉग केवल सामने का हिस्सा है।",
+    capabilitiesText: "हर उत्पाद परिवार के पीछे मोल्डिंग, इलेक्ट्रॉनिक्स, R&D, असेंबली और टूलिंग की एकीकृत विनिर्माण व्यवस्था है।",
+    viewFacilities: "विनिर्माण सुविधाएं देखें",
+    productsInHouse: "इन-हाउस क्षमताएं",
+    productCategories: "मुख्य उत्पाद श्रेणियां",
+    ctaEyebrow: "बनाने के लिए तैयार?",
+    ctaTitle: "अपनी स्पेसिफिकेशन हमारे साथ साझा करें।",
+    ctaText: "ड्रॉइंग, प्रोडक्ट रेफरेंस या आवश्यकता साझा करें। हम इसे उपयुक्त विनिर्माण क्षमता तक चर्चा के लिए पहुंचाएंगे।",
+    requestQuote: "कोटेशन मांगें",
+  }
+} as const;
+
+const ledProducts = [
+  ["LED Bulbs", "/images/products/led-bulb.png", "/products/led-lighting/bulbs"],
+  ["LED Battens", "/images/products/led-batten.png", "/products/led-lighting/battens"],
+  ["LED Downlights", "/images/products/led-down-light.webp", "/products/led-lighting/downlights"],
+  ["Street Lights", "/images/products/led-street-light-2.png", "/products/led-lighting/street-lights"],
+  ["Flood / Well Lights", "/images/products/led-flood-well-light.png", "/products/led-lighting/flood-lights"],
+  ["Spot Lights", "/images/products/led-spot-light.png", "/products/led-lighting/spot-lights"],
+  ["Decorative Lights", "/images/products/led-decorative-light.png", "/products/led-lighting/decorative-lights"],
+  ["Smart LED", "/images/products/smart-led-bulb.png", "/products/led-lighting/smart-led"],
+  ["Strip Lights", "/images/products/led-strip-lights.png", "/products/led-lighting/strip-lights"],
+] as const;
+
+const packagingProducts = [
+  ["Plastic Bottles", "/images/products_packaging.jpg", "/products/rigid-packaging/bottles"],
+  ["Jars & Containers", "/images/jar_product.jpg", "/products/rigid-packaging/jars"],
+  ["Custom Packaging", "/images/packaging_factory.jpg", "/products/rigid-packaging/custom"],
+  ["Injection-Moulded Components", "/images/moulding_factory.jpg", "/products/rigid-packaging/components"],
+] as const;
+
 export default function ProductsHub() {
-  const t = useTranslations("ProductsPage");
-  const [hoveredSide, setHoveredSide] = useState<"left" | "right" | null>(null);
+  const locale = useLocale() === "hi" ? "hi" : "en";
+  const t = copy[locale];
+
+  const families = [
+    { number: "01", title: t.led, desc: t.ledDesc, icon: Lightbulb, href: "/products/led-lighting", image: "/images/products/led-bulb.png" },
+    { number: "02", title: t.packaging, desc: t.packagingDesc, icon: PackageCheck, href: "/products/rigid-packaging", image: "/images/jar_product.jpg" },
+    { number: "03", title: t.electronics, desc: t.electronicsDesc, icon: Cpu, href: "/products/electronics", image: "/images/exension-board-jpg.webp" },
+    { number: "04", title: t.oem, desc: t.oemDesc, icon: Boxes, href: "/rfq", image: "/images/product_showcase.jpg" },
+  ];
 
   return (
-    <div className="w-full h-screen flex flex-col md:flex-row bg-paper overflow-hidden pt-20 md:pt-0">
-      
-      {/* LEFT SIDE: Rigid Packaging */}
-      <Link 
-        href="/products/rigid-packaging"
-        className={`relative flex flex-col justify-center transition-all duration-700 ease-in-out cursor-pointer group ${
-          hoveredSide === "left" ? "md:w-[65%]" : hoveredSide === "right" ? "md:w-[35%]" : "md:w-1/2"
-        } h-1/2 md:h-full border-b md:border-b-0 md:border-r border-slate-200`}
-        onMouseEnter={() => setHoveredSide("left")}
-        onMouseLeave={() => setHoveredSide(null)}
-      >
-        {/* Image Background */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <div className={`absolute inset-0 bg-paper transition-opacity duration-700 z-10 ${
-            hoveredSide === "right" ? "opacity-80" : "opacity-30 group-hover:opacity-10"
-          }`} />
-          <Image
-            src="/images/packaging_factory.jpg"
-            alt={t("div1Title")}
-            fill
-            sizes="(max-width: 768px) 100vw, 65vw"
-            className="object-cover transition-transform duration-1000 group-hover:scale-105"
-            priority
-          />
-        </div>
-
-        {/* Content */}
-        <div className="relative z-20 p-8 md:p-16 lg:p-24 w-full max-w-2xl mx-auto flex flex-col items-center md:items-start text-center md:text-left transition-transform duration-500">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
-              {t("div1")}
-            </p>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium text-ink mb-6 leading-tight">
-              Rigid Plastic Packaging
-            </h2>
-            <p className={`text-ink/70 text-lg transition-all duration-500 max-w-md mb-8 ${
-              hoveredSide === "right" ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
-            }`}>
-              {t("div1Desc")}
-            </p>
-            
-            <div className={`flex items-center gap-4 text-ink font-medium border border-slate-200 px-8 py-4 w-max transition-all duration-300 ${
-              hoveredSide === "left" ? "bg-white text-ink" : "hover:bg-slate-100"
-            }`}>
-              {t("explore")}
-              <ArrowRight className={`w-5 h-5 transition-transform ${hoveredSide === "left" ? "translate-x-1" : ""}`} />
-            </div>
-          </motion.div>
-        </div>
-      </Link>
-
-      {/* RIGHT SIDE: LED Lighting */}
-      <Link 
-        href="/products/led-lighting"
-        className={`relative flex flex-col justify-center transition-all duration-700 ease-in-out cursor-pointer group ${
-          hoveredSide === "right" ? "md:w-[65%]" : hoveredSide === "left" ? "md:w-[35%]" : "md:w-1/2"
-        } h-1/2 md:h-full`}
-        onMouseEnter={() => setHoveredSide("right")}
-        onMouseLeave={() => setHoveredSide(null)}
-      >
-        {/* Image Background */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <div className={`absolute inset-0 bg-paper transition-opacity duration-700 z-10 ${
-            hoveredSide === "left" ? "opacity-80" : "opacity-40 group-hover:opacity-10"
-          }`} />
+    <main className="bg-paper text-ink">
+      {/* HERO */}
+      <section className="relative min-h-[78vh] overflow-hidden bg-ink text-white">
+        <div className="absolute inset-0 opacity-60">
           <Image
             src="/images/products_led.jpg"
-            alt="LED Lighting Products"
+            alt="Sheetal Electrotech product portfolio"
             fill
-            sizes="(max-width: 768px) 100vw, 65vw"
-            className="object-cover transition-transform duration-1000 group-hover:scale-105"
+            sizes="100vw"
+            className="object-cover object-center"
             priority
           />
         </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#071322] via-[#071322]/85 to-[#071322]/30" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.04)_1px,transparent_1px)] bg-[size:48px_48px] opacity-40" />
 
-        {/* Content */}
-        <div className="relative z-20 p-8 md:p-16 lg:p-24 w-full max-w-2xl mx-auto flex flex-col items-center md:items-start text-center md:text-left transition-transform duration-500">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
-              {t("div2")}
-            </p>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium text-ink mb-6 leading-tight">
-              {t("div2Title")}
-            </h2>
-            <p className={`text-ink/70 text-lg transition-all duration-500 max-w-md mb-8 ${
-              hoveredSide === "left" ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
-            }`}>
-              {t("div2Desc")}
-            </p>
-            
-            <div className={`flex items-center gap-4 text-ink font-medium border border-slate-200 px-8 py-4 w-max transition-all duration-300 ${
-              hoveredSide === "right" ? "bg-accent border-accent text-ink" : "hover:bg-slate-100"
-            }`}>
-              Explore Portfolio
-              <ArrowRight className={`w-5 h-5 transition-transform ${hoveredSide === "right" ? "translate-x-1" : ""}`} />
+        <div className="relative z-10 container-wide pt-36 pb-24 grid lg:grid-cols-[1.05fr_.95fr] gap-16 items-center">
+          <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }}>
+            <p className="font-mono text-accent text-xs md:text-sm uppercase tracking-[.22em] mb-6">{t.eyebrow}</p>
+            <h1 className="text-5xl md:text-7xl lg:text-[88px] font-display font-medium leading-[.95] tracking-tight max-w-4xl">
+              {t.title}
+            </h1>
+            <p className="mt-8 text-white/70 text-lg md:text-xl leading-relaxed max-w-2xl">{t.intro}</p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link href="/products/led-lighting" className="inline-flex items-center gap-3 bg-white text-ink px-6 py-4 font-medium hover:bg-accent hover:text-white transition-colors">
+                {t.viewLed}<ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link href="/products/rigid-packaging" className="inline-flex items-center gap-3 border border-white/25 text-white px-6 py-4 font-medium hover:bg-white/10 transition-colors">
+                {t.viewPackaging}<ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: .8, delay: .15 }}
+            className="grid grid-cols-2 gap-3 max-w-xl lg:ml-auto"
+          >
+            {[
+              ["/images/products/led-bulb.png", "LED Bulbs"],
+              ["/images/products/led-batten.png", "LED Battens"],
+              ["/images/jar_product.jpg", "Jars"],
+              ["/images/products/led-street-light-2.png", "Street Lights"],
+            ].map(([src, label]) => (
+              <div key={label} className="relative aspect-square overflow-hidden border border-white/10 bg-white/5">
+                <Image src={src} alt={label} fill sizes="(max-width: 1024px) 45vw, 260px" className="object-cover" />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-5 pt-16">
+                  <p className="font-mono text-[11px] uppercase tracking-widest text-white/75">{label}</p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
         </div>
-      </Link>
-      
-    </div>
+      </section>
+
+      {/* FAMILY ARCHITECTURE */}
+      <section className="py-24 md:py-32">
+        <div className="container-wide">
+          <div className="max-w-3xl mb-16">
+            <p className="font-mono text-accent text-sm uppercase tracking-widest mb-3">{t.portfolio}</p>
+            <h2 className="text-4xl md:text-6xl font-display font-medium leading-tight">{t.portfolioTitle}</h2>
+            <p className="text-steel text-lg leading-relaxed mt-6">{t.portfolioText}</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+            {families.map((family, i) => {
+              const Icon = family.icon;
+              return (
+                <motion.div key={family.number} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .5, delay: i * .06 }}>
+                  <Link href={family.href} className="group relative block h-[430px] overflow-hidden bg-ink text-white">
+                    <Image src={family.image} alt={family.title} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover opacity-65 group-hover:scale-105 group-hover:opacity-80 transition-all duration-700" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#071322]/95 via-[#071322]/45 to-[#071322]/5" />
+                    <div className="relative z-10 h-full flex flex-col justify-between p-7">
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-xs tracking-widest text-accent">{family.number}</span>
+                        <Icon className="w-6 h-6 text-white/70" strokeWidth={1.4} />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-display font-medium mb-3">{family.title}</h3>
+                        <p className="text-white/70 text-sm leading-relaxed mb-6">{family.desc}</p>
+                        <div className="inline-flex items-center gap-2 text-accent text-sm font-medium">
+                          Explore <ArrowUpRight className="w-4 h-4" />
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* LED PORTFOLIO */}
+      <section className="py-24 md:py-32 bg-mist border-y border-steel/10">
+        <div className="container-wide">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+            <div className="max-w-3xl">
+              <p className="font-mono text-accent text-sm uppercase tracking-widest mb-3">{t.ledEyebrow}</p>
+              <h2 className="text-4xl md:text-6xl font-display font-medium leading-tight">{t.ledTitle}</h2>
+            </div>
+            <Link href="/products/led-lighting" className="inline-flex items-center gap-2 text-accent font-medium text-sm uppercase tracking-wider">
+              {t.exploreAll}<ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
+            {ledProducts.map(([name, image, href], i) => (
+              <motion.div key={name} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .4, delay: i * .03 }}>
+                <Link href={href} className="group block bg-white border border-steel/10 overflow-hidden">
+                  <div className="relative aspect-[4/3] bg-[#f5f6f8] overflow-hidden">
+                    <Image src={image} alt={name} fill sizes="(max-width: 768px) 50vw, 33vw" className="object-contain p-8 group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute top-3 left-3 bg-ink text-white font-mono text-[10px] px-2 py-1 opacity-80">{String(i + 1).padStart(2, "0")}</div>
+                  </div>
+                  <div className="p-5 flex items-center justify-between gap-4">
+                    <span className="font-display font-medium text-lg group-hover:text-accent transition-colors">{name}</span>
+                    <ArrowRight className="w-4 h-4 text-accent opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PACKAGING */}
+      <section className="py-24 md:py-32">
+        <div className="container-wide">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+            <div className="max-w-3xl">
+              <p className="font-mono text-accent text-sm uppercase tracking-widest mb-3">{t.packagingEyebrow}</p>
+              <h2 className="text-4xl md:text-6xl font-display font-medium leading-tight">{t.packagingTitle}</h2>
+            </div>
+            <Link href="/products/rigid-packaging" className="inline-flex items-center gap-2 text-accent font-medium text-sm uppercase tracking-wider">
+              {t.packagingAll}<ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {packagingProducts.map(([name, image, href], i) => (
+              <Link key={name} href={href} className="group block bg-white border border-steel/10 overflow-hidden">
+                <div className="relative h-64 bg-mist overflow-hidden">
+                  <Image src={image} alt={name} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/55 to-transparent" />
+                  <span className="absolute bottom-4 left-4 text-white font-mono text-[10px] uppercase tracking-widest">0{i + 1} / Packaging</span>
+                </div>
+                <div className="p-6 flex items-center justify-between gap-4">
+                  <span className="font-display font-medium">{name}</span>
+                  <ArrowUpRight className="w-4 h-4 text-accent" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* MANUFACTURING BACKBONE */}
+      <section className="bg-[#071322] text-white py-24 md:py-32">
+        <div className="container-wide grid lg:grid-cols-[1fr_1.2fr] gap-16 items-start">
+          <div>
+            <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">{t.capabilities}</p>
+            <h2 className="text-4xl md:text-6xl font-display font-medium leading-tight">{t.capabilitiesTitle}</h2>
+            <p className="text-white/65 text-lg leading-relaxed mt-6 max-w-xl">{t.capabilitiesText}</p>
+            <Link href="/facilities" className="inline-flex items-center gap-3 mt-8 bg-white text-ink px-6 py-4 font-medium hover:bg-accent hover:text-white transition-colors">
+              {t.viewFacilities}<ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-px bg-white/10 border border-white/10">
+            {[
+              "Injection Moulding",
+              "IBM Plastic",
+              "Extrusion",
+              "Blow Moulding",
+              "SMT",
+              "Manual Insertion",
+              "Assembly & Packing",
+              "R&D",
+              "Tool Room",
+            ].map((item, i) => (
+              <div key={item} className="bg-[#071322] p-6 min-h-[120px] flex flex-col justify-between">
+                <span className="font-mono text-[10px] text-accent">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-display text-lg">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-24 md:py-32 bg-accent text-ink">
+        <div className="container-wide flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
+          <div className="max-w-3xl">
+            <p className="font-mono text-xs uppercase tracking-[.2em] mb-4">{t.ctaEyebrow}</p>
+            <h2 className="text-4xl md:text-6xl font-display font-medium leading-tight">{t.ctaTitle}</h2>
+            <p className="mt-6 text-ink/70 text-lg max-w-2xl leading-relaxed">{t.ctaText}</p>
+          </div>
+          <Link href="/rfq" className="inline-flex items-center justify-center gap-3 bg-ink text-white px-8 py-5 font-medium hover:bg-white hover:text-ink transition-colors whitespace-nowrap">
+            {t.requestQuote}<ArrowRight className="w-5 h-5" />
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }
