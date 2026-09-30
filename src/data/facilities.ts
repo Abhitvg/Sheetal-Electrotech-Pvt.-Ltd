@@ -8,6 +8,11 @@ export type Facility = {
   specs: { label: string; value: string }[];
   materials?: string[];
   highlights: { title: string; body: string }[];
+  portfolio?: { title: string; body: string }[];
+  applications?: string[];
+  approvedBrands?: string[];
+  capacityNote?: string;
+  legacyHeading?: string;
 };
 
 export const facilities: Facility[] = [
@@ -34,12 +39,25 @@ export const facilities: Facility[] = [
   {
     slug: "extrusion",
     title: "Extrusion",
-    tagline: "Continuous plastic profile manufacturing.",
-    description: "The extrusion machine is a versatile tool for producing a wide range of plastic products, including batten, with a high degree of precision and consistency.",
+    tagline: "Continuous plastic profile manufacturing for battens, housings and other formed plastic products.",
+    description: "Sheetal Electrotech's extrusion capability supports the production of plastic profiles and products including battens and housings. The extrusion process forms molten plastic through a die to create continuous profiles with consistent dimensions and finish.",
     image: "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot-2023-04-15-at-11.05.08-AM.png",
     fallbackImages: ["/images/hero_manufacturing.jpg"],
+    legacyHeading: "Extrusion product works with Sheetal Electrotech",
+    capacityNote: "The legacy company page describes capacity of up to 12 lakh pieces per month for extruder machine products.",
+    portfolio: [
+      { title: "Plastic Battens", body: "Extrusion supports the manufacture of plastic batten profiles used in lighting products." },
+      { title: "Plastic Housings", body: "Profile-based housings and formed plastic parts can be produced around specified product requirements." },
+      { title: "Custom Extruded Products", body: "Extrusion can be applied to residential, commercial and industrial product requirements." }
+    ],
+    applications: ["Residential", "Commercial", "Industrial"],
+    approvedBrands: ["RK Lighting", "Elite", "Crompton", "Lumisons"],
     specs: [],
-    highlights: []
+    highlights: [
+      { title: "Consistent Profile Formation", body: "Extrusion is suited to continuous plastic profiles where dimensional consistency and repeatable forming are important." },
+      { title: "Manufacturing Experience", body: "The legacy company material describes an experienced team of technicians and engineers supporting extrusion product manufacturing." },
+      { title: "Quality Focus", body: "The legacy material emphasizes quality, service, materials and production methods throughout the manufacturing process." }
+    ]
   },
   {
     slug: "manual-insertion",
