@@ -30,6 +30,10 @@ const assets = {
     url: "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8803.png",
     file: "assembly-packing.png",
   },
+  "extrusion-context": {
+    url: "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot-2023-04-15-at-11.05.08-AM.png",
+    file: "extrusion-context.png",
+  },
 };
 
 const root = process.cwd();
