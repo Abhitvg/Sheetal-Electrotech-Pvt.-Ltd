@@ -112,57 +112,117 @@ export default function ProductsHub() {
   return (
     <main className="bg-paper text-ink">
       {/* HERO */}
-      <section className="relative min-h-[78vh] overflow-hidden bg-ink text-white">
-        <div className="absolute inset-0 opacity-60">
-          <Image
-            src="/images/products_led.jpg"
-            alt="Sheetal Electrotech product portfolio"
-            fill
-            sizes="100vw"
-            className="object-cover object-center"
-            priority
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#071322] via-[#071322]/85 to-[#071322]/30" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.04)_1px,transparent_1px)] bg-[size:48px_48px] opacity-40" />
+      <section className="relative overflow-hidden bg-[#071322] text-white">
+        <div className="absolute inset-0 opacity-40 bg-[linear-gradient(rgba(255,255,255,.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.035)_1px,transparent_1px)] bg-[size:48px_48px]" />
+        <div className="absolute -left-40 -top-40 w-[520px] h-[520px] rounded-full border border-white/5" />
+        <div className="absolute -right-40 bottom-[-220px] w-[620px] h-[620px] rounded-full border border-white/5" />
 
-        <div className="relative z-10 container-wide pt-36 pb-24 grid lg:grid-cols-[1.05fr_.95fr] gap-16 items-center">
-          <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }}>
-            <p className="font-mono text-accent text-xs md:text-sm uppercase tracking-[.22em] mb-6">{t.eyebrow}</p>
-            <h1 className="text-5xl md:text-7xl lg:text-[88px] font-display font-medium leading-[.95] tracking-tight max-w-4xl">
-              {t.title}
-            </h1>
-            <p className="mt-8 text-white/70 text-lg md:text-xl leading-relaxed max-w-2xl">{t.intro}</p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link href="/products/led-lighting" className="inline-flex items-center gap-3 bg-white text-ink px-6 py-4 font-medium hover:bg-accent hover:text-white transition-colors">
-                {t.viewLed}<ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link href="/products/rigid-packaging" className="inline-flex items-center gap-3 border border-white/25 text-white px-6 py-4 font-medium hover:bg-white/10 transition-colors">
-                {t.viewPackaging}<ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </motion.div>
+        <div className="relative z-10 container-wide pt-32 md:pt-40 pb-16 md:pb-24">
+          <div className="grid lg:grid-cols-[.95fr_1.05fr] gap-12 lg:gap-20 items-center">
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }}>
+              <p className="font-mono text-accent text-xs md:text-sm uppercase tracking-[.22em] mb-6">
+                {t.eyebrow}
+              </p>
 
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: .8, delay: .15 }}
-            className="grid grid-cols-2 gap-3 max-w-xl lg:ml-auto"
-          >
-            {[
-              ["/images/products/led-bulb.png", "LED Bulbs"],
-              ["/images/products/led-batten.png", "LED Battens"],
-              ["/images/jar_product.jpg", "Jars"],
-              ["/images/products/led-street-light-2.png", "Street Lights"],
-            ].map(([src, label]) => (
-              <div key={label} className="relative aspect-square overflow-hidden border border-white/10 bg-white/5">
-                <Image src={src} alt={label} fill sizes="(max-width: 1024px) 45vw, 260px" className="object-cover" />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-5 pt-16">
-                  <p className="font-mono text-[11px] uppercase tracking-widest text-white/75">{label}</p>
+              <h1 className="text-5xl md:text-7xl xl:text-[88px] font-display font-medium leading-[.92] tracking-tight max-w-3xl">
+                Products,
+                <span className="block text-white/45">built around</span>
+                <span className="block">your requirements.</span>
+              </h1>
+
+              <p className="mt-8 text-white/65 text-lg md:text-xl leading-relaxed max-w-2xl">
+                {t.intro}
+              </p>
+
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Link
+                  href="/products/led-lighting"
+                  className="inline-flex items-center gap-3 bg-white text-ink px-6 py-4 font-medium hover:bg-accent hover:text-white transition-colors"
+                >
+                  {t.viewLed}<ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/products/rigid-packaging"
+                  className="inline-flex items-center gap-3 border border-white/20 text-white px-6 py-4 font-medium hover:bg-white/10 transition-colors"
+                >
+                  {t.viewPackaging}<ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+
+              <div className="mt-12 pt-7 border-t border-white/10 grid grid-cols-3 gap-5 max-w-xl">
+                <div>
+                  <p className="font-display text-3xl md:text-4xl">25+</p>
+                  <p className="text-white/45 text-xs uppercase tracking-widest mt-1">Years</p>
+                </div>
+                <div>
+                  <p className="font-display text-3xl md:text-4xl">9</p>
+                  <p className="text-white/45 text-xs uppercase tracking-widest mt-1">Capabilities</p>
+                </div>
+                <div>
+                  <p className="font-display text-3xl md:text-4xl">30K+</p>
+                  <p className="text-white/45 text-xs uppercase tracking-widest mt-1">Sq. Ft.</p>
                 </div>
               </div>
-            ))}
-          </motion.div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: .97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: .8, delay: .1 }}
+              className="relative"
+            >
+              <div className="grid grid-cols-12 grid-rows-2 gap-3 min-h-[520px]">
+                <div className="col-span-7 row-span-2 relative overflow-hidden border border-white/10 bg-white/5">
+                  <Image
+                    src="/images/products/led-bulb.png"
+                    alt="LED Bulbs"
+                    fill
+                    sizes="(max-width: 1024px) 58vw, 420px"
+                    className="object-contain p-10 md:p-14"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#071322]/80 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute left-5 bottom-5">
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-white/45">01</p>
+                    <p className="font-display text-xl">LED Lighting</p>
+                  </div>
+                </div>
+
+                <div className="col-span-5 relative overflow-hidden border border-white/10 bg-[#f2f3f5]">
+                  <Image
+                    src="/images/jar_product.jpg"
+                    alt="Rigid Plastic Packaging"
+                    fill
+                    sizes="(max-width: 1024px) 40vw, 300px"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                  <div className="absolute left-4 bottom-4">
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-white/60">02</p>
+                    <p className="font-display text-lg text-white">Packaging</p>
+                  </div>
+                </div>
+
+                <div className="col-span-5 relative overflow-hidden border border-white/10 bg-white/5">
+                  <Image
+                    src="/images/exension-board-jpg.webp"
+                    alt="Electronics and extension boards"
+                    fill
+                    sizes="(max-width: 1024px) 40vw, 300px"
+                    className="object-contain p-8"
+                  />
+                  <div className="absolute left-4 bottom-4">
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-white/45">03</p>
+                    <p className="font-display text-lg">Electronics</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="absolute -bottom-6 right-4 md:right-6 bg-accent text-ink px-5 py-3 shadow-xl">
+                <p className="font-mono text-[10px] uppercase tracking-widest">OEM / Contract Manufacturing</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
