@@ -10,6 +10,7 @@ const copy = {
   en: {
     eyebrow: "Product portfolio · OEM manufacturing",
     title: "Products built around your requirements.",
+    heroTitle: ["Products,", "built around", "your requirements."],
     intro: "Explore Sheetal Electrotech's product portfolio across LED lighting, electronics and rigid plastic packaging — backed by integrated manufacturing capabilities in Daman.",
     viewLed: "Explore LED Lighting",
     viewPackaging: "Explore Rigid Packaging",
@@ -45,6 +46,7 @@ const copy = {
   hi: {
     eyebrow: "उत्पाद पोर्टफोलियो · OEM विनिर्माण",
     title: "आपकी आवश्यकताओं के अनुसार तैयार उत्पाद।",
+    heroTitle: ["उत्पाद,", "आपकी आवश्यकताओं", "के अनुसार तैयार।"],
     intro: "दमन में एकीकृत विनिर्माण क्षमताओं के साथ LED लाइटिंग, इलेक्ट्रॉनिक्स और कठोर प्लास्टिक पैकेजिंग में शीतल इलेक्ट्रो-टेक का उत्पाद पोर्टफोलियो देखें।",
     viewLed: "LED लाइटिंग देखें",
     viewPackaging: "कठोर पैकेजिंग देखें",
@@ -125,9 +127,9 @@ export default function ProductsHub() {
               </p>
 
               <h1 className="text-5xl md:text-7xl xl:text-[88px] font-display font-medium leading-[.92] tracking-tight max-w-3xl">
-                Products,
-                <span className="block text-white/45">built around</span>
-                <span className="block">your requirements.</span>
+                {t.heroTitle[0]}
+                <span className="block text-white/45">{t.heroTitle[1]}</span>
+                <span className="block">{t.heroTitle[2]}</span>
               </h1>
 
               <p className="mt-8 text-white/65 text-lg md:text-xl leading-relaxed max-w-2xl">
