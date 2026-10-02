@@ -20,7 +20,8 @@ export default async function Page({ params: { locale } }: { params: { locale: s
     {
       id: "product-1",
       name: t("p1_name"),
-      range: "Custom"
+      range: "Custom",
+      description: "Custom moulded packaging developed against defined product, tooling and manufacturing requirements.",
       image: "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8665.png",
       specs: [],
     }
