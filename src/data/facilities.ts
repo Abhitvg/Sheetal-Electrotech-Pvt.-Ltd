@@ -66,7 +66,7 @@ export const facilities: Facility[] = [
     description: "Manual insertion is the hand placement of electronic components into printed circuit boards (PCBs). The official legacy site describes an experienced team, advanced tools and techniques, and complementary PCB, SMT, cable and box-build assembly services.",
     image: "/images/facilities/legacy/manual-insertion.png",
     fallbackImages: ["/images/legacy/manufacturing.png"],
-    specs: undefined,
+    specs: [],
     highlights: [{"title":"Through-hole component placement","body":"Manual insertion is used where components are placed into PCBs by hand with attention to accurate and precise placement."},{"title":"Complementary assembly","body":"The official legacy page lists PCB assembly, SMT assembly, cable assembly and box build assembly as complementary services."},{"title":"Experienced operations","body":"The legacy material describes experienced professionals and technology-supported manual insertion operations."}]
   },
   {
