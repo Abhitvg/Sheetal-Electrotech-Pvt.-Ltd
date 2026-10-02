@@ -21,26 +21,49 @@ const rfqSchema = z.object({
   utm_campaign: z.string().optional(),
 });
 
-// Simple in-memory rate limiter (resets on serverless cold starts, but provides baseline protection)
-const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
-const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const RATE_LIMIT_WINDOW_SECONDS = 60;
 const MAX_REQUESTS_PER_WINDOW = 3;
+
+async function checkRfqRateLimit(ip: string) {
+  if (!process.env.DATABASE_URL) return true;
+
+  const sql = neon(process.env.DATABASE_URL);
+  await sql`CREATE TABLE IF NOT EXISTS rate_limits (
+    rate_limit_key TEXT PRIMARY KEY,
+    window_started_at TIMESTAMPTZ NOT NULL,
+    request_count INTEGER NOT NULL DEFAULT 0
+  )`;
+
+  const rows = await sql`
+    INSERT INTO rate_limits (rate_limit_key, window_started_at, request_count)
+    VALUES (CONCAT('rfq:', \${ip}), NOW(), 1)
+    ON CONFLICT (rate_limit_key) DO UPDATE
+    SET request_count = CASE
+      WHEN NOW() - rate_limits.window_started_at < (\${RATE_LIMIT_WINDOW_SECONDS} * INTERVAL '1 second')
+        THEN rate_limits.request_count + 1
+      ELSE 1
+    END,
+    window_started_at = CASE
+      WHEN NOW() - rate_limits.window_started_at < (\${RATE_LIMIT_WINDOW_SECONDS} * INTERVAL '1 second')
+        THEN rate_limits.window_started_at
+      ELSE NOW()
+    END
+    RETURNING request_count
+  `;
+
+  return Number(rows[0]?.request_count ?? 1) <= MAX_REQUESTS_PER_WINDOW;
+}
 
 export async function submitRfq(formData: FormData) {
   try {
-    // 1. Rate Limiting
+    // 1. Durable rate limiting
     const headersList = await headers();
-    const ip = headersList.get("x-forwarded-for") || "unknown";
-    const now = Date.now();
-    const rateData = rateLimitMap.get(ip);
+    const forwardedFor = headersList.get("x-forwarded-for");
+    const ip = forwardedFor?.split(",")[0]?.trim() || headersList.get("x-real-ip") || "unknown";
 
-    if (rateData && now - rateData.timestamp < RATE_LIMIT_WINDOW_MS) {
-      if (rateData.count >= MAX_REQUESTS_PER_WINDOW) {
-        return { success: false, message: "Too many submissions. Please try again later." };
-      }
-      rateLimitMap.set(ip, { count: rateData.count + 1, timestamp: rateData.timestamp });
-    } else {
-      rateLimitMap.set(ip, { count: 1, timestamp: now });
+    const allowed = await checkRfqRateLimit(ip);
+    if (!allowed) {
+      return { success: false, message: "Too many submissions. Please try again later." };
     }
 
     // 2. Check honeypot
