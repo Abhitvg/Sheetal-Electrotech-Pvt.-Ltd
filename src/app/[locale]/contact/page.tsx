@@ -80,6 +80,12 @@ export default function ContactPage() {
                   Send Us a Message
                 </h2>
 
+                {/* Honeypot: legitimate users never see or fill this field. */}
+                <div className="absolute -left-[10000px] w-px h-px overflow-hidden" aria-hidden="true">
+                  <label htmlFor="website">Website</label>
+                  <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
                     <label className="block text-sm font-medium text-ink mb-2">Full Name *</label>
