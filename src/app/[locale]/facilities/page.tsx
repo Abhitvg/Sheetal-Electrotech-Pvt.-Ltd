@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
-import LegacyFacilityImage from "@/components/LegacyFacilityImage";
+import FacilityImage from "@/components/FacilityImage";
 import { facilities } from "@/data/facilities";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
@@ -49,7 +49,7 @@ export default function FacilitiesIndexPage() {
                 {/* Background */}
                 {hasRealPhoto ? (
                   <div className="absolute inset-0 z-0 overflow-hidden">
-                    <LegacyFacilityImage
+                    <FacilityImage
                       candidates={[facility.image, ...(facility.fallbackImages ?? [])]}
                       alt={facility.title}
                       className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
