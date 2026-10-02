@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import { ArrowRight, ArrowUpRight, Boxes, Cpu, Lightbulb, PackageCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import { legacyProductImages, facilityLegacyGalleries } from "@/data/legacyMedia";
 
 const copy = {
   en: {
@@ -107,8 +107,8 @@ export default function ProductsHub() {
   const families = [
     { number: "01", title: t.led, desc: t.ledDesc, icon: Lightbulb, href: "/products/led-lighting", image: "/images/products/led-bulb.png" },
     { number: "02", title: t.packaging, desc: t.packagingDesc, icon: PackageCheck, href: "/products/rigid-packaging", image: "/images/jar_product.jpg" },
-    { number: "03", title: t.electronics, desc: t.electronicsDesc, icon: Cpu, href: "/products/electronics", image: "/images/exension-board-jpg.webp" },
-    { number: "04", title: t.oem, desc: t.oemDesc, icon: Boxes, href: "/rfq", image: "/images/product_showcase.jpg" },
+    { number: "03", title: t.electronics, desc: t.electronicsDesc, icon: Cpu, href: "/products/electronics", image: legacyProductImages["extension-board"]?.[0] ?? "/images/exension-board-jpg.webp" },
+    { number: "04", title: t.oem, desc: t.oemDesc, icon: Boxes, href: "/rfq", image: facilityLegacyGalleries["injection-moulding"]?.[0] ?? "/images/product_showcase.jpg" },
   ];
 
   return (
@@ -206,12 +206,11 @@ export default function ProductsHub() {
                 </div>
 
                 <div className="col-span-5 relative overflow-hidden border border-white/10 bg-white/5">
-                  <Image
-                    src="/images/exension-board-jpg.webp"
+                  <img
+                    src={legacyProductImages["extension-board"]?.[0] ?? "/images/exension-board-jpg.webp"}
                     alt="Electronics and extension boards"
-                    fill
-                    sizes="(max-width: 1024px) 40vw, 300px"
-                    className="object-contain p-8"
+                    loading="lazy"
+                    className="h-full w-full object-contain p-8"
                   />
                   <div className="absolute left-4 bottom-4">
                     <p className="font-mono text-[10px] uppercase tracking-widest text-white/45">03</p>
@@ -243,7 +242,7 @@ export default function ProductsHub() {
               return (
                 <motion.div key={family.number} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .5, delay: i * .06 }}>
                   <Link href={family.href} className="group relative block h-[430px] overflow-hidden bg-ink text-white">
-                    <Image src={family.image} alt={family.title} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover opacity-65 group-hover:scale-105 group-hover:opacity-80 transition-all duration-700" />
+                    <img src={family.image} alt={family.title} loading={i === 0 ? "eager" : "lazy"} className="absolute inset-0 h-full w-full object-cover opacity-65 group-hover:scale-105 group-hover:opacity-80 transition-all duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#071322]/95 via-[#071322]/45 to-[#071322]/5" />
                     <div className="relative z-10 h-full flex flex-col justify-between p-7">
                       <div className="flex items-center justify-between">
