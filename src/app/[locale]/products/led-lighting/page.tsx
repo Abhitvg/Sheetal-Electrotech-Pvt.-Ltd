@@ -3,59 +3,60 @@
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
+import { legacyProductImages } from "@/data/legacyMedia";
 
 const subCategories = [
   {
     title: "LED Bulbs",
-    description: "Energy-efficient LED bulbs from 5W to 50W. Available in B22 & E27 bases for residential and commercial use.",
+    description: "LED bulbs for residential, commercial and industrial applications, manufactured to specified requirements.",
     href: "/products/led-lighting/bulbs",
-    image: "/images/products/led-bulb.png"
+    image: legacyProductImages["led-bulb"]?.[0] ?? "/images/products/led-bulb.png"
   },
   {
     title: "LED Battens",
-    description: "Slim-profile linear LED lighting solutions in various lengths and wattages for uniform illumination.",
+    description: "Linear LED lighting products for residential, commercial and industrial spaces, available in multiple configurations.",
     href: "/products/led-lighting/battens",
     image: "/images/products/led-batten.png"
   },
   {
     title: "LED Downlights & Panels",
-    description: "Precision-engineered recessed and surface-mount downlights and ceiling panels.",
+    description: "LED downlights, down lighters, ceiling lights and surface ring products manufactured to specified requirements.",
     href: "/products/led-lighting/downlights",
     image: "/images/products/led-down-light.webp"
   },
   {
     title: "LED Street Lights",
-    description: "High-power, durable LED street luminaires with IP65 weather-resistant rating for outdoor infrastructure.",
+    description: "LED street lighting products for outdoor illumination and infrastructure applications.",
     href: "/products/led-lighting/street-lights",
     image: "/images/products/led-street-light-2.png"
   },
   {
     title: "LED Flood Lights",
-    description: "High-intensity flood lights for architectural, industrial, and outdoor area illumination.",
+    description: "Flood and well light products for outdoor illumination, security, sports and landscaping applications.",
     href: "/products/led-lighting/flood-lights",
     image: "/images/products/led-flood-well-light.png"
   },
   {
     title: "LED Spot Lights",
-    description: "Directional precision spot lighting for retail, accent, and architectural applications.",
+    description: "Directional LED spot lighting products for focused illumination.",
     href: "/products/led-lighting/spot-lights",
     image: "/images/products/led-spot-light.png"
   },
   {
     title: "Decorative Lighting",
-    description: "Aesthetic LED fixtures designed for ambient and decorative interior lighting.",
+    description: "Decorative LED lighting products for aesthetic and ambient indoor illumination.",
     href: "/products/led-lighting/decorative-lights",
     image: "/images/products/led-decorative-light.png"
   },
   {
     title: "Smart LED Lighting",
-    description: "WiFi-enabled smart lighting with app control, dimming, and voice assistant support.",
+    description: "Smart LED lighting with smartphone/app control and voice assistant support through the connected ecosystem described on the official site.",
     href: "/products/led-lighting/smart-led",
     image: "/images/products/smart-led-bulb.png"
   },
   {
     title: "LED Strip Lights",
-    description: "Flexible, high-density LED strips for cove lighting, under-cabinet, and accent applications.",
+    description: "Flexible LED strip lighting products for accent and interior illumination.",
     href: "/products/led-lighting/strip-lights",
     image: "/images/products/led-strip-lights.png"
   }
