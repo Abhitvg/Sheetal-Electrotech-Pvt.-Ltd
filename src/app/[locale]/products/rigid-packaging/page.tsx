@@ -3,7 +3,6 @@
 import { Link } from "@/i18n/routing";
 import { ArrowRight, Box, Package, Layers, Hexagon } from "lucide-react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { facilityLegacyGalleries } from "@/data/legacyMedia";
 
 const packagingImages = {
@@ -24,7 +23,7 @@ const subCategories = [
   },
   {
     title: "Jars & Containers",
-    description: "Rigid plastic containers supported by Sheetal Electrotech&apos;s moulding capabilities.",
+    description: "Rigid plastic containers supported by Sheetal Electrotech's moulding capabilities.",
     href: "/products/rigid-packaging/jars",
     image: packagingImages.blowAlt,
     icon: Package
@@ -120,12 +119,11 @@ export default function RigidPackagingPage() {
           {subCategories.map((cat) => (
             <Link key={cat.title} href={cat.href} className="group block bg-white border border-steel/15 hover:border-accent/30 transition-all overflow-hidden flex flex-col h-full">
               <div className="h-48 relative bg-mist flex-shrink-0 overflow-hidden">
-                <Image
+                <img
                   src={cat.image}
                   alt={cat.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 25vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
                 <cat.icon className="absolute bottom-4 right-4 w-8 h-8 text-white/90" strokeWidth={1.5} />
