@@ -2,7 +2,7 @@ import { facilities } from "@/data/facilities";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { localizedMetadata } from "@/lib/seo";
-import LegacyFacilityImage from "@/components/LegacyFacilityImage";
+import FacilityImage from "@/components/FacilityImage";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, Factory, Gauge, Layers3 } from "lucide-react";
 
@@ -40,7 +40,7 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
       {/* Hero - Full bleed with overlay */}
       <div className="relative h-[70vh] min-h-[500px] flex items-end">
         <div className="absolute inset-0">
-          <LegacyFacilityImage
+          <FacilityImage
             candidates={[facility.image, ...(facility.fallbackImages ?? [])]}
             alt={facility.title}
             eager
