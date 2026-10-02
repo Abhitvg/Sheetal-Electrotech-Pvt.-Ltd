@@ -49,15 +49,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
-  const allRoutes = [...routes, ...insights.map((post) => `/insights/${post.slug}`)];
 
-  allRoutes.forEach((route) => {
+  routes.forEach((route) => {
     locales.forEach((locale) => {
       sitemapEntries.push({
         url: `${baseUrl}/${locale}${route}`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: route === '' ? 1 : 0.8,
+      });
+    });
+  });
+
+  insights.forEach((post) => {
+    locales.forEach((locale) => {
+      sitemapEntries.push({
+        url: `${baseUrl}/${locale}/insights/${post.slug}`,
+        lastModified: new Date(post.dateModified + 'T00:00:00Z'),
+        changeFrequency: 'monthly',
+        priority: 0.7,
       });
     });
   });
