@@ -71,7 +71,7 @@ export default function Footer() {
 
             <h4 className="font-mono text-xs uppercase tracking-widest text-ink/40 mb-6 mt-12">Resources</h4>
             <ul className="space-y-4 text-sm text-ink/80">
-              <li><a href="/resources/company-profile.pdf" target="_blank" className="hover:text-accent transition-colors">Company Profile (PDF)</a></li>
+              <li><a href="/resources/Sheetal-update.pdf" target="_blank" className="hover:text-accent transition-colors">Company Profile (PDF)</a></li>
               <li><a href="/resources/product-catalogue.pdf" target="_blank" className="hover:text-accent transition-colors">Product Catalogue (PDF)</a></li>
             </ul>
           </div>
