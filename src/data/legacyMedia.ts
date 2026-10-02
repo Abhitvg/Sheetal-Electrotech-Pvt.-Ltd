@@ -240,7 +240,11 @@ export const legacyInsightImages: Record<string, string[]> = {
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/PHOTO-2023-04-25-22-26-42-35-jpg.webp",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8665.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8666.png",
-  ]
+  ],
+  "plastic-blow-moulding-at-sheetal-electrotech": ["https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png"],
+  "smt-assembly-at-sheetal-electrotech": ["https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8730.png","https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8729.png","https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8728.png"],
+  "assembly-and-packing-manufacturing": ["https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8803.png","https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8802.png","https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8801.png"],
+  "plastic-injection-moulding-capabilities": ["https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8394.jpeg","https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8393.jpeg","https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8389.jpeg"],
 };
 
 export type LegacyGalleryImage = { src: string; category: "Facilities" | "Products" | "Knowledge"; source: string };
