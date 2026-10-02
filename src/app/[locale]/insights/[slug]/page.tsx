@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { localizedMetadata } from "@/lib/seo";
 import { routing } from "@/i18n/routing";
+import { legacyInsightImages } from "@/data/legacyMedia";
 
 export const dynamic = "force-static";
 export const revalidate = 3600;
@@ -96,9 +97,8 @@ export default async function InsightPage({
     .map((relatedSlug) => insights.find((item) => item.slug === relatedSlug))
     .filter(Boolean) as typeof insights;
 
-  const articleImage = `https://sheetalelectrotech.com/wp-content/uploads/2023/04/energy.png`;
-  const fallbackImage = articleImage;
-  const image = articleImage || fallbackImage;
+  const image = legacyInsightImages[post.slug]?.[0]
+    ?? "https://sheetalelectrotech.com/wp-content/uploads/2023/04/energy.png";
   const articleUrl = `https://sheetalelectrotech.com/${locale}/insights/${post.slug}`;
 
   const articleSchema = {
@@ -424,20 +424,5 @@ export default async function InsightPage({
 }
 
 function legacyImageFor(slug: string) {
-  const imageMap: Record<string, string> = {
-    "benefits-of-led-lighting": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/energy.png",
-    "choosing-right-led-light-beam-angle": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Narrow-Beam-Angle-Spot-light.png",
-    "understanding-led-colors-and-cct": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/3000K-Warm-White-Good-for-Relaxing-Similar-to-Incandescent-bulb-jpg.webp",
-    "what-is-ip-rating": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Moisture-Protection.png",
-    "what-are-lumens": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Untitled-design.gif",
-    "led-product-safety-bis": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/BIS.png",
-    "manual-insertion-process": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8706.png",
-    "plastic-blow-moulding-at-sheetal-electrotech": "https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png",
-    "assembly-and-packing-manufacturing": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8803.png",
-    "plastic-injection-moulding-capabilities": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8394.jpeg",
-    "research-and-development-lighting": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8770.png",
-    "injection-blow-moulding-capabilities": "https://sheetalelectrotech.com/wp-content/uploads/2023/05/PHOTO-2023-04-25-22-26-42-35-jpg.webp",
-    "smt-assembly-at-sheetal-electrotech": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8730.png",
-  };
-  return imageMap[slug] ?? null;
+  return legacyInsightImages[slug]?.[0] ?? null;
 }
