@@ -3,19 +3,22 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { localizedMetadata } from "@/lib/seo";
 import LegacyFacilityImage from "@/components/LegacyFacilityImage";
+import { Link } from "@/i18n/routing";
 import { facilityLegacyGalleries } from "@/data/legacyMedia";
 import { ArrowRight, Factory, Gauge, Layers3 } from "lucide-react";
 
 import { routing } from "@/i18n/routing";
 
-export function generateStaticParams() {
-  const params = [];
-  for (const locale of routing.locales) {
-    for (const f of facilities) {
-      params.push({ locale, slug: f.slug });
-    }
-  }
-  return params;
+export const dynamicParams = false;
+export const revalidate = 3600;
+
+export function generateStaticParams(): Array<{ locale: string; slug: string }> {
+  return routing.locales.flatMap((locale) =>
+    facilities.map((facility) => ({
+      locale,
+      slug: facility.slug,
+    }))
+  );
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
