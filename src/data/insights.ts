@@ -231,8 +231,7 @@ To make the right choice of light bulbs, it is important to understand the conce
 
 By checking these facts on the label before making a purchase, consumers can make informed decisions when selecting light bulbs. This can help ensure that they choose bulbs that are energy-efficient, have a long lifespan, and provide the desired level of light appearance for their needs.
     `
-  }
-
+  },
   {
     slug: "led-product-safety-bis",
     title: "LED Product Safety: Understanding BIS Safety Norms",
