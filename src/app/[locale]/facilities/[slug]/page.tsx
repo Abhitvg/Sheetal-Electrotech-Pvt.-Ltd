@@ -223,6 +223,7 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
                     src={src}
                     alt={`${facility.title} — official facility image ${i + 1}`}
                     loading="lazy"
+                    onError={(event) => { event.currentTarget.style.visibility = "hidden"; }}
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
