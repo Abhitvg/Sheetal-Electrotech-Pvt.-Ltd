@@ -4,12 +4,11 @@ import type { Metadata } from "next";
 import { localizedMetadata } from "@/lib/seo";
 import LegacyFacilityImage from "@/components/LegacyFacilityImage";
 import { Link } from "@/i18n/routing";
-import { facilityLegacyGalleries } from "@/data/legacyMedia";
 import { ArrowRight, Factory, Gauge, Layers3 } from "lucide-react";
 
 import { routing } from "@/i18n/routing";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 export const revalidate = 3600;
 
 export function generateStaticParams(): Array<{ locale: string; slug: string }> {
@@ -42,11 +41,7 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
       <div className="relative h-[70vh] min-h-[500px] flex items-end">
         <div className="absolute inset-0">
           <LegacyFacilityImage
-            candidates={[
-              ...(facility.slug !== "tool-room" ? (facilityLegacyGalleries[facility.slug] ?? []) : []),
-              facility.image,
-              ...(facility.fallbackImages ?? [])
-            ]}
+            candidates={[facility.image, ...(facility.fallbackImages ?? [])]}
             alt={facility.title}
             eager
             className="absolute inset-0 h-full w-full object-cover"
@@ -187,9 +182,9 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
                 <p className="font-mono text-xs uppercase tracking-widest text-ink/40 mb-4">Ready to partner?</p>
                 <h3 className="text-2xl font-display mb-4">Get a quote for this capability.</h3>
                 <p className="text-ink/60 text-sm mb-8">Share your specification, target volume and application with our team.</p>
-                <a href="/rfq" className="flex items-center justify-center gap-3 w-full bg-accent text-ink text-center py-4 font-medium hover:bg-orange-600 transition-colors">
+                <Link href="/rfq" className="flex items-center justify-center gap-3 w-full bg-accent text-ink text-center py-4 font-medium hover:bg-orange-600 transition-colors">
                   Request a Quote <ArrowRight className="w-4 h-4" />
-                </a>
+                </Link>
               </div>
               {facility.slug === "extrusion" && (
                 <div className="border border-steel/15 p-7 bg-white">
@@ -207,34 +202,7 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
         </div>
       </div>
 
-      {facility.slug !== "tool-room" && (facilityLegacyGalleries[facility.slug]?.length ?? 0) > 1 && (
-        <section className="border-t border-steel/10 bg-mist/40 py-20">
-          <div className="container-wide">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-              <div>
-                <p className="font-mono text-accent text-xs uppercase tracking-[.2em] mb-3">Official facility photography</p>
-                <h2 className="text-3xl md:text-5xl font-display font-medium">Inside the operation</h2>
-              </div>
-              <p className="text-steel max-w-md text-sm leading-relaxed">
-                These images are sourced from Sheetal Electrotech&apos;s official legacy site archive and kept tied to the corresponding manufacturing capability.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {(facilityLegacyGalleries[facility.slug] ?? []).slice(0, 10).map((src, i) => (
-                <div key={src} className="group overflow-hidden bg-white border border-steel/10 aspect-[4/3]">
-                  <img
-                    src={src}
-                    alt={`${facility.title} — official facility image ${i + 1}`}
-                    loading="lazy"
-                    onError={(event) => { event.currentTarget.style.visibility = "hidden"; }}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+
     </div>
   );
 }
