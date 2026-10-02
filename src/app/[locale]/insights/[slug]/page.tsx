@@ -62,6 +62,7 @@ export default async function InsightPage({ params }: { params: Promise<{ locale
                       src={src}
                       alt={`${post.title} — official source image ${index + 1}`}
                       loading={index === 0 ? "eager" : "lazy"}
+                      onError={(event) => { event.currentTarget.style.visibility = "hidden"; }}
                       className="h-full w-full object-cover"
                     />
                   </div>
