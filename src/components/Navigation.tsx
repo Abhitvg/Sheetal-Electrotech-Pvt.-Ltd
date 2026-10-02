@@ -49,7 +49,7 @@ export default function Navigation() {
           
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 z-50 relative">
-            <div className="relative w-10 h-10 flex-shrink-0">
+            <div className="relative w-11 h-11 flex-shrink-0">
               <Image 
                 src="/images/logo.webp" 
                 alt="Sheetal Group Logo" 
@@ -58,7 +58,7 @@ export default function Navigation() {
                 priority
               />
             </div>
-            <span className={`font-display font-bold tracking-tight text-xl ${
+            <span className={`font-display font-bold tracking-tight text-2xl ${
               !isHomepage || isScrolled || activeMegaMenu || isMobileMenuOpen ? "text-ink" : "text-white"
             }`}>
               Sheetal Group
@@ -66,7 +66,7 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-9 xl:gap-10">
             {navLinks.map((link) => (
               <div
                 key={link.name}
@@ -75,7 +75,7 @@ export default function Navigation() {
               >
                 <Link
                   href={link.href}
-                  className={`flex items-center gap-1 text-sm font-medium transition-colors hover:text-accent ${
+                  className={`flex items-center gap-1 text-[15px] xl:text-base font-medium transition-colors hover:text-accent ${
                     !isHomepage || isScrolled || activeMegaMenu ? "text-ink/80" : "text-white/90"
                   }`}
                 >
@@ -95,7 +95,7 @@ export default function Navigation() {
             </div>
             <Link 
               href="/rfq" 
-              className={`hidden md:flex text-sm font-medium px-6 py-2.5 transition-colors rounded-full ${
+              className={`hidden md:flex text-[15px] font-medium px-7 py-3 transition-colors rounded-full ${
                 !isHomepage || isScrolled || activeMegaMenu
                   ? "bg-accent text-white hover:bg-blue-600"
                   : "bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white hover:text-ink"
