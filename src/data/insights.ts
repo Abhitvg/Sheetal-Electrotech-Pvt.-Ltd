@@ -251,6 +251,78 @@ Before purchasing electronic products, including lights, consumers should look f
 
 By purchasing BIS certified products, consumers can be assured that the products they are buying are safe to use and meet certain quality standards. This can help prevent accidents and protect consumers from harm, while also ensuring that the products function properly and have a longer lifespan.
 `
+  },,
+  {
+    slug: "plastic-blow-moulding-at-sheetal-electrotech",
+    title: "Plastic Blow Moulding: Container Manufacturing Capability",
+    excerpt: "Explore Sheetal Electrotech’s official blow moulding capability for hollow plastic products across a broad container range and application sectors.",
+    category: "Manufacturing",
+    relatedProducts: [
+      { name: "Rigid Packaging", href: "/products/rigid-packaging" },
+      { name: "Plastic Bottles", href: "/products/rigid-packaging/bottles" }
+    ],
+    content: `## Plastic blow moulding work in Sheetal Electrotech
+
+Sheetal Electrotech specializes in plastic blow moulding and describes equipment designed to handle products from 10 ml to 25 litre containers.
+
+The official legacy material cites applications across pharmaceutical, agricultural and packing industries. It also describes a total of 18 blow moulding machines and emphasizes precision, consistency, product quality and customized solutions.
+
+The legacy page names UPL, HPCL, BPCL and TATA among customers served, and describes the company’s focus on quality, innovation and sustainability in plastic manufacturing.
+`
   },
+  {
+    slug: "smt-assembly-at-sheetal-electrotech",
+    title: "SMT Assembly and High-Speed PCB Manufacturing",
+    excerpt: "See how Sheetal Electrotech’s SMT operation combines high-speed placement, vision systems, reflow and inspection for electronics manufacturing.",
+    category: "Manufacturing",
+    relatedProducts: [
+      { name: "Electronics", href: "/products/electronics" },
+      { name: "Extension Boards", href: "/products/electronics/extension-boards" }
+    ],
+    content: `## SMT Machines in Sheetal Electrotech
+
+Surface Mount Technology (SMT) assembly places electronic components directly onto the surface of a printed circuit board (PCB). Sheetal Electrotech describes state-of-the-art SMT equipment and techniques for high-speed, high-precision placement.
+
+The official legacy page lists HT-F7S at 170k cph, RT-2 at 22k cph, HT-E6T at 20k cph and a six-zone SMT reflow oven. It also describes advanced vision systems for accurate component placement.
+
+The legacy material lists surface-mount resistors, capacitors, IC, MOSFET, diode and LED among component types supported, with in-line inspection and end-of-line testing used for quality control.
+`
+  },
+  {
+    slug: "assembly-and-packing-manufacturing",
+    title: "Assembly, Packing and Product Aging Tests",
+    excerpt: "How the official legacy site describes systematic conveyor assembly, flexible packing and electrical aging tests for lighting products.",
+    category: "Manufacturing",
+    relatedProducts: [
+      { name: "LED Battens", href: "/products/led-lighting/battens" },
+      { name: "Downlights", href: "/products/led-lighting/downlights" }
+    ],
+    content: `## Assembly and Packing in Sheetal Electrotech
+
+Sheetal Electrotech describes systematic conveyor-based assembly for batten, panel and downlight products. The legacy page states a daily assembly capacity of up to 100k units.
+
+After assembly, the packing system uses different materials and packaging configurations according to product requirements. The same source describes an aging machine handling 100V to 320V for product testing and validation under varied voltage conditions.
+
+The stated process combines assembly, packing and testing to support consistent finished-product quality.
+`
+  },
+  {
+    slug: "plastic-injection-moulding-capabilities",
+    title: "Plastic Injection Moulding: Materials, Machines and Job Work",
+    excerpt: "A source-based overview of Sheetal Electrotech’s plastic injection moulding capability, including supported materials and machine range.",
+    category: "Manufacturing",
+    relatedProducts: [
+      { name: "Injection-Moulded Components", href: "/products/rigid-packaging/components" },
+      { name: "Rigid Packaging", href: "/products/rigid-packaging" }
+    ],
+    content: `## Why Sheetal Electrotech for your Plastic Injection Moulding Work?
+
+The official legacy page describes Sheetal Electrotech as a plastic injection moulding partner supporting materials including PP, ABS, PET, PC and PBT.
+
+The legacy source lists injection moulding machines ranging from 80 to 160 tons and describes support across design, prototyping, tooling and production.
+
+The same material emphasizes cost-effective solutions and timely delivery, with an experienced engineering and manufacturing team supporting plastic moulding projects.
+`
+  }
 ];
 
