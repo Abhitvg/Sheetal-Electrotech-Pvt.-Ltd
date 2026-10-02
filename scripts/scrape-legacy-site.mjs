@@ -12,6 +12,8 @@ const PAGES = path.join(OUT, "pages");
 const IMAGES = path.join(OUT, "images");
 const MAX_PAGES = 250;
 const MAX_IMAGE_BYTES = 25 * 1024 * 1024;
+const FETCH_TIMEOUT_MS = 15000;
+const IMAGE_CONCURRENCY = 6;
 
 const seeds = [
   "/", "/about-us/", "/products/", "/contact/", "/careers/", "/manufacturing-units/",
@@ -148,7 +150,8 @@ async function fetchText(url) {
       "user-agent": "Mozilla/5.0 (compatible; SheetalLegacyExtractor/1.0)",
       "accept": "text/html,application/xhtml+xml"
     },
-    redirect: "follow"
+    redirect: "follow",
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS)
   });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return { html: await response.text(), finalUrl: response.url, contentType: response.headers.get("content-type") || "" };
@@ -165,7 +168,8 @@ async function downloadImage(url) {
 
   const response = await fetch(url, {
     headers: { "user-agent": "Mozilla/5.0 (compatible; SheetalLegacyExtractor/1.0)" },
-    redirect: "follow"
+    redirect: "follow",
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS)
   });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   const contentType = response.headers.get("content-type") || "";
@@ -237,15 +241,21 @@ while (queue.length && visited.size < MAX_PAGES) {
 }
 
 const imageManifest = [];
-for (const url of imageUrls) {
-  try {
-    imageManifest.push(await downloadImage(url));
-    console.log(`IMAGE: ${url}`);
-  } catch (error) {
-    imageManifest.push({ url, status: "failed", error: String(error) });
-    console.error(`IMAGE FAILED: ${url}: ${String(error)}`);
+const imageQueue = [...imageUrls];
+async function imageWorker(workerId) {
+  while (imageQueue.length) {
+    const url = imageQueue.shift();
+    if (!url) return;
+    try {
+      imageManifest.push(await downloadImage(url));
+      console.log(`IMAGE WORKER ${workerId}: ${url}`);
+    } catch (error) {
+      imageManifest.push({ url, status: "failed", error: String(error) });
+      console.error(`IMAGE FAILED: ${url}: ${String(error)}`);
+    }
   }
 }
+await Promise.all(Array.from({ length: Math.min(IMAGE_CONCURRENCY, imageQueue.length) }, (_, i) => imageWorker(i + 1)));
 
 pages.sort((a,b) => a.url.localeCompare(b.url));
 imageManifest.sort((a,b) => a.url.localeCompare(b.url));
