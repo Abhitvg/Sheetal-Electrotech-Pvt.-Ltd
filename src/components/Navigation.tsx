@@ -38,6 +38,10 @@ export default function Navigation() {
   return (
     <>
       <nav
+        aria-label="Primary navigation"
+        onKeyDown={(event) => {
+          if (event.key === "Escape") setActiveMegaMenu(null);
+        }}
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           !isHomepage || isScrolled || activeMegaMenu || isMobileMenuOpen
             ? "glass-card !border-x-0 !border-t-0 py-4"
@@ -75,6 +79,9 @@ export default function Navigation() {
               >
                 <Link
                   href={link.href}
+                  aria-haspopup={link.hasMegaMenu ? "true" : undefined}
+                  aria-expanded={link.hasMegaMenu ? activeMegaMenu === link.name : undefined}
+                  onFocus={() => link.hasMegaMenu && setActiveMegaMenu(link.name)}
                   className={`flex items-center gap-1 text-[15px] xl:text-base font-medium transition-colors hover:text-accent ${
                     !isHomepage || isScrolled || activeMegaMenu ? "text-ink/80" : "text-white/90"
                   }`}
@@ -104,7 +111,11 @@ export default function Navigation() {
               {t("requestQuote")}
             </Link>
             
-            <button 
+            <button
+              type="button"
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation-menu"
               className={`lg:hidden ${!isHomepage || isScrolled || isMobileMenuOpen ? "text-ink" : "text-white"}`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
@@ -203,7 +214,9 @@ export default function Navigation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            id="mobile-navigation-menu"\n            aria-label="Mobile navigation"\n            className="fixed inset-0 bg-paper/95 backdrop-blur-xl z-40 lg:hidden pt-24 px-6"
+            id="mobile-navigation-menu"
+            aria-label="Mobile navigation"
+            className="fixed inset-0 bg-paper/95 backdrop-blur-xl z-40 lg:hidden pt-24 px-6"
           >
             <div className="flex flex-col gap-6 text-xl">
               {navLinks.map((link) => (
