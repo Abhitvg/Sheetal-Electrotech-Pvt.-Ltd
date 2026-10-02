@@ -203,7 +203,7 @@ export default function Navigation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-paper/95 backdrop-blur-xl z-40 lg:hidden pt-24 px-6"
+            id="mobile-navigation-menu"\n            aria-label="Mobile navigation"\n            className="fixed inset-0 bg-paper/95 backdrop-blur-xl z-40 lg:hidden pt-24 px-6"
           >
             <div className="flex flex-col gap-6 text-xl">
               {navLinks.map((link) => (
