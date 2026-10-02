@@ -22,7 +22,7 @@ const CATEGORY_ICONS: Record<string, any> = {
 
 const CATEGORY_ORDER = ["LED Knowledge", "Manufacturing", "Product & Engineering"] as const;
 
-function readingTime(content: [string, ...string][]) {
+function readingTime(content: [string, ...string[]][]) {
   const text = content.flat().join(" ");
   const words = text.replace(/[*_#]/g, "").split(/\\s+/).filter(Boolean).length;
   return Math.max(1, Math.ceil(words / 200));
