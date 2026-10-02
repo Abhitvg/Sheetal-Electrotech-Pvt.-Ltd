@@ -20,15 +20,15 @@ export default async function JarsPage({ params: { locale } }: { params: { local
     {
       id: "pp-jars",
       name: t("p1_name"),
-      range: t("p1_range"),
-      image: "/images/legacy/Photo8.webp",
+      range: "Configured to requirement",
+      image: "https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png",
       specs: [],
     },
     {
       id: "custom-containers",
       name: t("p2_name"),
-      range: t("p2_range"),
-      image: "/images/legacy/Photo12.webp",
+      range: "Custom",
+      image: "https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png",
       specs: [],
     }
   ];
