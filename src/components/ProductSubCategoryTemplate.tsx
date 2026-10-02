@@ -62,6 +62,7 @@ export default function ProductSubCategoryTemplate({ title, category, descriptio
                           src={src}
                           alt={`${product.name} — official source image ${index + 1}`}
                           loading="lazy"
+                          onError={(event) => { event.currentTarget.src = product.image; }}
                           className="h-full w-full object-cover hover:scale-105 transition-transform duration-500"
                         />
                       </div>
