@@ -2,10 +2,17 @@
 
 import { neon } from "@neondatabase/serverless";
 import { revalidatePath } from "next/cache";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
 const VALID_STATUSES = ["new", "contacted", "quoted", "won", "lost"] as const;
 
 export async function updateRfqStatus(id: string, status: string, internalNotes: string) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) {
+    return { success: false, message: "Unauthorized." };
+  }
+
   if (!process.env.DATABASE_URL) {
     return { success: false, message: "Database is not configured." };
   }
