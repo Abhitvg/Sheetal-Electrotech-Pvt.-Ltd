@@ -57,7 +57,7 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* Stats Banner directly below */
+      {/* Stats Banner directly below */}
       <section className="bg-mist text-ink py-16 border-b border-steel/10">
         <div className="container-wide grid grid-cols-1 md:grid-cols-3 gap-12">
           {[
