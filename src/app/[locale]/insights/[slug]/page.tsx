@@ -76,37 +76,57 @@ export default async function InsightPage({ params }: { params: Promise<{ locale
             prose-headings:font-display prose-headings:font-medium prose-headings:text-ink prose-headings:tracking-tight
             prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:pb-4 prose-h2:border-b prose-h2:border-slate-200
             prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
-            prose-p:text-ink/80 prose-p:leading-[1.8]
+            prose-p:text-ink/80 prose-p:leading-[1.85]
             prose-strong:text-ink prose-strong:font-medium
-            prose-ul:list-none prose-ul:pl-0
-            prose-li:text-ink/80 prose-li:relative prose-li:pl-6
+            prose-ul:my-8 prose-ul:space-y-3 prose-ul:pl-6
+            prose-li:text-ink/80 prose-li:leading-[1.75]
             prose-a:text-accent prose-a:no-underline hover:prose-a:underline
-            [&_li]:before:content-[''] [&_li]:before:absolute [&_li]:before:left-0 [&_li]:before:top-3 [&_li]:before:w-1.5 [&_li]:before:h-1.5 [&_li]:before:bg-accent [&_li]:before:rounded-sm
           ">
-            {/* Custom markdown renderer for basic formatting */}
-            {post.content.split("\n").map((line, i) => {
-              const trimmed = line.trim();
-              if (!trimmed) return null;
-              
-              if (trimmed.startsWith("## ")) {
-                return <h2 key={i}>{trimmed.slice(3)}</h2>;
-              }
-              if (trimmed.startsWith("### ")) {
-                return <h3 key={i}>{trimmed.slice(4)}</h3>;
-              }
-              if (trimmed.startsWith("* **")) {
-                const match = trimmed.match(/\*\s\*\*(.+?)\*\*(.*)/);
-                if (match) {
-                  return <li key={i}><strong>{match[1]}</strong>{match[2]}</li>;
+            {(() => {
+              const lines = post.content.split("\n").map((line) => line.trim()).filter(Boolean);
+              const blocks: React.ReactNode[] = [];
+
+              for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+
+                if (line.startsWith("## ")) {
+                  blocks.push(<h2 key={i}>{line.slice(3)}</h2>);
+                  continue;
                 }
+
+                if (line.startsWith("### ")) {
+                  blocks.push(<h3 key={i}>{line.slice(4)}</h3>);
+                  continue;
+                }
+
+                if (line.startsWith("* ")) {
+                  const items: React.ReactNode[] = [];
+                  while (i < lines.length && lines[i].startsWith("* ")) {
+                    const item = lines[i].slice(2);
+                    const match = item.match(/^\*\*(.+?)\*\*(.*)$/);
+                    items.push(
+                      <li key={`${i}-item`}>
+                        {match ? <><strong>{match[1]}</strong>{match[2]}</> : item}
+                      </li>
+                    );
+                    i++;
+                  }
+                  i--;
+                  blocks.push(<ul key={`list-${i}`}>{items}</ul>);
+                  continue;
+                }
+
+                blocks.push(<p key={i}>{line}</p>);
               }
-              if (trimmed.startsWith("* ")) {
-                return <li key={i}>{trimmed.slice(2)}</li>;
-              }
-              
-              return <p key={i}>{trimmed}</p>;
-            })}
+
+              return blocks;
+            })()}
           </article>
+
+          <div className="mt-12 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-y border-steel/10 py-5 text-xs text-steel">
+            <span className="font-mono uppercase tracking-widest">Source: Official Sheetal Electrotech legacy knowledge archive</span>
+            <span className="font-mono uppercase tracking-widest">{post.category}</span>
+          </div>
 
           {/* Related Products / CTA */}
           {post.relatedProducts && post.relatedProducts.length > 0 && (
