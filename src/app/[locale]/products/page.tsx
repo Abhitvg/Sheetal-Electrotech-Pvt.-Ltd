@@ -1,10 +1,8 @@
-"use client";
-
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import { ArrowRight, ArrowUpRight, Boxes, Cpu, Lightbulb, PackageCheck } from "lucide-react";
-import { motion } from "framer-motion";
+import { HeroTextFadeUp, HeroImageScaleIn, FamilyCardFadeUp, ProductCardFadeUp } from "@/components/ProductAnimations";
 import { legacyProductImages, facilityLegacyGalleries } from "@/data/legacyMedia";
 
 const copy = {
@@ -122,7 +120,7 @@ export default function ProductsHub() {
 
         <div className="relative z-10 container-wide pt-32 md:pt-40 pb-16 md:pb-24">
           <div className="grid lg:grid-cols-[.95fr_1.05fr] gap-12 lg:gap-20 items-center">
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }}>
+            <HeroTextFadeUp>
               <p className="font-mono text-accent text-xs md:text-sm uppercase tracking-[.22em] mb-6">
                 {t.eyebrow}
               </p>
@@ -166,14 +164,9 @@ export default function ProductsHub() {
                   <p className="text-white/45 text-xs uppercase tracking-widest mt-1">Sq. Ft.</p>
                 </div>
               </div>
-            </motion.div>
+            </HeroTextFadeUp>
 
-            <motion.div
-              initial={{ opacity: 0, scale: .97 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: .8, delay: .1 }}
-              className="relative"
-            >
+            <HeroImageScaleIn>
               <div className="grid grid-cols-12 grid-rows-2 gap-3 min-h-[520px]">
                 <div className="col-span-7 row-span-2 relative overflow-hidden border border-white/10 bg-white/5">
                   <Image
@@ -223,7 +216,7 @@ export default function ProductsHub() {
               <div className="absolute -bottom-6 right-4 md:right-6 bg-accent text-ink px-5 py-3 shadow-xl">
                 <p className="font-mono text-[10px] uppercase tracking-widest">OEM / Contract Manufacturing</p>
               </div>
-            </motion.div>
+            </HeroImageScaleIn>
           </div>
         </div>
       </section>
@@ -241,7 +234,7 @@ export default function ProductsHub() {
             {families.map((family, i) => {
               const Icon = family.icon;
               return (
-                <motion.div key={family.number} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .5, delay: i * .06 }}>
+                <FamilyCardFadeUp key={family.number} delay={i * .06}>
                   <Link href={family.href} className="group relative block h-[430px] overflow-hidden bg-ink text-white">
                     <img src={family.image} alt={family.title} loading={i === 0 ? "eager" : "lazy"} className="absolute inset-0 h-full w-full object-cover opacity-65 group-hover:scale-105 group-hover:opacity-80 transition-all duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#071322]/95 via-[#071322]/45 to-[#071322]/5" />
@@ -259,7 +252,7 @@ export default function ProductsHub() {
                       </div>
                     </div>
                   </Link>
-                </motion.div>
+                </FamilyCardFadeUp>
               );
             })}
           </div>
@@ -281,7 +274,7 @@ export default function ProductsHub() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
             {ledProducts.map(([name, image, href], i) => (
-              <motion.div key={name} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .4, delay: i * .03 }}>
+              <ProductCardFadeUp key={name} delay={i * .03}>
                 <Link href={href} className="group block bg-white border border-steel/10 overflow-hidden">
                   <div className="relative aspect-[4/3] bg-[#f5f6f8] overflow-hidden">
                     <Image src={image} alt={name} fill sizes="(max-width: 768px) 50vw, 33vw" className="object-contain p-8 group-hover:scale-105 transition-transform duration-500" />
@@ -292,7 +285,7 @@ export default function ProductsHub() {
                     <ArrowRight className="w-4 h-4 text-accent opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </div>
                 </Link>
-              </motion.div>
+              </ProductCardFadeUp>
             ))}
           </div>
         </div>
