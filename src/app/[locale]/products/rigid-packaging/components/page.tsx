@@ -20,8 +20,8 @@ export default async function Page({ params: { locale } }: { params: { locale: s
     {
       id: "product-1",
       name: t("p1_name"),
-      range: t("p1_range"),
-      image: "/images/legacy/Photo13.webp",
+      range: "Configured to requirement"
+      image: "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8394.jpeg",
       specs: [],
     }
   ];
