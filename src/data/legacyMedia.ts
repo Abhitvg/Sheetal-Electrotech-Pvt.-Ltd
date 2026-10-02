@@ -881,3 +881,9 @@ export const legacyGalleryImages: LegacyGalleryImage[] = [
     "source": "/comparision/"
   }
 ];
+
+export const legacyCompanyImages: string[] = [
+  "https://sheetalelectrotech.com/wp-content/uploads/2023/04/PHOTO-2023-04-25-19-12-00-jpg.webp",
+  "https://sheetalelectrotech.com/wp-content/uploads/2023/04/PHOTO-2023-04-25-19-23-04-jpg.webp",
+  "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8752-removebg-preview.png"
+];
