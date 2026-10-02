@@ -14,7 +14,14 @@ export default function CompanyPage() {
       {/* Hero */}
       <div className="relative h-[75vh] min-h-[550px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
-          <img src={legacyCompanyImages[0]} alt="Sheetal Electrotech official company photography" className="h-full w-full object-cover object-center" fetchPriority="high" />
+          <Image
+            src={legacyCompanyImages[0]}
+            alt="Sheetal Electrotech official company photography"
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover object-center"
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-ink/75 to-ink/30" />
         </div>
         <div className="relative z-10 container-wide text-paper pb-20 pt-36">
@@ -45,7 +52,7 @@ export default function CompanyPage() {
       <section className="bg-paper py-10 border-b border-steel/10">
         <div className="container-wide grid grid-cols-2 md:grid-cols-3 gap-3">
           {legacyCompanyImages.map((src, i) => (
-            <div key={src} className="aspect-[16/9] overflow-hidden bg-mist border border-steel/10">
+            <div key={src} className="relative aspect-[16/9] overflow-hidden bg-mist border border-steel/10">
               <img
                 src={src}
                 alt={`Sheetal Electrotech official company image ${i + 1}`}
