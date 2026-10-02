@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { localizedMetadata } from "@/lib/seo";
 import { routing } from "@/i18n/routing";
+import { legacyInsightImages } from "@/data/legacyMedia";
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -52,6 +53,22 @@ export default async function InsightPage({ params }: { params: Promise<{ locale
           </div>
 
           <div className="w-full h-[1px] bg-slate-200 mb-16" />
+          {legacyInsightImages[post.slug]?.length ? (
+            <div className="mb-16">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {(legacyInsightImages[post.slug] ?? []).slice(0, 3).map((src, index) => (
+                  <div key={src} className="aspect-[4/3] bg-mist overflow-hidden border border-steel/10">
+                    <img
+                      src={src}
+                      alt={`${post.title} — official source image ${index + 1}`}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
 
           {/* Content */}
           <article className="prose prose-lg prose-slate max-w-none
