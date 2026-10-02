@@ -23,7 +23,7 @@ export const facilities: Facility[] = [
     description: "Sheetal Electrotech supports plastic injection moulding for precision plastic components and products, with materials including PP, ABS, PET, PC and PBT. The capability supports design, prototyping, tooling and production workflows.",
     image: "/images/facilities/legacy/injection-moulding.jpeg",
     fallbackImages: ["/images/moulding_factory.jpg"],
-    specs: [{"label":"Machine range","value":"80–160 tons"}],
+    specs: [],
     highlights: [{"title":"Material flexibility","body":"Materials including PP, ABS, PET, PC and PBT can be considered based on product and application requirements."},{"title":"Design to production","body":"The capability can support the workflow from design and prototyping through tooling and production."},{"title":"Cost-effective manufacturing","body":"The process is suited to repeatable production of precision plastic components with attention to consistency and production requirements."}]
   },
   {
@@ -33,7 +33,7 @@ export const facilities: Facility[] = [
     description: "Injection Blow Moulding (IBM) is used for hollow plastic parts and supports applications such as bulb housings. The process complements Sheetal Electrotech's wider plastic manufacturing capabilities.",
     image: "/images/facilities/legacy/ibm-plastic.webp",
     fallbackImages: ["/images/products_packaging.jpg"],
-    specs: [{"label":"Bulb housing capacity","value":"Up to 9 lakh / month"}],
+    specs: [],
     highlights: [{"title":"Bulb housing focus","body":"The capability supports hollow plastic components, including bulb-housing applications."},{"title":"Selected applications","body":"The capability can be configured around specified product and application requirements."},{"title":"Integrated plastics capability","body":"IBM is supported by additional plastic manufacturing capabilities including extrusion and injection moulding."}]
   },
   {
@@ -41,7 +41,7 @@ export const facilities: Facility[] = [
     title: "Extrusion",
     tagline: "Continuous plastic profile manufacturing for battens, housings and other formed plastic products.",
     description: "Sheetal Electrotech's extrusion capability supports the production of plastic profiles and products including battens and housings. The extrusion process forms molten plastic through a die to create continuous profiles with consistent dimensions and finish.",
-    image: "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot-2023-04-15-at-11.05.08-AM.png",
+    image: "/images/hero_manufacturing.jpg",
     fallbackImages: ["/images/hero_manufacturing.jpg"],
     heading: "Extrusion product works with Sheetal Electrotech",
     capacityNote: "Extrusion supports continuous production of plastic profiles and formed products to specified dimensions and application requirements.",
@@ -86,7 +86,7 @@ export const facilities: Facility[] = [
     description: "Sheetal Electrotech’s plastic blow moulding operation supports hollow plastic products including bottles, containers and tanks. Production can be configured around product geometry, material and volume requirements.",
     image: "/images/facilities/legacy/blow-moulding.png",
     fallbackImages: ["/images/packaging_factory.jpg"],
-    specs: [{"label":"Container range","value":"10 ml–25 litres"},{"label":"Machines","value":"18"}],
+    specs: [],
     applications: ["Pharmaceutical","Agricultural","Packing"],
     highlights: [{"title":"Wide container range","body":"Blow moulding supports a range of hollow plastic product formats and container applications."},{"title":"Sector coverage","body":"Applications can include pharmaceutical, agricultural and packaging requirements."},{"title":"Application requirements","body":"Production can be developed around customer-specific specifications and application requirements."}]
   },
@@ -97,7 +97,7 @@ export const facilities: Facility[] = [
     description: "Surface Mount Technology (SMT) assembly places electronic components directly onto printed circuit boards. The capability supports precision component placement, inspection, reflow and testing for electronic assemblies.",
     image: "/images/facilities/legacy/smt.png",
     fallbackImages: ["/images/smt_electronics.jpg"],
-    specs: [{"label":"HT-F7S","value":"170k cph"},{"label":"RT-2","value":"22k cph"},{"label":"HT-E6T","value":"20k cph"},{"label":"Reflow","value":"6-zone SMT reflow oven"}],
+    specs: [],
     highlights: [{"title":"High-speed placement","body":"SMT production supports high-speed component placement with process controls suited to repeatable electronic assembly."},{"title":"Vision-assisted accuracy","body":"Vision-assisted inspection supports accurate component placement and process verification."},{"title":"Component flexibility","body":"Typical surface-mount components include resistors, capacitors, ICs, MOSFETs, diodes and LEDs, depending on the assembly."},{"title":"Inspection and testing","body":"Inspection and testing can be incorporated into the assembly workflow before finished products are released."}]
   },
   {
@@ -107,7 +107,7 @@ export const facilities: Facility[] = [
     description: "Sheetal Electrotech’s assembly and packing operation supports batten, panel and downlight products through a systematic conveyor-based process, followed by product-specific packing and electrical aging tests.",
     image: "/images/facilities/legacy/assembly-packing.png",
     fallbackImages: ["/images/product_showcase.jpg"],
-    specs: [{"label":"Daily capacity","value":"Up to 100k units"},{"label":"Aging test range","value":"100V–320V"}],
+    specs: [],
     highlights: [{"title":"Systematic conveyor assembly","body":"Conveyor-based assembly supports organized, repeatable production and can be configured around product-specific workflows."},{"title":"Flexible packing","body":"The packing system can use different materials and packaging configurations based on product requirements."},{"title":"Aging test","body":"Product testing can include aging and electrical checks appropriate to the product specification."}]
   },
   {
