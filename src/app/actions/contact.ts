@@ -15,7 +15,6 @@ const contactSchema = z.object({
   honeypot: z.string().max(0, "Spam detected").optional(),
 });
 
-const RATE_LIMIT_WINDOW_MINUTES = 10;
 const MAX_REQUESTS_PER_WINDOW = 5;
 
 async function checkContactRateLimit(ip: string) {
