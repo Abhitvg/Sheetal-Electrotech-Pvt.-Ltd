@@ -20,6 +20,7 @@ export default async function JarsPage({ params: { locale } }: { params: { local
     {
       id: "pp-jars",
       name: t("p1_name"),
+      description: "Rigid plastic jar and container formats supported by integrated moulding capabilities.",
       range: "Configured to requirement",
       image: "https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png",
       specs: [],
@@ -27,6 +28,7 @@ export default async function JarsPage({ params: { locale } }: { params: { local
     {
       id: "custom-containers",
       name: t("p2_name"),
+      description: "Custom moulded packaging formats developed around the required geometry and application.",
       range: "Custom",
       image: "https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png",
       specs: [],
