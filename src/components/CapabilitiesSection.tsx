@@ -6,7 +6,7 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { companyFacts } from "@/data/companyFacts";
-import LegacyFacilityImage from "@/components/LegacyFacilityImage";
+import LegacyFacilityImage from "@/components/FacilityImage";
 
 const capabilities = [
   {
