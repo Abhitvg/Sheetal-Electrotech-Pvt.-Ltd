@@ -105,7 +105,7 @@ export default function InsightsIndexPage() {
                             </div>
                           </div>
                         </Link>
-                      ))})}
+                      ))}
                     </div>
                   ) : (
                     <div className="p-8 bg-slate-50 border border-slate-200 border-dashed text-steel/70 text-sm">
