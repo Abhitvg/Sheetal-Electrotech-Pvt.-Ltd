@@ -173,7 +173,7 @@
     },
     "battens": {
       "title": "LED Battens",
-      "description": "Linear LED lighting solutions for residential, commercial, and industrial spaces. Available in multiple lengths and IP ratings.",
+      "description": "Linear LED lighting solutions for residential, commercial, and industrial spaces, available in multiple configurations.",
       "p1_name": "Led High Power Batten",
       "p1_range": "Various",
       "p2_name": "High Power LED Batten",
@@ -184,18 +184,18 @@
     },
     "bottles": {
       "title": "Plastic Bottles",
-      "description": "High-quality blow-moulded and injection-stretch blow-moulded bottles for pharmaceutical, chemical, and FMCG sectors.",
-      "p1_name": "HDPE Bottles",
+      "description": "Plastic bottles and hollow products supported by Sheetal Electrotech’s blow moulding and injection blow moulding capabilities.",
+      "p1_name": "Plastic Bottles",
       "p1_range": "Various",
-      "p2_name": "PET Bottles",
+      "p2_name": "Hollow Plastic Products",
       "p2_range": "Various"
     },
     "jars": {
       "title": "Plastic Jars & Containers",
-      "description": "Wide-mouth jars and custom containers manufactured to strict tolerances for secure sealing and optimal shelf appeal.",
-      "p1_name": "PP Jars",
+      "description": "Rigid plastic jars, containers and custom moulded packaging products supported by integrated plastic manufacturing capabilities.",
+      "p1_name": "Plastic Jars & Containers",
       "p1_range": "Various",
-      "p2_name": "Custom Containers",
+      "p2_name": "Custom Moulded Packaging",
       "p2_range": "Custom"
     },
     "downlights": {
@@ -215,7 +215,7 @@
     },
     "street-lights": {
       "title": "LED Street Lights",
-      "description": "Durable and bright street luminaires.",
+      "description": "LED street lighting products for outdoor illumination and infrastructure applications.",
       "p1_name": "Product 1",
       "p1_range": "Various",
       "p0_name": "LED Street Light",
@@ -223,7 +223,7 @@
     },
     "flood-lights": {
       "title": "LED Flood Lights",
-      "description": "High-power flood lights for outdoors.",
+      "description": "Flood and well light products for outdoor illumination, security, sports and landscaping applications.",
       "p1_name": "Product 1",
       "p1_range": "Various",
       "p0_name": "Led Flood Well Light",
@@ -231,7 +231,7 @@
     },
     "spot-lights": {
       "title": "LED Spot Lights",
-      "description": "Precision spot lighting.",
+      "description": "Directional LED spot lighting products for focused illumination.",
       "p1_name": "Product 1",
       "p1_range": "Various",
       "p0_name": "Led Spot Light",
@@ -239,7 +239,7 @@
     },
     "decorative-lights": {
       "title": "Decorative Lighting",
-      "description": "Aesthetic LED fixtures.",
+      "description": "Decorative LED lighting products for aesthetic and ambient indoor illumination.",
       "p1_name": "Product 1",
       "p1_range": "Various",
       "p0_name": "Led Decorative Light",
@@ -247,7 +247,7 @@
     },
     "smart-led": {
       "title": "Smart LED Lighting",
-      "description": "IoT enabled smart lighting.",
+      "description": "Smart LED lighting with smartphone/app control and voice assistant support.",
       "p1_name": "Product 1",
       "p1_range": "Various",
       "p0_name": "Smart Led Bulb",
@@ -255,7 +255,7 @@
     },
     "strip-lights": {
       "title": "LED Strip Lights",
-      "description": "Flexible LED strips.",
+      "description": "Flexible LED strip lighting products for accent and interior illumination.",
       "p1_name": "Product 1",
       "p1_range": "Various",
       "p0_name": "Led Strip Lights",
@@ -281,7 +281,7 @@
     },
     "extension-boards": {
       "title": "Extension Boards",
-      "description": "Safe and durable power extensions.",
+      "description": "Extension boards and electronic accessories manufactured to specified requirements.",
       "p1_name": "Product 1",
       "p1_range": "Various",
       "p0_name": "Extension Board",
