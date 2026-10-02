@@ -1,6 +1,7 @@
 
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import { legacyGalleryImages } from "@/data/legacyMedia";
 
@@ -63,7 +64,7 @@ export default function GalleryPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {visible.map((item, index) => (
             <figure key={item.src} className="group bg-white border border-steel/10 overflow-hidden">
-              <div className="aspect-[4/3] bg-mist overflow-hidden">
+              <div className="relative aspect-[4/3] bg-mist overflow-hidden">
                 <img
                   src={item.src}
                   alt={`${item.category} — Sheetal Electrotech official archive image ${index + 1}`}
