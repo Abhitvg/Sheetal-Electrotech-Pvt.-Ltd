@@ -1,7 +1,6 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
+import Image from "next/image";
 import { useState } from "react";
 
 type Props = {
@@ -9,6 +8,7 @@ type Props = {
   alt: string;
   className?: string;
   eager?: boolean;
+  sizes?: string;
 };
 
 export default function FacilityImage({
@@ -16,6 +16,7 @@ export default function FacilityImage({
   alt,
   className = "",
   eager = false,
+  sizes = "100vw",
 }: Props) {
   const [index, setIndex] = useState(0);
   const [failed, setFailed] = useState(false);
@@ -25,13 +26,13 @@ export default function FacilityImage({
   }
 
   return (
-    // Facility imagery is sourced from approved company assets.
-    <img
+    <Image
       src={candidates[index]}
       alt={alt}
+      fill
+      sizes={sizes}
+      priority={eager}
       className={className}
-      loading={eager ? "eager" : "lazy"}
-      decoding="async"
       onError={() => {
         if (index < candidates.length - 1) setIndex(index + 1);
         else setFailed(true);
