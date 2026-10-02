@@ -5,6 +5,7 @@ import { Link } from "@/i18n/routing";
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin } from "lucide-react";
 import { companyFacts, companyTimeline, leadershipTeam, coreTeam } from "@/data/companyFacts";
+import { legacyCompanyImages } from "@/data/legacyMedia";
 
 export default function CompanyPage() {
   return (
@@ -13,7 +14,7 @@ export default function CompanyPage() {
       {/* Hero */}
       <div className="relative h-[75vh] min-h-[550px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/facilities/hero-company.png" alt="Sheetal Electrotech Factory" fill sizes="100vw" className="object-cover object-center" priority />
+          <img src={legacyCompanyImages[0]} alt="Sheetal Electrotech official company photography" className="h-full w-full object-cover object-center" fetchPriority="high" />
           <div className="absolute inset-0 bg-gradient-to-r from-ink/75 to-ink/30" />
         </div>
         <div className="relative z-10 container-wide text-paper pb-20 pt-36">
@@ -41,7 +42,22 @@ export default function CompanyPage() {
         </div>
       </div>
 
-      {/* Stats Banner directly below */}
+      <section className="bg-paper py-10 border-b border-steel/10">
+        <div className="container-wide grid grid-cols-2 md:grid-cols-3 gap-3">
+          {legacyCompanyImages.map((src, i) => (
+            <div key={src} className="aspect-[16/9] overflow-hidden bg-mist border border-steel/10">
+              <img
+                src={src}
+                alt={`Sheetal Electrotech official company image ${i + 1}`}
+                loading="lazy"
+                className="h-full w-full object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Stats Banner directly below */
       <section className="bg-mist text-ink py-16 border-b border-steel/10">
         <div className="container-wide grid grid-cols-1 md:grid-cols-3 gap-12">
           {[
