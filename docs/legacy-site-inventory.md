@@ -60,3 +60,21 @@ Source: `https://sheetalelectrotech.com/` (official Sheetal Electrotech site).
 | /what-is-ip | What Is IP? – Sheetal Electrotech Private Limited | 22 | /en/insights |
 | /what-is-lumens | What Is LUMENS? – Sheetal Electrotech Private Limited | 7 | /en/insights |
 | /what-is-right-light | What Is Right Light? – Sheetal Electrotech Private Limited | 12 | /en/insights |
+
+## Migration implementation status — 2026-10-02
+
+The completed extraction archive is now wired into the application in these areas:
+
+- `src/data/legacyMedia.ts`: selected official legacy image sets for facilities, products, insights, company photography and gallery presentation.
+- Facility detail pages: official legacy photography galleries, with the relevant manufacturing capability's source images presented alongside the modern page.
+- Product subcategory pages: official legacy product images added as source thumbnails alongside the modern catalogue presentation.
+- Insights: legacy knowledge content migrated into the current insight posts for LED benefits, beam angles, CCT, IP ratings, lumens, manual insertion, R&D, and IBM; BIS safety content is also represented as a dedicated insight.
+- Gallery: official legacy imagery is filterable by Facilities, Products and Knowledge.
+- Legacy URL preservation: legacy product, facility, blog/knowledge and company URLs now redirect permanently to their localized modern destinations where a destination exists.
+- Rigid packaging: category imagery now uses official manufacturing photography from the legacy blow moulding, IBM and injection moulding sources instead of generic/LED imagery.
+
+### Automated verification
+
+GitHub Actions workflow `Next.js Build Check` was added to run `npm ci` and `npm run build` on pushes and pull requests to `main`.
+
+A prior post-migration build completed successfully at commit `98a33d8a8d95fb4302a629e2735c971037ef5228`. Subsequent content/media changes are being checked by the latest workflow run before deployment verification.
