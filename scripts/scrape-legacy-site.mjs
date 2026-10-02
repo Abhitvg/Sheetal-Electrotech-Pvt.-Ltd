@@ -63,16 +63,16 @@ function normalizePageUrl(raw) {
 
 function slugForUrl(url) {
   const u = new URL(url);
-  let slug = u.pathname.replace(/^\\//, "").replace(/\\/$/, "");
+  let slug = u.pathname.replace(/^\//, "").replace(/\/$/, "");
   if (!slug) slug = "home";
   return slug.replace(/[^a-zA-Z0-9._-]+/g, "_").slice(0, 180);
 }
 
 function cleanText(s) {
-  return s.replace(/<script[\\s\\S]*?<\\/script>/gi, " ")
-    .replace(/<style[\\s\\S]*?<\\/style>/gi, " ")
-    .replace(/<noscript[\\s\\S]*?<\\/noscript>/gi, " ")
-    .replace(/<svg[\\s\\S]*?<\\/svg>/gi, " ")
+  return s.replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<noscript[\s\S]*?<\/noscript>/gi, " ")
+    .replace(/<svg[\s\S]*?<\/svg>/gi, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/&nbsp;/gi, " ")
     .replace(/&#8211;|&ndash;/gi, "–")
@@ -87,17 +87,17 @@ function cleanText(s) {
 
 function textToMarkdown(html) {
   let body = html
-    .replace(/<script[\\s\\S]*?<\\/script>/gi, "")
-    .replace(/<style[\\s\\S]*?<\\/style>/gi, "")
-    .replace(/<noscript[\\s\\S]*?<\\/noscript>/gi, "");
-  body = body.replace(/<h([1-6])[^>]*>([\\s\\S]*?)<\\/h\\1>/gi,
-    (_, level, inner) => `\\n\\n${"#".repeat(Number(level))} ${cleanText(inner)}\\n\\n`);
-  body = body.replace(/<li[^>]*>([\\s\\S]*?)<\\/li>/gi,
-    (_, inner) => `\\n- ${cleanText(inner)}`);
-  body = body.replace(/<p[^>]*>([\\s\\S]*?)<\\/p>/gi,
-    (_, inner) => `\\n\\n${cleanText(inner)}\\n\\n`);
-  body = body.replace(/<br\\s*\\/?>(?:\\s*)/gi, "\\n");
-  return cleanText(body).replace(/\\n +/g, "\\n").replace(/\\n{3,}/g, "\\n\\n").trim();
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/<noscript[\s\S]*?<\/noscript>/gi, "");
+  body = body.replace(/<h([1-6])[^>]*>([\s\S]*?)<\/h\1>/gi,
+    (_, level, inner) => `\n\n${"#".repeat(Number(level))} ${cleanText(inner)}\n\n`);
+  body = body.replace(/<li[^>]*>([\s\S]*?)<\/li>/gi,
+    (_, inner) => `\n- ${cleanText(inner)}`);
+  body = body.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi,
+    (_, inner) => `\n\n${cleanText(inner)}\n\n`);
+  body = body.replace(/<br\s*\/?>(?:\s*)/gi, "\n");
+  return cleanText(body).replace(/\n +/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
 }
 
 function extractMeta(html, pattern) {
@@ -109,23 +109,23 @@ function extractImages(html, pageUrl) {
   const found = new Set();
   const attrs = ["src", "data-src", "data-lazy-src", "poster"];
   for (const attr of attrs) {
-    const re = new RegExp(`${attr}\\s*=\\s*["']([^"']+)["']`, "gi");
+    const re = new RegExp(`${attr}\s*=\s*["']([^"']+)["']`, "gi");
     for (const m of html.matchAll(re)) {
       const u = absoluteUrl(m[1], pageUrl);
       if (u && sameSite(u) && imageExt.test(new URL(u).pathname)) found.add(u);
     }
   }
   for (const attr of ["srcset", "data-srcset"]) {
-    const re = new RegExp(`${attr}\\s*=\\s*["']([^"']+)["']`, "gi");
+    const re = new RegExp(`${attr}\s*=\s*["']([^"']+)["']`, "gi");
     for (const m of html.matchAll(re)) {
       for (const candidate of m[1].split(",")) {
-        const raw = candidate.trim().split(/\\s+/)[0];
+        const raw = candidate.trim().split(/\s+/)[0];
         const u = absoluteUrl(raw, pageUrl);
         if (u && sameSite(u) && imageExt.test(new URL(u).pathname)) found.add(u);
       }
     }
   }
-  for (const m of html.matchAll(/url\\((?:\\s*["']?)([^)"']+)(?:["']?\\s*)\\)/gi)) {
+  for (const m of html.matchAll(/url\((?:\s*["']?)([^)"']+)(?:["']?\s*)\)/gi)) {
     const u = absoluteUrl(m[1], pageUrl);
     if (u && sameSite(u) && imageExt.test(new URL(u).pathname)) found.add(u);
   }
@@ -134,7 +134,7 @@ function extractImages(html, pageUrl) {
 
 function extractLinks(html, pageUrl) {
   const found = new Set();
-  for (const m of html.matchAll(/<a[^>]+href\\s*=\\s*["']([^"']+)["']/gi)) {
+  for (const m of html.matchAll(/<a[^>]+href\s*=\s*["']([^"']+)["']/gi)) {
     const u = normalizePageUrl(m[1]);
     if (u && !imageExt.test(new URL(u).pathname)) found.add(u);
   }
@@ -194,7 +194,7 @@ while (queue.length && visited.size < MAX_PAGES) {
 
     const finalUrl = normalizePageUrl(result.finalUrl) || url;
     const { html } = result;
-    const title = extractMeta(html, /<title[^>]*>([\\s\\S]*?)<\\/title>/i);
+    const title = extractMeta(html, /<title[^>]*>([\s\S]*?)<\/title>/i);
     const description = extractMeta(html, /<meta[^>]+(?:name|property)=["']description["'][^>]+content=["']([^"']*)["']/i)
       || extractMeta(html, /<meta[^>]+content=["']([^"']*)["'][^>]+(?:name|property)=["']description["']/i);
     const canonical = extractMeta(html, /<link[^>]+rel=["'][^"']*canonical[^"']*["'][^>]+href=["']([^"']+)["']/i)
@@ -206,7 +206,7 @@ while (queue.length && visited.size < MAX_PAGES) {
     const slug = slugForUrl(finalUrl);
     await writeFile(path.join(PAGES, `${slug}.html`), html, "utf8");
     await writeFile(path.join(PAGES, `${slug}.md`),
-      `# ${title || slug}\\n\\nSource: ${finalUrl}\\n\\nDescription: ${description || "(none)"}\\n\\nCanonical: ${canonical || "(none)"}\\n\\n${text}\\n`,
+      `# ${title || slug}\n\nSource: ${finalUrl}\n\nDescription: ${description || "(none)"}\n\nCanonical: ${canonical || "(none)"}\n\n${text}\n`,
       "utf8"
     );
 
@@ -265,7 +265,7 @@ await writeFile(path.join(OUT, "image-manifest.json"), JSON.stringify({
 }, null, 2));
 
 await writeFile(path.join(OUT, "extraction-report.md"),
-  `# Sheetal Electrotech legacy-site extraction\\n\\nGenerated: ${new Date().toISOString()}\\n\\nPages crawled: ${pages.length}\\nImages discovered: ${imageUrls.size}\\nImages downloaded: ${imageManifest.filter(x => x.status === "downloaded" || x.status === "already-present").length}\\nImage failures: ${imageManifest.filter(x => x.status === "failed").length}\\n\\nThe extractor seeds the official site navigation, product catalogue, facilities, knowledge pages and known legacy routes, then follows same-origin links discovered in those pages. Raw HTML, cleaned Markdown text and image manifests are retained for migration/reference.\\n`
+  `# Sheetal Electrotech legacy-site extraction\n\nGenerated: ${new Date().toISOString()}\n\nPages crawled: ${pages.length}\nImages discovered: ${imageUrls.size}\nImages downloaded: ${imageManifest.filter(x => x.status === "downloaded" || x.status === "already-present").length}\nImage failures: ${imageManifest.filter(x => x.status === "failed").length}\n\nThe extractor seeds the official site navigation, product catalogue, facilities, knowledge pages and known legacy routes, then follows same-origin links discovered in those pages. Raw HTML, cleaned Markdown text and image manifests are retained for migration/reference.\n`
 );
 
 console.log(`DONE: ${pages.length} pages, ${imageUrls.size} unique images.`);
