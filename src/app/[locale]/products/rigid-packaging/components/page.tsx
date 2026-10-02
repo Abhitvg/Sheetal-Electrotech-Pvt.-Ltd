@@ -20,7 +20,8 @@ export default async function Page({ params: { locale } }: { params: { locale: s
     {
       id: "product-1",
       name: t("p1_name"),
-      range: "Configured to requirement"
+      range: "Configured to requirement",
+      description: "Injection-moulded plastic components, housings and specified parts for OEM requirements.",
       image: "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8394.jpeg",
       specs: [],
     }
