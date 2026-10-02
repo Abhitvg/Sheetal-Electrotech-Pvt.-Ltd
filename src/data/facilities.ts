@@ -12,7 +12,7 @@ export type Facility = {
   applications?: string[];
   approvedBrands?: string[];
   capacityNote?: string;
-  legacyHeading?: string;
+  heading?: string;
 };
 
 export const facilities: Facility[] = [
@@ -20,21 +20,21 @@ export const facilities: Facility[] = [
     slug: "injection-moulding",
     title: "Injection Moulding",
     tagline: "Injection moulding for precision plastic components and products.",
-    description: "Sheetal Electrotech supports plastic injection moulding using a range of materials including PP, ABS, PET, PC and PBT. The legacy site describes injection moulding machines ranging from 80 to 160 tons, with support across design, prototyping, tooling and production.",
+    description: "Sheetal Electrotech supports plastic injection moulding for precision plastic components and products, with materials including PP, ABS, PET, PC and PBT. The capability supports design, prototyping, tooling and production workflows.",
     image: "/images/facilities/legacy/injection-moulding.jpeg",
     fallbackImages: ["/images/moulding_factory.jpg"],
     specs: [{"label":"Machine range","value":"80–160 tons"}],
-    highlights: [{"title":"Material flexibility","body":"The official legacy material lists PP, ABS, PET, PC, PBT and more among the materials supported for injection moulding."},{"title":"Design to production","body":"The team supports design and prototyping through tooling and production, according to the official legacy site."},{"title":"Cost-effective manufacturing","body":"The legacy site positions injection moulding around cost-effective solutions, precision parts and timely project delivery."}]
+    highlights: [{"title":"Material flexibility","body":"Materials including PP, ABS, PET, PC and PBT can be considered based on product and application requirements."},{"title":"Design to production","body":"The capability can support the workflow from design and prototyping through tooling and production."},{"title":"Cost-effective manufacturing","body":"The process is suited to repeatable production of precision plastic components with attention to consistency and production requirements."}]
   },
   {
     slug: "ibm-plastic",
     title: "Injection Blow Moulding",
     tagline: "Injection Blow Moulding (IBM) for precision containers.",
-    description: "Injection Blow Moulding (IBM) is used for hollow plastic parts and is a key capability for bulb housings. The official legacy site describes a capacity of 9 lakh bulb housings per month and cites work with Orient, Ledvance and Bright Elite.",
+    description: "Injection Blow Moulding (IBM) is used for hollow plastic parts and supports applications such as bulb housings. The process complements Sheetal Electrotech's wider plastic manufacturing capabilities.",
     image: "/images/facilities/legacy/ibm-plastic.webp",
     fallbackImages: ["/images/products_packaging.jpg"],
     specs: [{"label":"Bulb housing capacity","value":"Up to 9 lakh / month"}],
-    highlights: [{"title":"Bulb housing focus","body":"The official legacy page specifically describes injection blow moulding work for bulb housing."},{"title":"Selected customers cited by legacy source","body":"The official page names Orient, Ledvance and Bright Elite among brands the company has worked with."},{"title":"Integrated plastics capability","body":"IBM is supported by additional plastic manufacturing capabilities including extrusion and injection moulding."}]
+    highlights: [{"title":"Bulb housing focus","body":"The capability supports hollow plastic components, including bulb-housing applications."},{"title":"Selected applications","body":"The capability can be configured around specified product and application requirements."},{"title":"Integrated plastics capability","body":"IBM is supported by additional plastic manufacturing capabilities including extrusion and injection moulding."}]
   },
   {
     slug: "extrusion",
@@ -43,8 +43,8 @@ export const facilities: Facility[] = [
     description: "Sheetal Electrotech's extrusion capability supports the production of plastic profiles and products including battens and housings. The extrusion process forms molten plastic through a die to create continuous profiles with consistent dimensions and finish.",
     image: "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot-2023-04-15-at-11.05.08-AM.png",
     fallbackImages: ["/images/hero_manufacturing.jpg"],
-    legacyHeading: "Extrusion product works with Sheetal Electrotech",
-    capacityNote: "The legacy company page describes capacity of up to 12 lakh pieces per month for extruder machine products.",
+    heading: "Extrusion product works with Sheetal Electrotech",
+    capacityNote: "Extrusion supports continuous production of plastic profiles and formed products to specified dimensions and application requirements.",
     portfolio: [
       { title: "Plastic Battens", body: "Extrusion supports the manufacture of plastic batten profiles used in lighting products." },
       { title: "Plastic Housings", body: "Profile-based housings and formed plastic parts can be produced around specified product requirements." },
@@ -55,19 +55,19 @@ export const facilities: Facility[] = [
     specs: [],
     highlights: [
       { title: "Consistent Profile Formation", body: "Extrusion is suited to continuous plastic profiles where dimensional consistency and repeatable forming are important." },
-      { title: "Manufacturing Experience", body: "The legacy company material describes an experienced team of technicians and engineers supporting extrusion product manufacturing." },
-      { title: "Quality Focus", body: "The legacy material emphasizes quality, service, materials and production methods throughout the manufacturing process." }
+      { title: "Manufacturing Experience", body: "Extrusion operations are supported by technical and production teams focused on repeatable profile manufacturing." },
+      { title: "Quality Focus", body: "Production focuses on material selection, process consistency, dimensional control and application requirements." }
     ]
   },
   {
     slug: "manual-insertion",
     title: "Manual Insertion",
     tagline: "Manual component insertion and assembly operations.",
-    description: "Manual insertion is the hand placement of electronic components into printed circuit boards (PCBs). The official legacy site describes an experienced team, advanced tools and techniques, and complementary PCB, SMT, cable and box-build assembly services.",
+    description: "Manual insertion is the hand placement of electronic components into printed circuit boards (PCBs). It supports through-hole component placement and can complement PCB, SMT, cable and box-build assembly operations.",
     image: "/images/facilities/legacy/manual-insertion.png",
     fallbackImages: ["/images/legacy/manufacturing.png"],
     specs: [],
-    highlights: [{"title":"Through-hole component placement","body":"Manual insertion is used where components are placed into PCBs by hand with attention to accurate and precise placement."},{"title":"Complementary assembly","body":"The official legacy page lists PCB assembly, SMT assembly, cable assembly and box build assembly as complementary services."},{"title":"Experienced operations","body":"The legacy material describes experienced professionals and technology-supported manual insertion operations."}]
+    highlights: [{"title":"Through-hole component placement","body":"Manual insertion is used where components are placed into PCBs by hand with attention to accurate and precise placement."},{"title":"Complementary assembly","body":"Manual insertion can be integrated with PCB assembly, SMT assembly, cable assembly and box-build workflows."},{"title":"Experienced operations","body":"Operations combine trained assembly personnel with appropriate tools and process controls."}]
   },
   {
     slug: "research-development",
@@ -77,28 +77,28 @@ export const facilities: Facility[] = [
     image: "/images/facilities/legacy/research-development.png",
     fallbackImages: ["/images/legacy/product-design.png"],
     specs: [],
-    highlights: [{"title":"Energy efficiency","body":"The official legacy site describes R&D aimed at LED lighting solutions that use minimal energy while maintaining high-quality illumination."},{"title":"Durability and longevity","body":"R&D also addresses longer product life and reduced maintenance requirements."},{"title":"Specialized lighting applications","body":"The legacy page cites LED lighting solutions for indoor farming and outdoor farming as examples of application-focused product development."}]
+    highlights: [{"title":"Energy efficiency","body":"R&D focuses on LED lighting and electronics, with attention to energy efficiency, product durability, longevity and application-specific development."},{"title":"Durability and longevity","body":"R&D also addresses longer product life and reduced maintenance requirements."},{"title":"Specialized lighting applications","body":"R&D can support application-focused lighting development for different indoor and outdoor environments."}]
   },
   {
     slug: "blow-moulding",
     title: "Blow Moulding",
     tagline: "Manufacturing of hollow plastic containers through blow moulding.",
-    description: "Sheetal Electrotech’s plastic blow moulding operation supports hollow plastic products including bottles, containers and tanks. The official legacy site describes machines handling products from 10 ml to 25 litres and a total of 18 machines.",
+    description: "Sheetal Electrotech’s plastic blow moulding operation supports hollow plastic products including bottles, containers and tanks. Production can be configured around product geometry, material and volume requirements.",
     image: "/images/facilities/legacy/blow-moulding.png",
     fallbackImages: ["/images/packaging_factory.jpg"],
     specs: [{"label":"Container range","value":"10 ml–25 litres"},{"label":"Machines","value":"18"}],
     applications: ["Pharmaceutical","Agricultural","Packing"],
-    highlights: [{"title":"Wide container range","body":"The official legacy material describes blow moulding equipment designed for products from 10 ml to 25 litres."},{"title":"Sector coverage","body":"The legacy site cites pharmaceutical, agricultural and packing industries."},{"title":"Customers cited by legacy source","body":"The official page names UPL, HPCL, BPCL and TATA among customers served."}]
+    highlights: [{"title":"Wide container range","body":"Blow moulding supports a range of hollow plastic product formats and container applications."},{"title":"Sector coverage","body":"Applications can include pharmaceutical, agricultural and packaging requirements."},{"title":"Application requirements","body":"Production can be developed around customer-specific specifications and application requirements."}]
   },
   {
     slug: "smt",
     title: "SMT",
     tagline: "Surface-mount technology for electronic assembly and lighting products.",
-    description: "Surface Mount Technology (SMT) assembly places electronic components directly onto printed circuit boards. The official legacy site describes high-speed, high-precision equipment, advanced vision systems, multiple SMT machines and six-zone reflow capability.",
+    description: "Surface Mount Technology (SMT) assembly places electronic components directly onto printed circuit boards. The capability supports precision component placement, inspection, reflow and testing for electronic assemblies.",
     image: "/images/facilities/legacy/smt.png",
     fallbackImages: ["/images/smt_electronics.jpg"],
     specs: [{"label":"HT-F7S","value":"170k cph"},{"label":"RT-2","value":"22k cph"},{"label":"HT-E6T","value":"20k cph"},{"label":"Reflow","value":"6-zone SMT reflow oven"}],
-    highlights: [{"title":"High-speed placement","body":"The legacy page lists HT-F7S, RT-2 and HT-E6T SMT machines for high-speed, high-precision component placement."},{"title":"Vision-assisted accuracy","body":"The official page describes advanced vision systems for accurate PCB component placement."},{"title":"Component flexibility","body":"The legacy source lists surface-mount resistors, capacitors, IC, MOSFET, diode and LED among component types supported."},{"title":"Inspection and testing","body":"The official page describes in-line testing and inspection plus end-of-line testing before products leave the facility."}]
+    highlights: [{"title":"High-speed placement","body":"SMT production supports high-speed component placement with process controls suited to repeatable electronic assembly."},{"title":"Vision-assisted accuracy","body":"Vision-assisted inspection supports accurate component placement and process verification."},{"title":"Component flexibility","body":"Typical surface-mount components include resistors, capacitors, ICs, MOSFETs, diodes and LEDs, depending on the assembly."},{"title":"Inspection and testing","body":"Inspection and testing can be incorporated into the assembly workflow before finished products are released."}]
   },
   {
     slug: "assembly-packing",
@@ -108,7 +108,7 @@ export const facilities: Facility[] = [
     image: "/images/facilities/legacy/assembly-packing.png",
     fallbackImages: ["/images/product_showcase.jpg"],
     specs: [{"label":"Daily capacity","value":"Up to 100k units"},{"label":"Aging test range","value":"100V–320V"}],
-    highlights: [{"title":"Systematic conveyor assembly","body":"The official legacy page describes a conveyor system designed for efficient and accurate assembly with a daily capacity of up to 100k units."},{"title":"Flexible packing","body":"The packing system can use different materials and packaging configurations based on product requirements."},{"title":"Aging test","body":"The official source describes an aging machine handling 100V to 320V for testing and validating products under varied voltage conditions."}]
+    highlights: [{"title":"Systematic conveyor assembly","body":"Conveyor-based assembly supports organized, repeatable production and can be configured around product-specific workflows."},{"title":"Flexible packing","body":"The packing system can use different materials and packaging configurations based on product requirements."},{"title":"Aging test","body":"Product testing can include aging and electrical checks appropriate to the product specification."}]
   },
   {
     slug: "tool-room",
