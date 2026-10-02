@@ -66,7 +66,7 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
               <div>
                 <p className="font-mono text-accent text-xs uppercase tracking-[.2em] mb-4">Capability Profile</p>
                 <h2 className="text-3xl md:text-5xl font-display font-medium leading-tight mb-6">
-                  {facility.legacyHeading || "Built for practical production requirements."}
+                  {facility.heading || "Built for practical production requirements."}
                 </h2>
                 {facility.capacityNote && (
                   <div className="flex items-start gap-4 bg-mist border border-steel/10 p-5">
