@@ -93,6 +93,7 @@ export default function InsightsIndexPage() {
                                 src={legacyInsightImages[post.slug][0]}
                                 alt={`${post.title} — official Sheetal Electrotech image`}
                                 loading="lazy"
+                                onError={(event) => { event.currentTarget.style.visibility = "hidden"; }}
                                 className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
                               />
                             </div>
