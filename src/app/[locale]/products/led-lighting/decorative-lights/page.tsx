@@ -9,7 +9,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return localizedMetadata(locale, "/products/led-lighting/decorative-lights", { en: { title: t("title"), description: t("description") }, hi: { title: t("title"), description: t("description") } });
 }
 
-export default async function Page({ params: { locale } }: { params: { locale: string } }) {
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Products.decorative-lights' });
 
   const products = [
