@@ -13,7 +13,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   });
 }
 
-export default async function BottlesPage({ params: { locale } }: { params: { locale: string } }) {
+export default async function BottlesPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Products.bottles' });
 
   const products = [
