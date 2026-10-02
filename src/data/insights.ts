@@ -23,26 +23,15 @@ export const insights: InsightPost[] = [
       { name: "Smart LED", href: "/products/led-lighting/smart-led" },
       { name: "Strip Lights", href: "/products/led-lighting/strip-lights" }
     ],
-    content: `
-## Energy Efficiency
+    content: `## Benefits of LED
 
-LED lighting uses less energy than traditional incandescent lighting. Lower energy consumption can reduce electricity usage.
-
-## Longer Operating Life
-
-LEDs generally have a longer operating life than traditional incandescent lighting. This can reduce replacement frequency and maintenance requirements.
-
-## Lighting Performance
-
-LED products are available in different designs, colour temperatures and applications. Suitable configurations depend on the intended lighting requirement.
-
-## Environmental Considerations
-
-Lower energy consumption can contribute to reduced energy use over the operating life of a product.
-
-## Application Flexibility
-
-LEDs are used across residential, commercial, decorative and outdoor lighting applications. The Sheetal Electrotech catalogue demonstrates this breadth through bulbs, battens, downlights, street lights, flood/well lights, decorative lights, strip lights and smart LED products.
+* **Energy Efficiency:** LED lights are highly energy-efficient and consume up to 80% less power than traditional incandescent bulbs. This translates into significant cost savings in the long run.
+* **Longer Lifespan:** LED lights last much longer than traditional bulbs, with some models lasting up to 25,000 hours or more. This means less frequent replacement and maintenance, saving you time and money.
+* **Environmentally Friendly:** LED lights are free of toxic chemicals and are recyclable, making them a more environmentally friendly option compared to traditional bulbs.
+* **Durability:** LED lights are built to last and are more resistant to damage from shock and vibration compared to traditional bulbs. This makes them ideal for use in outdoor and industrial settings.
+* **Better Light Quality:** LED lights produce a brighter, more natural light that is easier on the eyes and provides better visibility compared to traditional bulbs.
+* **Improved Safety:** LED lights produce less heat compared to traditional bulbs, reducing the risk of fire or burns. They also do not contain hazardous materials like mercury, making them safer to handle and dispose of.
+* **Design Flexibility:** LED lights come in a variety of shapes and sizes, making them suitable for a wide range of applications. They can also be easily dimmed, creating a more versatile lighting environment.
     `
   },
   {
@@ -55,8 +44,7 @@ LEDs are used across residential, commercial, decorative and outdoor lighting ap
       { name: "Downlights", href: "/products/led-lighting/downlights" },
       { name: "Flood Lights", href: "/products/led-lighting/flood-lights" }
     ],
-    content: `
-## What is Beam Angle?
+    content: `## What is Beam Angle?
 
 In general, beam angle refers to the spread of light emitted from a light source. A narrow beam angle means that the light is concentrated in a smaller area, while a wide beam angle means that the light is spread out over a larger area.
 
@@ -66,6 +54,9 @@ In the context of lighting design, choosing between a narrow beam angle and a wi
 
 ## What is the Right Light?
 
+Narrow Angle (Spot Light, COBs, etc.)  
+Wide Angle (Down Light, Panel Light etc.)
+
 As we discussed earlier, the beam angle determines how the light is distributed, and this can have a significant impact on the overall lighting effect.
 
 If you want to focus on a specific area or object, such as a painting or a display case, a narrow beam angle LED light with a range of 15-40 degrees would be ideal. These lights provide a higher intensity of light over a smaller area, making the object appear brighter and more prominent.
@@ -74,9 +65,11 @@ On the other hand, if you want to illuminate a larger area or provide general li
 
 ## Applications Based on Beam Angle
 
-*   **Narrow beam angle (15-40 degrees):** Ideal for focusing on specific areas or objects. Examples include spotlights for highlighting artwork, displays, or architectural features, and track lighting for highlighting merchandise in retail stores or showrooms.
-*   **Medium beam angle (40-90 degrees):** Provide a balanced combination of focused and diffused light. Examples include wall sconces for providing ambient lighting in hallways or staircases, pendant lights for illuminating dining tables or kitchen islands, and outdoor flood lights for highlighting specific landscaping features.
-*   **Wide beam angle (90-120 degrees or more):** Provide a more diffused and even light distribution, making them ideal for general lighting applications. Examples include ceiling fixtures for providing ambient lighting in living rooms, bedrooms, or offices, and outdoor wall lights for illuminating outdoor spaces or walkways.
+* **Narrow beam angle (15-40 degrees):** Ideal for focusing on specific areas or objects. Examples include spotlights for highlighting artwork, displays, or architectural features; downlights for illuminating countertops, workspaces, or tables; and track lighting for highlighting merchandise in retail stores or showrooms.
+* **Medium beam angle (40-90 degrees):** Provide a balanced combination of focused and diffused light. Examples include wall sconces for providing ambient lighting in hallways or staircases, pendant lights for illuminating dining tables or kitchen islands, and outdoor flood lights for highlighting specific landscaping features or providing security lighting.
+* **Wide beam angle (90-120 degrees or more):** Provide a more diffused and even light distribution, making them ideal for general lighting applications. Examples include ceiling fixtures for providing ambient lighting in living rooms, bedrooms, or offices; outdoor wall lights for illuminating outdoor spaces or walkways; and under-cabinet lighting for providing task lighting in kitchens or workspaces.
+
+Choosing the right LED light based on the beam angle can help achieve the desired lighting effect for a specific application, whether the requirement is to focus on a specific area or illuminate a larger space.
     `
   },
   {
@@ -88,22 +81,17 @@ On the other hand, if you want to illuminate a larger area or provide general li
       { name: "LED Bulbs", href: "/products/led-lighting/bulbs" },
       { name: "LED Battens", href: "/products/led-lighting/battens" }
     ],
-    content: `
-## What is Manual Insertion?
+    content: `## Manual Insertion
 
-Manual insertion is the process of inserting electronic components into printed circuit boards (PCBs) by hand. It is a critical step in the manufacturing of electronic devices, particularly for through-hole components that cannot be easily handled by automated Surface Mount Technology (SMT) machines, and requires a high level of skill and expertise. 
+Manual insertion is the process of inserting electronic components into printed circuit boards (PCBs) by hand. It is a critical step in the manufacturing of electronic devices, and requires a high level of skill and expertise.
 
-Sheetal Electrotech maintains a team of experienced professionals who specialize in manual insertion, ensuring that clients receive high-quality and reliable manufacturing services.
+Sheetal Electrotech has a team of experienced professionals who specialize in manual insertion, ensuring that clients receive high-quality and reliable services.
 
-## Our Approach to Manual Insertion
+Sheetal Electrotech’s manual insertion facility is equipped with the latest technology and equipment to ensure that clients receive the best results. The company uses advanced tools and techniques to ensure accurate and precise placement of components, while minimizing the risk of damage to the PCBs.
 
-Our manual insertion facility is equipped with the necessary technology and equipment to ensure that clients receive the best results. We use advanced tools and structured techniques to ensure accurate and precise placement of components, while minimizing the risk of damage to the PCBs during handling and soldering.
+In addition to its manual insertion services, Sheetal Electrotech also offers a range of complementary services to ensure that clients receive end-to-end solutions. These include PCB assembly, SMT assembly, cable assembly, and box build assembly.
 
-## A Complementary Service
-
-In addition to manual insertion services, we offer a range of complementary services to ensure that clients receive end-to-end solutions. These include full PCB assembly, SMT assembly, cable assembly, and box build assembly. 
-
-Our ability to provide a full range of services ensures that clients can get all of their requirements met in one place, reducing the need for multiple suppliers and simplifying the supply chain. Overall, our manual insertion facility is a reliable and cost-effective solution for clients looking for high-quality electronics manufacturing services. With a skilled team and a commitment to quality, we are well-positioned to meet the unique needs of clients across different sectors.
+The company’s ability to provide a full range of services ensures that clients can get all of their requirements met in one place, reducing the need for multiple suppliers and simplifying the supply chain.
     `
   },
   {
@@ -115,24 +103,17 @@ Our ability to provide a full range of services ensures that clients can get all
       { name: "LED Bulbs", href: "/products/led-lighting/bulbs" },
       { name: "Smart LED Bulbs", href: "/products/led-lighting/smart-led" }
     ],
-    content: `
-## A Focus on Continuous Improvement
+    content: `## Research and Development in Sheetal Electrotech
 
-Sheetal Electrotech maintains a strong focus on research and development to continuously improve our products and manufacturing processes.
+Sheetal Electrotech is a division of Sheetal Group that specializes in LED lighting and electronics. The company has a strong focus on research and development to continuously improve their products and stay ahead of the competition.
 
-## Energy Efficiency
+One of the key areas of focus for the company’s R&D team is energy efficiency. They work on developing LED lighting solutions that use minimal energy while still providing high-quality illumination.
 
-One of the key areas of focus for our R&D team is energy efficiency. We work on developing LED lighting solutions that use minimal energy while still providing high-quality illumination. This not only helps end-users save on energy costs but also contributes to broader environmental sustainability goals.
+Another important area of research for Sheetal Electrotech is product durability and longevity. They invest in developing products that have a longer lifespan and require minimal maintenance.
 
-## Product Durability and Longevity
+The company’s R&D team also works on developing new products and solutions that cater to changing market demands and emerging technologies. For example, they have developed LED lighting solutions for indoor farming and outdoor FARMING, which provide the optimal light spectrum for plant growth and help improve crop yields.
 
-Another important area of research is product durability and longevity. We invest in developing products that have a longer lifespan and require minimal maintenance. This provides customers with a more reliable and cost-effective product while simultaneously reducing waste and environmental impact.
-
-## Emerging Technologies and Custom Solutions
-
-Our R&D team also works on developing new products and solutions that cater to changing market demands and emerging technologies. For example, we have developed LED lighting solutions tailored for specific environments like indoor and outdoor farming, which provide the optimal light spectrum for plant growth and help improve crop yields.
-
-Overall, our research and development activities are aimed at delivering high-quality, innovative, and sustainable products. Through a focus on energy efficiency, durability, and robust product development, we meet the evolving needs of various industries and applications.
+Overall, Sheetal Electrotech’s research and development activities are aimed at delivering high-quality, innovative, and sustainable products to their customers. Through their focus on energy efficiency, durability, and product development, they are able to meet the evolving needs of various industries and applications.
     `
   },
   {
@@ -144,20 +125,17 @@ Overall, our research and development activities are aimed at delivering high-qu
       { name: "LED Bulbs", href: "/products/led-lighting/bulbs" },
       { name: "Decorative Lights", href: "/products/led-lighting/decorative-lights" }
     ],
-    content: `
-## Expertise in Injection Blow Moulding (IBM)
+    content: `## Injection blow moulding work of bulb with Sheetal Electrotech
 
-For reliable and experienced manufacturing using injection blow moulding (IBM), particularly for applications like bulb housings and precision containers, Sheetal Electrotech offers robust capabilities. With state-of-the-art technology and advanced manufacturing processes, we have built significant capacity to produce high volumes of precision components monthly.
+If you are looking for a reliable and experienced manufacturer for injection blow molding for bulb housing, Sheetal Electrotech is your ideal choice. With state-of-the-art technology and advanced manufacturing processes, the company has the capacity to produce 9 Lakh bulb housing monthly.
 
-Our long-standing reputation for delivering high-quality products is rooted in an ongoing investment in equipment and the expertise of our engineers and technicians. This allows us to design and manufacture custom products that meet the specific dimensional and material needs of our customers.
+Sheetal Electrotech has a long-standing reputation for delivering high-quality products to its customers, thanks to its investment in the latest technology and equipment. With a team of experienced engineers and technicians, the company has the expertise to design and manufacture custom products to meet the specific needs of its customers.
 
-## A Focus on Quality
+The company’s expertise in injection blow moulding is widely recognized in the industry, and they have worked with leading brands such as Orient, Ledvance, Bright Elite, and many others.
 
-We understand that quality is of the utmost importance when it comes to injection blow moulding. Our commitment to quality is reflected in every aspect of our manufacturing process, from raw material selection to finished products. We utilize modern equipment and strict quality control measures to ensure that our products meet the highest standards of durability and finish.
+At Sheetal Electrotech, we understand that quality is of the utmost importance when it comes to injection blow molding. Our commitment to quality is reflected in every aspect of our manufacturing process, from raw materials to finished products.
 
-## Comprehensive Plastic Manufacturing
-
-In addition to our expertise in injection blow moulding, we also offer a wide range of other plastic manufacturing services, including standard extrusion and injection moulding. Whatever the requirements may be, we have the expertise and experience to deliver quality components that meet exact specifications, supporting end-to-end manufacturing for our clients.
+In addition to our expertise in injection blow molding, we also offer a wide range of other plastic manufacturing services, including extrusion and injection molding.
     `
   },
   {
@@ -170,25 +148,13 @@ In addition to our expertise in injection blow moulding, we also offer a wide ra
       { name: "Downlights", href: "/products/led-lighting/downlights" },
       { name: "Smart LED", href: "/products/led-lighting/smart-led" }
     ],
-    content: `
-## What is Color Temperature?
+    content: `## Know about Colors
 
-In LED lighting, the "color" of white light is measured in Kelvin (K) and is known as Correlated Color Temperature (CCT). Unlike traditional incandescent bulbs that primarily emitted a warm, yellowish light, LEDs can be manufactured to produce white light across a broad spectrum of temperatures.
+Correlated Color Temperature (CCT) is a measure of the color appearance of light emitted from a light source, typically a light bulb or LED. It is measured in Kelvin (K) and is used to describe how “warm” or “cool” the light appears.
 
-## The Kelvin Scale
+Lower CCT values, such as 2200-3000K, are considered “warm” and emit a yellowish-white light similar to the glow of a candle or incandescent bulb. Higher CCT values, such as 5000-6500K, are considered “cool” and emit a bluish-white light similar to daylight.
 
-The Kelvin scale for residential and commercial lighting typically ranges from 2700K to 6500K:
-
-*   **Warm White (2700K - 3000K):** Produces a yellowish, cozy light similar to traditional incandescent bulbs. Ideal for living rooms, bedrooms, and hospitality environments where a relaxing atmosphere is desired.
-*   **Natural/Neutral White (4000K - 4500K):** Produces a clean, neutral white light. This is an excellent choice for kitchens, bathrooms, offices, and retail spaces where accurate visibility without harshness is required.
-*   **Cool White / Daylight (5000K - 6500K):** Produces a crisp, bluish-white light that mimics daylight. It is highly invigorating and provides maximum contrast, making it perfect for industrial settings, hospitals, garages, and task-heavy environments.
-
-## Choosing the Right Color
-
-Selecting the appropriate color temperature depends entirely on the application:
-* For areas requiring relaxation and comfort, stick to Warm White.
-* For work environments and task-oriented spaces, Neutral White provides the best balance of clarity and comfort.
-* For precision tasks or outdoor security (like Street Lights and Flood Lights), Cool White or Daylight is usually preferred to maximize visibility and alertness.
+The CCT of a light source can have a significant impact on the look and feel of a space, as well as on the perceived color of objects within that space.
     `
   },
   {
@@ -201,28 +167,26 @@ Selecting the appropriate color temperature depends entirely on the application:
       { name: "Flood Lights", href: "/products/led-lighting/flood-lights" },
       { name: "Strip Lights", href: "/products/led-lighting/strip-lights" }
     ],
-    content: `
-## Defining Ingress Protection (IP)
+    content: `## What is IP?
 
-An IP (Ingress Protection) rating is an international standard used to define the levels of sealing effectiveness of electrical enclosures against intrusion from foreign bodies (like tools, dirt, and dust) and moisture. 
+The Ingress Protection (IP) rating is a standard used to indicate the level of protection provided by electronic enclosures against the intrusion of foreign bodies (such as dust and tools) and moisture.
 
-For LED lighting, understanding the IP rating is critical to ensuring the fixture will survive its intended environment without failing prematurely or posing a safety hazard.
+The IP rating is usually expressed as “IP” followed by two digits, with each digit representing a different level of protection. The first digit represents the level of protection against solid objects, while the second digit represents the level of protection against liquids. The higher the number, the greater the level of protection provided by the enclosure.
 
-## How to Read an IP Rating
+## IP20
 
-An IP rating consists of the letters "IP" followed by two numbers (e.g., IP65).
+Products suitable for indoor use, like bedroom, living room, office, etc.
 
-*   **The First Digit (0-6):** Indicates the level of protection against solid objects and dust. A rating of 6 means the fixture is completely dust-tight.
-*   **The Second Digit (0-9):** Indicates the level of protection against liquids (water). A rating of 5 means the fixture is protected against low-pressure water jets from any direction.
+## IP44
 
-## Common IP Ratings in Lighting
+Products suitable for special areas that are semi indoors or areas with high dust/water usage, like balcony, bathrooms, etc.
 
-*   **IP20:** Protected against solid objects larger than 12.5mm (like fingers) but offers no protection against water. Suitable for standard indoor environments like living rooms and offices (e.g., standard LED Bulbs and indoor Battens).
-*   **IP44:** Protected against solid objects larger than 1mm and water splashing from any direction. Suitable for bathrooms or covered outdoor areas.
-*   **IP65:** Completely dust-tight and protected against low-pressure water jets. This is the standard requirement for outdoor lighting such as Street Lights, Flood Lights, and exposed architectural lighting.
-*   **IP67 / IP68:** Dust-tight and capable of temporary or continuous immersion in water. Used for specialized applications like underwater pool lighting.
+## IP65
 
-When selecting outdoor lighting products from Sheetal Electrotech, verifying the IP rating ensures you are deploying fixtures engineered for environmental resilience.
+Products suitable to be used for outdoors, like street lighting, landscape lighting, etc.
+
+The FIRST DIGIT signifies intrusion protection.  
+The SECOND DIGIT signifies mositure protection.
     `
   },
   {
@@ -235,33 +199,59 @@ When selecting outdoor lighting products from Sheetal Electrotech, verifying the
       { name: "Downlights", href: "/products/led-lighting/downlights" },
       { name: "Flood Lights", href: "/products/led-lighting/flood-lights" }
     ],
-    content: `
-## The Shift from Watts to Lumens
+    content: `## What is LUMENS?
 
-For decades, consumers bought light bulbs based on wattage (e.g., a 60W or 100W bulb). However, wattage is simply a measure of how much electrical power the bulb consumes, not how bright it is. 
+When buying LED bulbs, it is important to consider the lumens value rather than just the wattage. The wattage of a bulb measures its energy usage, whereas lumens measure the brightness or light output of the bulb.
 
-With the advent of energy-efficient LED technology, a 10W LED can produce the same amount of light as a 60W incandescent bulb. Because of this massive difference in efficiency, the industry shifted to using **Lumens (lm)** as the standard measurement for brightness.
+LED bulbs are more energy-efficient than traditional incandescent bulbs, so a lower wattage LED bulb can provide the same level of brightness as a higher wattage incandescent bulb. Therefore, looking at the lumens value is a better way to determine the brightness or light output of the LED bulb.
 
-## What is a Lumen?
+The lumens value of a bulb is usually indicated on the packaging or the bulb itself. A higher lumens value indicates a brighter bulb. When buying LED bulbs, consumers should look for bulbs with the desired lumens value to ensure that they provide the desired level of brightness.
 
-A lumen is a unit of measurement that quantifies the total amount of visible light emitted by a source. Put simply: **Lumens equal brightness.** The higher the lumen rating, the brighter the light will appear.
+By considering the lumens value when buying LED bulbs, consumers can ensure that they choose bulbs that provide the desired level of brightness while also being energy-efficient. This can help save money on energy bills and reduce the environmental impact of lighting.
 
-## Understanding Luminous Efficacy
+## More
 
-When comparing LED products, engineers look at "Luminous Efficacy"—a metric that divides the total lumen output by the wattage consumed (Lumens per Watt, or lm/W). A higher lm/W ratio means the light is more efficient, converting more electricity directly into visible light rather than wasting it as heat.
+* **Luminous flux** is the total amount of visible light emitted by a light source per unit of time, usually measured in lumens (lm).
+* **The lumen** is the SI unit of luminous flux.
+* The brightness or light output of a light source is determined by its lumens value.
+* The higher the lumens value of a light source, the brighter it will be, and the lower the lumens value, the dimmer it will be.
+* It is important to consider the lumens value when choosing a light source.
+* The lumens value is usually indicated on the packaging or the light source itself.
+* Consumers can use the lumens value to select the desired level of brightness for their lighting needs.
+* For example, a standard 60-watt incandescent bulb produces around 800 lumens of light, whereas a 40-watt bulb produces around 450 lumens.
+* By understanding the relationship between lumens and the brightness of a light source, consumers can make informed decisions when selecting lighting products that best meet their needs.
 
-Sheetal Electrotech prioritizes high luminous efficacy in our LED manufacturing, ensuring our products deliver maximum brightness for minimal power consumption.
+## Other label information
 
-## How Many Lumens Do You Need?
+To make the right choice of light bulbs, it is important to understand the concept of lumens due to changes in lighting regulations and technologies. However, there are other important facts to check on the label before making a purchase, such as:
 
-The required lumen output depends on the size of the space and its intended use:
-*   **Reading / Task Lighting:** 400 - 800 lumens
-*   **Living Rooms:** 1,500 - 3,000 lumens total
-*   **Kitchens / Workspaces:** 3,000 - 6,000 lumens total
-*   **Outdoor Flood Lights:** 5,000 - 20,000+ lumens depending on area coverage
+* **Estimated yearly cost of energy:** The label should indicate the estimated yearly cost of energy for the bulb. This information can help consumers choose energy-efficient bulbs that can help save money on energy bills.
+* **Lifespan of the product:** The label should also indicate the estimated lifespan of the product. This information can help consumers choose bulbs that have a longer lifespan and may be more cost-effective in the long run.
+* **Light appearance:** The label should indicate the light appearance of the bulb, which ranges from warm to cool, as per the correlated colour temperature (CCT). Warm light appears more yellow or orange, while cool light appears more blue or white. This information can help consumers choose bulbs that provide the desired level of light appearance for their needs.
 
-When selecting lighting, always check the lumen output first to guarantee the fixture will adequately illuminate your target area.
+By checking these facts on the label before making a purchase, consumers can make informed decisions when selecting light bulbs. This can help ensure that they choose bulbs that are energy-efficient, have a long lifespan, and provide the desired level of light appearance for their needs.
     `
   }
+
+  {
+    slug: "led-product-safety-bis",
+    title: "LED Product Safety: Understanding BIS Safety Norms",
+    excerpt: "An official legacy-site guide explaining BIS safety norms, the BIS logo and the role of safety and quality standards for electronic lighting products.",
+    category: "LED Knowledge",
+    relatedProducts: [
+      { name: "LED Bulbs", href: "/products/led-lighting/bulbs" },
+      { name: "LED Battens", href: "/products/led-lighting/battens" },
+      { name: "Extension Boards", href: "/products/electronics/extension-boards" }
+    ],
+    content: `
+## Know About Products Safety
+
+BIS safety norms are designed to ensure that electronic products sold in India meet certain safety and quality standards. This includes protection against electric shock and resistance to heat and flames, among other safety requirements.
+
+Before purchasing electronic products, including lights, consumers should look for the BIS logo. This indicates that the product has been certified by the Bureau of Indian Standards and meets the necessary safety and quality standards.
+
+By purchasing BIS certified products, consumers can be assured that the products they are buying are safe to use and meet certain quality standards. This can help prevent accidents and protect consumers from harm, while also ensuring that the products function properly and have a longer lifespan.
+`
+  },
 ];
 
