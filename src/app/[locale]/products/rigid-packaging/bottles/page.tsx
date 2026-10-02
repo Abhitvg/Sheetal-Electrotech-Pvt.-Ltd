@@ -20,15 +20,15 @@ export default async function BottlesPage({ params: { locale } }: { params: { lo
     {
       id: "hdpe-bottles",
       name: t("p1_name"),
-      range: t("p1_range"),
-      image: "/images/legacy/Photo7.webp",
+      range: "Configured to requirement",
+      image: "https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png",
       specs: [],
     },
     {
       id: "pet-bottles",
       name: t("p2_name"),
-      range: t("p2_range"),
-      image: "/images/legacy/Photo9.webp",
+      range: "Configured to requirement",
+      image: "https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png",
       specs: [],
     }
   ];
