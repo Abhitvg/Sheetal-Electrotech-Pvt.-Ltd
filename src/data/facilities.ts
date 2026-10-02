@@ -76,7 +76,7 @@ export const facilities: Facility[] = [
     description: "Sheetal Electrotech’s R&D work focuses on LED lighting and electronics, with attention to energy efficiency, product durability and longevity, and the development of products for changing market requirements and emerging technologies.",
     image: "/images/facilities/legacy/research-development.png",
     fallbackImages: ["/images/legacy/product-design.png"],
-    specs: undefined,
+    specs: [],
     highlights: [{"title":"Energy efficiency","body":"The official legacy site describes R&D aimed at LED lighting solutions that use minimal energy while maintaining high-quality illumination."},{"title":"Durability and longevity","body":"R&D also addresses longer product life and reduced maintenance requirements."},{"title":"Specialized lighting applications","body":"The legacy page cites LED lighting solutions for indoor farming and outdoor farming as examples of application-focused product development."}]
   },
   {
