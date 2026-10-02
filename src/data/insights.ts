@@ -251,7 +251,7 @@ Before purchasing electronic products, including lights, consumers should look f
 
 By purchasing BIS certified products, consumers can be assured that the products they are buying are safe to use and meet certain quality standards. This can help prevent accidents and protect consumers from harm, while also ensuring that the products function properly and have a longer lifespan.
 `
-  },,
+  },
   {
     slug: "plastic-blow-moulding-at-sheetal-electrotech",
     title: "Plastic Blow Moulding: Container Manufacturing Capability",
