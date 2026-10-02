@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { localizedMetadata } from "@/lib/seo";
 import LegacyFacilityImage from "@/components/LegacyFacilityImage";
+import { facilityLegacyGalleries } from "@/data/legacyMedia";
 import { ArrowRight, Factory, Gauge, Layers3 } from "lucide-react";
 
 import { routing } from "@/i18n/routing";
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   });
 }
 
-export default async function FacilityDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function FacilityDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { slug } = await params;
   const facility = facilities.find((f) => f.slug === slug);
   if (!facility) notFound();
@@ -38,7 +39,11 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
       <div className="relative h-[70vh] min-h-[500px] flex items-end">
         <div className="absolute inset-0">
           <LegacyFacilityImage
-            candidates={[facility.image, ...(facility.fallbackImages ?? [])]}
+            candidates={[
+              ...(facility.slug !== "tool-room" ? (facilityLegacyGalleries[facility.slug] ?? []) : []),
+              facility.image,
+              ...(facility.fallbackImages ?? [])
+            ]}
             alt={facility.title}
             eager
             className="absolute inset-0 h-full w-full object-cover"
@@ -198,6 +203,34 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
           </div>
         </div>
       </div>
+
+      {facility.slug !== "tool-room" && (facilityLegacyGalleries[facility.slug]?.length ?? 0) > 1 && (
+        <section className="border-t border-steel/10 bg-mist/40 py-20">
+          <div className="container-wide">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+              <div>
+                <p className="font-mono text-accent text-xs uppercase tracking-[.2em] mb-3">Official facility photography</p>
+                <h2 className="text-3xl md:text-5xl font-display font-medium">Inside the operation</h2>
+              </div>
+              <p className="text-steel max-w-md text-sm leading-relaxed">
+                These images are sourced from Sheetal Electrotech&apos;s official legacy site archive and kept tied to the corresponding manufacturing capability.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {(facilityLegacyGalleries[facility.slug] ?? []).slice(0, 10).map((src, i) => (
+                <div key={src} className="group overflow-hidden bg-white border border-steel/10 aspect-[4/3]">
+                  <img
+                    src={src}
+                    alt={`${facility.title} — official facility image ${i + 1}`}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
