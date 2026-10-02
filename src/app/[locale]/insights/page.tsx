@@ -3,6 +3,7 @@ import { ArrowRight, BookOpen, Factory, Settings2, Package } from "lucide-react"
 import { insights } from "@/data/insights";
 import type { Metadata } from "next";
 import { getPageCopy, localizedMetadata } from "@/lib/seo";
+import { legacyInsightImages } from "@/data/legacyMedia";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -81,22 +82,30 @@ export default function InsightsIndexPage() {
                   {posts && posts.length > 0 ? (
                     <div className="grid md:grid-cols-2 gap-6">
                       {posts.map((post) => (
-                        <Link 
-                          key={post.slug} 
+                        <Link
+                          key={post.slug}
                           href={`/insights/${post.slug}`}
-                          className="group bg-white border border-slate-200 p-8 flex flex-col hover:border-accent/50 hover:shadow-lg transition-all duration-300"
+                          className="group bg-white border border-slate-200 overflow-hidden hover:border-accent/50 hover:shadow-lg transition-all duration-300"
                         >
-                          <h3 className="text-xl font-medium mb-4 group-hover:text-accent transition-colors">
-                            {post.title}
-                          </h3>
-                          <p className="text-steel text-sm leading-relaxed mb-8 flex-grow">
-                            {post.excerpt}
-                          </p>
-                          <div className="flex items-center gap-2 text-xs font-medium text-accent">
-                            Read Article <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          {legacyInsightImages[post.slug]?.[0] && (
+                            <div className="aspect-[16/9] bg-mist overflow-hidden">
+                              <img
+                                src={legacyInsightImages[post.slug][0]}
+                                alt={`${post.title} — official Sheetal Electrotech image`}
+                                loading="lazy"
+                                className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
+                              />
+                            </div>
+                          )}
+                          <div className="p-8">
+                            <h3 className="text-xl font-medium mb-4 group-hover:text-accent transition-colors">{post.title}</h3>
+                            <p className="text-steel text-sm leading-relaxed mb-8">{post.excerpt}</p>
+                            <div className="flex items-center gap-2 text-xs font-medium text-accent">
+                              Read Article <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </div>
                           </div>
                         </Link>
-                      ))}
+                      ))})}
                     </div>
                   ) : (
                     <div className="p-8 bg-slate-50 border border-slate-200 border-dashed text-steel/70 text-sm">
