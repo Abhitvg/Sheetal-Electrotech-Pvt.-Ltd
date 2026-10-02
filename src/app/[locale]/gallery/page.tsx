@@ -1,53 +1,98 @@
+
 "use client";
 
-import Image from "next/image";
-import { Link } from "@/i18n/routing";
+import { useMemo, useState } from "react";
+import { legacyGalleryImages } from "@/data/legacyMedia";
 
-const galleryImages = [
-  { src: "/images/legacy/Photo1.webp", alt: "Injection Moulding Facility", category: "Facilities" },
-  { src: "/images/legacy/Photo2.webp", alt: "Tooling and CNC Extruder", category: "Facilities" },
-  { src: "/images/legacy/Photo3.webp", alt: "SMT & Auto Insertion Line", category: "Electronics" },
-  { src: "/images/legacy/Photo4.webp", alt: "Assembly and Packaging Line", category: "Assembly" },
-  { src: "/images/legacy/Photo5.webp", alt: "Blow Moulding Machinery", category: "Facilities" },
-  { src: "/images/testing_lab.jpg", alt: "Quality Assurance Laboratory", category: "Quality" },
-  { src: "/images/hero_factory.jpg", alt: "Factory Floor Overview", category: "Facilities" }
-];
+const FILTERS = ["All", "Facilities", "Products", "Knowledge"] as const;
+type Filter = (typeof FILTERS)[number];
 
 export default function GalleryPage() {
+  const [filter, setFilter] = useState<Filter>("All");
+  const [visibleCount, setVisibleCount] = useState(36);
+
+  const filtered = useMemo(
+    () => filter === "All" ? legacyGalleryImages : legacyGalleryImages.filter((item) => item.category === filter),
+    [filter]
+  );
+
+  const visible = filtered.slice(0, visibleCount);
+
+  function selectFilter(next: Filter) {
+    setFilter(next);
+    setVisibleCount(36);
+  }
+
   return (
-    <div className="bg-paper min-h-screen text-ink pt-32 pb-24">
+    <main className="bg-paper min-h-screen text-ink pt-32 pb-24">
       <div className="container-wide">
-        <div className="max-w-3xl mb-16">
-          <p className="font-mono text-accent text-sm uppercase tracking-widest mb-6 flex items-center gap-3">
-            <span className="w-8 h-[1px] bg-accent inline-block"></span>
-            Factory Floor
+        <div className="max-w-4xl mb-14">
+          <p className="font-mono text-accent text-sm uppercase tracking-[.2em] mb-6">
+            Official Site Archive
           </p>
           <h1 className="text-5xl md:text-7xl font-display font-medium mb-6">
-            Inside Our Operations.
+            Factory, Products & Knowledge.
           </h1>
-          <p className="text-steel text-xl">
-            A look inside our vertically integrated manufacturing facility in Daman.
+          <p className="text-steel text-xl leading-relaxed max-w-3xl">
+            Authentic Sheetal Electrotech photography and visual assets recovered from the company&apos;s official legacy website, organized around manufacturing, products and technical knowledge.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {galleryImages.map((img, i) => (
-            <div key={i} className="group relative aspect-[4/3] bg-mist overflow-hidden border border-steel/10">
-              <Image 
-                src={img.src}
-                alt={img.alt}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <p className="text-accent font-mono text-xs uppercase tracking-widest mb-1">{img.category}</p>
-                <p className="text-white font-medium">{img.alt}</p>
+        <div className="flex flex-wrap items-center justify-between gap-5 mb-10 pb-5 border-b border-steel/10">
+          <div className="flex flex-wrap gap-2">
+            {FILTERS.map((item) => (
+              <button
+                key={item}
+                type="button"
+                onClick={() => selectFilter(item)}
+                className={`px-4 py-2 text-xs font-mono uppercase tracking-wider border transition-colors ${
+                  filter === item
+                    ? "bg-ink text-white border-ink"
+                    : "bg-white text-steel border-steel/15 hover:border-accent hover:text-ink"
+                }`}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+          <p className="text-steel text-sm font-mono">
+            {filtered.length} archived images
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {visible.map((item, index) => (
+            <figure key={item.src} className="group bg-white border border-steel/10 overflow-hidden">
+              <div className="aspect-[4/3] bg-mist overflow-hidden">
+                <img
+                  src={item.src}
+                  alt={`${item.category} — Sheetal Electrotech official archive image ${index + 1}`}
+                  loading={index < 8 ? "eager" : "lazy"}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
               </div>
-            </div>
+              <figcaption className="px-4 py-3 flex items-center justify-between gap-3">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-accent">
+                  {item.category}
+                </span>
+                <span className="text-[10px] text-steel/60">Official archive</span>
+              </figcaption>
+            </figure>
           ))}
         </div>
+
+        {visibleCount < filtered.length && (
+          <div className="text-center mt-12">
+            <button
+              type="button"
+              onClick={() => setVisibleCount((count) => Math.min(count + 36, filtered.length))}
+              className="px-7 py-3 border border-ink text-ink text-sm font-medium hover:bg-ink hover:text-white transition-colors"
+            >
+              Load more
+            </button>
+          </div>
+        )}
       </div>
-    </div>
+    </main>
   );
 }
