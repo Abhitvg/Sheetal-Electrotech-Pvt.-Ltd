@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, ArrowUpRight, BookOpen, Factory, Settings2 } from "lucide-react";
 import { insights } from "@/data/insights";
