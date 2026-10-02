@@ -8,13 +8,11 @@ export const facilityLegacyGalleries: Record<string, string[]> = {
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8393.jpeg",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8389.jpeg",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8383-jpeg.webp",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "ibm-plastic": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/PHOTO-2023-04-25-22-26-42-35-jpg.webp",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8665.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8666.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "extrusion": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8682.png",
@@ -54,7 +52,6 @@ export const facilityLegacyGalleries: Record<string, string[]> = {
   ],
   "blow-moulding": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "smt": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8730.png",
@@ -86,7 +83,6 @@ export const facilityLegacyGalleries: Record<string, string[]> = {
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/inspection.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/stock.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/technical-support.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8771.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8665.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8424-jpeg.webp",
@@ -99,38 +95,32 @@ export const legacyProductImages: Record<string, string[]> = {
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot_2023-04-18_at_6.35.44_PM-removebg-preview.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot_2023-04-17_at_5.31.51_PM-removebg-preview.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/led-bulb-desc.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "led-bulb-2": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot_2023-04-18_at_6.35.44_PM-removebg-preview.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot_2023-04-17_at_5.31.51_PM-removebg-preview.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/led-bulb-2.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "led-high-power-bulb": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot_2023-04-17_at_6.04.55_PM-removebg-preview.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot-2023-04-27-161608.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "led-emergency-bulb": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/Photo13.webp",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/15.webp",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/10-3.webp",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/opp-1.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "led-candle-bulb": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot_2023-04-18_at_6.35.03_PM-removebg-preview.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/11-2.webp",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/slp-e1682594364593.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "led-batten": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot_2023-04-17_at_5.53.51_PM-removebg-preview-1-e1681734590114.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot_2023-04-17_at_5.53.51_PM-removebg-preview.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot-2023-04-17-at-5.27.21-PM.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot-2023-04-27-155612.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "led-high-power-batten": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/9-3.webp",
@@ -167,7 +157,6 @@ export const legacyProductImages: Record<string, string[]> = {
   "led-ceiling-light": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot_2023-04-17_at_9.23.15_AM-removebg-preview.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/io.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "led-street-light-2": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot_2023-04-17_at_5.41.13_PM-removebg-preview.png",
@@ -175,13 +164,11 @@ export const legacyProductImages: Record<string, string[]> = {
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/Photo8.webp",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/5-1-jpg.webp",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/iop.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "led-flood-well-light": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/sepl-1.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot_2023-04-17_at_5.41.03_PM-removebg-preview.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/spelr.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "led-spot-light": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot_2023-04-17_at_5.35.47_PM-removebg-preview.png",
@@ -189,29 +176,24 @@ export const legacyProductImages: Record<string, string[]> = {
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/10-2.webp",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/9-2.webp",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/spot-g9.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "led-decorative-light": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot_2023-04-17_at_5.28.43_PM-removebg-preview.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/DSC07219-2-fotor-bg-remover-20230421162038-e1682598876237.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/ssep.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "smart-led-bulb": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot_2023-04-16_at_11.29.01_PM-removebg-preview.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot-2023-04-17-at-9.31.53-AM.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/smart-led-light-2-e1682589797372.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "led-strip-lights": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot-2023-04-18-at-6.22.28-PM-e1681822540973.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/sepl.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "extension-board": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/exension-board-jpg.webp",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/exten.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ]
 };
 
@@ -230,7 +212,6 @@ export const legacyInsightImages: Record<string, string[]> = {
   ],
   "understanding-led-colors-and-cct": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/3000K-Warm-White-Good-for-Relaxing-Similar-to-Incandescent-bulb-jpg.webp",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "what-is-ip-rating": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/indoor.png",
@@ -242,7 +223,6 @@ export const legacyInsightImages: Record<string, string[]> = {
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Untitled-design.gif",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Untitled-Business-Card-Landscape-Presentation-169.gif",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/VS-Facebook-Post-Landscape.gif",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ],
   "manual-insertion-process": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8706.png",
@@ -260,7 +240,6 @@ export const legacyInsightImages: Record<string, string[]> = {
     "https://sheetalelectrotech.com/wp-content/uploads/2023/05/PHOTO-2023-04-25-22-26-42-35-jpg.webp",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8665.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8666.png",
-    "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png"
   ]
 };
 
