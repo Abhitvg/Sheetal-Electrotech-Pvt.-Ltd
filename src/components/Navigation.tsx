@@ -156,7 +156,7 @@ export default function Navigation() {
                       <div>
                         <p className="font-mono text-ink/40 text-xs uppercase mb-4">Finishing & Assembly</p>
                         <ul className="space-y-3">
-                          <li><Link href="/facilities/assembly-packaging" className="text-ink/80 hover:text-accent text-sm">Assembly & Packaging</Link></li>
+                          <li><Link href="/facilities/assembly-packing" className="text-ink/80 hover:text-accent text-sm">Assembly & Packing</Link></li>
                           <li><Link href="/quality" className="text-ink/80 hover:text-accent text-sm">Quality Testing Lab</Link></li>
                         </ul>
                       </div>
