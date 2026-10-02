@@ -2,7 +2,6 @@
 
 import { Link } from "@/i18n/routing";
 import { ArrowRight, Download } from "lucide-react";
-import Image from "next/image";
 import { legacyProductImages } from "@/data/legacyMedia";
 
 interface ProductSubCategoryProps {
@@ -46,12 +45,12 @@ export default function ProductSubCategoryTemplate({ title, category, descriptio
             <div key={product.id} className="flex flex-col md:flex-row gap-12 bg-white border border-steel/15 p-0 md:p-8 group hover:border-accent/30 transition-all">
               {/* Product Image */}
               <div className="w-full md:w-5/12">
-                <div className={`aspect-square relative ${product.bg || "bg-mist"} flex items-center justify-center p-8`}>
-                  <Image
+                <div className={`aspect-[4/3] relative ${product.bg || "bg-mist"} flex items-center justify-center p-8 overflow-hidden`}>
+                  <img
                     src={product.image}
                     alt={product.name}
-                    fill
-                    className="object-contain p-8 group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                    className="h-full w-full object-contain p-8 group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 {(legacyProductImages[product.id]?.length ?? 0) > 0 && (
@@ -74,6 +73,12 @@ export default function ProductSubCategoryTemplate({ title, category, descriptio
               <div className="flex-1 flex flex-col justify-start p-8 md:p-0">
                 <div className="mb-6">
                   <h2 className="text-3xl font-display font-bold text-ink mb-2 uppercase tracking-wide">{product.name}</h2>
+                  {product.range && (
+                    <div className="inline-flex items-center gap-2 mt-2 mb-4 px-3 py-2 bg-mist border border-steel/10 text-xs font-mono uppercase tracking-wider text-steel">
+                      <span className="text-accent">Configuration</span>
+                      <span>{product.range}</span>
+                    </div>
+                  )}
                   {product.description && (
                     <p className="text-steel text-lg leading-relaxed mt-4">{product.description}</p>
                   )}
