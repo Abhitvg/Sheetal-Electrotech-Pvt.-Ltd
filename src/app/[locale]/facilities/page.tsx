@@ -3,7 +3,6 @@ import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 import FacilityImage from "@/components/FacilityImage";
 import { facilities } from "@/data/facilities";
-import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { getPageCopy, localizedMetadata } from "@/lib/seo";
 
@@ -53,6 +52,7 @@ export default function FacilitiesIndexPage() {
                       candidates={[facility.image, ...(facility.fallbackImages ?? [])]}
                       alt={facility.title}
                       className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw"
                     />
                     {/* Improved gradient overlay for readability - stronger contrast */}
                     <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/45 to-ink/5" />
