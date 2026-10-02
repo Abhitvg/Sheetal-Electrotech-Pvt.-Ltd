@@ -20,6 +20,7 @@ export default async function BottlesPage({ params: { locale } }: { params: { lo
     {
       id: "hdpe-bottles",
       name: t("p1_name"),
+      description: "Plastic bottle formats supported through Sheetal Electrotech’s blow moulding and injection blow moulding capabilities.",
       range: "Configured to requirement",
       image: "https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png",
       specs: [],
@@ -27,6 +28,7 @@ export default async function BottlesPage({ params: { locale } }: { params: { lo
     {
       id: "pet-bottles",
       name: t("p2_name"),
+      description: "Hollow plastic product formats developed around specified size, geometry and application requirements.",
       range: "Configured to requirement",
       image: "https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png",
       specs: [],
