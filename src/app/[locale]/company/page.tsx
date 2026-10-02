@@ -1,8 +1,6 @@
-"use client";
-
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
-import { motion } from "framer-motion";
+import { HeroFadeUp, TimelineFadeIn, LeaderCardFadeUp } from "@/components/CompanyAnimations";
 import { ArrowRight, MapPin } from "lucide-react";
 import { companyFacts, companyTimeline, leadershipTeam, coreTeam } from "@/data/companyFacts";
 import { legacyCompanyImages } from "@/data/legacyMedia";
@@ -25,11 +23,7 @@ export default function CompanyPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-ink/75 to-ink/30" />
         </div>
         <div className="relative z-10 container-wide text-paper pb-20 pt-36">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <HeroFadeUp>
             <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
               Est. 1999 · Daman, India
             </p>
@@ -45,7 +39,7 @@ export default function CompanyPage() {
             >
               Explore Capabilities <ArrowRight className="w-4 h-4" />
             </Link>
-          </motion.div>
+          </HeroFadeUp>
         </div>
       </div>
 
@@ -94,14 +88,7 @@ export default function CompanyPage() {
 
             <div className="space-y-0 divide-y divide-steel/10 md:divide-none">
               {companyTimeline.map((m, i) => (
-                <motion.div
-                  key={m.year}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.5, delay: i * 0.07 }}
-                  className="flex flex-col md:flex-row gap-4 md:gap-12 py-8 md:py-10"
-                >
+                <TimelineFadeIn key={m.year} delay={i * 0.07}>
                   {/* Year */}
                   <div className="md:w-[120px] flex-shrink-0 flex md:justify-end items-start pt-1">
                     <span className={`font-mono text-sm font-bold ${m.year === "Today" ? "text-accent" : "text-steel"}`}>
@@ -121,7 +108,7 @@ export default function CompanyPage() {
                     <h4 className="font-display text-xl font-medium text-ink mb-2">{m.title}</h4>
                     <p className="text-steel leading-relaxed max-w-lg">{m.body}</p>
                   </div>
-                </motion.div>
+                </TimelineFadeIn>
               ))}
             </div>
           </div>
@@ -179,14 +166,7 @@ export default function CompanyPage() {
           {/* Directors — with photos */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
             {leadershipTeam.map((leader) => (
-              <motion.div
-                key={leader.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6 }}
-                className="bg-white border border-steel/15 overflow-hidden group"
-              >
+              <LeaderCardFadeUp key={leader.name}>
                 <div className="relative w-full aspect-[4/5] overflow-hidden">
                   <Image
                     src={leader.photo!}
@@ -202,7 +182,7 @@ export default function CompanyPage() {
                   <div className="w-8 h-[1px] bg-steel/30 mb-4" />
                   <p className="text-steel text-sm leading-relaxed">{leader.note}</p>
                 </div>
-              </motion.div>
+              </LeaderCardFadeUp>
             ))}
           </div>
           
