@@ -4,34 +4,43 @@ import { Link } from "@/i18n/routing";
 import { ArrowRight, Box, Package, Layers, Hexagon } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { facilityLegacyGalleries } from "@/data/legacyMedia";
+
+const packagingImages = {
+  blow: facilityLegacyGalleries["blow-moulding"]?.[0] ?? "/images/packaging_factory.jpg",
+  blowAlt: facilityLegacyGalleries["blow-moulding"]?.[1] ?? "/images/packaging_factory.jpg",
+  ibm: facilityLegacyGalleries["ibm-plastic"]?.[0] ?? "/images/products_packaging.jpg",
+  injection: facilityLegacyGalleries["injection-moulding"]?.[0] ?? "/images/moulding_factory.jpg",
+  rd: facilityLegacyGalleries["research-development"]?.[0] ?? "/images/packaging_factory.jpg",
+};
 
 const subCategories = [
   {
     title: "Plastic Bottles",
-    description: "Blow-moulded and injection blow-moulded bottles.",
+    description: "Blow-moulded and injection blow-moulded plastic bottles and hollow products.",
     href: "/products/rigid-packaging/bottles",
-    image: "/images/products_packaging.jpg",
+    image: packagingImages.blow,
     icon: Box
   },
   {
     title: "Jars & Containers",
-    description: "Wide-mouth jars and rigid containers for diverse applications.",
+    description: "Rigid plastic containers supported by Sheetal Electrotech&apos;s moulding capabilities.",
     href: "/products/rigid-packaging/jars",
-    image: "/images/jar_product.jpg",
+    image: packagingImages.blowAlt,
     icon: Package
   },
   {
     title: "Custom Packaging",
-    description: "Custom-moulded packaging designed around specific product requirements.",
+    description: "Packaging requirements supported through mould development and integrated plastics manufacturing.",
     href: "/products/rigid-packaging/custom",
-    image: "/images/packaging_factory.jpg",
+    image: packagingImages.ibm,
     icon: Layers
   },
   {
     title: "Injection-Moulded Components",
-    description: "Precision mechanical plastic parts, housings, and enclosures.",
+    description: "Injection-moulded plastic components, housings and other specified parts.",
     href: "/products/rigid-packaging/components",
-    image: "/images/moulding_factory.jpg",
+    image: packagingImages.injection,
     icon: Hexagon
   }
 ];
@@ -42,7 +51,7 @@ export default function RigidPackagingPage() {
       {/* Hero */}
       <div className="relative h-[65vh] min-h-[500px] flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/packaging_factory.jpg" alt="Rigid plastic packaging manufacturing" fill sizes="100vw" className="object-cover object-center" priority />
+          <img src={packagingImages.blow} alt="Sheetal Electrotech plastic blow moulding operation" className="h-full w-full object-cover object-center" fetchPriority="high" />
           <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/20" />
         </div>
         <div className="relative z-10 container-wide text-white pt-20">
@@ -84,6 +93,11 @@ export default function RigidPackagingPage() {
 
       {/* Manufacturing Capabilities Banner */}
       <section className="bg-mist text-ink py-12 border-b border-steel/10">
+        <div className="container-wide mb-8">
+          <p className="font-mono text-[11px] uppercase tracking-[.2em] text-steel/70 text-center">
+            Official Sheetal Electrotech manufacturing photography
+          </p>
+        </div>
         <div className="container-wide">
           <div className="flex flex-wrap justify-center items-center gap-3 md:gap-6 text-sm md:text-xl font-display font-medium text-center text-ink/70">
             <span className="text-ink">Injection Moulding</span>
