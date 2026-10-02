@@ -274,7 +274,7 @@ export const legacyGalleryImages: LegacyGalleryImage[] = [
     "source": "/injection-moulding/"
   },
   {
-    "src": "http://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png",
+    "src": "https://sheetalelectrotech.com/wp-content/uploads/2021/12/PHOTO-2023-04-11-14-01-38-removebg-preview.png",
     "category": "Facilities",
     "source": "/injection-moulding/"
   },
