@@ -53,8 +53,9 @@ function sameSite(u) {
 }
 
 function normalizePageUrl(raw) {
-  const u = absoluteUrl(raw, ORIGIN);
-  if (!u || !sameSite(u)) return null;
+  const rawUrl = absoluteUrl(raw, ORIGIN);
+  if (!rawUrl || !sameSite(rawUrl)) return null;
+  const u = new URL(rawUrl);
   u.hash = "";
   u.search = "";
   if (!u.pathname.endsWith("/") && !imageExt.test(u.pathname)) u.pathname += "/";
