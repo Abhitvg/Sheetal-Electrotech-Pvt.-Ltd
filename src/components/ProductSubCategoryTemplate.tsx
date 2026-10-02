@@ -3,6 +3,7 @@
 import { Link } from "@/i18n/routing";
 import { ArrowRight, Download } from "lucide-react";
 import Image from "next/image";
+import { legacyProductImages } from "@/data/legacyMedia";
 
 interface ProductSubCategoryProps {
   title: string;
@@ -44,16 +45,31 @@ export default function ProductSubCategoryTemplate({ title, category, descriptio
           {products.map((product) => (
             <div key={product.id} className="flex flex-col md:flex-row gap-12 bg-white border border-steel/15 p-0 md:p-8 group hover:border-accent/30 transition-all">
               {/* Product Image */}
-              <div className={`w-full md:w-5/12 aspect-square relative ${product.bg || "bg-mist"} flex items-center justify-center p-8`}>
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  className="object-contain p-8 group-hover:scale-105 transition-transform duration-500"
-                />
+              <div className="w-full md:w-5/12">
+                <div className={`aspect-square relative ${product.bg || "bg-mist"} flex items-center justify-center p-8`}>
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-contain p-8 group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                {(legacyProductImages[product.id]?.length ?? 0) > 0 && (
+                  <div className="grid grid-cols-3 gap-2 mt-3">
+                    {(legacyProductImages[product.id] ?? []).slice(0, 3).map((src, index) => (
+                      <div key={src} className="aspect-[4/3] bg-mist overflow-hidden border border-steel/10">
+                        <img
+                          src={src}
+                          alt={`${product.name} — official source image ${index + 1}`}
+                          loading="lazy"
+                          className="h-full w-full object-cover hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-              
-              {/* Product Info */}
+                            {/* Product Info */}
               <div className="flex-1 flex flex-col justify-start p-8 md:p-0">
                 <div className="mb-6">
                   <h2 className="text-3xl font-display font-bold text-ink mb-2 uppercase tracking-wide">{product.name}</h2>
