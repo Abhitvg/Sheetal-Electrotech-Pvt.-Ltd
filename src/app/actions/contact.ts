@@ -2,25 +2,83 @@
 
 import { z } from "zod";
 import { Resend } from "resend";
+import { neon } from "@neondatabase/serverless";
+import { headers } from "next/headers";
 
 const contactSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().optional(),
-  company: z.string().optional(),
-  subject: z.string().min(1, "Subject is required"),
-  message: z.string().min(1, "Message is required"),
+  name: z.string().trim().min(1, "Name is required").max(120, "Name is too long"),
+  email: z.string().trim().email("Invalid email address").max(320, "Email is too long"),
+  phone: z.string().trim().max(100, "Phone number is too long").optional(),
+  company: z.string().trim().max(160, "Company name is too long").optional(),
+  subject: z.string().trim().min(1, "Subject is required").max(120, "Subject is too long"),
+  message: z.string().trim().min(1, "Message is required").max(5000, "Message is too long"),
+  honeypot: z.string().max(0, "Spam detected").optional(),
 });
+
+const RATE_LIMIT_WINDOW_MINUTES = 10;
+const MAX_REQUESTS_PER_WINDOW = 5;
+
+async function checkContactRateLimit(ip: string) {
+  if (!process.env.DATABASE_URL) {
+    return true;
+  }
+
+  const sql = neon(process.env.DATABASE_URL);
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS contact_rate_limits (
+      ip_address TEXT PRIMARY KEY,
+      window_started_at TIMESTAMPTZ NOT NULL,
+      request_count INTEGER NOT NULL DEFAULT 0
+    )
+  `;
+
+  const rows = await sql`
+    INSERT INTO contact_rate_limits (ip_address, window_started_at, request_count)
+    VALUES (${ip}, NOW(), 1)
+    ON CONFLICT (ip_address) DO UPDATE
+    SET
+      request_count = CASE
+        WHEN NOW() - contact_rate_limits.window_started_at < INTERVAL '10 minutes'
+          THEN contact_rate_limits.request_count + 1
+        ELSE 1
+      END,
+      window_started_at = CASE
+        WHEN NOW() - contact_rate_limits.window_started_at < INTERVAL '10 minutes'
+          THEN contact_rate_limits.window_started_at
+        ELSE NOW()
+      END
+    RETURNING request_count
+  `;
+
+  return Number(rows[0]?.request_count ?? 1) <= MAX_REQUESTS_PER_WINDOW;
+}
 
 export async function submitContact(formData: FormData) {
   try {
+    const honeypot = String(formData.get("website") ?? "");
+
+    if (honeypot) {
+      return { success: true, message: "Message sent successfully." };
+    }
+
+    const headersList = await headers();
+    const forwardedFor = headersList.get("x-forwarded-for");
+    const ip = forwardedFor?.split(",")[0]?.trim() || headersList.get("x-real-ip") || "unknown";
+
+    const allowed = await checkContactRateLimit(ip);
+    if (!allowed) {
+      return { success: false, message: "Too many submissions. Please try again later." };
+    }
+
     const rawData = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      phone: formData.get("phone") as string,
-      company: formData.get("company") as string,
-      subject: formData.get("subject") as string,
-      message: formData.get("message") as string,
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      phone: String(formData.get("phone") ?? ""),
+      company: String(formData.get("company") ?? ""),
+      subject: String(formData.get("subject") ?? ""),
+      message: String(formData.get("message") ?? ""),
+      honeypot,
     };
 
     const validatedData = contactSchema.parse(rawData);
