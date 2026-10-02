@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import { ArrowRight, ArrowUpRight, Boxes, Cpu, Lightbulb, PackageCheck } from "lucide-react";
