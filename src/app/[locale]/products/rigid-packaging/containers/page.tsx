@@ -20,6 +20,7 @@ export default async function Page({ params: { locale } }: { params: { locale: s
     {
       id: "product-1",
       name: t("p1_name"),
+      description: "Rigid plastic container formats supported by Sheetal Electrotech’s integrated moulding processes.",
       range: "Configured to requirement",
       image: "https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png",
       specs: [],
