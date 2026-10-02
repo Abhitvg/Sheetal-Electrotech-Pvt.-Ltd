@@ -174,7 +174,7 @@
     },
     "battens": {
       "title": "LED बैटन",
-      "description": "आवासीय, वाणिज्यिक और औद्योगिक स्थानों के लिए लीनियर LED लाइटिंग समाधान। कई लंबाई और IP रेटिंग में उपलब्ध।",
+      "description": "आवासीय, वाणिज्यिक और औद्योगिक स्थानों के लिए लीनियर LED लाइटिंग समाधान, विभिन्न कॉन्फ़िगरेशन में।",
       "p1_name": "Led High Power Batten",
       "p1_range": "विभिन्न",
       "p2_name": "हाई पावर LED बैटन",
@@ -185,18 +185,18 @@
     },
     "bottles": {
       "title": "प्लास्टिक की बोतलें",
-      "description": "फार्मास्युटिकल, रसायन और FMCG क्षेत्रों के लिए उच्च गुणवत्ता वाली ब्लो-मोल्डेड और इंजेक्शन-स्ट्रेच ब्लो-मोल्डेड बोतलें।",
-      "p1_name": "HDPE बोतलें",
+      "description": "Sheetal Electrotech की ब्लो मोल्डिंग और इंजेक्शन ब्लो मोल्डिंग क्षमताओं से समर्थित प्लास्टिक बोतलें और खोखले प्लास्टिक उत्पाद।",
+      "p1_name": "प्लास्टिक बोतलें",
       "p1_range": "विभिन्न",
-      "p2_name": "PET बोतलें",
+      "p2_name": "खोखले प्लास्टिक उत्पाद",
       "p2_range": "विभिन्न"
     },
     "jars": {
       "title": "प्लास्टिक जार और कंटेनर",
-      "description": "सुरक्षित सीलिंग और इष्टतम शेल्फ अपील के लिए सख्त सहनशीलता के अनुसार निर्मित वाइड-माउथ जार और कस्टम कंटेनर।",
-      "p1_name": "PP जार",
+      "description": "एकीकृत प्लास्टिक विनिर्माण क्षमताओं से समर्थित कठोर प्लास्टिक जार, कंटेनर और कस्टम मोल्डेड पैकेजिंग उत्पाद।",
+      "p1_name": "प्लास्टिक जार और कंटेनर",
       "p1_range": "विभिन्न",
-      "p2_name": "कस्टम कंटेनर",
+      "p2_name": "कस्टम मोल्डेड पैकेजिंग",
       "p2_range": "कस्टम"
     },
     "downlights": {
@@ -216,7 +216,7 @@
     },
     "street-lights": {
       "title": "LED Street Lights (HI)",
-      "description": "Durable and bright street luminaires. (HI)",
+      "description": "आउटडोर रोशनी और इंफ्रास्ट्रक्चर अनुप्रयोगों के लिए LED स्ट्रीट लाइटिंग उत्पाद।",
       "p1_name": "उत्पाद 1",
       "p1_range": "Various",
       "p0_name": "LED Street Light",
@@ -224,7 +224,7 @@
     },
     "flood-lights": {
       "title": "LED Flood Lights (HI)",
-      "description": "High-power flood lights for outdoors. (HI)",
+      "description": "आउटडोर रोशनी, सुरक्षा, खेल और लैंडस्केपिंग अनुप्रयोगों के लिए फ्लड और वेल लाइट उत्पाद।",
       "p1_name": "उत्पाद 1",
       "p1_range": "Various",
       "p0_name": "Led Flood Well Light",
@@ -232,7 +232,7 @@
     },
     "spot-lights": {
       "title": "LED Spot Lights (HI)",
-      "description": "Precision spot lighting. (HI)",
+      "description": "फोकस्ड रोशनी के लिए दिशात्मक LED स्पॉट लाइटिंग उत्पाद।",
       "p1_name": "उत्पाद 1",
       "p1_range": "Various",
       "p0_name": "Led Spot Light",
@@ -240,7 +240,7 @@
     },
     "decorative-lights": {
       "title": "Decorative Lighting (HI)",
-      "description": "Aesthetic LED fixtures. (HI)",
+      "description": "सौंदर्यात्मक और एम्बिएंट इंडोर रोशनी के लिए डेकोरेटिव LED लाइटिंग उत्पाद।",
       "p1_name": "उत्पाद 1",
       "p1_range": "Various",
       "p0_name": "Led Decorative Light",
@@ -248,7 +248,7 @@
     },
     "smart-led": {
       "title": "Smart LED Lighting (HI)",
-      "description": "IoT enabled smart lighting. (HI)",
+      "description": "स्मार्टफोन/ऐप नियंत्रण और वॉइस असिस्टेंट सपोर्ट के साथ स्मार्ट LED लाइटिंग।",
       "p1_name": "उत्पाद 1",
       "p1_range": "Various",
       "p0_name": "Smart Led Bulb",
@@ -256,7 +256,7 @@
     },
     "strip-lights": {
       "title": "LED Strip Lights (HI)",
-      "description": "Flexible LED strips. (HI)",
+      "description": "एक्सेंट और इंटीरियर रोशनी के लिए लचीले LED स्ट्रिप लाइटिंग उत्पाद।",
       "p1_name": "उत्पाद 1",
       "p1_range": "Various",
       "p0_name": "Led Strip Lights",
@@ -264,25 +264,25 @@
     },
     "containers": {
       "title": "Containers (HI)",
-      "description": "Durable storage containers. (HI)",
+      "description": "ब्लो मोल्डिंग और अन्य प्लास्टिक विनिर्माण प्रक्रियाओं से समर्थित कंटेनर उत्पाद।",
       "p1_name": "उत्पाद 1",
       "p1_range": "Various"
     },
     "custom": {
       "title": "Custom Packaging (HI)",
-      "description": "Tailored packaging designs. (HI)",
+      "description": "विशिष्ट आवश्यकताओं के अनुसार कस्टम मोल्डेड पैकेजिंग समाधान।",
       "p1_name": "उत्पाद 1",
       "p1_range": "Various"
     },
     "components": {
       "title": "Injection-Moulded Components (HI)",
-      "description": "High-precision components. (HI)",
+      "description": "निर्दिष्ट आवश्यकताओं के अनुसार इंजेक्शन-मोल्डेड प्लास्टिक घटक।",
       "p1_name": "उत्पाद 1",
       "p1_range": "Various"
     },
     "extension-boards": {
       "title": "Extension Boards (HI)",
-      "description": "Safe and durable power extensions. (HI)",
+      "description": "निर्दिष्ट आवश्यकताओं के अनुसार निर्मित एक्सटेंशन बोर्ड और इलेक्ट्रॉनिक एक्सेसरीज़।",
       "p1_name": "उत्पाद 1",
       "p1_range": "Various",
       "p0_name": "Extension Board",
