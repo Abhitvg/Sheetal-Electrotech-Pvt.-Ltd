@@ -219,6 +219,10 @@ export const legacyInsightImages: Record<string, string[]> = {
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/strret.png",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Moisture-Protection.png"
   ],
+  "led-product-safety-bis": [
+    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/BIS-jpg.webp",
+    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/BIS-1024x576.webp"
+  ],
   "what-are-lumens": [
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Untitled-design.gif",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Untitled-Business-Card-Landscape-Presentation-169.gif",
