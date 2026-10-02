@@ -11,6 +11,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: scrape-official-site
+  cancel-in-progress: true
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
