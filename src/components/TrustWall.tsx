@@ -19,10 +19,7 @@ export default function TrustWall() {
   const t = useTranslations("TrustWall");
   return (
     <section className="py-20 bg-paper border-y border-slate-200 overflow-hidden" id="trust">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8 }}
+      <div
       >
         <p className="text-center font-mono text-xs uppercase tracking-[0.3em] text-steel mb-12">
           Trusted by Industry Leaders
