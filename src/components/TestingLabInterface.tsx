@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Activity, Thermometer, Zap, ShieldCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Activity, Thermometer, Zap } from "lucide-react";
 
 export default function TestingLabInterface() {
   const [activeTest, setActiveTest] = useState("thermal");

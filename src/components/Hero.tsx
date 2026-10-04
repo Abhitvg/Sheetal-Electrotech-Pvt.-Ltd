@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { companyFacts } from "@/data/companyFacts";
 
 // Only verified stats — sourced from companyFacts
 const statsConfig = [
@@ -37,7 +36,6 @@ export default function Hero() {
           fill
           className="object-cover"
           priority
-          unoptimized
         />
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-[#0b192c]/90 via-[#0b192c]/70 to-[#0b192c]/40"

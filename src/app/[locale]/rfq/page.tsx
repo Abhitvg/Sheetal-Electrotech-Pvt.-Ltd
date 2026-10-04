@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, Suspense } from "react";
+import { Link } from "@/i18n/routing";
 import { ArrowRight, Send, CheckCircle, Loader2, UploadCloud } from "lucide-react";
 import { submitRfq } from "@/app/actions/rfq";
 import { track } from "@vercel/analytics";
@@ -63,7 +64,7 @@ function RFQFormContent() {
         setError(result.message);
         track("rfq_submit_error", { message: result.message });
       }
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred. Please try again.");
       track("rfq_submit_error", { message: "Unexpected error" });
     } finally {
@@ -82,9 +83,9 @@ function RFQFormContent() {
           <p className="text-steel text-lg mb-8">
             Our technical team will review your specification and respond promptly with a production-ready proposal.
           </p>
-          <a href="/" className="bg-accent text-white px-8 py-4 font-medium hover:bg-orange-600 transition-colors inline-flex items-center gap-3">
+          <Link href="/" className="bg-accent text-white px-8 py-4 font-medium hover:bg-orange-600 transition-colors inline-flex items-center gap-3">
             Return Home <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
       </div>
     );

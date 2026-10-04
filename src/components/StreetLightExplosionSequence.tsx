@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Environment, ContactShadows, Float, PresentationControls } from "@react-three/drei";
+import { Environment, ContactShadows, Float } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";

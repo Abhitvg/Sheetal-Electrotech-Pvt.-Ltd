@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Canvas, useThree } from "@react-three/fiber";
-import { Environment, ContactShadows, Float } from "@react-three/drei";
-import * as THREE from "three";
+import { Canvas } from "@react-three/fiber";
+import { Environment, ContactShadows } from "@react-three/drei";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEngineeringMode } from "./EngineeringModeProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
