@@ -1,3 +1,7 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Layers, Settings, ShieldCheck, TrendingUp, DollarSign, Users } from "lucide-react";
 
 const reasons = [
@@ -34,12 +38,18 @@ const reasons = [
 ];
 
 export default function WhySheetal() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
   return (
     <section className="py-24 md:py-32 bg-mist/30" id="why-sheetal">
       <div className="container-wide">
-        <div
+        <motion.div
           ref={ref}
-          className="max-w-3xl mb-16 reveal-on-load"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mb-16"
         >
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-3">
             Why Sheetal
@@ -50,15 +60,18 @@ export default function WhySheetal() {
           <p className="text-steel text-lg">
             Sheetal Electrotech offers a range of integrated manufacturing services designed around customer requirements.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reasons.map((reason, i) => {
             const Icon = reason.icon;
             return (
-              <div
+              <motion.div
                 key={reason.title}
-                className="group p-8 border border-steel/15 bg-white hover:border-accent/30 transition-all duration-300 reveal-on-load"
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="group p-8 border border-steel/15 bg-white hover:border-accent/30 transition-all duration-300"
               >
                 <div className="w-12 h-12 bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
                   <Icon className="w-6 h-6 text-accent" />
@@ -69,7 +82,7 @@ export default function WhySheetal() {
                 <p className="text-steel text-sm leading-relaxed">
                   {reason.description}
                 </p>
-              </div>
+              </motion.div>
             );
           })}
         </div>
