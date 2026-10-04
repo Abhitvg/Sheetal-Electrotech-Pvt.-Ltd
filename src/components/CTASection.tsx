@@ -21,11 +21,8 @@ export default function CTASection() {
 
       {/* Content */}
       <div className="container-wide relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="max-w-3xl"
+        <div
+          className="max-w-3xl reveal-on-load"
         >
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
             {t("badge")}
