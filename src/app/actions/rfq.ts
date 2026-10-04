@@ -99,7 +99,7 @@ export async function submitRfq(formData: FormData) {
 
     // 4. File Upload (Vercel Blob)
     const file = formData.get("file") as File | null;
-    let attachmentPaths: string[] = [];
+    const attachmentPaths: string[] = [];
 
     if (file && file.size > 0) {
       if (file.size > 20 * 1024 * 1024) {
