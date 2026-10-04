@@ -1,16 +1,13 @@
-"use client";
-
 import { Link } from "@/i18n/routing";
 import { ArrowRight, Box, Package, Layers, Hexagon } from "lucide-react";
-import { motion } from "framer-motion";
-import { facilityLegacyGalleries } from "@/data/legacyMedia";
+import Image from "next/image";
+import { HeroTextFadeUp } from "@/components/ProductAnimations";
 
 const packagingImages = {
-  blow: facilityLegacyGalleries["blow-moulding"]?.[0] ?? "/images/packaging_factory.jpg",
-  blowAlt: facilityLegacyGalleries["blow-moulding"]?.[1] ?? "/images/packaging_factory.jpg",
-  ibm: facilityLegacyGalleries["ibm-plastic"]?.[0] ?? "/images/products_packaging.jpg",
-  injection: facilityLegacyGalleries["injection-moulding"]?.[0] ?? "/images/moulding_factory.jpg",
-  rd: facilityLegacyGalleries["research-development"]?.[0] ?? "/images/packaging_factory.jpg",
+  blow: "/images/packaging_factory.jpg",
+  blowAlt: "/images/packaging_factory.jpg",
+  ibm: "/images/products_packaging.jpg",
+  injection: "/images/moulding_factory.jpg",
 };
 
 const subCategories = [
@@ -50,16 +47,18 @@ export default function RigidPackagingPage() {
       {/* Hero */}
       <div className="relative h-[65vh] min-h-[500px] flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={packagingImages.blow} alt="Sheetal Electrotech plastic blow moulding operation" className="h-full w-full object-cover object-center" fetchPriority="high" />
+          <Image
+            src={packagingImages.blow}
+            alt="Sheetal Electrotech plastic blow moulding operation"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/20" />
         </div>
         <div className="relative z-10 container-wide text-white pt-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
-          >
+          <HeroTextFadeUp>
             <Link href="/products" className="text-white/60 hover:text-white text-sm font-mono uppercase tracking-widest mb-6 inline-block">
               ← Back to Products
             </Link>
@@ -86,7 +85,7 @@ export default function RigidPackagingPage() {
                 Request Quote
               </Link>
             </div>
-          </motion.div>
+          </HeroTextFadeUp>
         </div>
       </div>
 
@@ -119,11 +118,12 @@ export default function RigidPackagingPage() {
           {subCategories.map((cat) => (
             <Link key={cat.title} href={cat.href} className="group block bg-white border border-steel/15 hover:border-accent/30 transition-all overflow-hidden flex flex-col h-full">
               <div className="h-48 relative bg-mist flex-shrink-0 overflow-hidden">
-                <img
+                <Image
                   src={cat.image}
                   alt={cat.title}
-                  loading="lazy"
-                  className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
                 <cat.icon className="absolute bottom-4 right-4 w-8 h-8 text-white/90" strokeWidth={1.5} />
