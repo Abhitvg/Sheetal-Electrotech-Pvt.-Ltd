@@ -119,3 +119,26 @@
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+
+/* Lightweight reveal animation for server-rendered sections */
+@keyframes sheetal-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-on-load {
+  animation: sheetal-fade-up 700ms ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-load {
+    animation: none;
+  }
+}
