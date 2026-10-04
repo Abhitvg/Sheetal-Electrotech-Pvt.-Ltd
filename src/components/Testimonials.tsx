@@ -1,15 +1,8 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
 import { Settings2 } from "lucide-react";
 
 export default function Testimonials() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section ref={ref} className="py-24 md:py-32 bg-ink text-paper" id="approach">
+    <section className="py-24 md:py-32 bg-ink text-paper" id="approach">
       <div className="container-wide">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -30,7 +23,7 @@ export default function Testimonials() {
               </p>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
