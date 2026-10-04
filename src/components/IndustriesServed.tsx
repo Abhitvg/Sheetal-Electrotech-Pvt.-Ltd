@@ -1,16 +1,9 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
 import { industriesServed } from "@/data/companyFacts";
 import { Lightbulb, Cpu, Pill, Package, ShoppingBag, Car } from "lucide-react";
 
 const icons = [Lightbulb, Cpu, Pill, Package, ShoppingBag, Car];
 
 export default function IndustriesServed() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
     <section className="py-24 md:py-32 bg-paper border-t border-steel/10" id="industries">
       <div className="container-wide">
@@ -30,7 +23,7 @@ export default function IndustriesServed() {
           <p className="text-steel text-lg">
             Manufacturing solutions across multiple industry verticals.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {industriesServed.map((industry, i) => {
@@ -48,7 +41,7 @@ export default function IndustriesServed() {
                 </div>
                 <h3 className="font-display font-bold text-ink text-sm mb-2">{industry.name}</h3>
                 <p className="text-steel text-xs leading-relaxed">{industry.description}</p>
-              </motion.div>
+              </div>
             );
           })}
         </div>
