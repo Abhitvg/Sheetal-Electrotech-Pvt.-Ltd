@@ -85,7 +85,7 @@ export default function proxy(req: NextRequest, event: NextFetchEvent) {
 
   // Admin remains protected while locale routes continue through next-intl.
   if (req.nextUrl.pathname.startsWith('/admin') || req.nextUrl.pathname.match(/^\/(en|hi)\/admin/)) {
-    return authMiddleware(req, event);
+    return authMiddleware(req as Parameters<typeof authMiddleware>[0], event);
   }
 
   return intlMiddleware(req);
