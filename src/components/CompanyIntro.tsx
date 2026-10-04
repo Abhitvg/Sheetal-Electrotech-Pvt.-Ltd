@@ -1,7 +1,3 @@
-"use client";
-
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import { companyFacts } from "@/data/companyFacts";
 
 const divisions = [
@@ -12,9 +8,6 @@ const divisions = [
 ];
 
 export default function CompanyIntro() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
     <section className="py-24 md:py-32 bg-paper border-b border-steel/10" id="company-intro">
       <div className="container-wide">
@@ -37,7 +30,7 @@ export default function CompanyIntro() {
             the company combines product development, moulding, electronics manufacturing, assembly
             and quality processes under one manufacturing ecosystem.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {divisions.map((div, i) => (
@@ -53,7 +46,7 @@ export default function CompanyIntro() {
               </p>
               <h3 className="text-xl font-display font-bold text-ink mb-3">{div.label}</h3>
               <p className="text-steel text-sm leading-relaxed">{div.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
