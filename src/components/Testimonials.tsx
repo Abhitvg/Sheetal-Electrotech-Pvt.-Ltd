@@ -4,11 +4,8 @@ export default function Testimonials() {
   return (
     <section className="py-24 md:py-32 bg-ink text-paper" id="approach">
       <div className="container-wide">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto text-center"
+        <div
+          className="max-w-4xl mx-auto text-center reveal-on-load"
         >
           <div className="relative min-h-[300px] flex items-center justify-center">
             <div className="text-center">
