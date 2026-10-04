@@ -199,11 +199,12 @@ export default function ProductsHub() {
                 </div>
 
                 <div className="col-span-5 relative overflow-hidden border border-white/10 bg-white/5">
-                  <img
-                    src={legacyProductImages["extension-board"]?.[0] ?? "/images/exension-board-jpg.webp"}
+                  <Image
+                    src="/images/products/extension-board.webp"
                     alt="Electronics and extension boards"
-                    loading="lazy"
-                    className="h-full w-full object-contain p-8"
+                    fill
+                    sizes="(max-width: 1024px) 40vw, 300px"
+                    className="object-contain p-8"
                   />
                   <div className="absolute left-4 bottom-4">
                     <p className="font-mono text-[10px] uppercase tracking-widest text-white/45">03</p>
