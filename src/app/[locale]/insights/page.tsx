@@ -116,10 +116,13 @@ export default function InsightsIndexPage() {
             <Link href={`/insights/${featured.slug}`} className="group grid lg:grid-cols-[1.12fr_.88fr] bg-ink text-white overflow-hidden">
               <div className="relative min-h-[360px] lg:min-h-[500px] bg-mist overflow-hidden">
                 {featuredImage ? (
-                  <img
+                  <Image
                     src={featuredImage}
                     alt={`${featured.title} — official Sheetal Electrotech source image`}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 56vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 ) : (
                   <div className="h-full w-full bg-mist" />
@@ -217,12 +220,14 @@ export default function InsightsIndexPage() {
                           >
                             <div className="relative">
                               {image ? (
-                                <div className="aspect-[16/9] bg-mist overflow-hidden">
-                                  <img
+                                <div className="aspect-[16/9] relative bg-mist overflow-hidden">
+                                  <Image
                                     src={image}
                                     alt={`${post.title} — official source image`}
-                                    loading={index < 2 ? "eager" : "lazy"}
-                                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    fill
+                                    priority={index < 2}
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                                   />
                                 </div>
                               ) : (
