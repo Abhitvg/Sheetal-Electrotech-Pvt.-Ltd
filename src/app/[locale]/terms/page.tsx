@@ -1,4 +1,3 @@
-import { Link } from "@/i18n/routing";
 import type { Metadata } from "next";
 import { getPageCopy, localizedMetadata } from "@/lib/seo";
 

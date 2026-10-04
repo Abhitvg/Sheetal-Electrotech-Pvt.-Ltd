@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LogOut, Inbox, FileText, LayoutDashboard } from "lucide-react";
+import { LogOut, Inbox, FileText } from "lucide-react";
 import "../globals.css"; // Ensure globals CSS is loaded here since it's outside [locale]
 
 export const metadata = {
