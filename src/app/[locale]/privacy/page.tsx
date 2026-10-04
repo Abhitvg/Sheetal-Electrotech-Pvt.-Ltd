@@ -17,7 +17,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-2xl font-display font-medium text-ink mb-4">1. Introduction</h2>
             <p>
-              Sheetal Electrotech Pvt. Ltd. ("we," "our," or "us") respects your privacy and is committed to protecting it through our compliance with this policy. This policy describes the types of information we may collect from you or that you may provide when you visit the website sheetalelectrotech.com (our "Website") and our practices for collecting, using, maintaining, protecting, and disclosing that information.
+              Sheetal Electrotech Pvt. Ltd. (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) respects your privacy and is committed to protecting it through our compliance with this policy. This policy describes the types of information we may collect from you or that you may provide when you visit the website sheetalelectrotech.com (our &quot;Website&quot;) and our practices for collecting, using, maintaining, protecting, and disclosing that information.
             </p>
           </section>
 
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
               We collect several types of information from and about users of our Website, including information:
             </p>
             <ul className="list-disc pl-6 mt-4 space-y-2">
-              <li>By which you may be personally identified, such as name, postal address, e-mail address, telephone number, or any other identifier by which you may be contacted online or offline ("personal information").</li>
+              <li>By which you may be personally identified, such as name, postal address, e-mail address, telephone number, or any other identifier by which you may be contacted online or offline (&quot;personal information&quot;).</li>
               <li>That is about you but individually does not identify you, such as your company name and industry.</li>
               <li>About your internet connection, the equipment you use to access our Website, and usage details.</li>
             </ul>

@@ -65,7 +65,7 @@ export default function CareersPage() {
           <div className="bg-accent/10 border border-accent/20 p-10 flex flex-col md:flex-row items-center justify-between gap-8">
             <div>
               <h3 className="text-2xl font-display font-medium mb-2 text-ink">Ready to Apply?</h3>
-              <p className="text-steel">Send your resume and a brief cover letter with the subject line <strong>"Job Application"</strong>.</p>
+              <p className="text-steel">Send your resume and a brief cover letter with the subject line <strong>&quot;Job Application&quot;</strong>.</p>
             </div>
             <a href="mailto:info@sheetalelectrotech.com?subject=Job%20Application" className="bg-accent text-white px-8 py-4 font-medium flex items-center gap-3 hover:bg-blue-600 transition-colors whitespace-nowrap">
               <Mail className="w-5 h-5" /> Email HR Team

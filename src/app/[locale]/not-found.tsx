@@ -12,7 +12,7 @@ export default function NotFound() {
           Page Not Found
         </h1>
         <p className="text-xl text-steel mb-12">
-          The page you are looking for doesn't exist or has been moved.
+          The page you are looking for doesn&apos;t exist or has been moved.
         </p>
         <Link href="/" className="btn-primary inline-flex items-center gap-2 mx-auto">
           <ArrowLeft className="w-4 h-4" />

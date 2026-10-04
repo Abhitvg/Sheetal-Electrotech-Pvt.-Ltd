@@ -109,7 +109,7 @@ export default function LEDBulbManufacturerIndia() {
       <section className="py-24 container-wide text-center">
         <h2 className="text-3xl md:text-5xl font-display font-medium mb-6">Ready to scale your lighting brand?</h2>
         <p className="text-steel text-xl max-w-2xl mx-auto mb-10">
-          Partner with India's most reliable OEM LED bulb manufacturer. Get in touch with our engineering team today.
+          Partner with India&apos;s most reliable OEM LED bulb manufacturer. Get in touch with our engineering team today.
         </p>
         <Link href="/rfq" className="bg-ink text-white px-8 py-4 font-medium hover:bg-accent hover:text-ink transition-colors inline-flex items-center gap-3">
           Start Your OEM Project <ArrowRight className="w-5 h-5" />

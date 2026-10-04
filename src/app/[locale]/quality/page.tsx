@@ -15,7 +15,7 @@ export default function QualityPage() {
             Built into every stage of manufacturing.
           </h1>
           <p className="text-steel text-xl max-w-2xl">
-            We don't just manufacture; we validate. Our in-house testing and robust inspection processes support compliance with domestic BIS standards and our own internal quality metrics.
+            We don&apos;t just manufacture; we validate. Our in-house testing and robust inspection processes support compliance with domestic BIS standards and our own internal quality metrics.
           </p>
         </div>
       </div>
