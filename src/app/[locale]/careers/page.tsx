@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
 import { Link } from "@/i18n/routing";
 
