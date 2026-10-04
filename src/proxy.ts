@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server';
+import { NextFetchEvent, NextRequest } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { withAuth } from "next-auth/middleware";
 import { routing } from './i18n/routing';
@@ -76,7 +76,7 @@ const legacyRoutes: Record<string, string> = {
   '/lazer-machine': '/en/facilities',
 };
 
-export default function proxy(req: NextRequest) {
+export default function proxy(req: NextRequest, event: NextFetchEvent) {
   const legacyTarget = legacyRoutes[req.nextUrl.pathname];
 
   if (legacyTarget) {
@@ -85,7 +85,7 @@ export default function proxy(req: NextRequest) {
 
   // Admin remains protected while locale routes continue through next-intl.
   if (req.nextUrl.pathname.startsWith('/admin') || req.nextUrl.pathname.match(/^\/(en|hi)\/admin/)) {
-    return authMiddleware(req);
+    return authMiddleware(req, event);
   }
 
   return intlMiddleware(req);

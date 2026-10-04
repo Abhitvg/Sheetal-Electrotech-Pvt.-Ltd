@@ -7,7 +7,7 @@ import { authOptions } from "@/lib/auth";
 
 const VALID_STATUSES = ["new", "contacted", "quoted", "won", "lost"] as const;
 
-export async function updateRfqStatus(id: string, status: string, internalNotes: string) {
+export async function updateRfqStatus(id: number | string, status: string, internalNotes: string) {
   const session = await getServerSession(authOptions);
   if (!session?.user) {
     return { success: false, message: "Unauthorized." };
@@ -21,7 +21,7 @@ export async function updateRfqStatus(id: string, status: string, internalNotes:
     return { success: false, message: "Invalid RFQ status." };
   }
 
-  if (!id || internalNotes.length > 5000) {
+  if (id === "" || id === null || id === undefined || internalNotes.length > 5000) {
     return { success: false, message: "Invalid RFQ update." };
   }
 
