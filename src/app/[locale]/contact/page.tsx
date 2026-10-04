@@ -88,10 +88,12 @@ export default function ContactPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
-                    <label className="block text-sm font-medium text-ink mb-2">Full Name *</label>
+                    <label htmlFor="name" className="block text-sm font-medium text-ink mb-2">Full Name *</label>
                     <input
+                      id="name"
                       type="text"
                       name="name"
+                      autoComplete="name"
                       required
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
@@ -100,10 +102,12 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-ink mb-2">Email *</label>
+                    <label htmlFor="email" className="block text-sm font-medium text-ink mb-2">Email *</label>
                     <input
+                      id="email"
                       type="email"
                       name="email"
+                      autoComplete="email"
                       required
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
@@ -112,10 +116,12 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-ink mb-2">Phone</label>
+                    <label htmlFor="phone" className="block text-sm font-medium text-ink mb-2">Phone</label>
                     <input
+                      id="phone"
                       type="tel"
                       name="phone"
+                      autoComplete="tel"
                       value={formState.phone}
                       onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
                       className="w-full px-4 py-3 border border-slate-200 rounded-sm text-ink bg-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
@@ -123,10 +129,12 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-ink mb-2">Company</label>
+                    <label htmlFor="company" className="block text-sm font-medium text-ink mb-2">Company</label>
                     <input
+                      id="company"
                       type="text"
                       name="company"
+                      autoComplete="organization"
                       value={formState.company}
                       onChange={(e) => setFormState({ ...formState, company: e.target.value })}
                       className="w-full px-4 py-3 border border-slate-200 rounded-sm text-ink bg-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
@@ -136,8 +144,9 @@ export default function ContactPage() {
                 </div>
 
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-ink mb-2">Subject *</label>
+                  <label htmlFor="subject" className="block text-sm font-medium text-ink mb-2">Subject *</label>
                   <select
+                    id="subject"
                     name="subject"
                     required
                     value={formState.subject}
@@ -154,8 +163,9 @@ export default function ContactPage() {
                 </div>
 
                 <div className="mb-8">
-                  <label className="block text-sm font-medium text-ink mb-2">Message *</label>
+                  <label htmlFor="message" className="block text-sm font-medium text-ink mb-2">Message *</label>
                   <textarea
+                    id="message"
                     name="message"
                     required
                     rows={5}
@@ -167,7 +177,7 @@ export default function ContactPage() {
                 </div>
 
                 {errorMsg && (
-                  <div className="mb-6 p-4 bg-red-50 text-red-600 border border-red-200 rounded-sm text-sm">
+                  <div role="alert" aria-live="polite" className="mb-6 p-4 bg-red-50 text-red-600 border border-red-200 rounded-sm text-sm">
                     {errorMsg}
                   </div>
                 )}
