@@ -65,11 +65,13 @@ export default function GalleryPage() {
           {visible.map((item, index) => (
             <figure key={item.src} className="group bg-white border border-steel/10 overflow-hidden">
               <div className="relative aspect-[4/3] bg-mist overflow-hidden">
-                <img
+                <Image
                   src={item.src}
                   alt={`${item.category} — Sheetal Electrotech official archive image ${index + 1}`}
-                  loading={index < 8 ? "eager" : "lazy"}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  fill
+                  priority={index < 8}
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
               <figcaption className="px-4 py-3 flex items-center justify-between gap-3">
