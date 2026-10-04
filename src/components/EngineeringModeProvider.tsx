@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useEffect, useSyncExternalStore, ReactNode } from "react";
 
 interface EngineeringModeContextType {
   isEngineeringMode: boolean;
@@ -8,30 +8,56 @@ interface EngineeringModeContextType {
 }
 
 const EngineeringModeContext = createContext<EngineeringModeContextType | undefined>(undefined);
+const STORAGE_KEY = "sheetal-engineering-mode";
+const listeners = new Set<() => void>();
+
+function getSnapshot() {
+  if (typeof window === "undefined") return false;
+  return window.localStorage.getItem(STORAGE_KEY) === "true";
+}
+
+function getServerSnapshot() {
+  return false;
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
+function applyBodyClass(enabled: boolean) {
+  document.body.classList.toggle("engineering-mode", enabled);
+}
+
+function setEngineeringMode(enabled: boolean) {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(STORAGE_KEY, String(enabled));
+  applyBodyClass(enabled);
+  listeners.forEach((listener) => listener());
+}
 
 export function EngineeringModeProvider({ children }: { children: ReactNode }) {
-  const [isEngineeringMode, setIsEngineeringMode] = useState(false);
+  const isEngineeringMode = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot
+  );
 
   useEffect(() => {
-    // Read from localStorage on mount
-    const savedMode = localStorage.getItem("sheetal-engineering-mode");
-    if (savedMode === "true") {
-      setIsEngineeringMode(true);
-      document.body.classList.add("engineering-mode");
-    }
+    applyBodyClass(getSnapshot());
+
+    const handleStorage = () => {
+      const enabled = getSnapshot();
+      applyBodyClass(enabled);
+      listeners.forEach((listener) => listener());
+    };
+
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
   const toggleEngineeringMode = () => {
-    setIsEngineeringMode(prev => {
-      const newState = !prev;
-      if (newState) {
-        document.body.classList.add("engineering-mode");
-      } else {
-        document.body.classList.remove("engineering-mode");
-      }
-      localStorage.setItem("sheetal-engineering-mode", String(newState));
-      return newState;
-    });
+    setEngineeringMode(!getSnapshot());
   };
 
   return (
