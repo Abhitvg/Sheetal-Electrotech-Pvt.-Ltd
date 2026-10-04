@@ -1,7 +1,3 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
 import { Layers, Settings, ShieldCheck, TrendingUp, DollarSign, Users } from "lucide-react";
 
 const reasons = [
@@ -38,9 +34,6 @@ const reasons = [
 ];
 
 export default function WhySheetal() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
     <section className="py-24 md:py-32 bg-mist/30" id="why-sheetal">
       <div className="container-wide">
@@ -60,7 +53,7 @@ export default function WhySheetal() {
           <p className="text-steel text-lg">
             Sheetal Electrotech offers a range of integrated manufacturing services designed around customer requirements.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reasons.map((reason, i) => {
@@ -82,7 +75,7 @@ export default function WhySheetal() {
                 <p className="text-steel text-sm leading-relaxed">
                   {reason.description}
                 </p>
-              </motion.div>
+              </div>
             );
           })}
         </div>
