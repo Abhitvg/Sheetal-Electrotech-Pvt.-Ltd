@@ -26,6 +26,13 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
   const navLinks = [
     { name: t("facilities"), href: "/facilities", hasMegaMenu: true },
     { name: t("products"), href: "/products", hasMegaMenu: true },
@@ -40,7 +47,10 @@ export default function Navigation() {
       <nav
         aria-label="Primary navigation"
         onKeyDown={(event) => {
-          if (event.key === "Escape") setActiveMegaMenu(null);
+          if (event.key === "Escape") {
+            setActiveMegaMenu(null);
+            setIsMobileMenuOpen(false);
+          }
         }}
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           !isHomepage || isScrolled || activeMegaMenu || isMobileMenuOpen
@@ -215,6 +225,8 @@ export default function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             id="mobile-navigation-menu"
+            role="dialog"
+            aria-modal="true"
             aria-label="Mobile navigation"
             className="fixed inset-0 bg-paper/95 backdrop-blur-xl z-40 lg:hidden pt-24 px-6"
           >
