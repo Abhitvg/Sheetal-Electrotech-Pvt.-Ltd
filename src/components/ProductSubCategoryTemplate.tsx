@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { legacyProductImages } from "@/data/legacyMedia";
 
 interface ProductSubCategoryProps {
