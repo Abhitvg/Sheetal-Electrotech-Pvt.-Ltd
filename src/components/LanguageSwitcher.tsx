@@ -16,8 +16,10 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2" role="group" aria-label="Language">
       <button
+        type="button"
+        aria-pressed={locale === "en"}
         onClick={() => switchLanguage("en")}
         className={`text-xs font-mono font-bold px-2 py-1 rounded-sm transition-colors ${
           locale === "en" ? "bg-accent text-white" : "text-slate-400 hover:text-ink"
@@ -27,6 +29,8 @@ export default function LanguageSwitcher() {
       </button>
       <span className="text-slate-300">|</span>
       <button
+        type="button"
+        aria-pressed={locale === "hi"}
         onClick={() => switchLanguage("hi")}
         className={`text-xs font-mono font-bold px-2 py-1 rounded-sm transition-colors ${
           locale === "hi" ? "bg-accent text-white" : "text-slate-400 hover:text-ink"
