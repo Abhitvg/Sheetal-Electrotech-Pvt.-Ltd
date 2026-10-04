@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Environment, Float, ContactShadows } from "@react-three/drei";
+import { Environment, Float } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -47,14 +47,24 @@ function PCBSimulation({ timeline }: { timeline: gsap.core.Timeline | null }) {
 
   }, [timeline]);
 
-  // Procedural SMD components scattered on the board
-  const smds = Array.from({ length: 15 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 3 - 1.5,
-    z: Math.random() * 3 - 1.5,
-    type: Math.random() > 0.5 ? 'resistor' : 'capacitor',
-    rotation: Math.random() > 0.5 ? Math.PI / 2 : 0
-  }));
+  // Deterministic SMD layout keeps the 3D scene stable across renders.
+  const smds = [
+    { id: 0, x: -1.25, z: -1.25, type: "resistor", rotation: 0 },
+    { id: 1, x: -0.75, z: -0.85, type: "capacitor", rotation: Math.PI / 2 },
+    { id: 2, x: -0.25, z: -1.35, type: "resistor", rotation: 0 },
+    { id: 3, x: 0.35, z: -1.05, type: "capacitor", rotation: Math.PI / 2 },
+    { id: 4, x: 0.95, z: -1.3, type: "resistor", rotation: 0 },
+    { id: 5, x: 1.3, z: -0.65, type: "capacitor", rotation: Math.PI / 2 },
+    { id: 6, x: -1.35, z: -0.15, type: "capacitor", rotation: 0 },
+    { id: 7, x: -0.9, z: 0.35, type: "resistor", rotation: Math.PI / 2 },
+    { id: 8, x: 0.95, z: 0.2, type: "resistor", rotation: 0 },
+    { id: 9, x: 1.35, z: 0.65, type: "capacitor", rotation: Math.PI / 2 },
+    { id: 10, x: -1.2, z: 1.1, type: "resistor", rotation: 0 },
+    { id: 11, x: -0.55, z: 1.3, type: "capacitor", rotation: Math.PI / 2 },
+    { id: 12, x: 0.15, z: 1.15, type: "resistor", rotation: 0 },
+    { id: 13, x: 0.75, z: 1.35, type: "capacitor", rotation: Math.PI / 2 },
+    { id: 14, x: 1.25, z: 1.05, type: "resistor", rotation: 0 },
+  ];
 
   return (
     <group ref={pcbRef}>
