@@ -36,15 +36,15 @@ async function checkRfqRateLimit(ip: string) {
 
   const rows = await sql`
     INSERT INTO rate_limits (rate_limit_key, window_started_at, request_count)
-    VALUES (CONCAT('rfq:', \${ip}), NOW(), 1)
+    VALUES (CONCAT('rfq:', ${ip}), NOW(), 1)
     ON CONFLICT (rate_limit_key) DO UPDATE
     SET request_count = CASE
-      WHEN NOW() - rate_limits.window_started_at < (\${RATE_LIMIT_WINDOW_SECONDS} * INTERVAL '1 second')
+      WHEN NOW() - rate_limits.window_started_at < (${RATE_LIMIT_WINDOW_SECONDS} * INTERVAL '1 second')
         THEN rate_limits.request_count + 1
       ELSE 1
     END,
     window_started_at = CASE
-      WHEN NOW() - rate_limits.window_started_at < (\${RATE_LIMIT_WINDOW_SECONDS} * INTERVAL '1 second')
+      WHEN NOW() - rate_limits.window_started_at < (${RATE_LIMIT_WINDOW_SECONDS} * INTERVAL '1 second')
         THEN rate_limits.window_started_at
       ELSE NOW()
     END
