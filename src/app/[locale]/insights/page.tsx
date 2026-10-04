@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, ArrowUpRight, BookOpen, Factory, Settings2 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { insights } from "@/data/insights";
 import type { Metadata } from "next";
 import { getPageCopy, localizedMetadata } from "@/lib/seo";
@@ -15,13 +16,13 @@ export async function generateMetadata({
   return localizedMetadata(locale, "/insights", getPageCopy("insights"));
 }
 
-const CATEGORY_ICONS: Record<string, any> = {
+const CATEGORY_ORDER = ["LED Knowledge", "Manufacturing", "Product & Engineering"] as const;
+
+const CATEGORY_ICONS: Record<(typeof CATEGORY_ORDER)[number], LucideIcon> = {
   "LED Knowledge": BookOpen,
   "Manufacturing": Factory,
   "Product & Engineering": Settings2,
 };
-
-const CATEGORY_ORDER = ["LED Knowledge", "Manufacturing", "Product & Engineering"] as const;
 
 function readingTime(content: [string, ...string[]][]) {
   const text = content.flat().join(" ");
