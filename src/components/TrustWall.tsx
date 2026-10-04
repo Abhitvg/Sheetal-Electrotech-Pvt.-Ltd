@@ -1,8 +1,4 @@
-"use client";
-
-import { useRef } from "react";
 import { useTranslations } from "next-intl";
-import { motion, useInView } from "framer-motion";
 
 const logos = [
   { name: "TATA", style: "font-bold tracking-tight" },
@@ -21,11 +17,8 @@ const logos = [
 
 export default function TrustWall() {
   const t = useTranslations("TrustWall");
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-
   return (
-    <section ref={ref} className="py-20 bg-paper border-y border-slate-200 overflow-hidden" id="trust">
+    <section className="py-20 bg-paper border-y border-slate-200 overflow-hidden" id="trust">
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
@@ -56,7 +49,7 @@ export default function TrustWall() {
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
