@@ -11,12 +11,9 @@ export default function CompanyIntro() {
   return (
     <section className="py-24 md:py-32 bg-paper border-b border-steel/10" id="company-intro">
       <div className="container-wide">
-        <motion.div
+        <div
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="max-w-4xl mb-20"
+          className="max-w-4xl mb-20 reveal-on-load"
         >
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
             {companyFacts.experience} Years of Manufacturing Expertise
@@ -34,12 +31,9 @@ export default function CompanyIntro() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {divisions.map((div, i) => (
-            <motion.div
+            <div
               key={div.label}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
-              className="border border-steel/15 p-8 bg-white hover:border-accent/30 transition-colors"
+              className="border border-steel/15 p-8 bg-white hover:border-accent/30 transition-colors reveal-on-load"
             >
               <p className="font-mono text-accent text-xs uppercase tracking-widest mb-3">
                 0{i + 1}
