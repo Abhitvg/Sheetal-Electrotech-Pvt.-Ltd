@@ -3,7 +3,6 @@ import { Link } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import { ArrowRight, ArrowUpRight, Boxes, Cpu, Lightbulb, PackageCheck } from "lucide-react";
 import { HeroTextFadeUp, HeroImageScaleIn, FamilyCardFadeUp, ProductCardFadeUp } from "@/components/ProductAnimations";
-import { legacyProductImages, facilityLegacyGalleries } from "@/data/legacyMedia";
 
 const copy = {
   en: {
@@ -106,8 +105,8 @@ export default function ProductsHub() {
   const families = [
     { number: "01", title: t.led, desc: t.ledDesc, icon: Lightbulb, href: "/products/led-lighting", image: "/images/products/led-bulb.png" },
     { number: "02", title: t.packaging, desc: t.packagingDesc, icon: PackageCheck, href: "/products/rigid-packaging", image: "/images/jar_product.jpg" },
-    { number: "03", title: t.electronics, desc: t.electronicsDesc, icon: Cpu, href: "/products/electronics", image: legacyProductImages["extension-board"]?.[0] ?? "/images/exension-board-jpg.webp" },
-    { number: "04", title: t.oem, desc: t.oemDesc, icon: Boxes, href: "/rfq", image: facilityLegacyGalleries["injection-moulding"]?.[0] ?? "/images/product_showcase.jpg" },
+    { number: "03", title: t.electronics, desc: t.electronicsDesc, icon: Cpu, href: "/products/electronics", image: "/images/products/extension-board.webp" },
+    { number: "04", title: t.oem, desc: t.oemDesc, icon: Boxes, href: "/rfq", image: "/images/moulding_factory.jpg" },
   ];
 
   return (
