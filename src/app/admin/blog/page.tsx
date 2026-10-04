@@ -12,39 +12,48 @@ interface BlogPost {
   author?: string;
 }
 
+async function fetchPosts(): Promise<BlogPost[]> {
+  const q = query(collection(db, "blog_posts"), orderBy("created_at", "desc"));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map((snapshot) => {
+    const data = snapshot.data();
+    return {
+      id: snapshot.id,
+      title: typeof data.title === "string" ? data.title : "Untitled",
+      slug: typeof data.slug === "string" ? data.slug : "",
+      author: typeof data.author === "string" ? data.author : undefined,
+    };
+  });
+}
+
 export default function AdminBlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchPosts = async () => {
-    try {
-      const q = query(collection(db, "blog_posts"), orderBy("created_at", "desc"));
-      const querySnapshot = await getDocs(q);
-      const fetchedPosts: BlogPost[] = querySnapshot.docs.map((snapshot) => {
-        const data = snapshot.data();
-        return {
-          id: snapshot.id,
-          title: typeof data.title === "string" ? data.title : "Untitled",
-          slug: typeof data.slug === "string" ? data.slug : "",
-          author: typeof data.author === "string" ? data.author : undefined,
-        };
-      });
-      setPosts(fetchedPosts);
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchPosts();
+    let active = true;
+
+    fetchPosts()
+      .then((fetchedPosts) => {
+        if (active) setPosts(fetchedPosts);
+      })
+      .catch((error) => {
+        console.error("Error fetching posts:", error);
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this post?")) {
       await deleteDoc(doc(db, "blog_posts", id));
-      fetchPosts();
+      const fetchedPosts = await fetchPosts();
+      setPosts(fetchedPosts);
     }
   };
 
