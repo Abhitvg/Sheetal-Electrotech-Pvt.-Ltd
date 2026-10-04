@@ -213,10 +213,10 @@ If you have drawings or specs you didn't attach, just reply to this email and we
 
     return { success: true, message: "RFQ submitted successfully." };
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("RFQ Submission Error:", error);
-    if (error && error.errors && Array.isArray(error.errors) && error.errors.length > 0) {
-      return { success: false, message: error.errors[0].message };
+    if (error instanceof z.ZodError) {
+      return { success: false, message: error.issues[0]?.message ?? "Invalid RFQ data." };
     }
     return { success: false, message: "An unexpected error occurred. Please try again." };
   }
