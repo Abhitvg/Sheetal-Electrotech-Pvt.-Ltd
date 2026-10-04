@@ -1,13 +1,19 @@
+"use client";
+
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
+import { motion, useInView } from "framer-motion";
 import { ArrowRight, Phone, Mail } from "lucide-react";
 
 export default function CTASection() {
   const t = useTranslations("CTA");
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden" id="cta">
+    <section ref={ref} className="relative py-24 md:py-32 overflow-hidden" id="cta">
       {/* Background */}
       <div className="absolute inset-0">
         <Image
@@ -21,8 +27,11 @@ export default function CTASection() {
 
       {/* Content */}
       <div className="container-wide relative z-10">
-        <div
-          className="max-w-3xl reveal-on-load"
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="max-w-3xl"
         >
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-4">
             {t("badge")}
@@ -64,7 +73,7 @@ export default function CTASection() {
               +91 93273 45295
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
