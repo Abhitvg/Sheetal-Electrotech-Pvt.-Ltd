@@ -4,7 +4,26 @@ import { useState } from "react";
 import { updateRfqStatus } from "@/app/actions/admin";
 import { Loader2 } from "lucide-react";
 
-export default function RfqRow({ rfq }: { rfq: any }) {
+type RfqStatus = "new" | "contacted" | "quoted" | "won" | "lost";
+
+interface RfqSubmission {
+  id: number | string;
+  created_at: string | Date;
+  status: RfqStatus;
+  product_categories: string[] | null;
+  monthly_volume: string | null;
+  target_delivery: string | null;
+  additional_notes: string | null;
+  company: string | null;
+  full_name: string | null;
+  work_email: string | null;
+  phone: string | null;
+  attachment_paths: string[] | null;
+  utm_source: string | null;
+  internal_notes: string | null;
+}
+
+export default function RfqRow({ rfq }: { rfq: RfqSubmission }) {
   const [status, setStatus] = useState(rfq.status);
   const [notes, setNotes] = useState(rfq.internal_notes || "");
   const [loading, setLoading] = useState(false);
@@ -22,7 +41,7 @@ export default function RfqRow({ rfq }: { rfq: any }) {
         <p className="text-steel">{rfq.full_name}</p>
         <p className="text-steel/70 text-xs">{rfq.work_email} | {rfq.phone}</p>
         <div className="mt-2 flex flex-wrap gap-1">
-          {rfq.product_categories?.map((cat: string) => (
+          {rfq.product_categories?.map((cat) => (
              <span key={cat} className="bg-mist text-accent px-2 py-0.5 rounded text-xs">{cat}</span>
           ))}
         </div>
@@ -46,7 +65,7 @@ export default function RfqRow({ rfq }: { rfq: any }) {
       <td className="p-4 align-top">
         <select 
           value={status} 
-          onChange={(e) => setStatus(e.target.value)}
+          onChange={(e) => setStatus(e.target.value as RfqStatus)}
           className="w-full border border-steel/20 px-2 py-1 bg-white text-ink text-xs mb-2 focus:border-accent"
         >
           <option value="new">New</option>
