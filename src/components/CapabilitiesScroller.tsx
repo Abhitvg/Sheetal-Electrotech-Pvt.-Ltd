@@ -159,8 +159,6 @@ export default function CapabilitiesScroller() {
             ))}
           </div>
 
-</div>
-
           {/* Right Image Content - Transitions based on scroll */}
           <div className="w-full md:w-1/2 h-[60vh] relative">
             {facilities.map((facility, index) => (
