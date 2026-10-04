@@ -1,6 +1,7 @@
 
 
 import { Link } from "@/i18n/routing";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { legacyProductImages } from "@/data/legacyMedia";
 
@@ -85,11 +86,12 @@ export default function LEDLightingPage() {
           {subCategories.map((cat) => (
             <Link key={cat.title} href={cat.href} className="group block bg-white border border-steel/15 hover:border-accent/30 transition-all overflow-hidden">
               <div className="h-64 relative bg-mist p-8 flex items-center justify-center">
-                <img
+                <Image
                   src={cat.image}
                   alt={cat.title}
-                  loading="lazy"
-                  className="h-full w-full object-contain p-8 group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-contain p-8 group-hover:scale-105 transition-transform duration-500"
                 />             </div>
               <div className="p-8">
                 <h2 className="text-2xl font-display font-bold text-ink mb-2 flex items-center justify-between">
