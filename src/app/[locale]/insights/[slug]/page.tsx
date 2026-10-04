@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { ArrowLeft, ArrowRight, Clock3, ListTree, Package, Quote } from "lucide-react";
 import { insights } from "@/data/insights";
@@ -228,12 +229,14 @@ export default async function InsightPage({
                 <div className="grid md:grid-cols-2 gap-4 mb-14">
                   {post.visuals.map((visual, index) => (
                     <figure key={visual.src} className={post.visuals && post.visuals.length === 1 ? "md:col-span-2" : ""}>
-                      <div className="aspect-[16/10] overflow-hidden bg-mist border border-steel/10">
-                        <img
+                      <div className="relative aspect-[16/10] overflow-hidden bg-mist border border-steel/10">
+                        <Image
                           src={visual.src}
                           alt={visual.title}
-                          loading={index === 0 ? "eager" : "lazy"}
-                          className="h-full w-full object-cover"
+                          fill
+                          priority={index === 0}
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          className="object-cover"
                         />
                       </div>
                       <figcaption className="mt-3 text-xs text-steel leading-relaxed">{visual.caption}</figcaption>
@@ -327,12 +330,13 @@ export default async function InsightPage({
                         className="group bg-white border border-steel/10 overflow-hidden hover:border-accent/40 hover:shadow-md transition-all"
                       >
                         {legacyImageFor(item.slug) && (
-                          <div className="aspect-[4/3] bg-mist overflow-hidden">
-                            <img
+                          <div className="relative aspect-[4/3] bg-mist overflow-hidden">
+                            <Image
                               src={legacyImageFor(item.slug)!}
                               alt={item.title}
-                              loading="lazy"
-                              className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                              fill
+                              sizes="(max-width: 768px) 33vw"
+                              className="object-cover group-hover:scale-105 transition-transform duration-500"
                             />
                           </div>
                         )}
