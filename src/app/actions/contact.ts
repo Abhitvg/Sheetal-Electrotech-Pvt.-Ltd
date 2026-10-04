@@ -100,10 +100,10 @@ export async function submitContact(formData: FormData) {
     });
 
     return { success: true, message: "Message sent successfully." };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Contact Submission Error:", error);
-    if (error && error.errors && Array.isArray(error.errors) && error.errors.length > 0) {
-      return { success: false, message: error.errors[0].message };
+    if (error instanceof z.ZodError) {
+      return { success: false, message: error.issues[0]?.message ?? "Invalid form data." };
     }
     return { success: false, message: "Failed to send message." };
   }
