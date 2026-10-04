@@ -1,5 +1,6 @@
 
 
+import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, Download } from "lucide-react";
 import { legacyProductImages } from "@/data/legacyMedia";
@@ -46,23 +47,24 @@ export default function ProductSubCategoryTemplate({ title, category, descriptio
               {/* Product Image */}
               <div className="w-full md:w-5/12">
                 <div className={`aspect-[4/3] relative ${product.bg || "bg-mist"} flex items-center justify-center p-8 overflow-hidden`}>
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
-                    loading="lazy"
-                    className="h-full w-full object-contain p-8 group-hover:scale-105 transition-transform duration-500"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 42vw"
+                    className="object-contain p-8 group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 {(legacyProductImages[product.id]?.length ?? 0) > 0 && (
                   <div className="grid grid-cols-3 gap-2 mt-3">
                     {(legacyProductImages[product.id] ?? []).slice(0, 3).map((src, index) => (
-                      <div key={src} className="aspect-[4/3] bg-mist overflow-hidden border border-steel/10">
-                        <img
+                      <div key={src} className="aspect-[4/3] relative bg-mist overflow-hidden border border-steel/10">
+                        <Image
                           src={src}
                           alt={`${product.name} — official source image ${index + 1}`}
-                          loading="lazy"
-                          onError={(event) => { event.currentTarget.src = product.image; }}
-                          className="h-full w-full object-cover hover:scale-105 transition-transform duration-500"
+                          fill
+                          sizes="(max-width: 768px) 33vw, 14vw"
+                          className="object-cover hover:scale-105 transition-transform duration-500"
                         />
                       </div>
                     ))}
