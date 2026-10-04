@@ -37,12 +37,9 @@ export default function WhySheetal() {
   return (
     <section className="py-24 md:py-32 bg-mist/30" id="why-sheetal">
       <div className="container-wide">
-        <motion.div
+        <div
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mb-16"
+          className="max-w-3xl mb-16 reveal-on-load"
         >
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-3">
             Why Sheetal
@@ -59,12 +56,9 @@ export default function WhySheetal() {
           {reasons.map((reason, i) => {
             const Icon = reason.icon;
             return (
-              <motion.div
+              <div
                 key={reason.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="group p-8 border border-steel/15 bg-white hover:border-accent/30 transition-all duration-300"
+                className="group p-8 border border-steel/15 bg-white hover:border-accent/30 transition-all duration-300 reveal-on-load"
               >
                 <div className="w-12 h-12 bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
                   <Icon className="w-6 h-6 text-accent" />
