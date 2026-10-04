@@ -236,7 +236,14 @@ export default function ProductsHub() {
               return (
                 <FamilyCardFadeUp key={family.number} delay={i * .06}>
                   <Link href={family.href} className="group relative block h-[430px] overflow-hidden bg-ink text-white">
-                    <img src={family.image} alt={family.title} loading={i === 0 ? "eager" : "lazy"} className="absolute inset-0 h-full w-full object-cover opacity-65 group-hover:scale-105 group-hover:opacity-80 transition-all duration-700" />
+                    <Image
+                      src={family.image}
+                      alt={family.title}
+                      fill
+                      priority={i === 0}
+                      sizes="(max-width: 1280px) 50vw, 25vw"
+                      className="object-cover opacity-65 group-hover:scale-105 group-hover:opacity-80 transition-all duration-700"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#071322]/95 via-[#071322]/45 to-[#071322]/5" />
                     <div className="relative z-10 h-full flex flex-col justify-between p-7">
                       <div className="flex items-center justify-between">

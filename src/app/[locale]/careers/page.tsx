@@ -1,5 +1,4 @@
-import { ArrowRight, Mail } from "lucide-react";
-import { Link } from "@/i18n/routing";
+import { Mail } from "lucide-react";
 
 const openPositions = [
   {

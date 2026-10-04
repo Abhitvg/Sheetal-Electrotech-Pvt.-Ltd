@@ -2,19 +2,33 @@
 
 import { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
-import { collection, getDocs, query, orderBy, addDoc, deleteDoc, doc } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, deleteDoc, doc } from "firebase/firestore";
 import { Plus, Edit2, Trash2, Link as LinkIcon, Loader2 } from "lucide-react";
-import Link from "next/link";
+
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  author?: string;
+}
 
 export default function AdminBlogPage() {
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchPosts = async () => {
     try {
       const q = query(collection(db, "blog_posts"), orderBy("created_at", "desc"));
       const querySnapshot = await getDocs(q);
-      const fetchedPosts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const fetchedPosts: BlogPost[] = querySnapshot.docs.map((snapshot) => {
+        const data = snapshot.data();
+        return {
+          id: snapshot.id,
+          title: typeof data.title === "string" ? data.title : "Untitled",
+          slug: typeof data.slug === "string" ? data.slug : "",
+          author: typeof data.author === "string" ? data.author : undefined,
+        };
+      });
       setPosts(fetchedPosts);
     } catch (error) {
       console.error("Error fetching posts:", error);
