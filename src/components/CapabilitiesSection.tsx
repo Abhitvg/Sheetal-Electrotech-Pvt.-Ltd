@@ -33,7 +33,7 @@ export default function CapabilitiesSection() {
           {capabilities.map((cap, i) => (
             <motion.div key={cap.step} initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: i * 0.1 }}>
               <Link href={cap.href} className="group block relative overflow-hidden rounded-sm bg-ink h-[400px]">
-                <FacilityImage candidates={cap.candidates} alt={cap.title} eager={i < 3} className="absolute inset-0 h-full w-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700" />
+                <FacilityImage candidates={cap.candidates} alt={cap.title} eager={i === 0} sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" className="absolute inset-0 h-full w-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0b192c]/95 via-[#0b192c]/40 to-[#0b192c]/5" />
                 <div className="absolute inset-0 flex flex-col justify-end p-8">
                   <p className="font-mono text-accent text-xs uppercase tracking-widest mb-2">{cap.step} / {cap.subtitle}</p>
