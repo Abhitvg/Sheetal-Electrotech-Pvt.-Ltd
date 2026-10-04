@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Float, PresentationControls, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";

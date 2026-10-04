@@ -8,21 +8,11 @@ import Image from "next/image";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function DarkIndustrialTransition() {
-  const sectionRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    if (!sectionRef.current) return;
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        end: "top top",
-        scrub: 1,
-      }
-    });
+    if (!textRef.current || !statsRef.current) return;
 
     // Animate background from white to dark happens via the CSS flow, but we can 
     // fade in the stats as they scroll into view.
@@ -49,7 +39,7 @@ export default function DarkIndustrialTransition() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full py-32 bg-ink text-paper overflow-hidden flex flex-col items-center justify-center min-h-screen">
+    <section className="relative w-full py-32 bg-ink text-paper overflow-hidden flex flex-col items-center justify-center min-h-screen">
       
       {/* Background Factory Video/Image */}
       <div className="absolute inset-0 z-0">

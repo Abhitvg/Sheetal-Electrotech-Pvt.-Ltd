@@ -164,7 +164,7 @@ export default function HeroExplosionSequence() {
         {/* Step 6: Final Message */}
         <div ref={text6Ref} className="absolute inset-0 flex flex-col justify-center items-center text-center opacity-0 bg-paper/80 backdrop-blur-sm">
           <h2 className="text-5xl md:text-7xl font-display font-bold text-ink mb-6">
-            WE DON'T JUST ASSEMBLE.<br />
+            WE DON&apos;T JUST ASSEMBLE.<br />
             <span className="text-accent">WE MANUFACTURE.</span>
           </h2>
           <p className="text-slate-600 font-mono text-lg uppercase tracking-widest">
