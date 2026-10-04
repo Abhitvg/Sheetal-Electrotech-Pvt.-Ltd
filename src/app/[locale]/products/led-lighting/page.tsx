@@ -3,14 +3,13 @@
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { legacyProductImages } from "@/data/legacyMedia";
 
 const subCategories = [
   {
     title: "LED Bulbs",
     description: "LED bulbs for residential, commercial and industrial applications, manufactured to specified requirements.",
     href: "/products/led-lighting/bulbs",
-    image: legacyProductImages["led-bulb"]?.[0] ?? "/images/products/led-bulb.png"
+    image: "/images/products/led-bulb.png"
   },
   {
     title: "LED Battens",
