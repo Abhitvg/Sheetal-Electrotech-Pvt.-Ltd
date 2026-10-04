@@ -7,12 +7,9 @@ export default function IndustriesServed() {
   return (
     <section className="py-24 md:py-32 bg-paper border-t border-steel/10" id="industries">
       <div className="container-wide">
-        <motion.div
+        <div
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mb-16"
+          className="max-w-3xl mb-16 reveal-on-load"
         >
           <p className="font-mono text-accent text-sm uppercase tracking-widest mb-3">
             Industries
@@ -29,12 +26,9 @@ export default function IndustriesServed() {
           {industriesServed.map((industry, i) => {
             const Icon = icons[i] || Package;
             return (
-              <motion.div
+              <div
                 key={industry.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="group border border-steel/15 p-6 bg-white text-center hover:border-accent/30 transition-all"
+                className="group border border-steel/15 p-6 bg-white text-center hover:border-accent/30 transition-all reveal-on-load"
               >
                 <div className="w-12 h-12 bg-accent/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/20 transition-colors">
                   <Icon className="w-6 h-6 text-accent" />
