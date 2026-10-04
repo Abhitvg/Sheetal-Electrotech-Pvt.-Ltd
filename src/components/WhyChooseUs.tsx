@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { motion, useInView } from "framer-motion";
-import { Factory, Layers, Globe, ShieldCheck, Wrench, Zap } from "lucide-react";
+
 
 export default function WhyChooseUs() {
   const t = useTranslations("WhyChooseUs");
@@ -74,7 +75,7 @@ export default function WhyChooseUs() {
                 className="group p-8 border border-slate-200 rounded-sm hover:border-accent/50 hover:shadow-lg transition-all duration-300 bg-white"
               >
                 <div className="w-16 h-16 bg-accent/10 flex items-center justify-center rounded-sm mb-6 group-hover:bg-accent/20 transition-colors">
-                  <img src={reason.icon} alt={reason.title} className="w-8 h-8 object-contain" />
+                  <Image src={reason.icon} alt="" width={32} height={32} className="object-contain" />
                 </div>
                 <h3 className="text-xl font-display font-bold text-ink mb-3">
                   {reason.title}
