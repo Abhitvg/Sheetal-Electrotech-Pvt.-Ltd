@@ -3,6 +3,26 @@ import RfqRow from "./RfqRow";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
 
+type RfqStatus = "new" | "contacted" | "quoted" | "won" | "lost";
+
+interface RfqSubmission {
+  id: number | string;
+  created_at: string | Date;
+  status: RfqStatus;
+  product_categories: string[] | null;
+  monthly_volume: string | null;
+  target_delivery: string | null;
+  additional_notes: string | null;
+  full_name: string | null;
+  company: string | null;
+  work_email: string | null;
+  phone: string | null;
+  attachment_urls: string[] | null;
+  attachment_paths: string[] | null;
+  utm_source: string | null;
+  internal_notes: string | null;
+}
+
 export const metadata = {
   title: "Admin - RFQ Submissions",
 };
@@ -10,18 +30,18 @@ export const metadata = {
 export const revalidate = 0; // Disable static rendering for this page
 
 export default async function AdminRfqPage() {
-  let rfqs: any[] = [];
+  let rfqs: RfqSubmission[] = [];
 
   try {
     if (process.env.DATABASE_URL) {
       const sql = neon(process.env.DATABASE_URL);
-      rfqs = await sql`
+      rfqs = (await sql`
         SELECT id, created_at, status, product_categories, monthly_volume,
                target_delivery, additional_notes, full_name, company,
                work_email, phone, attachment_urls, attachment_paths, utm_source, internal_notes
         FROM rfq_submissions
         ORDER BY created_at DESC
-      `;
+      `) as RfqSubmission[];
     } else {
       console.error("DATABASE_URL is not configured");
     }
@@ -87,7 +107,7 @@ export default async function AdminRfqPage() {
                   </td>
                 </tr>
               ) : (
-                rfqs.map(rfq => (
+                rfqs.map((rfq) => (
                   <RfqRow key={rfq.id} rfq={rfq} />
                 ))
               )}
