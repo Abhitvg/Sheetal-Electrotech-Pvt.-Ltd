@@ -1,19 +1,13 @@
-"use client";
-
-import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
-import { motion, useInView } from "framer-motion";
 import { ArrowRight, Phone, Mail } from "lucide-react";
 
 export default function CTASection() {
   const t = useTranslations("CTA");
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 overflow-hidden" id="cta">
+    <section className="relative py-24 md:py-32 overflow-hidden" id="cta">
       {/* Background */}
       <div className="absolute inset-0">
         <Image
@@ -73,7 +67,7 @@ export default function CTASection() {
               +91 93273 45295
             </a>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
