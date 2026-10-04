@@ -47,11 +47,12 @@ export default function CompanyPage() {
         <div className="container-wide grid grid-cols-2 md:grid-cols-3 gap-3">
           {legacyCompanyImages.map((src, i) => (
             <div key={src} className="relative aspect-[16/9] overflow-hidden bg-mist border border-steel/10">
-              <img
+              <Image
                 src={src}
                 alt={`Sheetal Electrotech official company image ${i + 1}`}
-                loading="lazy"
-                className="h-full w-full object-cover hover:scale-105 transition-transform duration-700"
+                fill
+                sizes="(max-width: 768px) 50vw, 33vw"
+                className="object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
           ))}
