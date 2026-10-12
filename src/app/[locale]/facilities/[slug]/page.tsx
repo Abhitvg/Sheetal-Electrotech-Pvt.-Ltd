@@ -5,6 +5,9 @@ import { localizedMetadata } from "@/lib/seo";
 import FacilityImage from "@/components/FacilityImage";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, Factory, Gauge, Layers3 } from "lucide-react";
+import { getFacilityProcessChain } from "@/data/facilityProcessChains";
+import FacilityProcessVisualizer from "@/components/FacilityProcessVisualizer";
+import ProcessChainNav from "@/components/ProcessChainNav";
 
 import { routing } from "@/i18n/routing";
 
@@ -35,6 +38,8 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
   const facility = facilities.find((f) => f.slug === slug);
   if (!facility) notFound();
 
+  const processChain = getFacilityProcessChain(slug);
+
   return (
     <div className="bg-paper text-ink min-h-screen">
       {/* Hero - Full bleed with overlay */}
@@ -57,6 +62,11 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
           </h1>
           <p className="text-white/70 text-xl max-w-2xl">{facility.tagline}</p>
         </div>
+      </div>
+
+      {/* Process Chain Step Navigator */}
+      <div className="container-wide -mt-6 relative z-20">
+        <ProcessChainNav currentSlug={slug} />
       </div>
 
       {(facility.capacityNote || facility.applications || facility.approvedBrands || facility.portfolio) && (
@@ -202,6 +212,29 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
         </div>
       </div>
 
+      {/* Interactive Process Visualization & Machinery Simulation */}
+      {processChain && (
+        <section className="bg-slate-50 border-t border-slate-200 py-16">
+          <div className="container-wide">
+            <div className="max-w-3xl mb-4">
+              <p className="font-mono text-accent text-xs uppercase tracking-[.2em] mb-2">
+                Process Engineering · Daman Factory Floor
+              </p>
+              <h2 className="text-3xl md:text-5xl font-display font-medium text-ink leading-tight mb-4">
+                {processChain.headline}
+              </h2>
+              <p className="text-slate-600 text-lg leading-relaxed">
+                {processChain.summary}
+              </p>
+            </div>
+
+            <FacilityProcessVisualizer chain={processChain} />
+
+            {/* Bottom Facility Transitions */}
+            <ProcessChainNav currentSlug={slug} variant="bottom-cards" />
+          </div>
+        </section>
+      )}
 
     </div>
   );
