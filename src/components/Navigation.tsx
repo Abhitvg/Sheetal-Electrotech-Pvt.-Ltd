@@ -150,9 +150,14 @@ export default function Navigation() {
                     <div className="col-span-1">
                       <h3 className="text-ink mb-4">9 In-House Facilities</h3>
                       <p className="text-ink/60 text-sm mb-6">Fully vertically integrated manufacturing hub based in Daman, India.</p>
-                      <Link href="/facilities" className="text-accent flex items-center gap-2 text-sm font-medium hover:text-ink transition-colors">
-                        {tMega("viewAllFacilities")} <ArrowRight className="w-4 h-4" />
-                      </Link>
+                      <div className="space-y-2">
+                        <Link href="/facilities" className="text-accent flex items-center gap-2 text-sm font-medium hover:text-ink transition-colors">
+                          {tMega("viewAllFacilities")} <ArrowRight className="w-4 h-4" />
+                        </Link>
+                        <Link href="/processes" className="text-slate-600 flex items-center gap-2 text-sm font-medium hover:text-accent transition-colors">
+                          Production Process Chain (01–09) <ArrowRight className="w-4 h-4" />
+                        </Link>
+                      </div>
                     </div>
                     <div className="col-span-3 grid grid-cols-3 gap-8">
                       <div>

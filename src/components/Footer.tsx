@@ -51,6 +51,11 @@ export default function Footer() {
               <li><Link href="/facilities/assembly-packing" className="hover:text-accent transition-colors">Assembly & Packing</Link></li>
               <li><Link href="/facilities/tool-room" className="hover:text-accent transition-colors">Tool Room</Link></li>
               <li><Link href="/facilities/research-development" className="hover:text-accent transition-colors">R&D</Link></li>
+              <li className="pt-2 border-t border-slate-200">
+                <Link href="/processes" className="text-accent font-medium hover:underline flex items-center gap-1.5">
+                  Process Chain (01–09) →
+                </Link>
+              </li>
             </ul>
           </div>
 
