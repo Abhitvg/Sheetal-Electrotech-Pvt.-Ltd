@@ -1,12 +1,32 @@
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
-import { ArrowRight, ArrowUpRight, BookOpen, Factory, Settings2, ShieldCheck, CheckCircle2, Award, Cpu, FileText, HelpCircle, UserCheck, Sparkles } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BookOpen,
+  Factory,
+  Clock,
+  ShieldCheck,
+  CheckCircle2,
+  Award,
+  Cpu,
+  FileText,
+  HelpCircle,
+  UserCheck,
+  Sparkles,
+  Download,
+  ExternalLink,
+  ChevronRight,
+  Gauge,
+  Microscope,
+  FileCheck
+} from "lucide-react";
 import { insights } from "@/data/insights";
 import type { Metadata } from "next";
-import { getPageCopy, localizedMetadata, SITE_URL } from "@/lib/seo";
+import { localizedMetadata, SITE_URL } from "@/lib/seo";
 import { legacyInsightImages } from "@/data/legacyMedia";
 import InsightsExplorer from "@/components/InsightsExplorer";
+import InsightsFaqAccordion from "@/components/InsightsFaqAccordion";
 
 export async function generateMetadata({
   params,
@@ -68,7 +88,7 @@ const KNOWLEDGE_FAQS = [
 
 export default function InsightsIndexPage() {
   const featured = insights.find((post) => post.slug === "benefits-of-led-lighting") ?? insights[0];
-  const featuredImage = featured ? legacyInsightImages[featured.slug]?.[0] : undefined;
+  const featuredImage = legacyInsightImages[featured.slug]?.[0] || "/images/product_showcase.jpg";
 
   // JSON-LD Schema for SEO, GEO & AEO
   const schemaData = {
@@ -149,11 +169,25 @@ export default function InsightsIndexPage() {
 
       {/* Hero Section: Luxury Industrial Blueprint Aesthetic */}
       <section className="relative overflow-hidden bg-slate-950 text-white border-b border-slate-800">
-        <div className="absolute inset-0 opacity-25 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
-        <div className="absolute -left-40 -top-40 h-[480px] w-[480px] rounded-full bg-accent/10 blur-3xl pointer-events-none" />
+        {/* Ambient Factory Photo Backdrop */}
+        <div
+          className="absolute inset-0 opacity-15 mix-blend-luminosity bg-cover bg-center pointer-events-none"
+          style={{ backgroundImage: "url('/images/hero_manufacturing.jpg')" }}
+        />
+        <div className="absolute inset-0 opacity-20 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+        <div className="absolute -left-40 -top-40 h-[480px] w-[480px] rounded-full bg-accent/15 blur-3xl pointer-events-none" />
         <div className="absolute -right-40 bottom-[-200px] h-[520px] w-[520px] rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 container-wide pt-36 md:pt-44 pb-20 md:pb-28">
+        <div className="relative z-10 container-wide pt-32 md:pt-40 pb-20 md:pb-28">
+          {/* Breadcrumb Path */}
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-mono text-slate-400 mb-8">
+            <Link href="/" className="hover:text-accent transition-colors">
+              Home
+            </Link>
+            <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
+            <span className="text-accent font-semibold">Insights & Knowledge Hub</span>
+          </nav>
+
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-accent/15 border border-accent/30 rounded-full mb-6">
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
@@ -172,23 +206,42 @@ export default function InsightsIndexPage() {
               Authoritative technical documentation, thermal modeling, BIS compliance methodologies, and tooling engineering from Sheetal Electrotech&apos;s 30,000+ sq. ft. vertically integrated campus in Daman, India.
             </p>
 
-            {/* Core Metrics Strip */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-white/15 max-w-3xl">
-              <div>
-                <p className="font-display text-3xl md:text-4xl font-bold text-accent">{insights.length}</p>
-                <p className="text-slate-400 text-xs font-mono uppercase tracking-widest mt-1">In-Depth Guides</p>
+            {/* Core Metrics Strip in Blueprint Cards */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-10 border-t border-white/15 max-w-4xl">
+              <div className="p-4 rounded-sm bg-white/[0.04] border border-white/10 backdrop-blur-sm hover:border-accent/50 transition-colors">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <BookOpen className="w-4 h-4 text-accent" />
+                  <p className="font-display text-3xl md:text-4xl font-bold text-accent">{insights.length}</p>
+                </div>
+                <p className="text-white text-xs font-semibold">Technical Guides</p>
+                <p className="text-slate-400 text-[11px] font-mono mt-0.5">Comprehensive Archive</p>
               </div>
-              <div>
-                <p className="font-display text-3xl md:text-4xl font-bold text-white">9 Divisions</p>
-                <p className="text-slate-400 text-xs font-mono uppercase tracking-widest mt-1">In-House Capabilities</p>
+
+              <div className="p-4 rounded-sm bg-white/[0.04] border border-white/10 backdrop-blur-sm hover:border-white/30 transition-colors">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <Factory className="w-4 h-4 text-white" />
+                  <p className="font-display text-3xl md:text-4xl font-bold text-white">9</p>
+                </div>
+                <p className="text-white text-xs font-semibold">In-House Divisions</p>
+                <p className="text-slate-400 text-[11px] font-mono mt-0.5">Tooling, SMT & Moulding</p>
               </div>
-              <div>
-                <p className="font-display text-3xl md:text-4xl font-bold text-white">25+ Years</p>
-                <p className="text-slate-400 text-xs font-mono uppercase tracking-widest mt-1">Shop-Floor Data</p>
+
+              <div className="p-4 rounded-sm bg-white/[0.04] border border-white/10 backdrop-blur-sm hover:border-white/30 transition-colors">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <Clock className="w-4 h-4 text-white" />
+                  <p className="font-display text-3xl md:text-4xl font-bold text-white">25+ Yrs</p>
+                </div>
+                <p className="text-white text-xs font-semibold">Shop-Floor Data</p>
+                <p className="text-slate-400 text-[11px] font-mono mt-0.5">Empirical Reliability Logs</p>
               </div>
-              <div>
-                <p className="font-display text-3xl md:text-4xl font-bold text-accent">100% BIS</p>
-                <p className="text-slate-400 text-xs font-mono uppercase tracking-widest mt-1">Standards Compliant</p>
+
+              <div className="p-4 rounded-sm bg-white/[0.04] border border-white/10 backdrop-blur-sm hover:border-accent/50 transition-colors">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <ShieldCheck className="w-4 h-4 text-accent" />
+                  <p className="font-display text-3xl md:text-4xl font-bold text-accent">100%</p>
+                </div>
+                <p className="text-white text-xs font-semibold">BIS & ISO Compliant</p>
+                <p className="text-slate-400 text-[11px] font-mono mt-0.5">IS 16102 · IS 10322 · CRS</p>
               </div>
             </div>
           </div>
@@ -218,39 +271,59 @@ export default function InsightsIndexPage() {
 
             <Link
               href={`/insights/${featured.slug}`}
-              className="group grid lg:grid-cols-[1.15fr_.85fr] bg-slate-950 text-white rounded-sm overflow-hidden border border-slate-800 shadow-xl hover:border-accent/40 transition-all duration-500"
+              className="group grid lg:grid-cols-[1.15fr_.85fr] bg-slate-950 text-white rounded-sm overflow-hidden border border-slate-800 shadow-2xl hover:border-accent/40 transition-all duration-500"
             >
-              <div className="relative min-h-[380px] lg:min-h-[500px] bg-slate-900 overflow-hidden">
-                {featuredImage ? (
-                  <Image
-                    src={featuredImage}
-                    alt={`${featured.title} — official Sheetal Electrotech engineering source`}
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 58vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-                  />
-                ) : (
-                  <div className="h-full w-full bg-slate-800" />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+              {/* Left Column: High-Res Spotlight Photo */}
+              <div className="relative min-h-[400px] lg:min-h-[520px] bg-slate-900 overflow-hidden">
+                <Image
+                  src={featuredImage}
+                  alt={`${featured.title} — official Sheetal Electrotech engineering source`}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent pointer-events-none" />
+                
+                {/* Floating Badges */}
                 <div className="absolute left-6 top-6 flex items-center gap-2">
-                  <span className="px-3 py-1 bg-black/80 backdrop-blur-md text-white font-mono text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">
+                  <span className="px-3 py-1 bg-black/85 backdrop-blur-md text-white font-mono text-[10px] uppercase tracking-widest border border-white/10 rounded-xs">
                     {featured.category}
                   </span>
-                  <span className="px-3 py-1 bg-accent text-ink font-mono text-[10px] uppercase tracking-widest font-bold rounded-sm">
+                  <span className="px-3 py-1 bg-accent text-ink font-mono text-[10px] uppercase tracking-widest font-bold rounded-xs shadow-xs">
                     {readingTime(featured.content)} min read
                   </span>
                 </div>
+
+                {/* Technical Specifications Watermark Strip */}
+                <div className="absolute bottom-6 left-6 right-6 p-4 bg-slate-950/85 backdrop-blur-md border border-white/10 rounded-xs flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
+                  <div>
+                    <span className="text-slate-400 block text-[10px] uppercase">Luminous Efficacy</span>
+                    <span className="text-accent font-bold">≥ 100 lm/W</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[10px] uppercase">Operational Life</span>
+                    <span className="text-white font-bold">25,000 – 50,000 Hrs</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[10px] uppercase">Standard Compliance</span>
+                    <span className="text-white font-bold">IS 16102 / CRS</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[10px] uppercase">Daman Division</span>
+                    <span className="text-accent font-bold">Div 09 · Photometrics</span>
+                  </div>
+                </div>
               </div>
 
+              {/* Right Column: Key Takeaways & Pull Quote */}
               <div className="p-8 md:p-12 lg:p-14 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-2 text-accent font-mono text-xs uppercase tracking-widest mb-4">
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>01 · High-Impact Engineering Guide</span>
                   </div>
-                  <h3 className="text-3xl md:text-5xl font-display font-medium leading-tight mb-6 group-hover:text-accent transition-colors">
+                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-medium leading-tight mb-6 group-hover:text-accent transition-colors">
                     {featured.title}
                   </h3>
                   <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-8 font-sans">
@@ -260,9 +333,13 @@ export default function InsightsIndexPage() {
 
                 <div className="space-y-4 pt-6 border-t border-slate-800">
                   {featured.keyStat && (
-                    <div className="border border-white/10 bg-white/5 p-5 rounded-sm">
-                      <p className="font-mono text-[11px] uppercase tracking-widest text-accent mb-1 font-semibold">Key Empirical Stat</p>
-                      <p className="text-2xl md:text-3xl font-display font-medium text-white">{featured.keyStat}</p>
+                    <div className="border border-white/10 bg-white/5 p-5 rounded-xs">
+                      <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-1 font-semibold">
+                        Key Empirical Stat
+                      </p>
+                      <p className="text-2xl md:text-3xl font-display font-medium text-white">
+                        {featured.keyStat}
+                      </p>
                     </div>
                   )}
                   {featured.pullQuote && (
@@ -271,8 +348,11 @@ export default function InsightsIndexPage() {
                     </blockquote>
                   )}
                   <div className="pt-2 flex items-center justify-between text-xs font-mono text-slate-400">
-                    <span>Reviewed by Sheetal R&D Board</span>
-                    <span className="text-accent group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                    <span className="flex items-center gap-1.5 text-slate-400">
+                      <ShieldCheck className="w-4 h-4 text-accent" />
+                      Reviewed by Sheetal R&D Board
+                    </span>
+                    <span className="text-accent group-hover:translate-x-1 transition-transform inline-flex items-center gap-1 font-bold">
                       Read Full Analysis →
                     </span>
                   </div>
@@ -323,23 +403,25 @@ export default function InsightsIndexPage() {
             </p>
           </div>
 
-          {/* Comparative Standards Table */}
+          {/* Comparative Standards Table with Status Chips */}
           <div className="overflow-x-auto border border-slate-200 rounded-sm shadow-sm mb-12">
-            <table className="w-full text-left border-collapse min-w-[700px]">
+            <table className="w-full text-left border-collapse min-w-[760px]">
               <thead>
                 <tr className="bg-slate-900 text-white font-mono text-xs uppercase tracking-wider">
                   <th className="py-4 px-6 border-b border-slate-800">Manufacturing Domain</th>
                   <th className="py-4 px-6 border-b border-slate-800">Mandatory Standard</th>
                   <th className="py-4 px-6 border-b border-slate-800">Critical Technical Parameters</th>
                   <th className="py-4 px-6 border-b border-slate-800">Sheetal In-House Validation</th>
+                  <th className="py-4 px-6 border-b border-slate-800">Audit Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 text-sm">
                 <tr className="hover:bg-slate-50/80 transition-colors">
                   <td className="py-4 px-6 font-semibold text-ink">
                     Self-Ballasted LED Bulbs
+                    <span className="block text-xs font-mono text-slate-400 font-normal">Division 07 · Assembly</span>
                   </td>
-                  <td className="py-4 px-6 font-mono text-accent font-semibold text-xs">
+                  <td className="py-4 px-6 font-mono text-accent font-semibold text-xs whitespace-nowrap">
                     IS 16102 (Part 1 & 2)
                   </td>
                   <td className="py-4 px-6 text-slate-600">
@@ -348,12 +430,19 @@ export default function InsightsIndexPage() {
                   <td className="py-4 px-6 text-slate-700 font-medium">
                     Integrating Sphere spectrophotometer, High-Voltage flash, Surge test generator
                   </td>
+                  <td className="py-4 px-6 whitespace-nowrap">
+                    <span className="px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-mono rounded-xs font-semibold">
+                      100% Certified
+                    </span>
+                  </td>
                 </tr>
-                <tr className="hover:bg-slate-50/80 transition-colors bg-slate-50/40">
+
+                <tr className="hover:bg-slate-50/80 transition-colors">
                   <td className="py-4 px-6 font-semibold text-ink">
                     Fixed & Recessed Luminaires
+                    <span className="block text-xs font-mono text-slate-400 font-normal">Division 07 · Luminaires</span>
                   </td>
-                  <td className="py-4 px-6 font-mono text-accent font-semibold text-xs">
+                  <td className="py-4 px-6 font-mono text-accent font-semibold text-xs whitespace-nowrap">
                     IS 10322 (Part 5 Sec 1)
                   </td>
                   <td className="py-4 px-6 text-slate-600">
@@ -362,12 +451,19 @@ export default function InsightsIndexPage() {
                   <td className="py-4 px-6 text-slate-700 font-medium">
                     Thermal stress chamber, Goniophotometer dark room, IP water/dust test booth
                   </td>
+                  <td className="py-4 px-6 whitespace-nowrap">
+                    <span className="px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-mono rounded-xs font-semibold">
+                      100% Certified
+                    </span>
+                  </td>
                 </tr>
+
                 <tr className="hover:bg-slate-50/80 transition-colors">
                   <td className="py-4 px-6 font-semibold text-ink">
                     Electronic Drivers (PCBA)
+                    <span className="block text-xs font-mono text-slate-400 font-normal">Division 02 · SMT Lines</span>
                   </td>
-                  <td className="py-4 px-6 font-mono text-accent font-semibold text-xs">
+                  <td className="py-4 px-6 font-mono text-accent font-semibold text-xs whitespace-nowrap">
                     IS 15885 (Part 2 Sec 13)
                   </td>
                   <td className="py-4 px-6 text-slate-600">
@@ -376,12 +472,19 @@ export default function InsightsIndexPage() {
                   <td className="py-4 px-6 text-slate-700 font-medium">
                     Automated ATE testing bench, 100% cyclic burn-in aging carousel, AOI optical inspection
                   </td>
+                  <td className="py-4 px-6 whitespace-nowrap">
+                    <span className="px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-mono rounded-xs font-semibold">
+                      100% Certified
+                    </span>
+                  </td>
                 </tr>
-                <tr className="hover:bg-slate-50/80 transition-colors bg-slate-50/40">
+
+                <tr className="hover:bg-slate-50/80 transition-colors">
                   <td className="py-4 px-6 font-semibold text-ink">
                     Injection Mould Tooling
+                    <span className="block text-xs font-mono text-slate-400 font-normal">Division 08 · Tool Room</span>
                   </td>
-                  <td className="py-4 px-6 font-mono text-accent font-semibold text-xs">
+                  <td className="py-4 px-6 font-mono text-accent font-semibold text-xs whitespace-nowrap">
                     DIN 1.2316 / P20 Tool Steel
                   </td>
                   <td className="py-4 px-6 text-slate-600">
@@ -390,12 +493,19 @@ export default function InsightsIndexPage() {
                   <td className="py-4 px-6 text-slate-700 font-medium">
                     Coordinate Measuring Machine (CMM), CNC VMC probing, Ultrasonic die maintenance
                   </td>
+                  <td className="py-4 px-6 whitespace-nowrap">
+                    <span className="px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-mono rounded-xs font-semibold">
+                      100% Certified
+                    </span>
+                  </td>
                 </tr>
+
                 <tr className="hover:bg-slate-50/80 transition-colors">
                   <td className="py-4 px-6 font-semibold text-ink">
                     Rigid Packaging Containers
+                    <span className="block text-xs font-mono text-slate-400 font-normal">Division 01 & 03 · Moulding</span>
                   </td>
-                  <td className="py-4 px-6 font-mono text-accent font-semibold text-xs">
+                  <td className="py-4 px-6 font-mono text-accent font-semibold text-xs whitespace-nowrap">
                     IS 15410 / Food Grade FDA
                   </td>
                   <td className="py-4 px-6 text-slate-600">
@@ -404,106 +514,215 @@ export default function InsightsIndexPage() {
                   <td className="py-4 px-6 text-slate-700 font-medium">
                     Hydrostatic leak tester, Drop test platform, Digital wall-thickness micrometer
                   </td>
+                  <td className="py-4 px-6 whitespace-nowrap">
+                    <span className="px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-mono rounded-xs font-semibold">
+                      100% Certified
+                    </span>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          {/* Quick Technical Takeaway Banner */}
-          <div className="bg-mist border border-steel/15 p-6 md:p-8 rounded-sm flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-sm bg-accent/10 border border-accent/30 flex items-center justify-center text-accent shrink-0">
-                <ShieldCheck className="w-6 h-6" />
+          {/* Test Equipment Capabilities Banner */}
+          <div className="bg-paper border border-slate-200 p-6 md:p-8 rounded-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-white border border-slate-200 rounded-sm flex items-center justify-center shrink-0 text-accent">
+                <Microscope className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="font-display font-bold text-lg text-ink">Full Test Laboratory Traceability</h4>
-                <p className="text-slate-600 text-sm">All OEM batches are verified against certified test benches with traceable calibration records.</p>
+                <h4 className="font-display font-bold text-lg text-ink">
+                  Full Test Laboratory Traceability in Daman
+                </h4>
+                <p className="text-slate-600 text-sm max-w-2xl mt-1">
+                  Our in-house photometric dark rooms, surge simulation generators, and CMM dimensional laboratories provide 100% batch-wise traceability for OEM clients and third-party quality auditors.
+                </p>
               </div>
             </div>
             <Link
               href="/quality"
-              className="inline-flex items-center gap-2 bg-white border border-slate-300 text-ink px-6 py-2.5 text-xs font-mono uppercase tracking-wider rounded-sm hover:border-accent hover:text-accent transition-colors shrink-0"
+              className="inline-flex items-center gap-2 bg-ink text-white px-5 py-3 text-xs font-mono uppercase tracking-wider rounded-sm hover:bg-accent hover:text-ink transition-colors shrink-0"
             >
-              Inspect Quality Lab Protocol →
+              View Quality Accreditations →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* AEO / Answer Engine Direct Answers (AI Citations & Buyer Queries Accordion) */}
-      <section className="py-20 md:py-28 bg-paper border-b border-slate-200" id="faqs">
+      {/* OEM Engineering Dossier & Product Catalogue Download Section */}
+      <section className="py-16 md:py-20 bg-slate-900 text-white border-b border-slate-800">
         <div className="container-wide">
-          <div className="max-w-3xl mb-14">
-            <p className="font-mono text-accent text-xs uppercase tracking-[.25em] mb-2 font-semibold">
-              Answer Engine Optimization · Direct Technical Q&A
-            </p>
-            <h2 className="text-3xl md:text-5xl font-display font-medium text-ink mb-4">
-              Frequently Asked Technical Questions
-            </h2>
-            <p className="text-slate-600 text-lg leading-relaxed">
-              Concise, authoritative answers to high-intent questions asked by OEM product managers, procurement heads, and AI search engines.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {KNOWLEDGE_FAQS.map((faq, index) => (
-              <div
-                key={faq.question}
-                className="bg-white border border-slate-200/90 p-7 md:p-8 rounded-sm shadow-sm hover:border-accent/40 transition-colors flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
-                    <span className="text-accent font-semibold uppercase tracking-wider">
-                      {faq.topic}
-                    </span>
-                    <span>Q{index + 1}</span>
-                  </div>
-                  <h3 className="text-xl font-display font-bold text-ink mb-4 leading-snug">
-                    {faq.question}
-                  </h3>
-                  <div className="w-8 h-[2px] bg-accent/40 mb-4" />
-                  <p className="text-slate-600 text-sm leading-relaxed font-sans">
-                    {faq.answer}
-                  </p>
-                </div>
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono text-slate-400">
-                  <span>Sheetal Electrotech Technical Team</span>
-                  <span className="text-accent">Verified Spec ✓</span>
-                </div>
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/20 rounded-full mb-4">
+                <FileCheck className="w-3.5 h-3.5 text-accent" />
+                <span className="font-mono text-accent text-xs uppercase tracking-widest font-semibold">
+                  Official Technical Publications
+                </span>
               </div>
-            ))}
+              <h2 className="text-3xl md:text-5xl font-display font-medium mb-4">
+                Download OEM Product &amp; Engineering Catalogues
+              </h2>
+              <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-6 font-sans">
+                Access full photometric specification sheets, dimensional blueprints, packaging container line diagrams, and compliance certificates for your procurement audit.
+              </p>
+              <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400">
+                <span className="flex items-center gap-1.5 text-white">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-accent" /> Updated 2026 Edition
+                </span>
+                <span>·</span>
+                <span className="flex items-center gap-1.5 text-white">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-accent" /> High-Resolution PDF
+                </span>
+                <span>·</span>
+                <span className="flex items-center gap-1.5 text-white">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-accent" /> Ready for Technical Submittals
+                </span>
+              </div>
+            </div>
+
+            {/* Download Action Cards */}
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="bg-slate-950 border border-white/10 p-6 rounded-sm hover:border-accent transition-all flex flex-col justify-between">
+                <div>
+                  <div className="w-10 h-10 bg-accent/20 border border-accent/40 rounded-sm flex items-center justify-center text-accent mb-4">
+                    <FileText className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-lg font-display font-bold text-white mb-1">
+                    Product Catalogue 2026
+                  </h4>
+                  <p className="text-slate-400 text-xs mb-4">
+                    Complete portfolio overview of LED bulbs, battens, downlights, flood lights, and rigid packaging.
+                  </p>
+                  <span className="text-[10px] font-mono text-slate-400 block mb-6">
+                    PDF · Quick Reference · Immediate Access
+                  </span>
+                </div>
+                <a
+                  href="/resources/product-catalogue.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-accent text-ink py-3 px-4 font-bold text-xs uppercase tracking-wider rounded-xs hover:bg-white transition-colors"
+                >
+                  <Download className="w-4 h-4" /> Download Catalogue
+                </a>
+              </div>
+
+              <div className="bg-slate-950 border border-white/10 p-6 rounded-sm hover:border-accent transition-all flex flex-col justify-between">
+                <div>
+                  <div className="w-10 h-10 bg-blue-500/20 border border-blue-500/40 rounded-sm flex items-center justify-center text-blue-400 mb-4">
+                    <BookOpen className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-lg font-display font-bold text-white mb-1">
+                    Comprehensive Dossier
+                  </h4>
+                  <p className="text-slate-400 text-xs mb-4">
+                    Complete 37MB industrial dossier with factory machinery specs, QA test protocols, and tooling blueprints.
+                  </p>
+                  <span className="text-[10px] font-mono text-slate-400 block mb-6">
+                    PDF · 37 MB · Master Engineering Edition
+                  </span>
+                </div>
+                <a
+                  href="/resources/Sheetal-update.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 py-3 px-4 font-bold text-xs uppercase tracking-wider rounded-xs hover:bg-white hover:text-ink transition-colors"
+                >
+                  <Download className="w-4 h-4" /> Download Full Dossier
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Editorial & E-E-A-T Attribution Section */}
-      <section className="py-16 bg-white border-b border-slate-200">
+      {/* Answer Engine Optimization (AEO) Direct Q&A Accordion */}
+      <section className="py-20 md:py-28 bg-paper border-b border-slate-200">
         <div className="container-wide">
-          <div className="max-w-4xl mx-auto bg-slate-50 border border-slate-200 p-8 rounded-sm flex flex-col sm:flex-row items-center sm:items-start gap-6">
-            <div className="w-16 h-16 rounded-full bg-accent/15 border-2 border-accent flex items-center justify-center text-accent shrink-0">
-              <UserCheck className="w-8 h-8" />
-            </div>
-            <div>
-              <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold block mb-1">
-                E-E-A-T Editorial Review Board
-              </span>
-              <h4 className="text-xl font-display font-bold text-ink mb-2">
-                Authored & Verified by Sheetal Electrotech Technical Engineering Team
-              </h4>
-              <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                All articles and technical parameters published in this knowledge hub are drafted from actual shop-floor production metrics, CAD/CAM mould logs, and photometric test chamber data at our Daman manufacturing hub.
+          <div className="max-w-3xl mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-accent/15 border border-accent/30 rounded-full mb-4">
+              <HelpCircle className="w-3.5 h-3.5 text-accent" />
+              <p className="font-mono text-accent text-xs uppercase tracking-widest font-semibold">
+                Answer Engine Optimization (AEO) Knowledge Archive
               </p>
-              <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-slate-500">
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
-                  <strong>Suresh Prasad Arya</strong> — Head of R&D
-                </span>
-                <span className="hidden sm:inline">·</span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
-                  <strong>Manjit Yadav</strong> — Head of Quality Department
+            </div>
+            <h2 className="text-3xl md:text-5xl font-display font-medium text-ink mb-4">
+              Direct Answers for OEM Specifiers
+            </h2>
+            <p className="text-slate-600 text-lg leading-relaxed font-sans">
+              Concise, factual engineering answers formulated for procurement directors, project consultants, and generative AI research systems.
+            </p>
+          </div>
+
+          {/* Interactive Accordion with Topic Filters & Clipboard Copy */}
+          <InsightsFaqAccordion faqs={KNOWLEDGE_FAQS} />
+        </div>
+      </section>
+
+      {/* E-E-A-T Editorial Review & Engineering Authority Board */}
+      <section className="py-16 md:py-20 bg-white border-b border-slate-200">
+        <div className="container-wide">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-accent/15 border border-accent/30 rounded-full mb-3">
+                <UserCheck className="w-3.5 h-3.5 text-accent" />
+                <span className="font-mono text-accent text-xs uppercase tracking-widest font-semibold">
+                  E-E-A-T Editorial Governance
                 </span>
               </div>
+              <h3 className="text-2xl md:text-3xl font-display font-bold text-ink">
+                Reviewed by Sheetal Electrotech Engineering Directorate
+              </h3>
+              <p className="text-slate-600 text-sm max-w-xl mx-auto mt-2">
+                All articles, standards matrices, and shop-floor test guidelines published in this repository are reviewed and maintained by our department directors in Daman.
+              </p>
+            </div>
+
+            {/* Executive Cards */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-paper border border-slate-200 p-6 rounded-sm flex items-start gap-4">
+                <div className="w-12 h-12 bg-ink text-white rounded-sm flex items-center justify-center font-display font-bold text-lg shrink-0">
+                  SPA
+                </div>
+                <div>
+                  <h4 className="font-display font-bold text-lg text-ink">
+                    Suresh Prasad Arya
+                  </h4>
+                  <p className="text-accent text-xs font-mono font-semibold uppercase tracking-wider mb-2">
+                    Head of Research & Development (R&D)
+                  </p>
+                  <p className="text-slate-600 text-xs leading-relaxed">
+                    25+ years in optoelectronic engineering, photometric integrating sphere analysis, and Bureau of Indian Standards (BIS CRS) luminaire qualification.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-paper border border-slate-200 p-6 rounded-sm flex items-start gap-4">
+                <div className="w-12 h-12 bg-accent text-ink rounded-sm flex items-center justify-center font-display font-bold text-lg shrink-0">
+                  MY
+                </div>
+                <div>
+                  <h4 className="font-display font-bold text-lg text-ink">
+                    Manjit Yadav
+                  </h4>
+                  <p className="text-ink text-xs font-mono font-semibold uppercase tracking-wider mb-2">
+                    Head of Quality Department & Testing
+                  </p>
+                  <p className="text-slate-600 text-xs leading-relaxed">
+                    20+ years overseeing ISO 9001:2015 audit regimes, inline Automated Optical Inspection (AOI), and high-voltage dielectric withstand verification.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Integrity Statement */}
+            <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-accent" />
+                Daman Industrial Campus · Plot No. 43, 52/2 & 53/1, Silvassa Road
+              </span>
+              <span>Last Technical Audit: October 2026</span>
             </div>
           </div>
         </div>
@@ -519,27 +738,26 @@ export default function InsightsIndexPage() {
             <h3 className="text-3xl md:text-5xl font-display font-medium mb-3">
               Consult with our Daman engineering team.
             </h3>
-            <p className="text-ink/80 text-lg max-w-xl">
+            <p className="text-ink/80 text-lg max-w-xl font-sans">
               From photometric simulation and CAD mould design to custom SMT driver layouts, our technical experts are available for discovery discussions.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-4 shrink-0">
             <Link
               href="/rfq"
-              className="bg-white text-ink px-8 py-4 font-bold text-base hover:bg-slate-900 hover:text-white transition-colors flex items-center gap-2 whitespace-nowrap shadow-xl"
+              className="bg-white text-ink px-8 py-4 font-bold text-base hover:bg-slate-900 hover:text-white transition-colors flex items-center gap-2 whitespace-nowrap shadow-xl rounded-xs"
             >
               Start Technical Discussion <ArrowRight className="w-4 h-4 text-accent" />
             </Link>
             <Link
               href="/facilities"
-              className="border-2 border-ink text-ink px-7 py-4 font-bold text-base hover:bg-ink hover:text-white transition-colors whitespace-nowrap"
+              className="border-2 border-ink text-ink px-7 py-4 font-bold text-base hover:bg-ink hover:text-white transition-colors whitespace-nowrap rounded-xs"
             >
               View Factory Capabilities
             </Link>
           </div>
         </div>
       </section>
-
     </main>
   );
 }

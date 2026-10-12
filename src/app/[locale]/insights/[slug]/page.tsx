@@ -1,10 +1,28 @@
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
-import { ArrowLeft, ArrowRight, Clock3, ListTree, Package, Quote } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Clock3,
+  ListTree,
+  Package,
+  Quote,
+  CheckCircle2,
+  Download,
+  FileText,
+  ShieldCheck,
+  ChevronRight,
+  UserCheck,
+  Sparkles,
+  Award,
+  Layers,
+  HelpCircle,
+  Share2
+} from "lucide-react";
 import { insights } from "@/data/insights";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { localizedMetadata } from "@/lib/seo";
+import { localizedMetadata, SITE_URL } from "@/lib/seo";
 import { routing } from "@/i18n/routing";
 import { legacyInsightImages } from "@/data/legacyMedia";
 
@@ -43,12 +61,19 @@ function slugifyHeading(heading: string) {
 
 function renderParagraph(text: string) {
   const match = text.match(/^(General (?:industry|lighting|process|manufacturing|engineering) context:|General lighting guidance:|General industry guidance:|General process guidance:)(.*)$/i);
-  if (!match) return <p>{text}</p>;
+  if (!match) {
+    return <p className="text-slate-700 text-base md:text-lg leading-[1.85] font-sans mb-6">{text}</p>;
+  }
 
   return (
-    <p className="border-l-2 border-accent/50 bg-mist/50 px-5 py-4 text-ink/70 text-[0.96em]">
-      <span className="font-semibold text-ink">{match[1]}</span>{match[2]}
-    </p>
+    <div className="my-6 border-l-4 border-accent bg-paper border border-slate-200 p-5 rounded-r-xs shadow-xs">
+      <p className="font-mono text-xs uppercase tracking-widest text-accent font-semibold mb-1 flex items-center gap-1.5">
+        <Sparkles className="w-3.5 h-3.5" /> {match[1]}
+      </p>
+      <p className="text-slate-700 text-sm md:text-base leading-relaxed font-sans">
+        {match[2]}
+      </p>
+    </div>
   );
 }
 
@@ -69,11 +94,11 @@ export async function generateMetadata({
 
   return localizedMetadata(locale, `/insights/${slug}`, {
     en: {
-      title: `${post.title} | Sheetal Electrotech Insights`,
+      title: `${post.title} | Sheetal Electrotech Engineering Insights`,
       description: post.excerpt,
     },
     hi: {
-      title: `${post.title} | Sheetal Electrotech Insights`,
+      title: `${post.title} | शीतल इलेक्ट्रो-टेक इंजीनियरिंग अंतर्दृष्टि`,
       description: post.excerpt,
     },
   });
@@ -94,13 +119,14 @@ export default async function InsightPage({
     label: heading.replace(/^##\s*/, ""),
     id: slugifyHeading(heading.replace(/^##\s*/, "")),
   }));
+
   const related = post.relatedInsights
     .map((relatedSlug) => insights.find((item) => item.slug === relatedSlug))
     .filter(Boolean) as typeof insights;
 
-  const image = legacyInsightImages[post.slug]?.[0]
-    ?? "https://sheetalelectrotech.com/wp-content/uploads/2023/04/energy.png";
-  const articleUrl = `https://sheetalelectrotech.com/${locale}/insights/${post.slug}`;
+  const heroImage = legacyInsightImages[post.slug]?.[0] || "/images/product_showcase.jpg";
+  const secondaryImage = legacyInsightImages[post.slug]?.[1] || "/images/testing_lab.jpg";
+  const articleUrl = `${SITE_URL}/${locale}/insights/${post.slug}`;
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -111,19 +137,19 @@ export default async function InsightPage({
     dateModified: post.dateModified,
     author: {
       "@type": "Organization",
-      name: "Sheetal Electrotech",
-      url: "https://sheetalelectrotech.com",
+      name: "Sheetal Electrotech Engineering Directorate",
+      url: SITE_URL,
     },
     publisher: {
       "@type": "Organization",
       name: "Sheetal Electrotech",
-      url: "https://sheetalelectrotech.com",
+      url: SITE_URL,
       logo: {
         "@type": "ImageObject",
-        url: "https://sheetalelectrotech.com/wp-content/uploads/2023/04/seplr.png",
+        url: `${SITE_URL}/images/logo.webp`,
       },
     },
-    image,
+    image: `${SITE_URL}${heroImage.startsWith("/") ? heroImage : "/" + heroImage}`,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": articleUrl,
@@ -134,9 +160,9 @@ export default async function InsightPage({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: `https://sheetalelectrotech.com/${locale}` },
-      { "@type": "ListItem", position: 2, name: "Insights", item: `https://sheetalelectrotech.com/${locale}/insights` },
-      { "@type": "ListItem", position: 3, name: post.category, item: `https://sheetalelectrotech.com/${locale}/insights#${post.category.replace(/ /g, "-").toLowerCase()}` },
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/${locale}` },
+      { "@type": "ListItem", position: 2, name: "Insights & Knowledge", item: `${SITE_URL}/${locale}/insights` },
+      { "@type": "ListItem", position: 3, name: post.category, item: `${SITE_URL}/${locale}/insights` },
       { "@type": "ListItem", position: 4, name: post.title, item: articleUrl },
     ],
   };
@@ -157,276 +183,423 @@ export default async function InsightPage({
     : null;
 
   return (
-    <main className="min-h-screen bg-paper pt-32 pb-24">
+    <main className="min-h-screen bg-paper text-ink">
+      {/* Structured Schema */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       {faqSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       )}
 
-      <div className="container-wide">
+      {/* Hero Header: Luxury Industrial Blueprint Aesthetic */}
+      <section className="relative overflow-hidden bg-slate-950 text-white border-b border-slate-800 pt-32 md:pt-36 pb-16 md:pb-24">
+        {/* Subtle Blueprint Grid Pattern */}
+        <div className="absolute inset-0 opacity-15 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+        <div className="absolute -left-32 -top-32 h-[420px] w-[420px] rounded-full bg-accent/15 blur-3xl pointer-events-none" />
+        <div className="absolute -right-32 bottom-[-150px] h-[450px] w-[450px] rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 container-wide">
+          {/* Breadcrumb Path & Back Link */}
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-mono text-slate-400">
+              <Link href="/" className="hover:text-accent transition-colors">
+                Home
+              </Link>
+              <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
+              <Link href="/insights" className="hover:text-accent transition-colors">
+                Insights &amp; Knowledge
+              </Link>
+              <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
+              <span className="text-accent font-semibold">{post.category}</span>
+            </nav>
+
+            <Link
+              href="/insights"
+              className="inline-flex items-center gap-2 text-xs font-mono text-slate-400 hover:text-accent transition-colors"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              Back to All Insights
+            </Link>
+          </div>
+
+          <div className="max-w-4xl">
+            {/* Meta Badges */}
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <span className="px-3 py-1 bg-accent/20 text-accent text-[11px] font-mono font-semibold uppercase tracking-widest border border-accent/40 rounded-xs">
+                {post.category}
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest text-slate-400 bg-white/5 border border-white/10 px-3 py-1 rounded-xs">
+                <Clock3 className="w-3.5 h-3.5 text-accent" />
+                {minutes} min read
+              </span>
+              <span className="text-[11px] font-mono uppercase tracking-widest text-slate-400">
+                Updated {displayDate(post.dateModified)}
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest text-emerald-400 bg-emerald-950/40 border border-emerald-500/30 px-3 py-1 rounded-xs">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                Verified OEM Spec
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-medium tracking-tight leading-[1.05] mb-6 text-white">
+              {post.title}
+            </h1>
+
+            {/* Excerpt */}
+            <p className="max-w-3xl text-lg md:text-xl text-slate-300 leading-relaxed font-sans mb-10">
+              {post.excerpt}
+            </p>
+
+            {/* Hero Photo Banner - Framed Blueprint Showcase */}
+            <div className="relative aspect-[16/9] md:aspect-[21/9] rounded-sm overflow-hidden border border-white/15 shadow-2xl bg-slate-900 group">
+              <Image
+                src={heroImage}
+                alt={`${post.title} — official Sheetal Electrotech manufacturing and engineering documentation`}
+                fill
+                priority
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                className="object-cover opacity-90 group-hover:scale-102 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent pointer-events-none" />
+
+              {/* Blueprint Corner Watermarks */}
+              <div className="absolute top-4 left-4 font-mono text-[10px] text-white/80 bg-black/70 backdrop-blur-md px-3 py-1 rounded-xs border border-white/10">
+                SHEETAL ELECTROTECH · DAMAN MANUFACTURING CAMPUS
+              </div>
+
+              {/* Bottom Technical Strip */}
+              <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-slate-300 bg-slate-950/85 backdrop-blur-md p-3.5 rounded-xs border border-white/10">
+                <span className="flex items-center gap-2">
+                  <Award className="w-4 h-4 text-accent" />
+                  <span>ISO 9001:2015 &amp; BIS CRS Quality Benchmark</span>
+                </span>
+                <span className="text-accent font-semibold">
+                  Division 07 / 09 · Precision Verification
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content Layout with Sticky Sidebar */}
+      <div className="container-wide py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
-          <Link
-            href="/insights"
-            className="inline-flex items-center gap-2 text-steel hover:text-accent text-sm font-medium mb-10 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Insights
-          </Link>
-
-          <div className="grid lg:grid-cols-[minmax(0,1fr)_280px] gap-12 lg:gap-20">
+          <div className="grid lg:grid-cols-[minmax(0,1fr)_300px] gap-12 lg:gap-16">
+            {/* Left Column: Article Body */}
             <article>
-              <header className="mb-12">
-                <div className="flex flex-wrap items-center gap-3 mb-6">
-                  <span className="px-3 py-1.5 bg-accent/10 text-accent text-[10px] font-mono uppercase tracking-widest">
-                    {post.category}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-steel">
-                    <Clock3 className="w-3.5 h-3.5" />
-                    {minutes} min read
-                  </span>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-steel/70">
-                    Updated {displayDate(post.dateModified)}
-                  </span>
-                </div>
-
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium tracking-tight leading-[.98] mb-7">
-                  {post.title}
-                </h1>
-
-                <p className="max-w-3xl text-lg md:text-xl text-steel leading-relaxed">
-                  {post.excerpt}
-                </p>
-              </header>
-
-              <section className="border border-steel/10 bg-mist/50 p-7 md:p-9 mb-12">
+              {/* Key Takeaways Box: Blueprint Aesthetic */}
+              <section className="bg-slate-950 text-white border border-slate-800 p-7 md:p-9 mb-12 rounded-sm shadow-xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-36 h-36 bg-accent/10 rounded-full blur-2xl pointer-events-none" />
                 <div className="flex items-center gap-2 text-accent mb-5">
-                  <ListTree className="w-4 h-4" />
-                  <p className="font-mono text-[10px] uppercase tracking-[.2em]">Key takeaways</p>
+                  <CheckCircle2 className="w-4 h-4" />
+                  <p className="font-mono text-xs uppercase tracking-[.2em] font-semibold">
+                    Key Engineering Takeaways
+                  </p>
                 </div>
-                <ul className="space-y-3">
+                <ul className="space-y-3.5">
                   {post.keyTakeaways.map((takeaway) => (
-                    <li key={takeaway} className="flex gap-3 text-sm md:text-base text-ink/80 leading-relaxed">
-                      <span className="mt-2 h-1.5 w-1.5 bg-accent shrink-0" />
+                    <li key={takeaway} className="flex items-start gap-3 text-sm md:text-base text-slate-200 leading-relaxed">
+                      <span className="mt-1.5 h-2 w-2 rounded-full bg-accent shrink-0" />
                       <span>{takeaway}</span>
                     </li>
                   ))}
                 </ul>
               </section>
 
+              {/* Pull Quote Box */}
               {post.pullQuote && (
-                <blockquote className="my-12 border-y border-steel/10 py-8">
+                <blockquote className="my-10 bg-white border-y-2 border-accent py-8 px-6 md:px-10 shadow-xs">
                   <div className="flex gap-4 items-start">
-                    <Quote className="w-7 h-7 text-accent shrink-0 mt-1" />
-                    <p className="text-2xl md:text-3xl font-display leading-tight text-ink">
-                      {post.pullQuote}
-                    </p>
+                    <Quote className="w-8 h-8 text-accent shrink-0 mt-1" />
+                    <div>
+                      <p className="text-xl md:text-2xl font-display font-medium leading-relaxed text-ink italic">
+                        “{post.pullQuote}”
+                      </p>
+                      <p className="mt-3 font-mono text-[11px] text-slate-500 uppercase tracking-widest">
+                        — Sheetal Electrotech Technical Directorate · Daman Campus
+                      </p>
+                    </div>
                   </div>
                 </blockquote>
               )}
 
-              {post.visuals?.length ? (
-                <div className="grid md:grid-cols-2 gap-4 mb-14">
-                  {post.visuals.map((visual, index) => (
-                    <figure key={visual.src} className={post.visuals && post.visuals.length === 1 ? "md:col-span-2" : ""}>
-                      <div className="relative aspect-[16/10] overflow-hidden bg-mist border border-steel/10">
-                        <Image
-                          src={visual.src}
-                          alt={visual.title}
-                          fill
-                          priority={index === 0}
-                          sizes="(max-width: 1024px) 100vw, 50vw"
-                          className="object-cover"
-                        />
-                      </div>
-                      <figcaption className="mt-3 text-xs text-steel leading-relaxed">{visual.caption}</figcaption>
-                    </figure>
-                  ))}
-                </div>
-              ) : null}
+              {/* Secondary Visual Showcase (Perfect Placement) */}
+              {secondaryImage && secondaryImage !== heroImage && (
+                <figure className="my-12 bg-white border border-slate-200 p-3 rounded-sm shadow-sm">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-slate-950 rounded-xs">
+                    <Image
+                      src={secondaryImage}
+                      alt={`${post.title} — shop-floor manufacturing and laboratory test setup`}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 65vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute bottom-3 right-3 font-mono text-[9px] text-white/80 bg-black/70 backdrop-blur-xs px-2.5 py-1 rounded-xs border border-white/10">
+                      DAMAN TESTING &amp; MOULDING DIVISION
+                    </div>
+                  </div>
+                  <figcaption className="mt-3 px-2 text-xs text-slate-500 font-mono leading-relaxed flex items-center justify-between">
+                    <span>Shop-floor verification setup at Sheetal Electrotech, Daman.</span>
+                    <span className="text-accent font-semibold">REF #FAC-VER-26</span>
+                  </figcaption>
+                </figure>
+              )}
 
-              <div className="border-t border-steel/10 pt-12">
-                <div className="max-w-3xl prose prose-lg prose-slate
-                  prose-headings:font-display prose-headings:font-medium prose-headings:text-ink prose-headings:tracking-tight
-                  prose-h2:text-3xl prose-h2:mt-14 prose-h2:mb-5 prose-h2:pb-4 prose-h2:border-b prose-h2:border-slate-200
-                  prose-p:text-ink/80 prose-p:leading-[1.9]
-                  prose-ul:my-8 prose-ul:space-y-3 prose-ul:pl-6
-                  prose-li:text-ink/80 prose-li:leading-[1.75]
-                  prose-strong:text-ink prose-strong:font-medium
-                ">
-                  {post.content.map(([heading, ...paragraphs], index) => {
-                    const title = heading.replace(/^##\s*/, "");
-                    const id = slugifyHeading(title);
-                    return (
-                      <section key={heading + index} id={id} className="scroll-mt-28">
-                        <h2>{title}</h2>
-                        {paragraphs.map((paragraph, paragraphIndex) => (
-                          <div key={paragraph + paragraphIndex}>
-                            {renderParagraph(paragraph)}
-                          </div>
-                        ))}
-                      </section>
-                    );
-                  })}
-                </div>
+              {/* Formatted Article Content with Explicit Headings */}
+              <div className="border-t border-slate-200 pt-10">
+                {post.content.map(([heading, ...paragraphs], index) => {
+                  const title = heading.replace(/^##\s*/, "");
+                  const id = slugifyHeading(title);
+                  return (
+                    <section key={heading + index} id={id} className="scroll-mt-32 mb-12">
+                      <h2 className="text-2xl md:text-3xl font-display font-bold text-ink mb-5 pb-3 border-b border-slate-200 flex items-center gap-3">
+                        <span className="font-mono text-accent text-sm font-semibold tracking-wider bg-accent/10 px-2.5 py-1 rounded-xs">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <span>{title}</span>
+                      </h2>
+                      {paragraphs.map((paragraph, paragraphIndex) => (
+                        <div key={paragraph + paragraphIndex}>
+                          {renderParagraph(paragraph)}
+                        </div>
+                      ))}
+                    </section>
+                  );
+                })}
               </div>
 
+              {/* FAQ Section with Clean Accordion Styling */}
               {post.faq?.length ? (
-                <section className="mt-16 max-w-3xl">
+                <section className="mt-16 bg-white border border-slate-200 p-8 rounded-sm shadow-sm">
                   <div className="mb-6">
-                    <p className="font-mono text-[10px] uppercase tracking-[.2em] text-accent mb-2">Frequently asked questions</p>
-                    <h2 className="text-3xl font-display font-medium">Common questions</h2>
+                    <div className="flex items-center gap-2 text-accent mb-2">
+                      <HelpCircle className="w-4 h-4" />
+                      <p className="font-mono text-[10px] uppercase tracking-[.2em] font-semibold">
+                        Frequently Asked Questions
+                      </p>
+                    </div>
+                    <h2 className="text-2xl md:text-3xl font-display font-bold text-ink">
+                      Technical Q&amp;A on {post.title}
+                    </h2>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {post.faq.map((item) => (
-                      <details key={item.q} className="group border border-steel/10 bg-white px-6 py-5">
-                        <summary className="cursor-pointer list-none flex items-center justify-between gap-5 font-medium">
+                      <details key={item.q} className="group border border-slate-200 bg-paper p-5 rounded-xs transition-all">
+                        <summary className="cursor-pointer list-none flex items-center justify-between gap-4 font-semibold text-ink text-base">
                           <span>{item.q}</span>
-                          <span className="text-accent text-xl leading-none group-open:rotate-45 transition-transform">+</span>
+                          <span className="text-accent font-mono text-xl group-open:rotate-45 transition-transform duration-200">
+                            +
+                          </span>
                         </summary>
-                        <p className="pt-4 pr-8 text-sm text-steel leading-relaxed">{item.a}</p>
+                        <p className="pt-3 text-sm md:text-base text-slate-600 leading-relaxed font-sans border-t border-slate-200/60 mt-3">
+                          {item.a}
+                        </p>
                       </details>
                     ))}
                   </div>
                 </section>
               ) : null}
 
-              <section className="mt-16 max-w-3xl border border-steel/10 bg-mist/40 p-7 md:p-9">
-                <h2 className="text-xs font-mono uppercase tracking-widest text-steel mb-6 flex items-center gap-2">
-                  <Package className="w-4 h-4 text-accent" />
-                  Explore related products
-                </h2>
-                <div className="flex flex-wrap gap-3">
-                  {(post.relatedProducts ?? []).map((product) => (
-                    <Link
-                      key={product.name}
-                      href={product.href}
-                      className="group inline-flex items-center gap-2 px-4 py-2.5 bg-white border border-steel/10 text-sm font-medium text-ink hover:border-accent hover:text-accent transition-colors"
-                    >
-                      {product.name}
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  ))}
-                </div>
-              </section>
-
-              {related.length ? (
-                <section className="mt-12 max-w-3xl">
-                  <div className="flex items-end justify-between gap-6 mb-6">
-                    <div>
-                      <p className="font-mono text-[10px] uppercase tracking-[.2em] text-accent mb-2">Keep reading</p>
-                      <h2 className="text-3xl font-display font-medium">Related {post.category}</h2>
-                    </div>
-                    <Link href="/insights" className="hidden sm:inline-flex items-center gap-2 text-accent text-sm font-medium">
-                      All insights <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-
-                  <div className="grid md:grid-cols-3 gap-4">
-                    {related.slice(0, 3).map((item) => (
+              {/* Related Products Strip */}
+              {post.relatedProducts && post.relatedProducts.length > 0 && (
+                <section className="mt-12 bg-white border border-slate-200 p-7 md:p-8 rounded-sm shadow-sm">
+                  <h3 className="text-xs font-mono uppercase tracking-widest text-slate-500 mb-5 flex items-center gap-2">
+                    <Package className="w-4 h-4 text-accent" />
+                    Relevant Manufactured Products
+                  </h3>
+                  <div className="flex flex-wrap gap-2.5">
+                    {post.relatedProducts.map((product) => (
                       <Link
-                        key={item.slug}
-                        href={`/insights/${item.slug}`}
-                        className="group bg-white border border-steel/10 overflow-hidden hover:border-accent/40 hover:shadow-md transition-all"
+                        key={product.name}
+                        href={product.href}
+                        className="group inline-flex items-center gap-2 px-4 py-2.5 bg-paper border border-slate-200 text-sm font-semibold text-ink hover:border-accent hover:text-accent hover:bg-white transition-all rounded-xs"
                       >
-                        {legacyImageFor(item.slug) && (
-                          <div className="relative aspect-[4/3] bg-mist overflow-hidden">
-                            <Image
-                              src={legacyImageFor(item.slug)!}
-                              alt={item.title}
-                              fill
-                              sizes="(max-width: 768px) 33vw"
-                              className="object-cover group-hover:scale-105 transition-transform duration-500"
-                            />
-                          </div>
-                        )}
-                        <div className="p-5">
-                          <p className="font-mono text-[10px] uppercase tracking-widest text-steel mb-3">
-                            {readingTime(item)} min read
-                          </p>
-                          <h3 className="font-display text-lg font-medium leading-tight group-hover:text-accent transition-colors">
-                            {item.title}
-                          </h3>
-                        </div>
+                        {product.name}
+                        <ArrowRight className="w-3.5 h-3.5 text-accent group-hover:translate-x-1 transition-transform" />
                       </Link>
                     ))}
                   </div>
                 </section>
-              ) : null}
+              )}
 
-              <section className="mt-12 max-w-3xl bg-ink text-white p-8 md:p-10">
-                <p className="font-mono text-[10px] uppercase tracking-[.2em] text-accent mb-4">
-                  Source context
+              {/* E-E-A-T Editorial Verification Card */}
+              <section className="mt-12 bg-slate-900 text-white border border-slate-800 p-6 md:p-8 rounded-sm shadow-md">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pb-5 border-b border-white/10">
+                  <div className="w-12 h-12 bg-accent text-ink rounded-sm flex items-center justify-center font-display font-bold text-lg shrink-0">
+                    SPA
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h4 className="font-display font-bold text-base text-white">
+                        Suresh Prasad Arya
+                      </h4>
+                      <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-[10px] font-mono border border-emerald-500/30 rounded-xs">
+                        Verified Author
+                      </span>
+                    </div>
+                    <p className="text-accent text-xs font-mono">
+                      Head of Research &amp; Development (R&amp;D) · Sheetal Electrotech Daman
+                    </p>
+                  </div>
+                </div>
+                <p className="text-slate-300 text-xs leading-relaxed font-sans mt-4">
+                  Reviewed for accuracy against Indian Standard specifications (IS 16102, IS 10322, IS 15885) and internal factory quality assurance benchmarks at Plot No. 43, 52/2 &amp; 53/1, Silvassa Road, Daman.
                 </p>
-                <h2 className="text-3xl md:text-4xl font-display font-medium text-white mb-4">
-                  Discuss your manufacturing requirement.
-                </h2>
-                <p className="text-white/65 leading-relaxed max-w-2xl mb-7">
-                  Share a drawing, product reference or manufacturing requirement and our team can review the relevant capability with you.
-                </p>
-                <Link
-                  href="/rfq"
-                  className="inline-flex items-center gap-2 text-accent font-medium uppercase tracking-wider text-sm hover:text-white transition-colors"
-                >
-                  Request a Quote
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
               </section>
 
-              <div className="mt-8 flex flex-wrap gap-4 justify-between border-t border-steel/10 pt-5 text-[10px] font-mono uppercase tracking-widest text-steel/60">
-                <span>Official Sheetal Electrotech knowledge archive</span>
-                <a href={post.sourceUrl} target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
-                  View source
+              {/* Related Insights Grid */}
+              {related.length ? (
+                <section className="mt-16">
+                  <div className="flex items-end justify-between gap-6 mb-8 pb-3 border-b border-slate-200">
+                    <div>
+                      <p className="font-mono text-accent text-xs uppercase tracking-[.2em] font-semibold mb-1">
+                        Continue Reading
+                      </p>
+                      <h3 className="text-2xl md:text-3xl font-display font-bold text-ink">
+                        Related Technical Guides
+                      </h3>
+                    </div>
+                    <Link
+                      href="/insights"
+                      className="hidden sm:inline-flex items-center gap-1.5 text-accent text-xs font-mono font-semibold uppercase tracking-wider hover:underline"
+                    >
+                      All Insights <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+
+                  <div className="grid md:grid-cols-3 gap-6">
+                    {related.slice(0, 3).map((item) => {
+                      const relImg = legacyInsightImages[item.slug]?.[0] || "/images/product_showcase.jpg";
+                      return (
+                        <Link
+                          key={item.slug}
+                          href={`/insights/${item.slug}`}
+                          className="group bg-white border border-slate-200 rounded-sm overflow-hidden hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                        >
+                          <div>
+                            <div className="relative aspect-[16/10] bg-slate-950 overflow-hidden">
+                              <Image
+                                src={relImg}
+                                alt={item.title}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                                className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                              />
+                              <div className="absolute top-2.5 left-2.5 px-2 py-0.5 bg-black/80 backdrop-blur-xs text-white text-[9px] font-mono uppercase tracking-widest border border-white/10 rounded-xs">
+                                {item.category}
+                              </div>
+                            </div>
+                            <div className="p-5">
+                              <p className="font-mono text-[10px] uppercase tracking-widest text-slate-400 mb-2">
+                                {readingTime(item)} min read
+                              </p>
+                              <h4 className="font-display text-base font-bold text-ink group-hover:text-accent transition-colors leading-snug line-clamp-2">
+                                {item.title}
+                              </h4>
+                            </div>
+                          </div>
+                          <div className="px-5 py-2.5 bg-slate-50 border-t border-slate-100 text-xs font-semibold text-accent flex items-center justify-between">
+                            <span>Read Guide</span>
+                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </section>
+              ) : null}
+
+              {/* Source Context Disclaimer */}
+              <div className="mt-12 flex flex-wrap gap-4 justify-between border-t border-slate-200 pt-5 text-[11px] font-mono uppercase tracking-widest text-slate-500">
+                <span>Official Sheetal Electrotech Engineering Knowledge Base</span>
+                <a
+                  href={post.sourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-accent transition-colors underline"
+                >
+                  View Archive Source
                 </a>
               </div>
             </article>
 
-            {headings.length >= 3 && (
-              <aside className="hidden lg:block">
-                <div className="sticky top-32 border-l border-steel/10 pl-6">
-                  <p className="font-mono text-[10px] uppercase tracking-[.2em] text-steel mb-5">On this page</p>
-                  <nav className="space-y-3">
+            {/* Right Column: Sticky Sidebar with Table of Contents & Catalogue Downloads */}
+            <aside className="space-y-8">
+              {/* Sticky Table of Contents */}
+              {headings.length >= 2 && (
+                <div className="sticky top-32 bg-white border border-slate-200 p-6 rounded-sm shadow-sm space-y-6">
+                  <div>
+                    <div className="flex items-center gap-2 text-accent mb-1">
+                      <ListTree className="w-4 h-4" />
+                      <p className="font-mono text-[10px] uppercase tracking-[.2em] font-semibold">
+                        Table of Contents
+                      </p>
+                    </div>
+                    <h4 className="text-base font-display font-bold text-ink">
+                      In This Article
+                    </h4>
+                  </div>
+                  <nav className="space-y-2.5 border-t border-slate-100 pt-4">
                     {headings.map((heading, index) => (
                       <a
                         key={heading.id}
                         href={`#${heading.id}`}
-                        className="block text-sm text-steel hover:text-accent transition-colors leading-relaxed"
+                        className="block text-xs font-sans text-slate-600 hover:text-accent hover:translate-x-1 transition-all leading-snug"
                       >
-                        <span className="font-mono text-[10px] text-steel/50 mr-2">{String(index + 1).padStart(2, "0")}</span>
+                        <span className="font-mono text-[10px] text-accent font-semibold mr-2">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
                         {heading.label}
                       </a>
                     ))}
                   </nav>
-                </div>
-              </aside>
-            )}
-          </div>
 
-          {headings.length >= 3 && (
-            <details className="lg:hidden mt-12 border border-steel/10 bg-white">
-              <summary className="cursor-pointer list-none px-5 py-4 flex items-center justify-between font-medium">
-                <span className="inline-flex items-center gap-2">
-                  <ListTree className="w-4 h-4 text-accent" />
-                  Table of contents
-                </span>
-                <span className="text-accent">+</span>
-              </summary>
-              <nav className="px-5 pb-5 space-y-3">
-                {headings.map((heading, index) => (
-                  <a key={heading.id} href={`#${heading.id}`} className="block text-sm text-steel hover:text-accent leading-relaxed">
-                    <span className="font-mono text-[10px] text-steel/50 mr-2">{String(index + 1).padStart(2, "0")}</span>
-                    {heading.label}
-                  </a>
-                ))}
-              </nav>
-            </details>
-          )}
+                  {/* Catalogue Download Box inside Sidebar */}
+                  <div className="pt-5 border-t border-slate-100">
+                    <p className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2 font-semibold">
+                      Engineering Submittals
+                    </p>
+                    <a
+                      href="/resources/product-catalogue.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-2 bg-accent text-ink py-2.5 px-3 font-bold text-xs uppercase tracking-wider rounded-xs hover:bg-slate-900 hover:text-white transition-colors mb-2.5"
+                    >
+                      <Download className="w-3.5 h-3.5" /> Product Catalogue
+                    </a>
+                    <a
+                      href="/resources/Sheetal-update.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-2 bg-paper text-ink border border-slate-200 py-2.5 px-3 font-semibold text-xs uppercase tracking-wider rounded-xs hover:border-accent hover:text-accent transition-colors"
+                    >
+                      <FileText className="w-3.5 h-3.5" /> 37MB Master Dossier
+                    </a>
+                  </div>
+
+                  {/* Sticky RFQ Mini-Card */}
+                  <div className="pt-4 border-t border-slate-100 bg-slate-950 text-white p-5 rounded-xs">
+                    <p className="font-mono text-[10px] uppercase tracking-wider text-accent font-semibold mb-1">
+                      Custom OEM Requirements?
+                    </p>
+                    <p className="text-slate-300 text-xs mb-4 leading-relaxed">
+                      Discuss high-volume manufacturing, tooling design, or driver modifications with our engineers.
+                    </p>
+                    <Link
+                      href="/rfq"
+                      className="w-full inline-flex items-center justify-center gap-2 bg-white text-ink py-2.5 px-3 font-bold text-xs uppercase tracking-wider rounded-xs hover:bg-accent hover:text-ink transition-colors"
+                    >
+                      Request a Quote <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </aside>
+          </div>
         </div>
       </div>
     </main>
   );
-}
-
-function legacyImageFor(slug: string) {
-  return legacyInsightImages[slug]?.[0] ?? null;
 }

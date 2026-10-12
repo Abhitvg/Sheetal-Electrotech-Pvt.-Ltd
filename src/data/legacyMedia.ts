@@ -200,56 +200,70 @@ export const legacyProductImages: Record<string, string[]> = {
 
 export const legacyInsightImages: Record<string, string[]> = {
   "benefits-of-led-lighting": [
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/energy.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/longer-life.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/op-1.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/lplp.png"
+    "/images/product_showcase.jpg",
+    "/images/led_bulb_product.jpg",
+    "/images/hero_manufacturing.jpg"
   ],
   "choosing-right-led-light-beam-angle": [
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Narrow-Beam-Angle-Spot-light.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/sheetal-led.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/spot.jpeg",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/wide-angle.jpeg"
+    "/images/spot.png",
+    "/images/product_showcase.jpg",
+    "/images/testing_lab.jpg"
   ],
   "understanding-led-colors-and-cct": [
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/3000K-Warm-White-Good-for-Relaxing-Similar-to-Incandescent-bulb-jpg.webp",
+    "/images/testing_lab.jpg",
+    "/images/product_showcase.jpg",
+    "/images/led_bulb_product.jpg"
   ],
   "what-is-ip-rating": [
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/indoor.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/out.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/strret.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Moisture-Protection.png"
+    "/images/street_light.png",
+    "/images/hero_factory.jpg",
+    "/images/testing_lab.jpg"
   ],
   "led-product-safety-bis": [
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/BIS-jpg.webp",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/BIS-1024x576.webp"
+    "/images/hero_factory.jpg",
+    "/images/testing_lab.jpg",
+    "/images/product_showcase.jpg"
   ],
   "what-are-lumens": [
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Untitled-design.gif",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Untitled-Business-Card-Landscape-Presentation-169.gif",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/VS-Facebook-Post-Landscape.gif",
+    "/images/testing_lab.jpg",
+    "/images/product_showcase.jpg",
+    "/images/led_bulb_product.jpg"
   ],
   "manual-insertion-process": [
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8706.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8705.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8707.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8704.png"
+    "/images/facilities/manual-insertion.webp",
+    "/images/facilities/assembly-packing.webp",
+    "/images/smt_electronics.jpg"
   ],
   "research-and-development-lighting": [
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8770.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8769.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8755.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8754.png"
+    "/images/facilities/research-development.webp",
+    "/images/testing_lab.jpg",
+    "/images/hero_manufacturing.jpg"
   ],
   "injection-blow-moulding-capabilities": [
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/05/PHOTO-2023-04-25-22-26-42-35-jpg.webp",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8665.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8666.png",
+    "/images/facilities/ibm-plastic.webp",
+    "/images/packaging_factory.jpg",
+    "/images/facilities/blow-moulding.webp"
   ],
-  "plastic-blow-moulding-at-sheetal-electrotech": ["https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png"],
-  "smt-assembly-at-sheetal-electrotech": ["https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8730.png","https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8729.png","https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8728.png"],
-  "assembly-and-packing-manufacturing": ["https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8803.png","https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8802.png","https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8801.png"],
-  "plastic-injection-moulding-capabilities": ["https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8394.jpeg","https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8393.jpeg","https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8389.jpeg"],
+  "plastic-blow-moulding-at-sheetal-electrotech": [
+    "/images/facilities/blow-moulding.webp",
+    "/images/packaging_factory.jpg",
+    "/images/facilities/ibm-plastic.webp"
+  ],
+  "smt-assembly-at-sheetal-electrotech": [
+    "/images/facilities/smt.webp",
+    "/images/smt_electronics.jpg",
+    "/images/hero_factory.jpg"
+  ],
+  "assembly-and-packing-manufacturing": [
+    "/images/facilities/assembly-packing.webp",
+    "/images/packaging_factory.jpg",
+    "/images/hero_factory.jpg"
+  ],
+  "plastic-injection-moulding-capabilities": [
+    "/images/facilities/injection-moulding.webp",
+    "/images/moulding_factory.jpg",
+    "/images/facilities/tool-room.webp"
+  ],
 };
 
 export type LegacyGalleryImage = { src: string; category: "Facilities" | "Products" | "Knowledge"; source: string };
