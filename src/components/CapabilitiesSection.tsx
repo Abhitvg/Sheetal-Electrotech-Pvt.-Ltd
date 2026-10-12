@@ -8,11 +8,66 @@ import { companyFacts } from "@/data/companyFacts";
 import FacilityImage from "@/components/FacilityImage";
 
 const capabilities = [
-  { step: "01", title: "Injection Moulding", subtitle: "Precision plastic moulding", metric: "Injection & Precision Moulding", candidates: ["/images/facilities/injection-moulding.webp"], href: "/facilities/injection-moulding" },
-  { step: "02", title: "SMT & Electronics", subtitle: "PCB assembly", metric: "SMT & Component Assembly", candidates: ["/images/facilities/smt.webp"], href: "/facilities/smt" },
-  { step: "03", title: "Assembly & Packing", subtitle: "Product assembly", metric: "Assembly & Packing", candidates: ["/images/facilities/assembly-packing.webp"], href: "/facilities/assembly-packing" },
-  { step: "04", title: "Manual Insertion", subtitle: "Through-hole component assembly", metric: "Manual Component Insertion", candidates: ["/images/facilities/legacy/manual-insertion.png"], href: "/facilities/manual-insertion" },
-  { step: "05", title: "R&D / Product Development", subtitle: "Product development", metric: "R&D & Engineering", candidates: ["/images/facilities/legacy/research-development.png"], href: "/facilities/research-development" },
+  {
+    step: "01",
+    title: "Injection Moulding",
+    subtitle: "Precision plastic moulding",
+    metric: "Injection & Precision Moulding",
+    candidates: [
+      "/images/facilities/injection-moulding.webp",
+      "/images/facilities/legacy/injection-moulding.jpeg",
+      "/images/moulding_factory.jpg",
+    ],
+    href: "/facilities/injection-moulding",
+  },
+  {
+    step: "02",
+    title: "SMT & Electronics",
+    subtitle: "PCB assembly",
+    metric: "SMT & Component Assembly",
+    candidates: [
+      "/images/facilities/smt.webp",
+      "/images/facilities/legacy/smt.png",
+      "/images/smt_electronics.jpg",
+    ],
+    href: "/facilities/smt",
+  },
+  {
+    step: "03",
+    title: "Assembly & Packing",
+    subtitle: "Product assembly",
+    metric: "Assembly & Packing",
+    candidates: [
+      "/images/facilities/assembly-packing.webp",
+      "/images/facilities/legacy/assembly-packing.png",
+      "/images/product_showcase.jpg",
+    ],
+    href: "/facilities/assembly-packing",
+  },
+  {
+    step: "04",
+    title: "Manual Insertion",
+    subtitle: "Through-hole component assembly",
+    metric: "Manual Component Insertion",
+    candidates: [
+      "/images/facilities/manual-insertion.webp",
+      "/images/facilities/legacy/manual-insertion.png",
+      "/images/hero_factory.jpg",
+    ],
+    href: "/facilities/manual-insertion",
+  },
+  {
+    step: "05",
+    title: "R&D / Product Development",
+    subtitle: "Product development",
+    metric: "R&D & Engineering",
+    candidates: [
+      "/images/facilities/research-development.webp",
+      "/images/facilities/legacy/research-development.png",
+      "/images/testing_lab.jpg",
+    ],
+    href: "/facilities/research-development",
+  },
 ];
 
 export default function CapabilitiesSection() {
