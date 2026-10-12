@@ -78,15 +78,16 @@ export const facilityLegacyGalleries: Record<string, string[]> = {
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8783.png"
   ],
   "tool-room": [
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/product-design.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/manufacturing.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/inspection.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/stock.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/technical-support.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8771.png",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8665.png",
+    "/images/tool_room.jpg",
     "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8424-jpeg.webp",
-    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8717.png"
+    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8771.png",
+    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8717.png",
+    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8394.jpeg",
+    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8393.jpeg",
+    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8389.jpeg",
+    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8665.png",
+    "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8666.png",
+    "/images/moulding_factory.jpg"
   ]
 };
 
@@ -449,29 +450,29 @@ export const legacyGalleryImages: LegacyGalleryImage[] = [
     "source": "/assembly-and-packing/"
   },
   {
-    "src": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/product-design.png",
+    "src": "/images/tool_room.jpg",
     "category": "Facilities",
-    "source": "/facilites/"
+    "source": "/tool-room/"
   },
   {
-    "src": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/manufacturing.png",
+    "src": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8424-jpeg.webp",
     "category": "Facilities",
-    "source": "/facilites/"
+    "source": "/tool-room/"
   },
   {
-    "src": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/inspection.png",
+    "src": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8771.png",
     "category": "Facilities",
-    "source": "/facilites/"
+    "source": "/tool-room/"
   },
   {
-    "src": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/stock.png",
+    "src": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8717.png",
     "category": "Facilities",
-    "source": "/facilites/"
+    "source": "/tool-room/"
   },
   {
-    "src": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/technical-support.png",
+    "src": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/MG_8394.jpeg",
     "category": "Facilities",
-    "source": "/facilites/"
+    "source": "/tool-room/"
   },
   {
     "src": "https://sheetalelectrotech.com/wp-content/uploads/2023/04/Screenshot-2023-04-15-at-11.05.08-AM.png",
