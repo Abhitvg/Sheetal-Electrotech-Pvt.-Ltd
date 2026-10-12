@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { Link } from "@/i18n/routing";
 import {
   ArrowRight,
@@ -18,6 +20,10 @@ import {
   ZoomIn,
   ZoomOut,
   SlidersHorizontal,
+  Box,
+  CheckCircle2,
+  Loader2,
+  FileCode,
 } from "lucide-react";
 
 export interface Hotspot {
@@ -422,6 +428,122 @@ export const ROOM_PRODUCTS: RoomProduct[] = [
   },
 ];
 
+export interface CadAssetConfig {
+  key: string;
+  url: string;
+  label: string;
+  badge: string;
+  cadFile: string;
+  sourceDesc: string;
+  targetScale: number;
+  rotationOffset?: [number, number, number];
+  positionYOffset?: number;
+}
+
+export const PRODUCT_CAD_VARIANTS: Record<
+  number,
+  { primary: CadAssetConfig; secondary?: CadAssetConfig }
+> = {
+  0: {
+    primary: {
+      key: "bulb",
+      url: "/models/bulb.glb",
+      label: "A60 LED Bulb (Real CAD)",
+      badge: "SolidWorks CAD",
+      cadFile: "bulb.glb (2.0 MB)",
+      sourceDesc: "High-precision CAD model with threaded cap, heat sink body, and optical globe",
+      targetScale: 2.15,
+      positionYOffset: 0.1,
+    },
+  },
+  1: {
+    primary: {
+      key: "batten",
+      url: "/models/led_batten.glb",
+      label: "Argus Linear 2400mm (Real CAD)",
+      badge: "Architectural CAD",
+      cadFile: "led_batten.glb (2.6 MB)",
+      sourceDesc: "Precision 2400mm continuous architectural linear luminaire extrusion",
+      targetScale: 2.5,
+      rotationOffset: [0, Math.PI / 4, 0],
+      positionYOffset: 0.05,
+    },
+  },
+  2: {
+    primary: {
+      key: "street_light",
+      url: "/models/street_light.glb",
+      label: "Industrial Highway Luminaire (Real CAD)",
+      badge: "Municipal CAD",
+      cadFile: "street_light.glb (2.8 MB)",
+      sourceDesc: "High-mast aerodynamic die-cast aluminium roadway luminaire with cooling fins",
+      targetScale: 2.4,
+      rotationOffset: [0.35, -Math.PI / 3, 0],
+      positionYOffset: 0.15,
+    },
+    secondary: {
+      key: "street_floodlight",
+      url: "/models/street_floodlight.glb",
+      label: "EC-FL-30 Industrial Floodlight (Real CAD)",
+      badge: "Heavy-Duty CAD",
+      cadFile: "street_floodlight.glb (0.4 MB)",
+      sourceDesc: "Commercial grade IP66 exterior floodlight with adjustable mounting bracket",
+      targetScale: 2.4,
+      rotationOffset: [0.3, -Math.PI / 4, 0],
+      positionYOffset: 0.1,
+    },
+  },
+  3: {
+    primary: {
+      key: "downlight",
+      url: "/models/downlight.glb",
+      label: "Architectural Recessed Downlight (Real CAD)",
+      badge: "Anti-Glare CAD",
+      cadFile: "downlight.glb (0.8 MB)",
+      sourceDesc: "Precision ceiling downlight canister with parabolic reflector and spring clips",
+      targetScale: 2.2,
+      rotationOffset: [0.4, 0, 0],
+      positionYOffset: 0.1,
+    },
+    secondary: {
+      key: "spotlight",
+      url: "/models/spotlight.glb",
+      label: "Commercial Track Spotlight (Real CAD)",
+      badge: "Track Spot CAD",
+      cadFile: "spotlight.glb (5.0 MB)",
+      sourceDesc: "Steel Cut track-mount commercial luminaire with cooling fins and multi-axis swivel",
+      targetScale: 2.3,
+      rotationOffset: [0.3, -Math.PI / 3, 0],
+      positionYOffset: 0.1,
+    },
+  },
+  4: {
+    primary: {
+      key: "smart_bulb",
+      url: "/models/bulb.glb",
+      label: "IoT Connected Smart Bulb (Real CAD)",
+      badge: "RGB IoT CAD",
+      cadFile: "bulb.glb (2.0 MB)",
+      sourceDesc: "Multi-channel RGB + tunable white IoT connected luminaire",
+      targetScale: 2.15,
+      positionYOffset: 0.1,
+    },
+  },
+  5: {
+    primary: {
+      key: "ceiling_panel",
+      url: "/models/downlight.glb",
+      label: "Architectural Ceiling Luminaire (Real CAD)",
+      badge: "Ceiling CAD",
+      cadFile: "downlight.glb (0.8 MB)",
+      sourceDesc: "Commercial ultra-slim ambient ceiling fixture",
+      targetScale: 2.2,
+      rotationOffset: [0.55, 0, 0],
+      positionYOffset: 0.1,
+    },
+  },
+};
+
 interface LayerComponent {
   mesh: THREE.Object3D;
   explodeDirection: THREE.Vector3;
@@ -435,6 +557,14 @@ export default function ThreeProductRoom() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [modelMode, setModelMode] = useState<"cad" | "exploded">("cad");
+  const [variantMap, setVariantMap] = useState<Record<number, "primary" | "secondary">>({
+    2: "primary",
+    3: "primary",
+  });
+  const [loadingCad, setLoadingCad] = useState(false);
+  const [cadProgress, setCadProgress] = useState(0);
+
   const [isPanelOpen, setIsPanelOpen] = useState(true);
   const [hasWebGL, setHasWebGL] = useState(true);
   const [autoRotate, setAutoRotate] = useState(true);
@@ -447,15 +577,38 @@ export default function ThreeProductRoom() {
   const activeProduct = ROOM_PRODUCTS[activeIndex];
   const totalProducts = ROOM_PRODUCTS.length;
 
+  // Active CAD config
+  const activeCadVariants = PRODUCT_CAD_VARIANTS[activeIndex] || PRODUCT_CAD_VARIANTS[0];
+  const activeVariantKey = variantMap[activeIndex] || "primary";
+  const activeCadConfig =
+    activeVariantKey === "secondary" && activeCadVariants.secondary
+      ? activeCadVariants.secondary
+      : activeCadVariants.primary;
+
   // Real-time animation refs (ensuring smooth frame-rate lerps)
   const explodeRatioRef = useRef(0);
   const targetExplodeRatioRef = useRef(0);
+
+  // Sync refs for 60fps render loop
+  const activeIndexRef = useRef(activeIndex);
+  activeIndexRef.current = activeIndex;
+
+  const modelModeRef = useRef(modelMode);
+  modelModeRef.current = modelMode;
+
+  const variantMapRef = useRef(variantMap);
+  variantMapRef.current = variantMap;
 
   // Three.js State References
   const sceneRef = useRef<THREE.Scene | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const animFrameIdRef = useRef<number | null>(null);
+
+  // CAD Mesh references
+  const cadMasterGroupRef = useRef<THREE.Group | null>(null);
+  const loadedCadMapRef = useRef<Map<string, THREE.Group>>(new Map());
+  const loadCadModelRef = useRef<((url: string, config: CadAssetConfig) => void) | null>(null);
 
   // Lights
   const productLightRef = useRef<THREE.PointLight | null>(null);
@@ -492,6 +645,11 @@ export default function ThreeProductRoom() {
     targetExplodeRatioRef.current = nextState ? 1.0 : 0.0;
   };
 
+  // Switch CAD Variant (Primary vs Secondary)
+  const setVariantForProduct = (prodIdx: number, variant: "primary" | "secondary") => {
+    setVariantMap((prev) => ({ ...prev, [prodIdx]: variant }));
+  };
+
   // Navigation setter
   const setProduct = useCallback((index: number) => {
     const clamped = Math.max(0, Math.min(totalProducts - 1, index));
@@ -502,6 +660,13 @@ export default function ThreeProductRoom() {
     cameraOrbitRef.current.targetTheta = 0.35;
     cameraOrbitRef.current.targetPhi = 1.22;
   }, [totalProducts]);
+
+  // Trigger CAD asset loading whenever active product or variant changes
+  useEffect(() => {
+    if (loadCadModelRef.current && activeCadConfig) {
+      loadCadModelRef.current(activeCadConfig.url, activeCadConfig);
+    }
+  }, [activeIndex, activeCadConfig]);
 
   // Adjust camera horizontal offset based on drawer state
   useEffect(() => {
@@ -1152,6 +1317,93 @@ export default function ThreeProductRoom() {
     productGroupsRef.current = productGroups;
     productLayersRef.current = productLayers;
 
+    // =========================================================================
+    // PRODUCTION CAD GLTF LOADER SETUP
+    // =========================================================================
+    const cadMasterGroup = new THREE.Group();
+    stageGroup.add(cadMasterGroup);
+    cadMasterGroupRef.current = cadMasterGroup;
+
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath("/draco/");
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.setDRACOLoader(dracoLoader);
+
+    const loadCadModel = (url: string, config: CadAssetConfig) => {
+      if (loadedCadMapRef.current.has(config.key)) {
+        return;
+      }
+      setLoadingCad(true);
+      setCadProgress(15);
+      gltfLoader.load(
+        url,
+        (gltf) => {
+          const model = gltf.scene;
+
+          const box = new THREE.Box3().setFromObject(model);
+          const center = box.getCenter(new THREE.Vector3());
+          const size = box.getSize(new THREE.Vector3());
+          const maxDim = Math.max(size.x, size.y, size.z) || 1;
+          const scale = config.targetScale / maxDim;
+
+          const wrapper = new THREE.Group();
+          model.scale.setScalar(scale);
+          model.position.x = -center.x * scale;
+          model.position.y = -center.y * scale + (config.positionYOffset || 0);
+          model.position.z = -center.z * scale;
+
+          if (config.rotationOffset) {
+            model.rotation.set(...config.rotationOffset);
+          }
+
+          wrapper.add(model);
+          wrapper.scale.setScalar(0.0001);
+          wrapper.visible = false;
+
+          // Material upgrades and shadow registration
+          model.traverse((child) => {
+            if (child instanceof THREE.Mesh) {
+              child.castShadow = true;
+              child.receiveShadow = true;
+              if (child.material) {
+                const mats = Array.isArray(child.material) ? child.material : [child.material];
+                mats.forEach((m) => {
+                  if (m instanceof THREE.MeshStandardMaterial) {
+                    (m as any)._initiallyTransparent = m.transparent;
+                    (m as any)._initialOpacity = m.opacity;
+                    m.roughness = Math.min(0.65, Math.max(0.18, m.roughness));
+                    m.metalness = Math.max(0.12, m.metalness);
+                    materialsRef.current.push(m);
+                  }
+                });
+              }
+            }
+          });
+
+          cadMasterGroup.add(wrapper);
+          loadedCadMapRef.current.set(config.key, wrapper);
+          setLoadingCad(false);
+          setCadProgress(100);
+        },
+        (xhr) => {
+          if (xhr.total > 0) {
+            setCadProgress(Math.round((xhr.loaded / xhr.total) * 100));
+          }
+        },
+        (err) => {
+          console.warn("CAD load warning:", err);
+          setLoadingCad(false);
+        }
+      );
+    };
+
+    loadCadModelRef.current = loadCadModel;
+
+    // Load initial CAD model
+    if (activeCadConfig) {
+      loadCadModel(activeCadConfig.url, activeCadConfig);
+    }
+
     // RESIZE HANDLER
     const handleResize = () => {
       if (!container || !renderer || !camera) return;
@@ -1200,10 +1452,16 @@ export default function ThreeProductRoom() {
       explodeRatioRef.current += (targetExplodeRatioRef.current - explodeRatioRef.current) * 0.09;
       const currentExplode = explodeRatioRef.current;
 
-      const curIdx = activeIndex;
+      const curIdx = activeIndexRef.current;
+      const isCadMode = modelModeRef.current === "cad";
+      const currentVariantKey = variantMapRef.current[curIdx] || "primary";
+      const currentVariantConfig =
+        PRODUCT_CAD_VARIANTS[curIdx]?.[currentVariantKey] || PRODUCT_CAD_VARIANTS[curIdx]?.primary;
+      const activeCadKey = currentVariantConfig?.key;
 
+      // Update Procedural Exploded Groups
       productGroupsRef.current.forEach((group, idx) => {
-        const isCurrent = idx === curIdx;
+        const isCurrent = idx === curIdx && !isCadMode;
         const targetScale = isCurrent ? 1.0 : 0.0001;
 
         const curScale = group.scale.x;
@@ -1221,10 +1479,24 @@ export default function ThreeProductRoom() {
         }
       });
 
+      // Update Production CAD Mesh Groups
+      if (cadMasterGroupRef.current) {
+        loadedCadMapRef.current.forEach((wrapper, key) => {
+          const isCurrent = isCadMode && key === activeCadKey;
+          const targetScale = isCurrent ? 1.0 : 0.0001;
+
+          const curScale = wrapper.scale.x;
+          const nextScale = curScale + (targetScale - curScale) * 0.12;
+          wrapper.scale.setScalar(nextScale);
+          wrapper.visible = nextScale > 0.01;
+        });
+      }
+
       // Update 2D Screen Projections for Hotspots
       if (container && camera) {
         const currentProductHotspots = activeProduct.hotspots || [];
-        const activeGroup = productGroupsRef.current[curIdx];
+        const activeCadModel = activeCadKey ? loadedCadMapRef.current.get(activeCadKey) : null;
+        const activeGroup = isCadMode && activeCadModel ? activeCadModel : productGroupsRef.current[curIdx];
 
         if (activeGroup && activeGroup.visible) {
           const coords = currentProductHotspots.map((hs) => {
@@ -1348,27 +1620,105 @@ export default function ThreeProductRoom() {
       )}
 
       {/* TOP BAR: Header & Shading Mode Controls */}
-      <div className="absolute top-6 left-6 right-6 z-20 flex items-center justify-between pointer-events-none gap-4">
+      <div className="absolute top-6 left-6 right-6 z-20 flex flex-wrap items-center justify-between pointer-events-none gap-3">
         {/* Left: Studio Telemetry HUD */}
         <div className="flex flex-col gap-2 pointer-events-auto">
           <div className="flex items-center gap-2 bg-slate-900/85 backdrop-blur-xl px-4 py-2 rounded-full border border-white/10 shadow-xl">
             <Sparkles className="w-3.5 h-3.5 text-orange-400 animate-pulse" />
             <span className="font-mono text-xs uppercase tracking-widest text-white/90 font-medium">
-              Virtual 3D Engineering Suite · Daman Floor
+              {modelMode === "cad"
+                ? `Production CAD · ${activeCadConfig.badge}`
+                : "Exploded Sub-Assembly Cutaway · Daman Floor"}
             </span>
           </div>
 
-          <div className="hidden sm:flex items-center gap-2.5 font-mono text-[11px] text-white/70 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 w-fit">
+          <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] text-white/70 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 w-fit">
+            <span className="text-orange-400 font-semibold">{activeCadConfig.cadFile}</span>
+            <span className="text-white/20">|</span>
             <span>DRAG: 360° ORBIT</span>
             <span className="text-white/20">|</span>
             <span>SCROLL: ZOOM</span>
-            <span className="text-white/20">|</span>
-            <span className="text-orange-400">FPS: 60 HIGH-DPI</span>
           </div>
+
+          {/* Dynamic CAD streaming progress banner */}
+          {loadingCad && (
+            <div className="flex items-center gap-2 bg-orange-500/15 backdrop-blur-xl px-3 py-1 rounded-xl border border-orange-500/30 text-xs font-mono text-orange-400 animate-in fade-in">
+              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+              <span>Loading CAD Mesh ({cadProgress}%)...</span>
+            </div>
+          )}
         </div>
 
-        {/* Right: Render Shading Modes & Panel Toggle */}
-        <div className="flex items-center gap-2 pointer-events-auto">
+        {/* Right: Mode Switcher & Shading Modes & Panel Toggle */}
+        <div className="flex flex-wrap items-center gap-2 pointer-events-auto">
+          {/* Model Mode Switcher: Production CAD vs Exploded Cutaway */}
+          <div className="flex items-center bg-slate-900/90 backdrop-blur-xl p-1 rounded-2xl border border-white/10 shadow-lg">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setModelMode("cad");
+              }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono transition-all ${
+                modelMode === "cad"
+                  ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold shadow-md shadow-orange-500/20"
+                  : "text-white/70 hover:text-white"
+              }`}
+              title="Inspect Real Production CAD Model"
+            >
+              <Box className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Production CAD</span>
+              <span className="sm:hidden">CAD</span>
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setModelMode("exploded");
+              }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono transition-all ${
+                modelMode === "exploded"
+                  ? "bg-accent text-white font-bold shadow-md shadow-accent/20"
+                  : "text-white/70 hover:text-white"
+              }`}
+              title="Inspect Exploded Internal Engineering Sub-Assembly"
+            >
+              <Layers className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Exploded Cutaway</span>
+              <span className="sm:hidden">Exploded</span>
+            </button>
+          </div>
+
+          {/* Model Variant Toggle (if product has 2 real CAD models) */}
+          {modelMode === "cad" && activeCadVariants.secondary && (
+            <div className="flex items-center bg-slate-900/90 backdrop-blur-xl p-1 rounded-2xl border border-orange-500/30 shadow-lg">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setVariantForProduct(activeIndex, "primary");
+                }}
+                className={`px-2.5 py-1 rounded-xl text-xs font-mono transition-all ${
+                  activeVariantKey === "primary"
+                    ? "bg-orange-500/20 text-orange-300 font-bold border border-orange-500/40"
+                    : "text-white/60 hover:text-white"
+                }`}
+              >
+                {activeCadVariants.primary.badge}
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setVariantForProduct(activeIndex, "secondary");
+                }}
+                className={`px-2.5 py-1 rounded-xl text-xs font-mono transition-all ${
+                  activeVariantKey === "secondary"
+                    ? "bg-orange-500/20 text-orange-300 font-bold border border-orange-500/40"
+                    : "text-white/60 hover:text-white"
+                }`}
+              >
+                {activeCadVariants.secondary.badge}
+              </button>
+            </div>
+          )}
+
           {/* Shading Selector (Realistic / CAD Wire / X-Ray) */}
           <div className="flex items-center bg-slate-900/85 backdrop-blur-xl p-1 rounded-2xl border border-white/10 shadow-lg">
             <button
@@ -1570,14 +1920,20 @@ export default function ThreeProductRoom() {
 
         {/* Right: Studio Hardware Controls (Exploded, Power, CCT, Auto-Rotate) */}
         <div className="flex items-center gap-1.5 bg-slate-900/85 backdrop-blur-2xl p-1.5 rounded-2xl border border-white/10 shadow-xl pointer-events-auto">
-          {/* Exploded View Toggle */}
+          {/* Exploded / Assembled Toggle */}
           <button
             onClick={(e) => {
               e.stopPropagation();
-              toggleExploded();
+              if (modelMode === "cad") {
+                setModelMode("exploded");
+                setIsExploded(true);
+                targetExplodeRatioRef.current = 1.0;
+              } else {
+                toggleExploded();
+              }
             }}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono transition-all border ${
-              isExploded
+              isExploded && modelMode === "exploded"
                 ? "bg-accent text-white border-accent shadow-lg shadow-accent/30"
                 : "bg-white/5 text-white/80 border-white/5 hover:bg-white/10"
             }`}
@@ -1585,7 +1941,7 @@ export default function ThreeProductRoom() {
           >
             <Layers className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">
-              {isExploded ? "Assembled" : "Exploded"}
+              {isExploded && modelMode === "exploded" ? "Assembled" : "Exploded"}
             </span>
           </button>
 
@@ -1693,6 +2049,25 @@ export default function ThreeProductRoom() {
             <p className="text-slate-300 text-sm leading-relaxed mb-6 font-sans">
               {activeProduct.description}
             </p>
+
+            {/* Active 3D CAD Asset Telemetry */}
+            <div className="mb-6 bg-orange-500/10 border border-orange-500/25 rounded-2xl p-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-orange-400 font-bold flex items-center gap-1.5">
+                  <FileCode className="w-3.5 h-3.5" />
+                  Production CAD Asset
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 font-semibold border border-orange-500/30">
+                  {activeCadConfig.badge}
+                </span>
+              </div>
+              <p className="text-xs text-white font-mono font-medium mb-1">
+                {activeCadConfig.label}
+              </p>
+              <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+                {activeCadConfig.sourceDesc}
+              </p>
+            </div>
 
             {/* Performance Metric Progress Bars */}
             <div className="mb-6 space-y-2.5 bg-black/40 p-4 rounded-2xl border border-white/5">
