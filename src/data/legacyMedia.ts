@@ -892,7 +892,11 @@ export const legacyGalleryImages: LegacyGalleryImage[] = [
 ];
 
 export const legacyCompanyImages: string[] = [
-  "https://sheetalelectrotech.com/wp-content/uploads/2023/04/PHOTO-2023-04-25-19-12-00-jpg.webp",
-  "https://sheetalelectrotech.com/wp-content/uploads/2023/04/PHOTO-2023-04-25-19-23-04-jpg.webp",
-  "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8752-removebg-preview.png"
+  "/images/hero_factory.jpg",
+  "/images/moulding_factory.jpg",
+  "/images/smt_electronics.jpg",
+  "/images/packaging_factory.jpg",
+  "/images/testing_lab.jpg",
+  "/images/tool_room.jpg"
 ];
+
