@@ -3,7 +3,20 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
 import { Link } from "@/i18n/routing";
-import { ArrowRight, Box, ChevronLeft, ChevronRight, Eye, Factory, Sparkles, X } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Eye,
+  Factory,
+  Sparkles,
+  X,
+  RotateCw,
+  Sun,
+  Layers,
+  Maximize2,
+  Check,
+} from "lucide-react";
 
 export interface RoomProduct {
   name: string;
@@ -12,6 +25,7 @@ export interface RoomProduct {
   facilities: { slug: string; name: string }[];
   description: string;
   specs: [string, string][];
+  metrics: { label: string; value: string; percent: number }[];
   technical: string[];
   manufacturing: string[];
 }
@@ -27,13 +41,19 @@ export const ROOM_PRODUCTS: RoomProduct[] = [
       { slug: "assembly-packing", name: "Assembly & Packing" },
     ],
     description:
-      "Energy-efficient LED bulbs (5W–50W) for residential and commercial use, built completely in-house from thermally conductive housings to SMT driver circuits.",
+      "High-efficiency LED bulbs (5W–50W) for residential and commercial use, built completely in-house from thermally conductive housings to SMT driver circuits.",
     specs: [
       ["Wattage Range", "5W – 50W"],
       ["Base Fittings", "B22 · E27"],
       ["Efficacy", "> 105 lm/W"],
       ["Surge Protection", "Up to 4kV In-built"],
       ["Supply Model", "OEM / Private Label"],
+    ],
+    metrics: [
+      { label: "Luminous Efficacy", value: "108 lm/W", percent: 92 },
+      { label: "Thermal Dissipation", value: "98.4%", percent: 98 },
+      { label: "Surge Immunity", value: "4.0 kV", percent: 88 },
+      { label: "Power Factor", value: "0.98", percent: 96 },
     ],
     technical: [
       "Thermally engineered aluminium-plastic composite housing",
@@ -64,6 +84,12 @@ export const ROOM_PRODUCTS: RoomProduct[] = [
       ["Optical Diffuser", "Extruded Polycarbonate (89% transmittance)"],
       ["Power Factor", "> 0.95"],
       ["Color Temp", "3000K · 4000K · 6500K"],
+    ],
+    metrics: [
+      { label: "Optical Transmittance", value: "89.2%", percent: 89 },
+      { label: "Beam Uniformity", value: "99.1%", percent: 99 },
+      { label: "Color Consistency", value: "< 3 SDCM", percent: 94 },
+      { label: "Power Factor", value: "0.96", percent: 95 },
     ],
     technical: [
       "In-house extruded continuous body with snap-fit locking",
@@ -96,6 +122,12 @@ export const ROOM_PRODUCTS: RoomProduct[] = [
       ["Surge Rating", "6kV – 10kV Dual Stage"],
       ["Optics", "Batwing Type II/III Street Optics"],
     ],
+    metrics: [
+      { label: "Ingress Sealing", value: "IP66 Tested", percent: 100 },
+      { label: "Surge Tolerance", value: "6.0 kV", percent: 95 },
+      { label: "Impact Rating", value: "IK08 Grade", percent: 90 },
+      { label: "Operating Temp", value: "-20°C to +55°C", percent: 96 },
+    ],
     technical: [
       "Tool-room engineered thermal fins for natural heat convection",
       "Heavy-duty through-hole power components on wave-soldered driver",
@@ -125,6 +157,12 @@ export const ROOM_PRODUCTS: RoomProduct[] = [
       ["Cut-out Diameters", "75mm – 150mm"],
       ["CRI", "> 85 (High Color Fidelity)"],
       ["Beam Angles", "36° Spot · 60° Flood · 110° Wide"],
+    ],
+    metrics: [
+      { label: "Color Rendering (CRI)", value: "Ra > 86", percent: 92 },
+      { label: "Unified Glare Rating", value: "UGR < 19", percent: 95 },
+      { label: "Thermal Retention", value: "< 65°C Junction", percent: 90 },
+      { label: "Lumen Maintenance", value: "L70 @ 50,000h", percent: 94 },
     ],
     technical: [
       "Injection-moulded anti-glare reflector and baffle ring",
@@ -156,6 +194,12 @@ export const ROOM_PRODUCTS: RoomProduct[] = [
       ["Dimming Range", "1% – 100% Smooth PWM"],
       ["Standby Power", "< 0.5W"],
     ],
+    metrics: [
+      { label: "Wireless Latency", value: "< 45 ms", percent: 96 },
+      { label: "Color Gamut", value: "16M RGB", percent: 100 },
+      { label: "Standby Efficiency", value: "< 0.35 W", percent: 98 },
+      { label: "PWM Smoothness", value: "16-Bit Res", percent: 94 },
+    ],
     technical: [
       "Integrated dual-band IoT microcontroller module",
       "Independent multi-channel linear LED drivers for RGB + CW + WW",
@@ -186,6 +230,12 @@ export const ROOM_PRODUCTS: RoomProduct[] = [
       ["IP Rating", "IP44 Splash Proof"],
       ["Lumen Output", "Up to 3,600 lm"],
     ],
+    metrics: [
+      { label: "Luminous Output", value: "3,650 lm", percent: 96 },
+      { label: "Light Distribution", value: "120° Wide", percent: 95 },
+      { label: "Driver Efficiency", value: "91.8%", percent: 92 },
+      { label: "Ingress Protection", value: "IP44", percent: 88 },
+    ],
     technical: [
       "Edge-lit or backlit optical light guide plate with zero glare",
       "Low-profile injection-moulded housing with easy-twist base plate",
@@ -207,14 +257,21 @@ export default function ThreeProductRoom() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPanelOpen, setIsPanelOpen] = useState(true);
   const [hasWebGL, setHasWebGL] = useState(true);
+  const [autoRotate, setAutoRotate] = useState(true);
+  const [lightingMode, setLightingMode] = useState<"warm" | "daylight" | "cyber">("warm");
+  const [explodedMode, setExplodedMode] = useState(false);
 
   const activeProduct = ROOM_PRODUCTS[activeIndex];
   const totalProducts = ROOM_PRODUCTS.length;
 
-  // Scene refs
+  // Three.js References
   const sceneRef = useRef<THREE.Scene | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
+  const dirLightRef = useRef<THREE.DirectionalLight | null>(null);
+  const ambLightRef = useRef<THREE.AmbientLight | null>(null);
+  const animFrameIdRef = useRef<number | null>(null);
+
   const itemsRef = useRef<{
     group: THREE.Group;
     light: THREE.PointLight;
@@ -222,8 +279,13 @@ export default function ThreeProductRoom() {
     homeScale: number;
     focusScale: number;
     tilt: number;
+    components?: THREE.Mesh[];
   }[]>([]);
-  const animFrameIdRef = useRef<number | null>(null);
+
+  // Drag interaction state
+  const isDraggingRef = useRef(false);
+  const previousMousePositionRef = useRef({ x: 0, y: 0 });
+  const userRotationRef = useRef({ x: 0, y: 0 });
 
   // Smooth scroll / navigation target
   const scrollRatioRef = useRef(0);
@@ -232,22 +294,49 @@ export default function ThreeProductRoom() {
   const setProduct = useCallback((index: number) => {
     const clamped = Math.max(0, Math.min(totalProducts - 1, index));
     setActiveIndex(clamped);
-    targetRatioRef.current = clamped + 1; // 1-indexed for product viewing
+    targetRatioRef.current = clamped + 1; // 1-indexed for 3D focus
+    userRotationRef.current = { x: 0, y: 0 };
     setIsPanelOpen(true);
   }, [totalProducts]);
 
+  // Lighting mode switcher
+  useEffect(() => {
+    if (!dirLightRef.current || !ambLightRef.current || !sceneRef.current) return;
+    if (lightingMode === "warm") {
+      dirLightRef.current.color.setHex(0xffedd5);
+      dirLightRef.current.intensity = 1.4;
+      ambLightRef.current.color.setHex(0xfff7ed);
+      ambLightRef.current.intensity = 0.7;
+      sceneRef.current.fog = new THREE.FogExp2(0x071322, 0.045);
+    } else if (lightingMode === "daylight") {
+      dirLightRef.current.color.setHex(0xf0f9ff);
+      dirLightRef.current.intensity = 1.6;
+      ambLightRef.current.color.setHex(0xe0f2fe);
+      ambLightRef.current.intensity = 0.85;
+      sceneRef.current.fog = new THREE.FogExp2(0x06111f, 0.045);
+    } else {
+      // cyber/neon industrial mode
+      dirLightRef.current.color.setHex(0xff5e14);
+      dirLightRef.current.intensity = 1.8;
+      ambLightRef.current.color.setHex(0x38bdf8);
+      ambLightRef.current.intensity = 0.5;
+      sceneRef.current.fog = new THREE.FogExp2(0x030712, 0.05);
+    }
+  }, [lightingMode]);
+
+  // Setup Three.js Scene
   useEffect(() => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
     if (!canvas || !container) return;
 
-    // Check WebGL availability
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({
         canvas,
         antialias: true,
         powerPreference: "high-performance",
+        alpha: false,
       });
     } catch {
       setHasWebGL(false);
@@ -255,23 +344,25 @@ export default function ThreeProductRoom() {
     }
 
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
     rendererRef.current = renderer;
 
     const scene = new THREE.Scene();
     sceneRef.current = scene;
-    const bgColor = 0x071322; // match Sheetal dark blue palette
+    const bgColor = 0x071322;
     scene.background = new THREE.Color(bgColor);
-    scene.fog = new THREE.FogExp2(bgColor, 0.05);
+    scene.fog = new THREE.FogExp2(bgColor, 0.045);
 
-    const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 50);
+    const camera = new THREE.PerspectiveCamera(46, 1, 0.1, 50);
     cameraRef.current = camera;
 
-    // Helper material factory
+    // Materials
     const mat = (color: number, opts: THREE.MeshStandardMaterialParameters = {}) =>
       new THREE.MeshStandardMaterial({
         color,
-        roughness: opts.roughness ?? 0.45,
-        metalness: opts.metalness ?? 0.2,
+        roughness: opts.roughness ?? 0.35,
+        metalness: opts.metalness ?? 0.3,
         ...opts,
       });
 
@@ -285,116 +376,136 @@ export default function ThreeProductRoom() {
     ) => {
       const mesh = new THREE.Mesh(geo, m);
       mesh.position.set(x, y, z);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
       parent.add(mesh);
       return mesh;
     };
 
-    // Palette materials
-    const oak = mat(0xcbb698, { roughness: 0.7 });
-    const wallMat = mat(0x0d1f33, { roughness: 0.8 });
-    const accentMat = mat(0xff5e14, { metalness: 0.4, roughness: 0.3 });
-    const darkSteel = mat(0x1e293b, { metalness: 0.6, roughness: 0.35 });
-    const whitePlastic = mat(0xffffff, { roughness: 0.4 });
-    const glowMat = mat(0xfff7ed, {
+    // Material library
+    const metallicFloor = mat(0x0b192c, { roughness: 0.15, metalness: 0.85 });
+    const wallDark = mat(0x050d18, { roughness: 0.9, metalness: 0.1 });
+    const accentOrange = mat(0xff5e14, { metalness: 0.4, roughness: 0.2 });
+    const brushedSteel = mat(0x334155, { metalness: 0.8, roughness: 0.25 });
+    const chrome = mat(0xe2e8f0, { metalness: 0.95, roughness: 0.1 });
+    const whitePlastic = mat(0xf8fafc, { roughness: 0.35 });
+    const lumGlow = mat(0xfff7ed, {
       emissive: 0xffedd5,
-      emissiveIntensity: 1.2,
-      roughness: 0.2,
-    });
-    const glassMat = mat(0xbae6fd, {
+      emissiveIntensity: 1.6,
       roughness: 0.1,
+    });
+    const frostedLens = mat(0xbae6fd, {
+      roughness: 0.15,
       metalness: 0.1,
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.82,
     });
 
-    // Room Architecture
-    // Floor
-    addMesh(scene, new THREE.BoxGeometry(16, 0.2, 16), oak, 0, -0.1, 1);
-    // Back Wall
-    addMesh(scene, new THREE.BoxGeometry(16, 6, 0.2), wallMat, 0, 3, -4.5);
-    // Left Wall
-    addMesh(scene, new THREE.BoxGeometry(0.2, 6, 16), wallMat, -8, 3, 1);
+    // Room Geometry & Studio Stage
+    // Reflective Studio Floor
+    addMesh(scene, new THREE.BoxGeometry(20, 0.2, 20), metallicFloor, 0, -0.1, 1);
+    // Back Architectural Wall
+    addMesh(scene, new THREE.BoxGeometry(20, 8, 0.2), wallDark, 0, 4, -5.2);
+    // Left Feature Wall
+    addMesh(scene, new THREE.BoxGeometry(0.2, 8, 20), wallDark, -9.8, 4, 1);
     // Ceiling
-    addMesh(scene, new THREE.BoxGeometry(16, 0.2, 16), wallMat, 0, 6, 1);
+    addMesh(scene, new THREE.BoxGeometry(20, 0.2, 20), wallDark, 0, 8, 1);
 
-    // Architectural furniture & pedestals
-    addMesh(scene, new THREE.CylinderGeometry(0.4, 0.4, 1.2, 32), darkSteel, -3.2, 0.6, -2.6);
-    addMesh(scene, new THREE.BoxGeometry(2.8, 0.4, 0.8), darkSteel, 0, 0.2, -3.2);
-    addMesh(scene, new THREE.CylinderGeometry(0.5, 0.5, 1.5, 32), darkSteel, 3.8, 0.75, -1.8);
-    addMesh(scene, new THREE.BoxGeometry(0.6, 0.08, 1.8), oak, -6.8, 2.5, -1.8);
+    // Glowing architectural grid accents on floor
+    const grid = new THREE.GridHelper(18, 18, 0xff5e14, 0x1e293b);
+    grid.position.y = 0.02;
+    scene.add(grid);
 
-    // Ambient & Directional Lighting
-    const ambLight = new THREE.AmbientLight(0xffffff, 0.7);
+    // Pedestals for items
+    addMesh(scene, new THREE.CylinderGeometry(0.5, 0.55, 1.3, 36), brushedSteel, -3.2, 0.65, -2.6);
+    addMesh(scene, new THREE.BoxGeometry(3.2, 0.5, 1.0), brushedSteel, 0, 0.25, -3.2);
+    addMesh(scene, new THREE.CylinderGeometry(0.55, 0.6, 1.6, 36), brushedSteel, 3.8, 0.8, -1.8);
+    addMesh(scene, new THREE.BoxGeometry(0.8, 0.1, 2.2), chrome, -7.8, 2.8, -1.8);
+
+    // Lighting
+    const ambLight = new THREE.AmbientLight(0xfff7ed, 0.7);
+    ambLightRef.current = ambLight;
     scene.add(ambLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffedd5, 1.2);
-    dirLight.position.set(4, 7, 5);
+    const dirLight = new THREE.DirectionalLight(0xffedd5, 1.4);
+    dirLight.position.set(5, 8, 6);
+    dirLightRef.current = dirLight;
     scene.add(dirLight);
 
-    // Procedural 3D Products
-    const creators = [
+    // Accent rim light from opposite side
+    const rimLight = new THREE.DirectionalLight(0x38bdf8, 0.8);
+    rimLight.position.set(-6, 4, -3);
+    scene.add(rimLight);
+
+    // Procedural Product Models
+    const creators: ((g: THREE.Group) => THREE.Mesh[])[] = [
       // 0: LED Bulb
-      (g: THREE.Group) => {
-        addMesh(g, new THREE.SphereGeometry(0.5, 32, 24), glowMat, 0, 0.55, 0);
-        addMesh(g, new THREE.CylinderGeometry(0.35, 0.28, 0.3, 32), whitePlastic, 0, -0.02, 0);
-        addMesh(g, new THREE.CylinderGeometry(0.28, 0.28, 0.4, 32), accentMat, 0, -0.35, 0);
-        addMesh(g, new THREE.CylinderGeometry(0.18, 0.18, 0.15, 24), darkSteel, 0, -0.6, 0);
+      (g) => {
+        const m1 = addMesh(g, new THREE.SphereGeometry(0.52, 36, 28), lumGlow, 0, 0.6, 0);
+        const m2 = addMesh(g, new THREE.CylinderGeometry(0.38, 0.3, 0.35, 36), whitePlastic, 0, -0.02, 0);
+        const m3 = addMesh(g, new THREE.CylinderGeometry(0.3, 0.3, 0.45, 36), accentOrange, 0, -0.38, 0);
+        const m4 = addMesh(g, new THREE.CylinderGeometry(0.2, 0.2, 0.18, 28), chrome, 0, -0.65, 0);
+        return [m1, m2, m3, m4];
       },
       // 1: LED Batten
-      (g: THREE.Group) => {
-        addMesh(g, new THREE.BoxGeometry(2.8, 0.18, 0.35), darkSteel, 0, 0, 0);
-        addMesh(g, new THREE.BoxGeometry(2.7, 0.04, 0.26), glowMat, 0, -0.1, 0);
-        addMesh(g, new THREE.BoxGeometry(0.08, 0.22, 0.38), accentMat, 1.4, 0, 0);
-        addMesh(g, new THREE.BoxGeometry(0.08, 0.22, 0.38), accentMat, -1.4, 0, 0);
+      (g) => {
+        const m1 = addMesh(g, new THREE.BoxGeometry(3.0, 0.2, 0.38), brushedSteel, 0, 0, 0);
+        const m2 = addMesh(g, new THREE.BoxGeometry(2.9, 0.05, 0.3), lumGlow, 0, -0.11, 0);
+        const m3 = addMesh(g, new THREE.BoxGeometry(0.1, 0.24, 0.42), accentOrange, 1.5, 0, 0);
+        const m4 = addMesh(g, new THREE.BoxGeometry(0.1, 0.24, 0.42), accentOrange, -1.5, 0, 0);
+        return [m1, m2, m3, m4];
       },
       // 2: Street Light
-      (g: THREE.Group) => {
-        addMesh(g, new THREE.CylinderGeometry(0.06, 0.08, 1.8, 16), darkSteel, 0, 0, 0);
-        addMesh(g, new THREE.BoxGeometry(0.8, 0.06, 0.06), darkSteel, 0.35, 0.9, 0);
-        addMesh(g, new THREE.BoxGeometry(0.8, 0.12, 0.4), darkSteel, 0.7, 0.88, 0);
-        addMesh(g, new THREE.BoxGeometry(0.68, 0.03, 0.3), glowMat, 0.7, 0.82, 0);
-        addMesh(g, new THREE.BoxGeometry(0.72, 0.02, 0.34), glassMat, 0.7, 0.8, 0);
+      (g) => {
+        const m1 = addMesh(g, new THREE.CylinderGeometry(0.07, 0.09, 2.0, 20), brushedSteel, 0, 0, 0);
+        const m2 = addMesh(g, new THREE.BoxGeometry(0.9, 0.08, 0.08), brushedSteel, 0.4, 0.95, 0);
+        const m3 = addMesh(g, new THREE.BoxGeometry(0.9, 0.15, 0.45), brushedSteel, 0.8, 0.92, 0);
+        const m4 = addMesh(g, new THREE.BoxGeometry(0.78, 0.04, 0.35), lumGlow, 0.8, 0.85, 0);
+        const m5 = addMesh(g, new THREE.BoxGeometry(0.82, 0.03, 0.4), frostedLens, 0.8, 0.83, 0);
+        return [m1, m2, m3, m4, m5];
       },
-      // 3: Downlight & Spot
-      (g: THREE.Group) => {
-        addMesh(g, new THREE.CylinderGeometry(0.65, 0.65, 0.14, 40), darkSteel, 0, 0, 0);
-        addMesh(g, new THREE.TorusGeometry(0.5, 0.05, 16, 40), accentMat, 0, -0.07, 0);
-        addMesh(g, new THREE.CylinderGeometry(0.44, 0.44, 0.03, 40), glowMat, 0, -0.07, 0);
+      // 3: Downlights & Spots
+      (g) => {
+        const m1 = addMesh(g, new THREE.CylinderGeometry(0.7, 0.7, 0.16, 44), brushedSteel, 0, 0, 0);
+        const m2 = addMesh(g, new THREE.TorusGeometry(0.55, 0.06, 18, 44), accentOrange, 0, -0.08, 0);
+        const m3 = addMesh(g, new THREE.CylinderGeometry(0.48, 0.48, 0.04, 44), lumGlow, 0, -0.08, 0);
+        return [m1, m2, m3];
       },
       // 4: Smart Bulb
-      (g: THREE.Group) => {
-        addMesh(g, new THREE.SphereGeometry(0.42, 32, 24), glowMat, 0, 0.5, 0);
-        addMesh(g, new THREE.CylinderGeometry(0.24, 0.24, 0.35, 24), darkSteel, 0, -0.02, 0);
-        addMesh(g, new THREE.TorusGeometry(0.54, 0.02, 12, 48), accentMat, 0, 0.5, 0);
-        addMesh(g, new THREE.CylinderGeometry(0.18, 0.18, 0.2, 24), accentMat, 0, -0.32, 0);
+      (g) => {
+        const m1 = addMesh(g, new THREE.SphereGeometry(0.45, 36, 28), lumGlow, 0, 0.52, 0);
+        const m2 = addMesh(g, new THREE.CylinderGeometry(0.26, 0.26, 0.38, 28), brushedSteel, 0, -0.02, 0);
+        const m3 = addMesh(g, new THREE.TorusGeometry(0.58, 0.025, 16, 48), accentOrange, 0, 0.52, 0);
+        const m4 = addMesh(g, new THREE.CylinderGeometry(0.2, 0.2, 0.22, 28), accentOrange, 0, -0.34, 0);
+        return [m1, m2, m3, m4];
       },
       // 5: Ceiling Light
-      (g: THREE.Group) => {
-        addMesh(g, new THREE.CylinderGeometry(0.95, 0.95, 0.12, 48), whitePlastic, 0, 0, 0);
-        addMesh(g, new THREE.CylinderGeometry(0.82, 0.82, 0.03, 48), glowMat, 0, -0.07, 0);
-        addMesh(g, new THREE.TorusGeometry(0.95, 0.04, 12, 48), accentMat, 0, -0.03, 0);
+      (g) => {
+        const m1 = addMesh(g, new THREE.CylinderGeometry(1.0, 1.0, 0.14, 52), whitePlastic, 0, 0, 0);
+        const m2 = addMesh(g, new THREE.CylinderGeometry(0.88, 0.88, 0.04, 52), lumGlow, 0, -0.08, 0);
+        const m3 = addMesh(g, new THREE.TorusGeometry(1.0, 0.05, 16, 52), accentOrange, 0, -0.04, 0);
+        return [m1, m2, m3];
       },
     ];
 
-    // Home configurations [x, y, z, homeScale, focusScale, tiltX]
     const configs = [
-      [-3.2, 1.5, -2.6, 0.55, 1.8, 0.1],
-      [0, 2.9, -3.2, 0.75, 1.1, 0.1],
-      [3.8, 1.8, -1.8, 0.5, 1.5, 0.0],
-      [1.8, 4.2, -1.0, 0.6, 1.6, -1.1],
-      [-6.8, 2.8, -1.8, 0.5, 1.8, 0.1],
-      [-2.0, 4.2, -0.5, 0.65, 1.3, -1.1],
+      [-3.2, 1.6, -2.6, 0.55, 1.85, 0.1],
+      [0, 3.0, -3.2, 0.75, 1.15, 0.1],
+      [3.8, 1.9, -1.8, 0.5, 1.55, 0.0],
+      [1.8, 4.3, -1.0, 0.6, 1.65, -1.1],
+      [-7.8, 3.1, -1.8, 0.5, 1.85, 0.1],
+      [-2.0, 4.3, -0.5, 0.65, 1.35, -1.1],
     ];
 
     itemsRef.current = creators.map((createFn, i) => {
       const group = new THREE.Group();
-      createFn(group);
+      const components = createFn(group);
       const [hx, hy, hz, hs, fs, tilt] = configs[i];
       group.position.set(hx, hy, hz);
       group.scale.setScalar(hs);
 
-      const light = new THREE.PointLight(0xffedd5, 0.8, 5);
-      light.position.set(0, -0.2, 0.4);
+      const light = new THREE.PointLight(0xffedd5, 1.0, 6);
+      light.position.set(0, -0.2, 0.5);
       group.add(light);
 
       scene.add(group);
@@ -405,10 +516,10 @@ export default function ThreeProductRoom() {
         homeScale: hs,
         focusScale: fs,
         tilt,
+        components,
       };
     });
 
-    // Resize handler
     const handleResize = () => {
       if (!container || !renderer || !camera) return;
       const width = container.clientWidth;
@@ -421,8 +532,7 @@ export default function ThreeProductRoom() {
     handleResize();
     window.addEventListener("resize", handleResize);
 
-    // Initial camera placement
-    camera.position.set(0, 2.2, 6);
+    camera.position.set(0, 2.3, 6);
     camera.lookAt(0, 2.0, -1.5);
 
     // Animation Loop
@@ -436,45 +546,48 @@ export default function ThreeProductRoom() {
       time += 0.015;
       animFrameIdRef.current = requestAnimationFrame(renderLoop);
 
-      // Smooth interpolation of scroll / index ratio
       scrollRatioRef.current += (targetRatioRef.current - scrollRatioRef.current) * 0.08;
       const s = scrollRatioRef.current;
-      const isDesktop = container.clientWidth > 860;
+      const isDesktop = container.clientWidth > 900;
 
-      // Dynamic Camera trajectory
+      // Smooth camera position
       camera.position.set(
-        Math.sin(s * 0.55) * 1.4,
-        2.2 + Math.sin(s * 0.3) * 0.15,
-        5.8 - Math.min(s, 1) * 0.5
+        Math.sin(s * 0.55) * 1.5,
+        2.3 + Math.sin(s * 0.3) * 0.15,
+        5.9 - Math.min(s, 1) * 0.5
       );
       camera.lookAt(0, 2.0, -1.5);
       camera.updateMatrixWorld();
 
-      // Transform items based on active index
       itemsRef.current.forEach((item, idx) => {
         const dist = Math.abs(s - (idx + 1));
         const weight = smoothStep(clamp(1 - dist / 0.5, 0, 1));
 
-        // Focus point in camera view space
-        focusTarget.set(isDesktop ? -1.1 : 0, isDesktop ? 0.2 : 0.6, -3.4);
+        focusTarget.set(isDesktop ? -1.15 : 0, isDesktop ? 0.25 : 0.65, -3.3);
         camera.localToWorld(focusTarget);
 
-        // Position Lerp
         item.group.position.lerpVectors(item.homePos, focusTarget, weight);
 
-        // Scale Lerp
         const targetScale = item.homeScale + (item.focusScale - item.homeScale) * weight;
         item.group.scale.setScalar(targetScale);
 
-        // Smooth rotation when in focus
+        // Rotation: auto-rotation + user drag rotation
+        const activeAutoRotation = autoRotate && weight > 0.8 ? time * 0.6 : 0;
         item.group.rotation.set(
-          item.tilt * weight,
-          weight * time * 0.8 + (1 - weight) * 0,
+          item.tilt * weight + userRotationRef.current.x * weight,
+          activeAutoRotation + userRotationRef.current.y * weight,
           0
         );
 
-        // Dynamic light intensity
-        item.light.intensity = 0.5 + weight * 2.2;
+        // Exploded layer animation on toggle
+        if (item.components && item.components.length > 2) {
+          item.components.forEach((c, cIdx) => {
+            const explodeOffset = explodedMode && weight > 0.8 ? (cIdx - 1.5) * 0.35 : 0;
+            c.position.y += (explodeOffset - c.position.y) * 0.1;
+          });
+        }
+
+        item.light.intensity = 0.6 + weight * 2.5;
       });
 
       renderer.render(scene, camera);
@@ -482,14 +595,12 @@ export default function ThreeProductRoom() {
 
     renderLoop();
 
-    // Cleanup on unmount
     return () => {
       if (animFrameIdRef.current) {
         cancelAnimationFrame(animFrameIdRef.current);
       }
       window.removeEventListener("resize", handleResize);
 
-      // Dispose Geometries and Materials
       scene.traverse((obj) => {
         if (obj instanceof THREE.Mesh) {
           obj.geometry?.dispose();
@@ -502,17 +613,44 @@ export default function ThreeProductRoom() {
       });
       renderer.dispose();
     };
-  }, [totalProducts]);
+  }, [totalProducts, autoRotate, explodedMode]);
 
-  // Set initial target to 1 (first product)
   useEffect(() => {
     targetRatioRef.current = 1;
   }, []);
 
+  // Mouse & Touch Drag Handlers for 360° product rotation
+  const handlePointerDown = (e: React.PointerEvent) => {
+    isDraggingRef.current = true;
+    previousMousePositionRef.current = { x: e.clientX, y: e.clientY };
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isDraggingRef.current) return;
+    const deltaX = e.clientX - previousMousePositionRef.current.x;
+    const deltaY = e.clientY - previousMousePositionRef.current.y;
+
+    userRotationRef.current.y += deltaX * 0.012;
+    userRotationRef.current.x += deltaY * 0.012;
+
+    // Clamp vertical tilt
+    userRotationRef.current.x = Math.max(-0.6, Math.min(0.6, userRotationRef.current.x));
+
+    previousMousePositionRef.current = { x: e.clientX, y: e.clientY };
+  };
+
+  const handlePointerUp = () => {
+    isDraggingRef.current = false;
+  };
+
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[760px] md:h-[860px] rounded-3xl overflow-hidden bg-[#071322] border border-slate-800 shadow-2xl select-none"
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerLeave={handlePointerUp}
+      className="relative w-full h-[780px] md:h-[880px] rounded-3xl overflow-hidden bg-[#071322] border border-white/10 shadow-2xl select-none cursor-grab active:cursor-grabbing group"
     >
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full block" />
 
@@ -530,18 +668,108 @@ export default function ThreeProductRoom() {
         </div>
       )}
 
-      {/* Top HUD Brand Badge */}
-      <div className="absolute top-6 left-6 z-20 flex items-center gap-3 bg-slate-900/80 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
-        <Sparkles className="w-4 h-4 text-orange-400 animate-pulse" />
-        <span className="font-mono text-xs uppercase tracking-widest text-white/80">
-          3D Interactive Product Showroom · Daman Manufacturing
-        </span>
+      {/* Top Left: Status & Telemetry HUD */}
+      <div className="absolute top-6 left-6 z-20 flex flex-col gap-2 pointer-events-none">
+        <div className="flex items-center gap-2.5 bg-slate-900/80 backdrop-blur-xl px-4 py-2 rounded-full border border-white/10 shadow-lg">
+          <Sparkles className="w-4 h-4 text-orange-400 animate-pulse" />
+          <span className="font-mono text-xs uppercase tracking-widest text-white/90 font-medium">
+            Virtual 3D Engineering Suite · Daman Floor
+          </span>
+        </div>
+
+        {/* Real-time telemetry readouts */}
+        <div className="hidden sm:flex items-center gap-3 font-mono text-[11px] text-white/60 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/5">
+          <span>DRAG: 360° ORBIT</span>
+          <span className="text-white/20">|</span>
+          <span>ACTIVE: 0{activeIndex + 1}</span>
+          <span className="text-white/20">|</span>
+          <span className="text-orange-400">FPS: 60 HIGH-DPI</span>
+        </div>
       </div>
 
-      {/* Bottom Product Carousel Stepper */}
-      <div className="absolute bottom-6 left-6 right-6 md:right-auto z-20 flex flex-wrap items-center gap-2 bg-slate-900/90 backdrop-blur-md p-2 rounded-2xl border border-white/10 shadow-lg">
+      {/* Top Right: Studio Toolbar Controls */}
+      <div className="absolute top-6 right-6 z-20 flex items-center gap-2">
+        {/* Exploded Mode Toggle */}
         <button
-          onClick={() => setProduct(activeIndex - 1)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setExplodedMode((prev) => !prev);
+          }}
+          className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-mono transition-all backdrop-blur-xl border ${
+            explodedMode
+              ? "bg-accent text-white border-accent shadow-lg shadow-accent/20"
+              : "bg-slate-900/80 text-white/80 border-white/10 hover:bg-slate-800"
+          }`}
+          title="Toggle Exploded Layer Component View"
+        >
+          <Layers className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">Exploded View</span>
+        </button>
+
+        {/* Auto Rotate Toggle */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setAutoRotate((prev) => !prev);
+          }}
+          className={`p-2 rounded-xl text-xs backdrop-blur-xl border transition-all ${
+            autoRotate
+              ? "bg-slate-900/80 text-orange-400 border-white/10"
+              : "bg-slate-900/50 text-white/40 border-white/5"
+          }`}
+          title="Toggle Auto Rotation"
+        >
+          <RotateCw className={`w-4 h-4 ${autoRotate ? "animate-spin" : ""}`} style={{ animationDuration: "8s" }} />
+        </button>
+
+        {/* Lighting Mode Switcher */}
+        <div className="flex items-center bg-slate-900/80 backdrop-blur-xl p-1 rounded-xl border border-white/10">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightingMode("warm");
+            }}
+            className={`px-2 py-1 rounded-lg text-xs font-mono transition-colors ${
+              lightingMode === "warm" ? "bg-accent text-white font-bold" : "text-white/60 hover:text-white"
+            }`}
+            title="Warm 3000K Lighting"
+          >
+            3000K
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightingMode("daylight");
+            }}
+            className={`px-2 py-1 rounded-lg text-xs font-mono transition-colors ${
+              lightingMode === "daylight" ? "bg-sky-500 text-white font-bold" : "text-white/60 hover:text-white"
+            }`}
+            title="Cool Daylight 6500K"
+          >
+            6500K
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightingMode("cyber");
+            }}
+            className={`px-2 py-1 rounded-lg text-xs font-mono transition-colors ${
+              lightingMode === "cyber" ? "bg-purple-600 text-white font-bold" : "text-white/60 hover:text-white"
+            }`}
+            title="Cyber Industrial Illumination"
+          >
+            CYBER
+          </button>
+        </div>
+      </div>
+
+      {/* Bottom Floating Carousel & Step Controls */}
+      <div className="absolute bottom-6 left-6 right-6 md:right-auto z-20 flex flex-wrap items-center gap-2 bg-slate-900/90 backdrop-blur-2xl p-2 rounded-2xl border border-white/10 shadow-2xl">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setProduct(activeIndex - 1);
+          }}
           disabled={activeIndex === 0}
           className="p-2.5 rounded-xl text-white hover:bg-white/10 disabled:opacity-30 disabled:pointer-events-none transition-colors"
           aria-label="Previous 3D Product"
@@ -549,14 +777,17 @@ export default function ThreeProductRoom() {
           <ChevronLeft className="w-5 h-5" />
         </button>
 
-        <div className="flex items-center gap-1.5 px-2 overflow-x-auto max-w-[280px] sm:max-w-md">
+        <div className="flex items-center gap-1.5 px-2 overflow-x-auto max-w-[260px] sm:max-w-md">
           {ROOM_PRODUCTS.map((p, idx) => (
             <button
               key={p.name}
-              onClick={() => setProduct(idx)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setProduct(idx);
+              }}
               className={`px-3 py-1.5 rounded-xl text-xs font-mono transition-all shrink-0 ${
                 idx === activeIndex
-                  ? "bg-accent text-white font-bold shadow-md shadow-accent/30"
+                  ? "bg-accent text-white font-bold shadow-md shadow-accent/30 ring-2 ring-orange-400/40"
                   : "bg-white/5 text-white/70 hover:bg-white/10"
               }`}
             >
@@ -566,7 +797,10 @@ export default function ThreeProductRoom() {
         </div>
 
         <button
-          onClick={() => setProduct(activeIndex + 1)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setProduct(activeIndex + 1);
+          }}
           disabled={activeIndex === totalProducts - 1}
           className="p-2.5 rounded-xl text-white hover:bg-white/10 disabled:opacity-30 disabled:pointer-events-none transition-colors"
           aria-label="Next 3D Product"
@@ -575,40 +809,62 @@ export default function ThreeProductRoom() {
         </button>
       </div>
 
-      {/* Fly-out Technical Inspection Panel */}
+      {/* Fly-out Technical Inspection Glass Card */}
       <div
-        className={`absolute top-6 right-6 bottom-6 w-full max-w-md z-30 transition-all duration-500 pointer-events-auto ${
+        className={`absolute top-20 sm:top-6 right-6 bottom-6 w-full max-w-md z-30 transition-all duration-500 pointer-events-auto ${
           isPanelOpen ? "translate-x-0 opacity-100" : "translate-x-[110%] opacity-0 pointer-events-none"
         }`}
+        onClick={(e) => e.stopPropagation()}
       >
-        <div className="h-full bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-3xl shadow-2xl p-6 md:p-8 flex flex-col justify-between overflow-y-auto text-ink">
-          {/* Header */}
+        <div className="h-full bg-slate-900/90 backdrop-blur-2xl border border-white/15 rounded-3xl shadow-2xl p-6 md:p-8 flex flex-col justify-between overflow-y-auto text-white">
           <div>
+            {/* Top Bar with Category Badge & Close Button */}
             <div className="flex items-center justify-between mb-4">
-              <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold px-2.5 py-1 bg-orange-50 rounded-full border border-orange-200">
+              <span className="font-mono text-xs uppercase tracking-widest text-orange-400 font-semibold px-3 py-1 bg-orange-500/10 rounded-full border border-orange-500/20">
                 0{activeIndex + 1} / 0{totalProducts} · {activeProduct.category}
               </span>
               <button
                 onClick={() => setIsPanelOpen(false)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                className="p-1.5 rounded-lg text-white/50 hover:text-white hover:bg-white/10 transition-colors"
                 aria-label="Close inspector panel"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <h3 className="text-3xl font-display font-medium text-ink mb-2">
+            <h3 className="text-3xl font-display font-medium text-white mb-2">
               {activeProduct.name}
             </h3>
 
-            <p className="text-slate-600 text-sm leading-relaxed mb-6">
+            <p className="text-slate-300 text-sm leading-relaxed mb-6">
               {activeProduct.description}
             </p>
 
+            {/* Performance Metric Progress Bars */}
+            <div className="mb-6 space-y-2.5 bg-black/30 p-4 rounded-2xl border border-white/5">
+              <h4 className="font-mono text-[10px] uppercase tracking-widest text-white/40 mb-2">
+                Engineering Benchmarks
+              </h4>
+              {activeProduct.metrics.map((m) => (
+                <div key={m.label} className="space-y-1">
+                  <div className="flex justify-between text-xs font-mono">
+                    <span className="text-slate-400">{m.label}</span>
+                    <span className="text-orange-400 font-bold">{m.value}</span>
+                  </div>
+                  <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-orange-500 to-amber-300 transition-all duration-700 rounded-full"
+                      style={{ width: `${m.percent}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
             {/* In-House Production Facilities Badges */}
             <div className="mb-6">
-              <h4 className="font-mono text-[11px] uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-1.5">
-                <Factory className="w-3.5 h-3.5 text-accent" />
+              <h4 className="font-mono text-[11px] uppercase tracking-wider text-slate-400 mb-2.5 flex items-center gap-1.5">
+                <Factory className="w-3.5 h-3.5 text-orange-400" />
                 Manufactured Across Sheetal Facilities:
               </h4>
               <div className="flex flex-wrap gap-1.5">
@@ -616,7 +872,7 @@ export default function ThreeProductRoom() {
                   <Link
                     key={fac.slug}
                     href={`/facilities/${fac.slug}`}
-                    className="inline-block px-2.5 py-1 rounded-md bg-slate-100 hover:bg-accent hover:text-white text-xs font-mono text-slate-700 transition-colors"
+                    className="inline-block px-3 py-1.5 rounded-lg bg-white/5 hover:bg-accent hover:text-white text-xs font-mono text-slate-300 border border-white/10 transition-all"
                   >
                     {fac.name} →
                   </Link>
@@ -624,31 +880,33 @@ export default function ThreeProductRoom() {
               </div>
             </div>
 
-            {/* Specifications Table */}
+            {/* Specifications Quick-Glance Table */}
             <div className="mb-6">
               <h4 className="font-mono text-[11px] uppercase tracking-wider text-slate-400 mb-2">
                 Technical Specifications
               </h4>
-              <dl className="divide-y divide-slate-100 text-xs border border-slate-100 rounded-xl bg-slate-50/50 p-3">
+              <dl className="divide-y divide-white/10 text-xs border border-white/10 rounded-2xl bg-black/20 p-3.5">
                 {activeProduct.specs.map(([label, val]) => (
-                  <div key={label} className="py-1.5 flex justify-between gap-4">
-                    <dt className="text-slate-500 font-mono">{label}</dt>
-                    <dd className="font-semibold text-slate-900 text-right">{val}</dd>
+                  <div key={label} className="py-2 flex justify-between gap-4">
+                    <dt className="text-slate-400 font-mono">{label}</dt>
+                    <dd className="font-semibold text-white text-right">{val}</dd>
                   </div>
                 ))}
               </dl>
             </div>
 
-            {/* Key Manufacturing Stages */}
+            {/* Key Manufacturing Stages Pipeline */}
             <div className="mb-6">
               <h4 className="font-mono text-[11px] uppercase tracking-wider text-slate-400 mb-2">
                 Factory Execution Pipeline
               </h4>
-              <ol className="space-y-1.5 text-xs text-slate-600">
+              <ol className="space-y-2 text-xs text-slate-300">
                 {activeProduct.manufacturing.map((step, sIdx) => (
-                  <li key={step} className="flex items-start gap-2">
-                    <span className="font-mono text-accent font-bold">0{sIdx + 1}.</span>
-                    <span>{step}</span>
+                  <li key={step} className="flex items-start gap-2.5">
+                    <span className="font-mono text-orange-400 font-bold bg-orange-500/10 px-1.5 py-0.5 rounded text-[10px]">
+                      0{sIdx + 1}
+                    </span>
+                    <span className="leading-relaxed">{step}</span>
                   </li>
                 ))}
               </ol>
@@ -656,18 +914,18 @@ export default function ThreeProductRoom() {
           </div>
 
           {/* Action CTAs */}
-          <div className="pt-4 border-t border-slate-100 flex items-center gap-3">
+          <div className="pt-4 border-t border-white/10 flex items-center gap-3">
             <Link
               href={activeProduct.href}
-              className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition-colors text-center"
+              className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors text-center border border-white/15"
             >
               Explore Category <ArrowRight className="w-3.5 h-3.5" />
             </Link>
             <Link
               href="/rfq"
-              className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-accent text-white text-xs font-semibold hover:bg-orange-600 transition-colors shadow-md shadow-accent/20 text-center"
+              className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-accent text-white text-xs font-semibold hover:bg-orange-600 transition-colors shadow-lg shadow-accent/30 text-center"
             >
-              Request Quote
+              Request OEM Quote
             </Link>
           </div>
         </div>
@@ -676,10 +934,13 @@ export default function ThreeProductRoom() {
       {/* Button to reopen panel if closed */}
       {!isPanelOpen && (
         <button
-          onClick={() => setIsPanelOpen(true)}
-          className="absolute top-6 right-6 z-20 flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-900/90 text-white text-xs font-mono uppercase tracking-wider border border-white/20 shadow-xl hover:bg-black transition-all"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsPanelOpen(true);
+          }}
+          className="absolute top-20 sm:top-6 right-6 z-20 flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900/90 text-white text-xs font-mono uppercase tracking-wider border border-white/20 shadow-2xl hover:bg-black transition-all"
         >
-          <Eye className="w-4 h-4 text-accent" /> Inspect Product
+          <Eye className="w-4 h-4 text-orange-400" /> Inspect Product
         </button>
       )}
     </div>

@@ -3,7 +3,17 @@
 import { useState, useEffect } from "react";
 import { Link } from "@/i18n/routing";
 import { FACILITY_PROCESS_CHAINS } from "@/data/facilityProcessChains";
-import { ArrowRight, CheckCircle2, Cog, Layers, ShieldCheck, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ArrowRight,
+  CheckCircle2,
+  Cog,
+  Layers,
+  ShieldCheck,
+  ChevronLeft,
+  ChevronRight,
+  Sparkles,
+  Factory,
+} from "lucide-react";
 
 export default function ProcessesTimeline() {
   const [activeSlug, setActiveSlug] = useState<string>(FACILITY_PROCESS_CHAINS[0].slug);
@@ -39,7 +49,7 @@ export default function ProcessesTimeline() {
     setActiveSlug(slug);
     const element = document.getElementById(`process-${slug}`);
     if (element) {
-      const yOffset = -140; // account for sticky header & timeline bar
+      const yOffset = -140;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
@@ -59,15 +69,15 @@ export default function ProcessesTimeline() {
 
   return (
     <div className="relative">
-      {/* Sticky Process Chain Navigation Bar */}
-      <div className="sticky top-20 z-30 mb-12">
-        <div className="bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl shadow-lg p-3 md:p-4 max-w-5xl mx-auto">
+      {/* Sticky Process Chain Navigation Radar Bar */}
+      <div className="sticky top-20 z-30 mb-16">
+        <div className="bg-[#0b192c]/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-3 md:p-4 max-w-5xl mx-auto text-white">
           <div className="flex items-center justify-between gap-3">
             {/* Prev step */}
             <button
               onClick={goToPrev}
               disabled={activeIndex === 0}
-              className="p-2 rounded-xl text-slate-600 hover:text-accent hover:bg-slate-100 disabled:opacity-30 disabled:pointer-events-none transition-colors"
+              className="p-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 disabled:opacity-20 disabled:pointer-events-none transition-colors"
               aria-label="Scroll to previous process"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -75,13 +85,13 @@ export default function ProcessesTimeline() {
 
             {/* Current Process Label & Dot Sequence */}
             <div className="flex-1 min-w-0 flex flex-col items-center gap-2">
-              <div className="text-xs font-mono text-slate-500 flex items-center gap-2 truncate">
-                <span>Active Process:</span>
-                <span className="font-bold text-accent">
+              <div className="text-xs font-mono text-slate-300 flex items-center gap-2 truncate">
+                <span className="text-slate-500">PIPELINE NODE:</span>
+                <span className="font-bold text-orange-400 bg-orange-500/10 px-2 py-0.5 rounded border border-orange-500/20">
                   {String(activeIndex + 1).padStart(2, "0")} / 09
                 </span>
-                <span className="hidden sm:inline text-slate-300">·</span>
-                <span className="font-medium text-slate-900 truncate">
+                <span className="hidden sm:inline text-white/20">·</span>
+                <span className="font-medium text-white truncate">
                   {FACILITY_PROCESS_CHAINS[activeIndex]?.name}
                 </span>
               </div>
@@ -104,10 +114,10 @@ export default function ProcessesTimeline() {
                       <span
                         className={`block rounded-full transition-all ${
                           isCurrent
-                            ? "w-3 h-3 bg-accent ring-4 ring-orange-200"
+                            ? "w-3 h-3 bg-accent ring-4 ring-orange-400/40 shadow-lg shadow-accent/50"
                             : isPast
-                            ? "w-2.5 h-2.5 bg-slate-900"
-                            : "w-2.5 h-2.5 bg-slate-200 group-hover:bg-slate-400"
+                            ? "w-2.5 h-2.5 bg-sky-400"
+                            : "w-2.5 h-2.5 bg-slate-700 group-hover:bg-slate-500"
                         }`}
                       />
                     </button>
@@ -120,7 +130,7 @@ export default function ProcessesTimeline() {
             <button
               onClick={goToNext}
               disabled={activeIndex === total - 1}
-              className="p-2 rounded-xl text-slate-600 hover:text-accent hover:bg-slate-100 disabled:opacity-30 disabled:pointer-events-none transition-colors"
+              className="p-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 disabled:opacity-20 disabled:pointer-events-none transition-colors"
               aria-label="Scroll to next process"
             >
               <ChevronRight className="w-5 h-5" />
@@ -129,8 +139,8 @@ export default function ProcessesTimeline() {
         </div>
       </div>
 
-      {/* Sequential Process Rows */}
-      <div className="space-y-16">
+      {/* Sequential Process Rows with Connected Industrial Pipeline */}
+      <div className="space-y-16 relative">
         {FACILITY_PROCESS_CHAINS.map((fac, index) => {
           const isCurrent = fac.slug === activeSlug;
 
@@ -142,17 +152,23 @@ export default function ProcessesTimeline() {
               data-process-row
               className={`rounded-3xl border transition-all duration-500 scroll-mt-36 overflow-hidden ${
                 isCurrent
-                  ? "bg-white border-accent shadow-xl shadow-accent/10 ring-1 ring-orange-200"
-                  : "bg-white/80 border-slate-200 shadow-sm hover:border-slate-300"
+                  ? "bg-white border-accent shadow-2xl shadow-accent/10 ring-2 ring-orange-400/30"
+                  : "bg-white/90 border-slate-200 shadow-sm hover:border-slate-300"
               }`}
             >
               {/* Row Header */}
-              <div className="p-8 md:p-10 border-b border-slate-100 bg-gradient-to-r from-slate-50/80 via-white to-slate-50/50">
+              <div
+                className={`p-8 md:p-10 border-b transition-colors ${
+                  isCurrent
+                    ? "bg-gradient-to-r from-orange-50/70 via-white to-slate-50 border-orange-200"
+                    : "bg-gradient-to-r from-slate-50/80 via-white to-slate-50/50 border-slate-100"
+                }`}
+              >
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                   <div>
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="px-3 py-1 bg-accent/10 text-accent font-mono text-xs font-bold rounded-full">
-                        PROCESS {String(index + 1).padStart(2, "0")} OF 09
+                      <span className="px-3 py-1 bg-accent/10 text-accent font-mono text-xs font-bold rounded-full border border-orange-500/20">
+                        PIPELINE STEP {String(index + 1).padStart(2, "0")} OF 09
                       </span>
                       <span className="font-mono text-xs text-slate-400 uppercase tracking-wider">
                         {fac.kind}
@@ -170,9 +186,9 @@ export default function ProcessesTimeline() {
 
                   <Link
                     href={`/facilities/${fac.slug}`}
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 text-white font-medium text-sm hover:bg-accent transition-colors shrink-0 group shadow-sm"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 text-white font-medium text-sm hover:bg-accent transition-colors shrink-0 group shadow-lg shadow-slate-900/10"
                   >
-                    Explore Facility & Simulation
+                    Launch Facility Simulation
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
@@ -191,17 +207,17 @@ export default function ProcessesTimeline() {
                     {fac.stages.map((st, sIdx) => (
                       <div
                         key={st.title}
-                        className="p-5 rounded-2xl border border-slate-100 bg-slate-50/60 hover:bg-slate-50 transition-colors"
+                        className="p-5 rounded-2xl border border-slate-100 bg-slate-50/70 hover:bg-slate-50 hover:border-slate-200 transition-all"
                       >
                         <div className="flex items-baseline gap-3 mb-1.5">
-                          <span className="font-mono text-xs font-bold text-accent">
+                          <span className="font-mono text-xs font-bold text-accent px-2 py-0.5 rounded bg-orange-500/10">
                             0{sIdx + 1}
                           </span>
                           <h4 className="font-display text-lg font-medium text-ink">
                             {st.title}
                           </h4>
                         </div>
-                        <p className="text-sm text-slate-600 pl-7 leading-relaxed">
+                        <p className="text-sm text-slate-600 pl-8 leading-relaxed">
                           {st.description}
                         </p>
                       </div>
@@ -213,7 +229,7 @@ export default function ProcessesTimeline() {
                 <div className="lg:col-span-5 space-y-6">
                   {/* Products this Line Feeds */}
                   <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
-                    <h4 className="font-mono text-xs uppercase tracking-widest text-slate-700 font-semibold mb-3 flex items-center gap-2">
+                    <h4 className="font-mono text-xs uppercase tracking-widest text-slate-700 font-bold mb-3 flex items-center gap-2">
                       <Layers className="w-4 h-4 text-accent" />
                       Outputs & Product Feeds
                     </h4>
@@ -221,7 +237,7 @@ export default function ProcessesTimeline() {
                       {fac.feeds.map((feed) => (
                         <span
                           key={feed}
-                          className="px-3 py-1.5 bg-white border border-slate-200 text-xs font-medium text-slate-800 rounded-lg"
+                          className="px-3 py-1.5 bg-white border border-slate-200 text-xs font-medium text-slate-800 rounded-lg shadow-2xs"
                         >
                           {feed}
                         </span>
@@ -231,9 +247,9 @@ export default function ProcessesTimeline() {
 
                   {/* Quality Checkpoints */}
                   <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
-                    <h4 className="font-mono text-xs uppercase tracking-widest text-slate-700 font-semibold mb-3 flex items-center gap-2">
+                    <h4 className="font-mono text-xs uppercase tracking-widest text-slate-700 font-bold mb-3 flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                      Quality Checkpoints
+                      Quality Assurance Gates
                     </h4>
                     <ul className="space-y-2.5">
                       {fac.qc.map((point) => (
@@ -247,7 +263,7 @@ export default function ProcessesTimeline() {
 
                   {/* Specifications Quick Glance */}
                   <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
-                    <h4 className="font-mono text-xs uppercase tracking-widest text-slate-700 font-semibold mb-3 flex items-center gap-2">
+                    <h4 className="font-mono text-xs uppercase tracking-widest text-slate-700 font-bold mb-3 flex items-center gap-2">
                       <Cog className="w-4 h-4 text-slate-700" />
                       Engineering Specifications
                     </h4>

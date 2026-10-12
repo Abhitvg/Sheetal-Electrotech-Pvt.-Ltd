@@ -2,7 +2,21 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import type { FacilityProcessChain } from "@/data/facilityProcessChains";
-import { Play, Pause, ChevronLeft, ChevronRight, CheckCircle2, Cog, Layers, ShieldCheck } from "lucide-react";
+import {
+  Play,
+  Pause,
+  ChevronLeft,
+  ChevronRight,
+  CheckCircle2,
+  Cog,
+  Layers,
+  ShieldCheck,
+  Activity,
+  Gauge,
+  Thermometer,
+  Cpu,
+  RotateCw,
+} from "lucide-react";
 
 interface Props {
   chain: FacilityProcessChain;
@@ -11,6 +25,7 @@ interface Props {
 export default function FacilityProcessVisualizer({ chain }: Props) {
   const [currentStageIndex, setCurrentStageIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [activeTab, setActiveTab] = useState<"simulation" | "telemetry" | "quality">("simulation");
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const stages = chain.stages;
@@ -33,7 +48,7 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
     if (isPlaying) {
       timerRef.current = setInterval(() => {
         handleNext();
-      }, 2600);
+      }, 2800);
     } else if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
@@ -45,13 +60,12 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
     };
   }, [isPlaying, handleNext]);
 
-  // Reset to stage 0 when facility changes
   useEffect(() => {
     setCurrentStageIndex(0);
     setIsPlaying(false);
   }, [chain.slug]);
 
-  // Keyboard navigation
+  // Keyboard controls
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
@@ -68,41 +82,238 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleNext, handlePrev]);
 
+  // Dynamic telemetry simulated based on current stage
+  const getTelemetry = () => {
+    switch (currentStageIndex) {
+      case 0:
+        return {
+          clampForce: "180.2 T",
+          pressure: "85 bar",
+          temp: "218°C",
+          status: "CLAMP ENGAGED",
+          cycleTime: "4.2s",
+          powerKw: "34.2 kW",
+        };
+      case 1:
+        return {
+          clampForce: "185.0 T",
+          pressure: "148 bar",
+          temp: "225°C",
+          status: "INJECTION ACTIVE",
+          cycleTime: "9.8s",
+          powerKw: "48.6 kW",
+        };
+      case 2:
+        return {
+          clampForce: "180.0 T",
+          pressure: "45 bar",
+          temp: "195°C",
+          status: "COOLING CIRCUIT",
+          cycleTime: "15.4s",
+          powerKw: "22.1 kW",
+        };
+      default:
+        return {
+          clampForce: "12.0 T",
+          pressure: "20 bar",
+          temp: "205°C",
+          status: "PART EJECTION",
+          cycleTime: "18.6s",
+          powerKw: "16.4 kW",
+        };
+    }
+  };
+
+  const tele = getTelemetry();
+
   return (
     <div className="space-y-12 my-16">
-      {/* Visualizer Card */}
-      <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-        {/* Top Header Bar */}
-        <div className="border-b border-slate-200 bg-slate-50/80 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+      {/* Industrial SCADA / Digital Twin Visualizer Card */}
+      <div className="bg-[#0b1320] border border-slate-800 rounded-3xl shadow-2xl overflow-hidden text-white">
+        {/* Top Control & Telemetry Strip */}
+        <div className="border-b border-slate-800 bg-[#070d17] px-6 py-4 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse" />
-            <p className="font-mono text-xs uppercase tracking-widest text-slate-700 font-semibold">
-              Interactive Simulation · {chain.cycleName}
-            </p>
-          </div>
-          <div className="flex items-center gap-3 text-xs font-mono text-slate-500">
-            <span>Cycle Stage:</span>
-            <span className="px-2.5 py-1 bg-white border border-slate-200 rounded-md font-semibold text-accent">
-              {String(currentStageIndex + 1).padStart(2, "0")} / {String(totalStages).padStart(2, "0")}
+            <span className="w-2.5 h-2.5 rounded-full bg-orange-500 animate-pulse" />
+            <span className="font-mono text-xs uppercase tracking-widest text-slate-300 font-semibold flex items-center gap-2">
+              <Cpu className="w-4 h-4 text-orange-400" />
+              Digital Twin Console · {chain.name}
+            </span>
+            <span className="hidden sm:inline text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              ONLINE · Daman Hub
             </span>
           </div>
-        </div>
 
-        {/* Machine Schematic Section */}
-        <div className="p-6 md:p-10 bg-slate-900 text-white relative overflow-hidden">
-          <div className="absolute inset-0 opacity-15 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] bg-[size:32px_32px]" />
-          
-          <div className="relative z-10 max-w-4xl mx-auto">
-            {chain.schematicType === "injection-machine" ? (
-              <InjectionMachineSchematic stageIndex={currentStageIndex} />
-            ) : (
-              <GenericProcessFlowSchematic stages={stages} stageIndex={currentStageIndex} />
-            )}
+          {/* View Mode Switcher Tabs */}
+          <div className="flex items-center bg-slate-900 p-1 rounded-xl border border-slate-800">
+            <button
+              onClick={() => setActiveTab("simulation")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                activeTab === "simulation"
+                  ? "bg-accent text-white font-bold shadow-md shadow-accent/30"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              Schematic View
+            </button>
+            <button
+              onClick={() => setActiveTab("telemetry")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                activeTab === "telemetry"
+                  ? "bg-accent text-white font-bold shadow-md shadow-accent/30"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              Telemetry Readouts
+            </button>
+            <button
+              onClick={() => setActiveTab("quality")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                activeTab === "quality"
+                  ? "bg-accent text-white font-bold shadow-md shadow-accent/30"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              QC Gates
+            </button>
           </div>
         </div>
 
+        {/* Live Industrial Telemetry Readout Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px bg-slate-800/60 border-b border-slate-800">
+          <div className="p-4 bg-[#09101b]">
+            <p className="font-mono text-[10px] uppercase tracking-wider text-slate-500 flex items-center gap-1.5 mb-1">
+              <Gauge className="w-3.5 h-3.5 text-orange-400" /> Clamp Force
+            </p>
+            <p className="font-mono text-base font-bold text-white">{tele.clampForce}</p>
+          </div>
+          <div className="p-4 bg-[#09101b]">
+            <p className="font-mono text-[10px] uppercase tracking-wider text-slate-500 flex items-center gap-1.5 mb-1">
+              <Activity className="w-3.5 h-3.5 text-sky-400" /> Cavity Pressure
+            </p>
+            <p className="font-mono text-base font-bold text-sky-400">{tele.pressure}</p>
+          </div>
+          <div className="p-4 bg-[#09101b]">
+            <p className="font-mono text-[10px] uppercase tracking-wider text-slate-500 flex items-center gap-1.5 mb-1">
+              <Thermometer className="w-3.5 h-3.5 text-rose-400" /> Barrel Temp
+            </p>
+            <p className="font-mono text-base font-bold text-rose-400">{tele.temp}</p>
+          </div>
+          <div className="p-4 bg-[#09101b]">
+            <p className="font-mono text-[10px] uppercase tracking-wider text-slate-500 mb-1">
+              Cycle Clock
+            </p>
+            <p className="font-mono text-base font-bold text-emerald-400">{tele.cycleTime}</p>
+          </div>
+          <div className="p-4 bg-[#09101b]">
+            <p className="font-mono text-[10px] uppercase tracking-wider text-slate-500 mb-1">
+              Drive Power
+            </p>
+            <p className="font-mono text-base font-bold text-slate-200">{tele.powerKw}</p>
+          </div>
+          <div className="p-4 bg-[#09101b]">
+            <p className="font-mono text-[10px] uppercase tracking-wider text-slate-500 mb-1">
+              Line Status
+            </p>
+            <p className="font-mono text-xs font-bold text-orange-400 truncate">{tele.status}</p>
+          </div>
+        </div>
+
+        {/* Dynamic Content Panel based on activeTab */}
+        {activeTab === "simulation" && (
+          <div className="p-6 md:p-10 relative overflow-hidden bg-[#070e1a]">
+            <div className="absolute inset-0 opacity-10 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] bg-[size:28px_28px]" />
+            <div className="relative z-10 max-w-4xl mx-auto">
+              {chain.schematicType === "injection-machine" ? (
+                <InjectionMachineSchematic stageIndex={currentStageIndex} />
+              ) : (
+                <GenericProcessFlowSchematic stages={stages} stageIndex={currentStageIndex} />
+              )}
+            </div>
+          </div>
+        )}
+
+        {activeTab === "telemetry" && (
+          <div className="p-8 md:p-12 bg-[#070e1a]">
+            <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+              <div className="bg-[#0b1320] border border-slate-800 rounded-2xl p-6">
+                <h4 className="font-mono text-xs uppercase tracking-widest text-orange-400 mb-4 flex items-center gap-2">
+                  <Activity className="w-4 h-4" /> Real-Time Parameter Telemetry
+                </h4>
+                <div className="space-y-4 text-xs font-mono">
+                  <div className="flex justify-between p-3 bg-black/40 rounded-xl border border-white/5">
+                    <span className="text-slate-400">Microprocessor Clock</span>
+                    <span className="text-white">50 Hz Synchronous</span>
+                  </div>
+                  <div className="flex justify-between p-3 bg-black/40 rounded-xl border border-white/5">
+                    <span className="text-slate-400">Screw Position Linear Scale</span>
+                    <span className="text-sky-400">124.5 mm (±0.02 mm)</span>
+                  </div>
+                  <div className="flex justify-between p-3 bg-black/40 rounded-xl border border-white/5">
+                    <span className="text-slate-400">Mould Water Inflow</span>
+                    <span className="text-emerald-400">12.4°C @ 28 L/min</span>
+                  </div>
+                  <div className="flex justify-between p-3 bg-black/40 rounded-xl border border-white/5">
+                    <span className="text-slate-400">Cavity Peak Hydraulic Pressure</span>
+                    <span className="text-orange-400">165 bar Peak</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[#0b1320] border border-slate-800 rounded-2xl p-6">
+                <h4 className="font-mono text-xs uppercase tracking-widest text-sky-400 mb-4 flex items-center gap-2">
+                  <Cog className="w-4 h-4" /> Production Batch Tolerance
+                </h4>
+                <div className="space-y-4 text-xs font-mono">
+                  <div className="flex justify-between p-3 bg-black/40 rounded-xl border border-white/5">
+                    <span className="text-slate-400">Dimensional Tolerance</span>
+                    <span className="text-emerald-400">± 0.05 mm (ISO Class 2)</span>
+                  </div>
+                  <div className="flex justify-between p-3 bg-black/40 rounded-xl border border-white/5">
+                    <span className="text-slate-400">Polymer Melt Flow Index</span>
+                    <span className="text-white">14.2 g/10min Verified</span>
+                  </div>
+                  <div className="flex justify-between p-3 bg-black/40 rounded-xl border border-white/5">
+                    <span className="text-slate-400">Gram Weight Stability</span>
+                    <span className="text-white">± 0.08g Variance</span>
+                  </div>
+                  <div className="flex justify-between p-3 bg-black/40 rounded-xl border border-white/5">
+                    <span className="text-slate-400">Statistical Process Control</span>
+                    <span className="text-emerald-400">Cpk &gt; 1.67</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "quality" && (
+          <div className="p-8 md:p-12 bg-[#070e1a]">
+            <div className="max-w-4xl mx-auto space-y-4">
+              <h4 className="font-mono text-xs uppercase tracking-widest text-emerald-400 mb-4 flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4" /> ISO 9001:2015 Verified Quality Gates
+              </h4>
+              <div className="grid md:grid-cols-2 gap-4">
+                {chain.qc.map((point, qIdx) => (
+                  <div
+                    key={point}
+                    className="p-5 rounded-2xl bg-[#0b1320] border border-slate-800 flex items-start gap-3.5"
+                  >
+                    <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-mono text-[10px] text-slate-500 uppercase tracking-widest mb-1">
+                        Gate 0{qIdx + 1}
+                      </p>
+                      <p className="text-sm text-slate-300 leading-relaxed">{point}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Interactive Controls & Stage Description */}
-        <div className="p-6 md:p-10 grid lg:grid-cols-[280px_1fr] gap-10 items-center">
+        <div className="p-6 md:p-10 border-t border-slate-800 bg-[#09101c] grid lg:grid-cols-[280px_1fr] gap-10 items-center">
           {/* Circular Stage Wheel */}
           <div className="flex flex-col items-center justify-center">
             <div className="relative w-48 h-48">
@@ -113,8 +324,8 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
                   cy="100"
                   r="78"
                   fill="none"
-                  stroke="#e2e8f0"
-                  strokeWidth="3"
+                  stroke="#1e293b"
+                  strokeWidth="4"
                 />
                 {/* Active Progress Arc */}
                 <circle
@@ -123,7 +334,7 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
                   r="78"
                   fill="none"
                   stroke="#ff5e14"
-                  strokeWidth="4"
+                  strokeWidth="5"
                   strokeDasharray="490"
                   strokeDashoffset={490 - (490 * (currentStageIndex + 1)) / totalStages}
                   strokeLinecap="round"
@@ -150,10 +361,10 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
                     style={{ left: `${x}px`, top: `${y}px` }}
                     className={`absolute w-8 h-8 -ml-4 -mt-4 rounded-full flex items-center justify-center font-mono text-xs font-semibold transition-all duration-300 ${
                       isActive
-                        ? "bg-accent text-white scale-125 shadow-lg shadow-accent/30 ring-4 ring-orange-100"
+                        ? "bg-accent text-white scale-125 shadow-lg shadow-accent/50 ring-4 ring-orange-400/40"
                         : isPassed
-                        ? "bg-slate-900 text-white"
-                        : "bg-white border-2 border-slate-300 text-slate-600 hover:border-accent hover:text-accent"
+                        ? "bg-slate-700 text-white"
+                        : "bg-slate-900 border-2 border-slate-700 text-slate-400 hover:border-accent hover:text-white"
                     }`}
                     aria-label={`Go to stage ${i + 1}: ${st.title}`}
                   >
@@ -167,31 +378,33 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
                 <span className="font-mono text-[10px] tracking-widest text-slate-400 uppercase">
                   {chain.cycleName}
                 </span>
-                <span className="font-display text-2xl font-bold text-ink mt-0.5">
+                <span className="font-display text-3xl font-bold text-white mt-0.5">
                   {String(currentStageIndex + 1).padStart(2, "0")}
                 </span>
-                <span className="text-[11px] text-slate-500 font-medium">of {totalStages}</span>
+                <span className="text-[11px] text-slate-400 font-medium font-mono">
+                  of {String(totalStages).padStart(2, "0")}
+                </span>
               </div>
             </div>
           </div>
 
-          {/* Active Stage Details & Controls */}
+          {/* Active Stage Details & Stepper */}
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold">
-                Stage {String(currentStageIndex + 1).padStart(2, "0")}
+              <span className="font-mono text-xs uppercase tracking-widest text-orange-400 font-bold px-2.5 py-0.5 rounded bg-orange-500/10 border border-orange-500/20">
+                Phase {String(currentStageIndex + 1).padStart(2, "0")}
               </span>
-              <span className="text-slate-300">·</span>
-              <span className="font-mono text-xs uppercase tracking-wider text-slate-500">
+              <span className="text-slate-600">·</span>
+              <span className="font-mono text-xs uppercase tracking-wider text-slate-400">
                 {currentStage.title}
               </span>
             </div>
 
-            <h3 className="text-2xl md:text-3xl font-display font-medium text-ink mb-3">
+            <h3 className="text-2xl md:text-3xl font-display font-medium text-white mb-3">
               {currentStage.title}
             </h3>
 
-            <p className="text-slate-600 text-base md:text-lg leading-relaxed min-h-[4rem] mb-6">
+            <p className="text-slate-300 text-base md:text-lg leading-relaxed min-h-[4rem] mb-6">
               {currentStage.description}
             </p>
 
@@ -202,7 +415,7 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
                   handlePrev();
                   setIsPlaying(false);
                 }}
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg border border-slate-300 text-slate-700 text-sm font-medium hover:bg-slate-50 hover:border-slate-400 transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-700 text-slate-300 text-sm font-medium hover:bg-slate-800 hover:text-white transition-colors"
                 aria-label="Previous cycle stage"
               >
                 <ChevronLeft className="w-4 h-4" /> Previous
@@ -210,10 +423,10 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
 
               <button
                 onClick={togglePlay}
-                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                   isPlaying
-                    ? "bg-slate-900 text-white hover:bg-black shadow-sm"
-                    : "bg-accent text-white hover:bg-orange-600 shadow-md shadow-accent/20"
+                    ? "bg-slate-800 text-white hover:bg-slate-700 border border-slate-700 shadow-sm"
+                    : "bg-accent text-white hover:bg-orange-600 shadow-lg shadow-accent/30"
                 }`}
               >
                 {isPlaying ? (
@@ -222,7 +435,7 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
                   </>
                 ) : (
                   <>
-                    <Play className="w-4 h-4 fill-current" /> Auto-Play Cycle
+                    <Play className="w-4 h-4 fill-current" /> Auto-Run Cycle
                   </>
                 )}
               </button>
@@ -232,15 +445,15 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
                   handleNext();
                   setIsPlaying(false);
                 }}
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-slate-900 text-white text-sm font-medium hover:bg-black transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white text-slate-900 text-sm font-semibold hover:bg-slate-200 transition-colors"
                 aria-label="Next cycle stage"
               >
                 Next <ChevronRight className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Horizontal stage pill selector */}
-            <div className="mt-8 pt-6 border-t border-slate-100 flex flex-wrap gap-2">
+            {/* Stage Selector Pills */}
+            <div className="mt-8 pt-6 border-t border-slate-800/80 flex flex-wrap gap-2">
               {stages.map((st, i) => (
                 <button
                   key={st.title}
@@ -248,10 +461,10 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
                     setCurrentStageIndex(i);
                     setIsPlaying(false);
                   }}
-                  className={`px-3 py-1.5 rounded-full text-xs font-mono transition-all ${
+                  className={`px-3 py-1.5 rounded-xl text-xs font-mono transition-all ${
                     i === currentStageIndex
-                      ? "bg-orange-50 border border-accent text-accent font-semibold"
-                      : "bg-slate-100 text-slate-600 hover:bg-slate-200 border border-transparent"
+                      ? "bg-accent text-white font-bold shadow-md shadow-accent/30 ring-1 ring-orange-400"
+                      : "bg-slate-800/70 text-slate-400 hover:text-white hover:bg-slate-800"
                   }`}
                 >
                   {String(i + 1).padStart(2, "0")} {st.title}
@@ -262,14 +475,14 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
         </div>
       </div>
 
-      {/* 3-Column Specifications, Product Feeds, and Quality Grid */}
+      {/* Specifications, Products Fed, and Quality Cards */}
       <div className="grid md:grid-cols-3 gap-6">
         {/* Specifications */}
-        <div className="bg-white border border-slate-200 rounded-xl p-7 flex flex-col justify-between">
+        <div className="bg-white border border-slate-200 rounded-2xl p-7 flex flex-col justify-between shadow-sm">
           <div>
             <div className="flex items-center gap-2.5 mb-5 text-accent">
-              <Cog className="w-5 h-5" />
-              <h4 className="font-mono text-xs uppercase tracking-widest font-semibold text-slate-900">
+              <Cog className="w-5 h-5 text-accent" />
+              <h4 className="font-mono text-xs uppercase tracking-widest font-bold text-slate-900">
                 Technical Specifications
               </h4>
             </div>
@@ -287,11 +500,11 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
         </div>
 
         {/* Product Feeds */}
-        <div className="bg-white border border-slate-200 rounded-xl p-7 flex flex-col justify-between">
+        <div className="bg-white border border-slate-200 rounded-2xl p-7 flex flex-col justify-between shadow-sm">
           <div>
             <div className="flex items-center gap-2.5 mb-5 text-accent">
-              <Layers className="w-5 h-5" />
-              <h4 className="font-mono text-xs uppercase tracking-widest font-semibold text-slate-900">
+              <Layers className="w-5 h-5 text-accent" />
+              <h4 className="font-mono text-xs uppercase tracking-widest font-bold text-slate-900">
                 Products This Line Feeds
               </h4>
             </div>
@@ -312,12 +525,12 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
         </div>
 
         {/* Quality Checkpoints */}
-        <div className="bg-white border border-slate-200 rounded-xl p-7 flex flex-col justify-between">
+        <div className="bg-white border border-slate-200 rounded-2xl p-7 flex flex-col justify-between shadow-sm">
           <div>
             <div className="flex items-center gap-2.5 mb-5 text-accent">
-              <ShieldCheck className="w-5 h-5" />
-              <h4 className="font-mono text-xs uppercase tracking-widest font-semibold text-slate-900">
-                Quality Verification Points
+              <ShieldCheck className="w-5 h-5 text-emerald-600" />
+              <h4 className="font-mono text-xs uppercase tracking-widest font-bold text-slate-900">
+                Quality Verification Gates
               </h4>
             </div>
             <ul className="space-y-3">
@@ -340,18 +553,13 @@ export default function FacilityProcessVisualizer({ chain }: Props) {
 // -------------------------------------------------------------
 
 function InjectionMachineSchematic({ stageIndex }: { stageIndex: number }) {
-  // 0: Clamp (moving platen moves in, clamp closed)
-  // 1: Inject (screw moves forward, molten plastic flows into mould cavity)
-  // 2: Cool (cooling active, part solidified)
-  // 3: Eject (platen retracts, ejector pins fire, part drops)
-
   const isClamped = stageIndex === 0 || stageIndex === 1 || stageIndex === 2;
   const isInjecting = stageIndex === 1;
   const isCooling = stageIndex === 2;
   const isEjected = stageIndex === 3;
 
   const screwOffset = isInjecting ? 28 : stageIndex === 0 ? 0 : 12;
-  const platenOffset = isClamped ? 0 : 44;
+  const platenOffset = isClamped ? 0 : 48;
 
   return (
     <div className="w-full">
@@ -360,20 +568,30 @@ function InjectionMachineSchematic({ stageIndex }: { stageIndex: number }) {
         className="w-full h-auto select-none"
         aria-label="Interactive schematic of injection moulding machine cycle"
       >
+        <defs>
+          <linearGradient id="barrelGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#0f172a" />
+            <stop offset="100%" stopColor="#1e293b" />
+          </linearGradient>
+          <linearGradient id="meltFlow" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#ff5e14" />
+            <stop offset="100%" stopColor="#f59e0b" />
+          </linearGradient>
+        </defs>
+
         {/* Machine Bed Foundation */}
         <line x1="20" y1="280" x2="620" y2="280" stroke="#334155" strokeWidth="3" />
-        <rect x="60" y="280" width="120" height="14" fill="#1e293b" />
-        <rect x="420" y="280" width="140" height="14" fill="#1e293b" />
+        <rect x="60" y="280" width="120" height="14" fill="#1e293b" rx="2" />
+        <rect x="420" y="280" width="140" height="14" fill="#1e293b" rx="2" />
 
         {/* Resin Hopper */}
         <g>
           <path d="M120 40 H210 L195 120 H135 Z" fill="#1e293b" stroke="#94a3b8" strokeWidth="2" />
-          {/* Granules inside */}
           <circle cx="160" cy="70" r="3" fill="#ff5e14" />
           <circle cx="170" cy="80" r="3" fill="#ff5e14" />
           <circle cx="155" cy="90" r="3" fill="#ff5e14" />
           <circle cx="168" cy="98" r="3" fill="#ff5e14" />
-          <text x="165" y="30" textAnchor="middle" fill="#94a3b8" fontSize="11" fontFamily="monospace">
+          <text x="165" y="30" textAnchor="middle" fill="#94a3b8" fontSize="10" fontFamily="monospace">
             RESIN HOPPER
           </text>
         </g>
@@ -385,7 +603,7 @@ function InjectionMachineSchematic({ stageIndex }: { stageIndex: number }) {
           width="180"
           height="54"
           rx="6"
-          fill="#0f172a"
+          fill="url(#barrelGrad)"
           stroke="#475569"
           strokeWidth="2"
         />
@@ -395,76 +613,71 @@ function InjectionMachineSchematic({ stageIndex }: { stageIndex: number }) {
         <rect x="270" y="122" width="14" height="62" fill="#ef4444" opacity="0.6" rx="2" />
         <rect x="305" y="122" width="14" height="62" fill="#ef4444" opacity="0.6" rx="2" />
 
-        {/* Reciprocating Screw (Moves smoothly) */}
+        {/* Reciprocating Screw (Smooth Animated) */}
         <g
           style={{
             transform: `translateX(${screwOffset}px)`,
             transition: "transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)",
           }}
         >
-          {/* Screw flights */}
           <path
             d="M 195 138 v 30 M 210 138 v 30 M 225 138 v 30 M 240 138 v 30 M 255 138 v 30 M 270 138 v 30 M 285 138 v 30 M 300 138 v 30 M 315 138 v 30"
             stroke="#94a3b8"
             strokeWidth="2.5"
           />
           <rect x="185" y="148" width="140" height="10" fill="#64748b" />
-          {/* Screw tip */}
           <polygon points="325,143 345,153 325,163" fill="#cbd5e1" />
         </g>
 
         {/* Molten Plastic Flow Front */}
         <path
           d="M 345 147 H 360 V 159 H 345 Z"
-          fill={isInjecting ? "#ff5e14" : "#f59e0b"}
+          fill="url(#meltFlow)"
           className="transition-all duration-300"
         />
 
-        {/* Nozzle */}
+        {/* Injection Nozzle */}
         <polygon points="360,140 376,148 376,158 360,166" fill="#334155" />
 
         {/* Fixed Platen (Stationary) */}
         <g>
           <rect x="378" y="90" width="22" height="150" fill="#334155" rx="3" />
           <rect x="400" y="120" width="18" height="66" fill="#cbd5e1" stroke="#475569" strokeWidth="1.5" />
-          <text x="390" y="78" textAnchor="middle" fill="#94a3b8" fontSize="10" fontFamily="monospace">
+          <text x="390" y="78" textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="monospace">
             FIXED PLATEN
           </text>
         </g>
 
-        {/* Mould Cavity (Between Platens) */}
+        {/* Mould Cavity */}
         <rect
           x="418"
           y="126"
           width="26"
           height="54"
-          fill={isClamped ? (isInjecting ? "#ff5e14" : isCooling ? "#38bdf8" : "#94a3b8") : "#0f172a"}
+          fill={isClamped ? (isInjecting ? "#ff5e14" : isCooling ? "#38bdf8" : "#94a3b8") : "#070e1a"}
           stroke="#475569"
           strokeDasharray={isClamped ? "none" : "3 3"}
           className="transition-colors duration-500"
           rx="2"
         />
 
-        {/* Moving Platen & Hydraulic Ram (Clamps and opens) */}
+        {/* Moving Platen & Hydraulic Ram */}
         <g
           style={{
             transform: `translateX(${platenOffset}px)`,
             transition: "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
-          {/* Moving Mould half */}
           <rect x="444" y="120" width="18" height="66" fill="#cbd5e1" stroke="#475569" strokeWidth="1.5" />
-          {/* Moving Platen */}
           <rect x="462" y="90" width="22" height="150" fill="#334155" rx="3" />
-          {/* Hydraulic Tie Bar & Cylinder */}
           <rect x="484" y="150" width="80" height="20" fill="#475569" />
-          <rect x="564" y="130" width="36" height="60" fill="#1e293b" stroke="#334155" strokeWidth="2" />
-          <text x="473" y="78" textAnchor="middle" fill="#94a3b8" fontSize="10" fontFamily="monospace">
+          <rect x="564" y="130" width="36" height="60" fill="#1e293b" stroke="#334155" strokeWidth="2" rx="4" />
+          <text x="473" y="78" textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="monospace">
             MOVING PLATEN
           </text>
         </g>
 
-        {/* Ejected Solidified Product Drops (Stage 3) */}
+        {/* Ejected Solidified Part Drops (Stage 3) */}
         <g
           style={{
             opacity: isEjected ? 1 : 0,
@@ -482,18 +695,18 @@ function InjectionMachineSchematic({ stageIndex }: { stageIndex: number }) {
             stroke="#ffffff"
             strokeWidth="1.5"
           />
-          <text x="11" y="38" textAnchor="middle" fill="#38bdf8" fontSize="9" fontFamily="monospace">
-            PART EJECTED
+          <text x="11" y="38" textAnchor="middle" fill="#38bdf8" fontSize="8" fontFamily="monospace">
+            PART RELEASE
           </text>
         </g>
 
-        {/* Tie Bars (Horizontal Guide Bars) */}
+        {/* Tie Bars (Horizontal Guides) */}
         <line x1="360" y1="102" x2="580" y2="102" stroke="#64748b" strokeWidth="3" opacity="0.4" />
         <line x1="360" y1="228" x2="580" y2="228" stroke="#64748b" strokeWidth="3" opacity="0.4" />
 
-        {/* Real-time Status Badge */}
+        {/* Status Telemetry Badge */}
         <g transform="translate(30, 240)">
-          <rect x="0" y="0" width="180" height="28" rx="6" fill="#1e293b" stroke="#334155" />
+          <rect x="0" y="0" width="200" height="28" rx="6" fill="#1e293b" stroke="#334155" />
           <circle
             cx="14"
             cy="14"
@@ -503,12 +716,12 @@ function InjectionMachineSchematic({ stageIndex }: { stageIndex: number }) {
           />
           <text x="26" y="18" fill="#f8fafc" fontSize="10" fontFamily="monospace" fontWeight="bold">
             {stageIndex === 0
-              ? "CLAMP: HYDRAULIC LOCK"
+              ? "HYDRAULIC CLAMP: LOCKED"
               : stageIndex === 1
-              ? "INJECT: SCREW ADVANCE"
+              ? "INJECTION: SCREW ADVANCE"
               : stageIndex === 2
-              ? "COOL: HEAT EXTRACTION"
-              : "EJECT: PART RELEASE"}
+              ? "COOLING CIRCUIT: 12°C"
+              : "EJECTOR PINS: RETRACT"}
           </text>
         </g>
       </svg>
@@ -535,9 +748,9 @@ function GenericProcessFlowSchematic({
           return (
             <div
               key={stage.title}
-              className={`p-5 rounded-xl border transition-all duration-300 relative ${
+              className={`p-6 rounded-2xl border transition-all duration-300 relative ${
                 isActive
-                  ? "bg-slate-800/90 border-accent shadow-lg shadow-accent/15 ring-2 ring-orange-500/30"
+                  ? "bg-slate-800/90 border-accent shadow-xl shadow-accent/20 ring-2 ring-orange-400/40"
                   : isPassed
                   ? "bg-slate-800/40 border-slate-700 text-slate-300"
                   : "bg-slate-900/60 border-slate-800 text-slate-500"
@@ -553,7 +766,7 @@ function GenericProcessFlowSchematic({
                       : "bg-slate-800 text-slate-500"
                   }`}
                 >
-                  STEP {String(i + 1).padStart(2, "0")}
+                  PHASE 0{i + 1}
                 </span>
                 {isActive && (
                   <span className="w-2 h-2 rounded-full bg-accent animate-ping" />
@@ -572,7 +785,6 @@ function GenericProcessFlowSchematic({
                 {stage.description}
               </p>
 
-              {/* Progress Connector Indicator */}
               {i < n - 1 && (
                 <div className="hidden md:block absolute -right-2.5 top-1/2 -translate-y-1/2 z-10">
                   <span className={`text-xs ${isPassed ? "text-accent" : "text-slate-600"}`}>
