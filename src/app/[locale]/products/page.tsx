@@ -268,18 +268,28 @@ export default function ProductsHub() {
       </section>
 
       {/* 3D INTERACTIVE SHOWROOM */}
-      <section className="py-20 md:py-28 bg-[#040d18] text-white border-y border-white/10">
-        <div className="container-wide">
-          <div className="max-w-3xl mb-12">
-            <span className="font-mono text-xs uppercase tracking-[.25em] text-accent mb-3 block font-semibold">
-              Virtual Inspection · 3D Product Engineering
-            </span>
-            <h2 className="text-4xl md:text-6xl font-display font-medium text-white leading-tight">
-              Interactive 3D Showroom
-            </h2>
-            <p className="text-white/70 text-lg leading-relaxed mt-4">
-              Explore Sheetal&apos;s lighting luminaires in three dimensions. Select products to inspect specifications, photometric data, and factory execution pipelines.
-            </p>
+      <section className="py-20 md:py-28 bg-[#040d18] text-white border-y border-white/10 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(#ff5e14_1px,transparent_1px)] [background-size:28px_28px]" />
+        <div className="container-wide relative z-10">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12">
+            <div className="max-w-3xl">
+              <span className="font-mono text-xs uppercase tracking-[.25em] text-accent mb-3 block font-semibold flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                Virtual Inspection · 3D Product Engineering Suite
+              </span>
+              <h2 className="text-4xl md:text-6xl font-display font-medium text-white leading-tight">
+                Interactive 3D Showroom
+              </h2>
+              <p className="text-white/70 text-lg leading-relaxed mt-4">
+                Inspect Sheetal&apos;s lighting luminaires in three dimensions. Orbit 360°, trigger exploded sub-assemblies, toggle CAD wireframe blueprints, and inspect real in-house manufacturing specifications.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-white/70">
+              <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">360° Drag Orbit</span>
+              <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">Exploded View</span>
+              <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">CAD Wireframe</span>
+              <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">3D Sub-Assembly Pins</span>
+            </div>
           </div>
 
           <ProductRoomWrapper />
