@@ -3,6 +3,7 @@ import { Link } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import { ArrowRight, ArrowUpRight, Boxes, Cpu, Lightbulb, PackageCheck } from "lucide-react";
 import { HeroTextFadeUp, HeroImageScaleIn, FamilyCardFadeUp, ProductCardFadeUp } from "@/components/ProductAnimations";
+import ProductRoomWrapper from "@/components/ProductRoomWrapper";
 
 const copy = {
   en: {
@@ -263,6 +264,25 @@ export default function ProductsHub() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* 3D INTERACTIVE SHOWROOM */}
+      <section className="py-20 md:py-28 bg-[#040d18] text-white border-y border-white/10">
+        <div className="container-wide">
+          <div className="max-w-3xl mb-12">
+            <span className="font-mono text-xs uppercase tracking-[.25em] text-accent mb-3 block font-semibold">
+              Virtual Inspection · 3D Product Engineering
+            </span>
+            <h2 className="text-4xl md:text-6xl font-display font-medium text-white leading-tight">
+              Interactive 3D Showroom
+            </h2>
+            <p className="text-white/70 text-lg leading-relaxed mt-4">
+              Explore Sheetal&apos;s lighting luminaires in three dimensions. Select products to inspect specifications, photometric data, and factory execution pipelines.
+            </p>
+          </div>
+
+          <ProductRoomWrapper />
         </div>
       </section>
 
