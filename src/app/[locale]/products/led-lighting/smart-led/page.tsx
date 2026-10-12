@@ -18,9 +18,24 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       id: "smart-led-bulb",
       name: t("p0_name"),
       description: t("p0_desc"),
+      range: "9W, 12W, 15W Wi-Fi + BLE, RF Remote & Radar Sensor",
       image: "/images/products/smart-led-bulb.png",
-      specs: [],
-      applications: []
+      specs: [
+        { label: "Wireless Connectivity", value: "Wi-Fi (2.4GHz) + Bluetooth Low Energy (BLE Mesh)" },
+        { label: "Color Palette", value: "16 Million RGB Colors + Tunable White (2700K Warm to 6500K Cool)" },
+        { label: "Dimming Control", value: "Smooth Stepless Dimming (1% to 100%)" },
+        { label: "Alternative Control Options", value: "2.4GHz Handheld RF Remote, Wall-Switch Step CCT, Microwave Radar" },
+        { label: "Smart Ecosystem", value: "Amazon Alexa, Google Home & Smart Life App Compatible" },
+        { label: "Voltage Range", value: "100V – 300V AC (Surge Protected)" },
+        { label: "Power Factor", value: "> 0.9 PF High Efficiency" },
+      ],
+      applications: [
+        "Smart Home Automation Systems",
+        "Hospitality Guest Ambiance & Scene Control",
+        "Corridors & Restrooms (Microwave Radar Motion Auto-On)",
+        "Entertainment Centers & Gaming Setups",
+        "Commercial Retail Dynamic Lighting",
+      ]
     }
   ];
 

@@ -8,6 +8,8 @@ import { ArrowRight, Factory, Gauge, Layers3 } from "lucide-react";
 import { getFacilityProcessChain } from "@/data/facilityProcessChains";
 import FacilityProcessVisualizer from "@/components/FacilityProcessVisualizer";
 import ProcessChainNav from "@/components/ProcessChainNav";
+import { facilityLegacyGalleries } from "@/data/legacyMedia";
+import FacilityPhotoGallery from "@/components/FacilityPhotoGallery";
 
 import { routing } from "@/i18n/routing";
 
@@ -39,6 +41,14 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
   if (!facility) notFound();
 
   const processChain = getFacilityProcessChain(slug);
+  const legacyPhotos = facilityLegacyGalleries[slug] || [];
+  const allFacilityImages = Array.from(
+    new Set([
+      facility.image,
+      ...(facility.fallbackImages ?? []),
+      ...legacyPhotos,
+    ])
+  ).filter(Boolean);
 
   return (
     <div className="bg-paper text-ink min-h-screen">
@@ -211,6 +221,18 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
           </div>
         </div>
       </div>
+
+      {/* Factory Floor & Machine Photo Archive */}
+      {allFacilityImages.length > 0 && (
+        <section className="bg-white border-t border-slate-200 py-20">
+          <div className="container-wide">
+            <FacilityPhotoGallery
+              images={allFacilityImages}
+              facilityTitle={facility.title}
+            />
+          </div>
+        </section>
+      )}
 
       {/* Interactive Process Visualization & Machinery Simulation */}
       {processChain && (

@@ -21,18 +21,42 @@ export default async function JarsPage({ params }: { params: Promise<{ locale: s
     {
       id: "pp-jars",
       name: t("p1_name"),
-      description: "Rigid plastic jar and container formats supported by integrated moulding capabilities.",
-      range: "Configured to requirement",
-      image: "https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png",
-      specs: [],
+      description: "Precision-moulded polypropylene (PP) and HDPE wide-mouth jars engineered for cosmetic creams, pharmaceuticals, and nutraceutical products.",
+      range: "50 gm – 500 gm Single & Double-Wall Jars",
+      image: "/images/jar_product.jpg",
+      specs: [
+        { label: "Polymer Resin", value: "Medical & Food Grade Virgin Polypropylene (PP) / HDPE" },
+        { label: "Wall Construction", value: "Single-Wall Standard & Double-Wall Luxury Profile" },
+        { label: "Closure Sealing", value: "EPE Foam Wad, Induction Heat Foil or Shive Liner" },
+        { label: "Mouth Opening", value: "Wide-Mouth Ergonomic Thread for Effortless Dispensing" },
+        { label: "Surface Finish", value: "High-Gloss Mirror, Matte Frosted & Custom Color Masterbatch" },
+      ],
+      applications: [
+        "Cosmetic Face Creams, Balms & Scrubs",
+        "Dermatological Ointments & Pharmaceutical Gels",
+        "Nutraceutical Powders & Protein Supplements",
+        "Food Pastes, Confectionery & Premium Spices",
+      ]
     },
     {
       id: "custom-containers",
       name: t("p2_name"),
-      description: "Custom moulded packaging formats developed around the required geometry and application.",
-      range: "Custom",
-      image: "https://sheetalelectrotech.com/wp-content/uploads/2023/05/blow.png",
-      specs: [],
+      description: "Custom bulk containers and technical blow-moulded hollow parts engineered with integrated carry handles and interlock stacking.",
+      range: "500 ml – 5000 ml (5 Litres)",
+      image: "/images/packaging_factory.jpg",
+      specs: [
+        { label: "Moulding Process", value: "Heavy-Duty Accumulator Head Extrusion Blow Moulding" },
+        { label: "Polymer Resin", value: "High Molecular Weight Blow Moulding Grade HDPE" },
+        { label: "Handle Design", value: "Integrated Ergonomic Hollow Carry Handle" },
+        { label: "Stackability", value: "Interlocking Recessed Base & Crown for High Tier Stacking" },
+        { label: "UN Testing", value: "Certified Hydraulic Pressure Leak-Proof & Drop Tested" },
+      ],
+      applications: [
+        "Commercial Detergents & Sanitizer Bulks",
+        "Agricultural Pesticides & Liquid Fertilizers",
+        "Automotive Lubricants, Coolants & Brake Fluids",
+        "Chemical Formulation Packaging",
+      ]
     }
   ];
 

@@ -18,9 +18,24 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       id: "led-flood-well-light",
       name: t("p0_name"),
       description: t("p0_desc"),
+      range: "20W – 100W Flood & 40W/50W Well-Glass",
       image: "/images/products/led-flood-well-light.png",
-      specs: [],
-      applications: []
+      specs: [
+        { label: "Luminaire Options", value: "Flood Light (20W–100W) & Industrial Well-Glass (40W/50W)" },
+        { label: "Ingress Protection", value: "IP66 Weatherproof / Dust-Tight Seal" },
+        { label: "Surge Protection", value: "5KV – 6KV Heavy Surge Suppression" },
+        { label: "Operating Voltage", value: "100V – 300V AC (440V Withstand)" },
+        { label: "Enclosure Material", value: "Heavy-Duty Die-Cast Aluminium with Corrosion-Resistant Powder Coating" },
+        { label: "Optical Cover", value: "4mm Toughened Thermal Shock Proof Glass" },
+        { label: "Mounting Bracket", value: "Heavy-Gauge Steel 180° Swivel Cradle Mount" },
+      ],
+      applications: [
+        "Stadiums & Sports Playgrounds",
+        "Industrial Yards, Loading Bays & Warehouses",
+        "Architectural Facades & Monument Uplighting",
+        "Heavy Engineering Plants & Hazardous Foundries",
+        "High-Mast Lighting & Security Perimeters",
+      ]
     }
   ];
 

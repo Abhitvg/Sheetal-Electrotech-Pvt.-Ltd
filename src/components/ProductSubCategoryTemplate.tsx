@@ -27,6 +27,7 @@ const localImageMap: Record<string, string[]> = {
   "led-bulb-2": ["/images/products/led-bulb.png", "/images/led-bulb_specs.png"],
   "led-high-power-bulb": ["/images/led-bulb_specs.png"],
   "led-emergency-bulb": ["/images/led-bulb_specs.png"],
+  "led-candle-bulb": ["/images/spot_specs.png"],
   "led-batten": ["/images/led-batten_specs.png"],
   "led-high-power-batten": ["/images/led-batten_specs.png"],
   "led-ceiling-light": ["/images/ceiling_specs.png"],
@@ -38,6 +39,19 @@ const localImageMap: Record<string, string[]> = {
   "led-flood-well-light": ["/images/flood-well_specs.png"],
   "led-decorative-light": ["/images/decorative_specs.png"],
   "smart-led-bulb": ["/images/smart-bulb_specs.png"],
+  "led-strip-lights": ["/images/led-batten_specs.png"],
+  "extension-board": ["/images/legacy/exension-board-jpg.webp"],
+  "surface-ring": ["/images/products/surface-ring.png"],
+  "hdpe-bottles": ["/images/products_packaging.jpg", "/images/facilities/blow-moulding.webp"],
+  "pet-bottles": ["/images/jar_product.jpg", "/images/facilities/ibm-plastic.webp"],
+  "pp-jars": ["/images/jar_product.jpg", "/images/facilities/injection-moulding.webp"],
+  "custom-containers": ["/images/packaging_factory.jpg", "/images/products_packaging.jpg"],
+  "hdpe-industrial-containers": ["/images/packaging_factory.jpg", "/images/products_packaging.jpg"],
+  "bulk-food-containers": ["/images/jar_product.jpg", "/images/products_packaging.jpg"],
+  "screw-closures-caps": ["/images/facilities/injection-moulding.webp", "/images/moulding_factory.jpg"],
+  "crc-dispensing-closures": ["/images/facilities/injection-moulding.webp", "/images/moulding_factory.jpg"],
+  "custom-blow-moulding": ["/images/packaging_factory.jpg", "/images/facilities/blow-moulding.webp"],
+  "custom-technical-mouldings": ["/images/tool_room.jpg", "/images/moulding_factory.jpg"],
 };
 
 export default function ProductSubCategoryTemplate({

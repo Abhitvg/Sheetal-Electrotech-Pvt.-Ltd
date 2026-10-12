@@ -19,12 +19,43 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
   const products = [
     {
-      id: "product-1",
-      name: t("p1_name"),
-      range: "Custom",
-      description: "Custom moulded packaging developed against defined product, tooling and manufacturing requirements.",
-      image: "https://sheetalelectrotech.com/wp-content/uploads/2023/04/IMG_8665.png",
-      specs: [],
+      id: "custom-blow-moulding",
+      name: "Bespoke Tooling & Custom Blow-Moulded Geometries",
+      description: "End-to-end tooling cycle from parametric 3D CAD modeling to in-house CNC tool room fabrication and multi-cavity serial manufacturing.",
+      range: "Bespoke OEM Formats & Tooling",
+      image: "/images/packaging_factory.jpg",
+      specs: [
+        { label: "Engineering Scope", value: "3D CAD Concept → SLA Prototyping → In-House Tool Room → Serial Production" },
+        { label: "Mould Tool Steels", value: "Hardened P20, DIN 1.2316 Stainless Steel & Aircraft Aluminium 7075" },
+        { label: "Dimensional Tolerance", value: "Precision Machining within ±0.02 mm" },
+        { label: "Quality Validation", value: "CMM Coordinate Measuring, Drop Impact, Top-Load Compressive Stress" },
+      ],
+      applications: [
+        "Patented Proprietary Brand Bottles",
+        "Dual-Chamber & Multi-Compartment Dispensing Systems",
+        "Ergonomic Contour Grip Formats",
+        "Unique Aesthetic Shapes for FMCG Market Differentiation",
+      ]
+    },
+    {
+      id: "custom-technical-mouldings",
+      name: "High-Tolerance Technical Injection Mouldings",
+      description: "Precision-moulded structural plastic enclosures, instrument housings, and optical lens components for electrical, lighting and OEM applications.",
+      range: "Micro-Precision to 350T Press Components",
+      image: "/images/tool_room.jpg",
+      specs: [
+        { label: "Machine Capacity", value: "50 Ton to 350 Ton Microprocessor Injection Moulding Presses" },
+        { label: "Engineered Resins", value: "Polycarbonate (PC), Nylon 6/66 (PA), ABS, PBT, Polypropylene" },
+        { label: "Shot Weight Envelope", value: "5 grams to 650 grams per Cycle" },
+        { label: "Flame Retardancy", value: "UL94 V-0 and V-2 Self-Extinguishing Engineering Grades" },
+        { label: "Secondary Operations", value: "Ultrasonic Plastic Welding, Pad Printing, Laser Marking & Sub-Assembly" },
+      ],
+      applications: [
+        "LED Lighting Driver Housings & Reflectors",
+        "Electronic Enclosures & Terminal Blocks",
+        "Automotive Dashboard & Electrical Brackets",
+        "Medical Device Shells & Consumable Components",
+      ]
     }
   ];
 

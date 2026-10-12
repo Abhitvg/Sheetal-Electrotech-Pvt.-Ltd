@@ -18,9 +18,23 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       id: "led-decorative-light",
       name: t("p0_name"),
       description: t("p0_desc"),
+      range: "0.5W Night Lamp, 7-in-1 Color Cycle & Dual USB Charger",
       image: "/images/products/led-decorative-light.png",
-      specs: [],
-      applications: []
+      specs: [
+        { label: "Power Consumption", value: "0.5W Ultra-Low Power Draw" },
+        { label: "Operating Voltage", value: "100V – 300V AC (50Hz)" },
+        { label: "Color Modes", value: "RGBWY Solid Colors & 7-in-1 Auto Color Cycling" },
+        { label: "Form & Mounting", value: "B22 Lamp Cap, Direct 2-Pin Wall Plug, USB Fast Charger Hub" },
+        { label: "Beam Diffusion", value: "220° Frosted Polycarbonate Dome" },
+        { label: "USB Output (Charger Models)", value: "5V DC / 2.4A Fast Dual-Port Charging" },
+      ],
+      applications: [
+        "Bedside Night Lighting",
+        "Children's Bedrooms & Nurseries",
+        "Hotel Guest Room Wayfinding",
+        "Temple & Meditation Rooms",
+        "Hallway & Corridor Soft Accents",
+      ]
     }
   ];
 

@@ -18,9 +18,24 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       id: "led-spot-light",
       name: t("p0_name"),
       description: t("p0_desc"),
+      range: "3W, 4W, 5W GU10 / MR16 / G9 Bi-Pin",
       image: "/images/products/led-spot-light.png",
-      specs: [],
-      applications: []
+      specs: [
+        { label: "Optical Designs", value: "50° Precision Lens, 120° Frosted Diffuser & 300° G9 Capsule" },
+        { label: "Wattage Options", value: "3W, 4W, 5W" },
+        { label: "Input Voltage", value: "100V – 300V AC (GU10) & 12V DC (GU5.3 MR16)" },
+        { label: "Luminous Efficacy", value: "100 lm/W" },
+        { label: "Base Fittings", value: "GU10 Twist-Lock, GU5.3 Bi-Pin, G9 Capsule" },
+        { label: "Body Construction", value: "Die-Cast Thermal Aluminium with Anodized Finish" },
+        { label: "Color Quality", value: "CRI > 85 Ra High-Definition Visuals" },
+      ],
+      applications: [
+        "Jewelry & Watch Display Counters",
+        "Museum & Art Gallery Spotlighting",
+        "Retail Mannequin & Window Displays",
+        "Accent Wall Grazing & Niche Lighting",
+        "Hospitality Bar & Counter Lighting",
+      ]
     }
   ];
 
