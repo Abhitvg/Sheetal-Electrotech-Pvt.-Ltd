@@ -605,24 +605,24 @@ function buildCatalogue() {
     const battenCards = [
       {
         title: 'Slim Polycarbonate Batten (PC Series)',
-        rating: '18W, 20W, 24W  |  Length: 4 Feet (1200 mm)',
+        rating: '18W, 20W, 22W, 24W  |  Length: 4 Feet (1200 mm)',
         img: 'public/images/led-batten.png',
         desc: 'Sleek, lightweight all-polycarbonate co-extruded batten for domestic, commercial retail, and office corridors. Zero shadows and seamless end-to-end illumination.',
         points: [
-          'High luminous efficacy: >100 lm/W',
+          'Rated 2,200 Lumens @ 20W (102 mA, 220-240V)',
+          'CCT: 3000K, 4000K, 6500K & 7000K (Ultra Day)',
           'Wide voltage operation: 140V to 300V AC',
-          'Surge protection: 4KV sustained',
           'Easy snap-fit mounting bracket system',
           'UV-resistant anti-yellowing PC diffuser'
         ]
       },
       {
         title: 'Aluminium Heat Sink Batten (ALU Heavy Series)',
-        rating: '28W, 36W, 40W  |  Length: 4 Feet (1200 mm)',
+        rating: '28W, 36W, 40W, 50W  |  Length: 4 Feet & 5 Feet',
         img: 'public/images/products/led-high-power-batten.png',
         desc: 'Industrial-grade batten designed with heavy aircraft-grade 6063 aluminium extrusion back-channel for rapid thermal dissipation in high-ambient factories and warehouses.',
         points: [
-          'Output: Up to 4,000 Lumens heavy throw',
+          'Output: Up to 5,500 Lumens heavy throw',
           'Heavy aluminium channel for extended LED life',
           'High power factor: >0.98, THD <10%',
           'Class-A isolated constant current driver',
@@ -690,22 +690,25 @@ function buildCatalogue() {
     });
 
     // Batten Technical Table
-    const bTableY = bCardY + 10;
-    doc.font('Helvetica-Bold').fontSize(11).fillColor(COLORS.navy);
+    const bTableY = bCardY + 8;
+    doc.font('Helvetica-Bold').fontSize(10.5).fillColor(COLORS.navy);
     doc.text('Linear Batten Technical Specifications', MARGIN, bTableY);
 
     const battenTableData = [
-      ['SE-BAT-05W-1F', '5 Watt', '1 Foot (300mm)', '>500 lm', 'Polycarbonate', '220-240V', '4 KV', '50 Pcs'],
-      ['SE-BAT-10W-2F', '10 Watt', '2 Feet (600mm)', '>1,000 lm', 'Polycarbonate', '140-300V', '4 KV', '40 Pcs'],
-      ['SE-BAT-18W-4F', '18 Watt', '4 Feet (1200mm)', '>1,800 lm', 'Slim PC Co-Extrusion', '140-300V', '4 KV', '25 Pcs'],
-      ['SE-BAT-20W-4F', '20 Watt', '4 Feet (1200mm)', '>2,100 lm', 'Slim PC Co-Extrusion', '140-300V', '4 KV', '25 Pcs'],
-      ['SE-BAT-24W-4F', '24 Watt', '4 Feet (1200mm)', '>2,500 lm', 'PC High-Lumen', '140-300V', '4 KV', '25 Pcs'],
-      ['SE-BAT-36W-AL', '36 Watt', '4 Feet (1200mm)', '>3,800 lm', '6063 Aluminium Extrusion', '140-300V', '4 KV', '20 Pcs'],
+      ['SE-BAT-05W-1F', '5 Watt', '1 Foot (300mm)', '>600 lm', 'PC Co-Extrusion', '4 KV', '50 Pcs'],
+      ['SE-BAT-10W-2F', '10 Watt', '2 Feet (600mm)', '>1,100 lm', 'PC Co-Extrusion', '4 KV', '40 Pcs'],
+      ['SE-BAT-20W-4F', '20 Watt', '4 Feet (1200mm)', '2,200 lm (102mA)', 'Slim PC Extrusion', '4 KV', '25 Pcs'],
+      ['SE-BAT-22W-4F', '22 Watt', '4 Feet (1200mm)', '2,420 lm (108mA)', 'PC High Efficiency', '4 KV', '25 Pcs'],
+      ['SE-BAT-24W-4F', '24 Watt', '4 Feet (1200mm)', '>2,640 lm', 'PC High-Lumen', '4 KV', '25 Pcs'],
+      ['SE-BAT-28W-AL', '28 Watt', '4 Feet (1200mm)', '>3,080 lm', '6063 ALU Extrusion', '4 KV', '20 Pcs'],
+      ['SE-BAT-36W-AL', '36 Watt', '4 Feet (1200mm)', '>3,960 lm', '6063 ALU Extrusion', '4 KV', '20 Pcs'],
+      ['SE-BAT-40W-AL', '40 Watt', '4 Feet (1200mm)', '>4,400 lm', 'Heavy ALU High Bay', '4 KV', '16 Pcs'],
+      ['SE-BAT-50W-AL', '50 Watt', '5 Feet (1500mm)', '>5,500 lm', 'Heavy ALU High Bay', '4 KV', '12 Pcs'],
     ];
 
-    const btThY = bTableY + 16;
-    doc.rect(MARGIN, btThY, CONTENT_W, 18).fill(COLORS.navy);
-    doc.font('Helvetica-Bold').fontSize(7.5).fillColor(COLORS.white);
+    const btThY = bTableY + 14;
+    doc.rect(MARGIN, btThY, CONTENT_W, 16).fill(COLORS.navy);
+    doc.font('Helvetica-Bold').fontSize(7).fillColor(COLORS.white);
     const btCols = [
       { l: 'MODEL NO', x: MARGIN + 8 },
       { l: 'RATED WATT', x: MARGIN + 90 },
@@ -715,27 +718,33 @@ function buildCatalogue() {
       { l: 'SURGE', x: MARGIN + 420 },
       { l: 'PACKING', x: MARGIN + 470 },
     ];
-    btCols.forEach(c => doc.text(c.l, c.x, btThY + 5));
+    btCols.forEach(c => doc.text(c.l, c.x, btThY + 4.5));
 
-    let btRowY = btThY + 18;
+    let btRowY = btThY + 16;
     battenTableData.forEach((row, idx) => {
-      const rh = 16;
+      const rh = 14.5;
       if (idx % 2 === 1) doc.rect(MARGIN, btRowY, CONTENT_W, rh).fill(COLORS.lightGray);
       doc.rect(MARGIN, btRowY, CONTENT_W, rh).lineWidth(0.5).strokeColor(COLORS.border).stroke();
 
-      doc.font('Helvetica-Bold').fontSize(7).fillColor(COLORS.ink);
-      doc.text(row[0], MARGIN + 8, btRowY + 4);
+      doc.font('Helvetica-Bold').fontSize(6.8).fillColor(COLORS.ink);
+      doc.text(row[0], MARGIN + 8, btRowY + 3.5);
 
-      doc.font('Helvetica').fontSize(7).fillColor(COLORS.slateDark);
-      doc.text(row[1], MARGIN + 90, btRowY + 4);
-      doc.text(row[2], MARGIN + 155, btRowY + 4);
-      doc.text(row[3], MARGIN + 235, btRowY + 4);
-      doc.text(row[4], MARGIN + 315, btRowY + 4);
-      doc.text(row[5], MARGIN + 420, btRowY + 4);
-      doc.text(row[6], MARGIN + 470, btRowY + 4);
+      doc.font('Helvetica').fontSize(6.8).fillColor(COLORS.slateDark);
+      doc.text(row[1], MARGIN + 90, btRowY + 3.5);
+      doc.text(row[2], MARGIN + 155, btRowY + 3.5);
+      doc.text(row[3], MARGIN + 235, btRowY + 3.5);
+      doc.text(row[4], MARGIN + 315, btRowY + 3.5);
+      doc.text(row[5], MARGIN + 420, btRowY + 3.5);
+      doc.text(row[6], MARGIN + 470, btRowY + 3.5);
 
       btRowY += rh;
     });
+
+    // CCT Spectrum Note below table
+    doc.font('Helvetica-Bold').fontSize(6.5).fillColor(COLORS.accent);
+    doc.text('* CCT Spectrum Available:', MARGIN, btRowY + 5);
+    doc.font('Helvetica').fontSize(6.5).fillColor(COLORS.slateDark);
+    doc.text('3000K (Warm), 4000K (Neutral), 6500K (Daylight) & 7000K (Ultra Daylight / CW) • 220-240V AC 50Hz rated driver operation.', MARGIN + 95, btRowY + 5);
 
     drawRunningFooter(4);
   }

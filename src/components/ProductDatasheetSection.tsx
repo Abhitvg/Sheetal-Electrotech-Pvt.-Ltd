@@ -45,6 +45,28 @@ export default function ProductDatasheetSection({
     setModalOpen(true);
   };
 
+  const exportToExcel = () => {
+    if (!datasheet.columns || !datasheet.rows) return;
+    const cleanHeader = datasheet.columns.map((c) => `"${c.replace(/"/g, '""')}"`).join(",");
+    const cleanRows = datasheet.rows
+      .map((row) => row.map((cell) => `"${cell.replace(/"/g, '""')}"`).join(","))
+      .join("\n");
+    const csvContent = "\uFEFF" + `${cleanHeader}\n${cleanRows}`;
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    const safeTitle = (datasheet.sheetTitle || productName || "Sheetal-Specification")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+    link.href = url;
+    link.setAttribute("download", `${safeTitle}-specifications.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="mt-8 border border-accent/25 rounded-sm bg-gradient-to-b from-white to-[#fbfcfe] p-6 md:p-8 shadow-sm">
       {/* Top Banner & Header */}
@@ -63,15 +85,26 @@ export default function ProductDatasheetSection({
           </p>
         </div>
 
-        {/* Action Button: View Full Scanned Sheet */}
-        <button
-          type="button"
-          onClick={openModal}
-          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-ink text-white hover:bg-accent text-sm font-medium font-mono uppercase tracking-wider transition-all duration-200 shadow-sm flex-shrink-0 cursor-pointer"
-        >
-          <Maximize2 className="w-4 h-4 text-accent hover:text-white" />
-          <span>Inspect Original Sheet</span>
-        </button>
+        {/* Action Buttons: Export Excel + View Scanned Sheet */}
+        <div className="flex items-center gap-2.5 flex-wrap">
+          <button
+            type="button"
+            onClick={exportToExcel}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs md:text-sm font-semibold font-mono uppercase tracking-wider transition-all duration-200 shadow-sm flex-shrink-0 cursor-pointer rounded-xs"
+            title="Download verified Excel / CSV spreadsheet"
+          >
+            <FileSpreadsheet className="w-4 h-4 text-emerald-100" />
+            <span>Export Excel (.csv)</span>
+          </button>
+          <button
+            type="button"
+            onClick={openModal}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-ink text-white hover:bg-accent text-xs md:text-sm font-medium font-mono uppercase tracking-wider transition-all duration-200 shadow-sm flex-shrink-0 cursor-pointer rounded-xs"
+          >
+            <Maximize2 className="w-4 h-4 text-accent hover:text-white" />
+            <span>Inspect Original Sheet</span>
+          </button>
+        </div>
       </div>
 
       {/* Key Highlights Quick Strip (IN FRONT!) */}
@@ -112,7 +145,7 @@ export default function ProductDatasheetSection({
         if (!hasCct) return null;
 
         return (
-          <div className="my-6 p-4 md:p-5 rounded-sm bg-gradient-to-r from-amber-500/10 via-yellow-500/5 to-sky-500/10 border border-steel/20">
+          <div className="my-6 p-4 md:p-5 rounded-sm bg-gradient-to-r from-amber-500/10 via-yellow-500/5 to-cyan-500/10 border border-steel/20">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
               <div className="flex items-center gap-2">
                 <Sun className="w-4 h-4 text-amber-500" />
@@ -121,11 +154,11 @@ export default function ProductDatasheetSection({
                 </span>
               </div>
               <span className="text-[11px] font-mono text-steel">
-                Custom Kelvin (2700K–6500K) & 3CCT drivers supported on demand
+                Custom Kelvin (2700K–7000K) & 3CCT drivers supported on demand
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {/* 3000K Warm White */}
               <div className="flex items-start gap-3 p-3 bg-white border border-amber-300/80 rounded-sm shadow-xs">
                 <span className="w-4 h-4 mt-0.5 rounded-full bg-[#f59e0b] ring-2 ring-amber-200 flex-shrink-0" />
@@ -135,7 +168,7 @@ export default function ProductDatasheetSection({
                     <span className="text-[10px] text-amber-700 font-sans font-semibold">(WW)</span>
                   </div>
                   <p className="text-[11px] text-steel mt-0.5">
-                    Living rooms, bedrooms, hospitality corridors, restaurants & dining
+                    Living rooms, hospitality corridors, restaurants & dining
                   </p>
                 </div>
               </div>
@@ -149,7 +182,7 @@ export default function ProductDatasheetSection({
                     <span className="text-[10px] text-stone-600 font-sans font-semibold">(NW)</span>
                   </div>
                   <p className="text-[11px] text-steel mt-0.5">
-                    Modern corporate offices, task areas, retail showrooms & study tables
+                    Corporate offices, task desks, retail showrooms & study areas
                   </p>
                 </div>
               </div>
@@ -163,7 +196,21 @@ export default function ProductDatasheetSection({
                     <span className="text-[10px] text-sky-700 font-sans font-semibold">(CDL)</span>
                   </div>
                   <p className="text-[11px] text-steel mt-0.5">
-                    Industrial sheds, warehousing, healthcare cleanrooms & high-clarity spaces
+                    Warehouses, industrial sheds, cleanrooms & precision work
+                  </p>
+                </div>
+              </div>
+
+              {/* 7000K Ultra Daylight / Cool White */}
+              <div className="flex items-start gap-3 p-3 bg-white border border-cyan-300/80 rounded-sm shadow-xs">
+                <span className="w-4 h-4 mt-0.5 rounded-full bg-[#06b6d4] ring-2 ring-cyan-200 flex-shrink-0" />
+                <div>
+                  <div className="text-xs font-bold text-ink font-mono flex items-center gap-1.5">
+                    <span>7000K Ultra Daylight</span>
+                    <span className="text-[10px] text-cyan-700 font-sans font-semibold">(CW)</span>
+                  </div>
+                  <p className="text-[11px] text-steel mt-0.5">
+                    Textile grading, high-bay factories, printing & high contrast inspection
                   </p>
                 </div>
               </div>
@@ -175,14 +222,24 @@ export default function ProductDatasheetSection({
       {/* The Tabular Wattage / Matrix Specification Table */}
       {datasheet.columns && datasheet.rows && datasheet.rows.length > 0 && (
         <div className="mt-6">
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
             <p className="text-xs font-mono text-steel uppercase tracking-widest flex items-center gap-1.5">
               <Activity className="w-3.5 h-3.5 text-accent" />
               <span>Full Model Range & Dimensional Parameters</span>
             </p>
-            <span className="text-[11px] font-mono text-steel/70">
-              Scroll horizontally if needed →
-            </span>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={exportToExcel}
+                className="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-700 hover:text-emerald-800 font-semibold underline underline-offset-2 cursor-pointer"
+              >
+                <FileSpreadsheet className="w-3.5 h-3.5" />
+                <span>Export Spreadsheet (.csv)</span>
+              </button>
+              <span className="text-[11px] font-mono text-steel/70">
+                Scroll horizontally if needed →
+              </span>
+            </div>
           </div>
 
           <div className="overflow-x-auto border border-steel/20 rounded-sm bg-white shadow-xs">
@@ -209,7 +266,13 @@ export default function ProductDatasheetSection({
                       const isWattage = cIdx === 1;
                       const isCct = datasheet.columns[cIdx]?.toLowerCase().includes("cct");
 
-                      if (isCct && (cell.includes("3000K") || cell.includes("4000K") || cell.includes("6500K"))) {
+                      if (
+                        isCct &&
+                        (cell.includes("3000K") ||
+                          cell.includes("4000K") ||
+                          cell.includes("6500K") ||
+                          cell.includes("7000K"))
+                      ) {
                         return (
                           <td
                             key={cIdx}
@@ -217,9 +280,18 @@ export default function ProductDatasheetSection({
                           >
                             <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-slate-50 border border-steel/20 rounded-sm font-mono text-xs">
                               <div className="flex items-center gap-1">
-                                <span className="w-2.5 h-2.5 rounded-full bg-[#f59e0b]" title="3000K Warm White" />
-                                <span className="w-2.5 h-2.5 rounded-full bg-[#fde047] border border-amber-300" title="4000K Neutral White" />
-                                <span className="w-2.5 h-2.5 rounded-full bg-[#38bdf8]" title="6500K Cool Daylight" />
+                                {cell.includes("3000K") && (
+                                  <span className="w-2.5 h-2.5 rounded-full bg-[#f59e0b]" title="3000K Warm White" />
+                                )}
+                                {cell.includes("4000K") && (
+                                  <span className="w-2.5 h-2.5 rounded-full bg-[#fde047] border border-amber-300" title="4000K Neutral White" />
+                                )}
+                                {cell.includes("6500K") && (
+                                  <span className="w-2.5 h-2.5 rounded-full bg-[#38bdf8]" title="6500K Cool Daylight" />
+                                )}
+                                {cell.includes("7000K") && (
+                                  <span className="w-2.5 h-2.5 rounded-full bg-[#06b6d4] ring-1 ring-cyan-300" title="7000K Ultra Daylight" />
+                                )}
                               </div>
                               <span className="font-semibold text-ink">{cell}</span>
                             </div>
