@@ -37,7 +37,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className="flex flex-col min-h-screen bg-paper text-ink font-body">
+      <body className="flex flex-col min-h-screen bg-paper text-ink font-body" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <EngineeringModeProvider>
             <OrganizationSchema />

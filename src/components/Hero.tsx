@@ -13,6 +13,7 @@ const statsConfig = [
   { value: 25, suffix: "+", key: "years" },
   { value: 30, suffix: "K+", key: "area" },
   { value: 9, suffix: "", key: "capabilities" },
+  { value: 100, suffix: "%", key: "compliance" },
 ];
 
 export default function Hero() {
@@ -50,7 +51,7 @@ export default function Hero() {
       }} />
 
       {/* Content */}
-      <div className="container-wide relative z-10 pt-32 pb-20">
+      <div className="container-wide relative z-10 pt-28 md:pt-36 pb-16">
         <div className="max-w-3xl">
           {/* Badge */}
           <motion.div
@@ -116,18 +117,33 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/20 pt-10"
+          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 border-t border-white/20 pt-8"
         >
           {statsConfig.map((stat, i) => (
             <div key={i} className="text-white">
               <p className="text-3xl md:text-4xl font-display font-bold mb-1">
                 <span>{stat.value}{stat.suffix}</span>
               </p>
-              <p className="text-white/50 text-sm font-mono uppercase tracking-wider">
+              <p className="text-white/60 text-xs md:text-sm font-mono uppercase tracking-wider">
                 {t(`stats.${stat.key}`)}
               </p>
             </div>
           ))}
+        </motion.div>
+
+        {/* Verification Credentials Strip */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
+          className="mt-6 flex flex-wrap items-center gap-2 pt-4 border-t border-white/10 text-xs font-mono text-white/70"
+        >
+          <span className="text-[#ff5e14] font-semibold uppercase tracking-wider text-[11px] mr-1">Compliance & Scale:</span>
+          <span className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-full">✓ BIS Tested & Certified</span>
+          <span className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-full">✓ ISO 9001 Process Discipline</span>
+          <span className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-full">✓ Automated SMT Line</span>
+          <span className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-full">✓ In-House CNC Tool Room</span>
+          <span className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-full">✓ 30,000+ Sq. Ft. Daman Complex</span>
         </motion.div>
       </div>
 

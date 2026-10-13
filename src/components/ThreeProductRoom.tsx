@@ -452,8 +452,8 @@ export const PRODUCT_CAD_VARIANTS: Record<
       badge: "SolidWorks CAD",
       cadFile: "bulb.glb (2.0 MB)",
       sourceDesc: "High-precision CAD model with threaded cap, heat sink body, and optical globe",
-      targetScale: 2.15,
-      positionYOffset: 0.1,
+      targetScale: 1.18,
+      positionYOffset: -0.45,
     },
   },
   1: {
@@ -464,33 +464,33 @@ export const PRODUCT_CAD_VARIANTS: Record<
       badge: "Architectural CAD",
       cadFile: "led_batten.glb (2.6 MB)",
       sourceDesc: "Precision 2400mm continuous architectural linear luminaire extrusion",
-      targetScale: 2.5,
+      targetScale: 2.2,
       rotationOffset: [0, Math.PI / 4, 0],
-      positionYOffset: 0.05,
+      positionYOffset: -0.85,
     },
   },
   2: {
     primary: {
-      key: "street_light",
-      url: "/models/street_light.glb",
-      label: "Industrial Highway Luminaire (Real CAD)",
-      badge: "Municipal CAD",
-      cadFile: "street_light.glb (2.8 MB)",
-      sourceDesc: "High-mast aerodynamic die-cast aluminium roadway luminaire with cooling fins",
-      targetScale: 2.4,
-      rotationOffset: [0.35, -Math.PI / 3, 0],
-      positionYOffset: 0.15,
-    },
-    secondary: {
       key: "street_floodlight",
       url: "/models/street_floodlight.glb",
       label: "EC-FL-30 Industrial Floodlight (Real CAD)",
       badge: "Heavy-Duty CAD",
       cadFile: "street_floodlight.glb (0.4 MB)",
       sourceDesc: "Commercial grade IP66 exterior floodlight with adjustable mounting bracket",
-      targetScale: 2.4,
-      rotationOffset: [0.3, -Math.PI / 4, 0],
-      positionYOffset: 0.1,
+      targetScale: 1.55,
+      rotationOffset: [0.25, -Math.PI / 4, 0],
+      positionYOffset: -0.75,
+    },
+    secondary: {
+      key: "street_light",
+      url: "/models/street_light.glb",
+      label: "Industrial Highway Luminaire (Real CAD)",
+      badge: "Municipal CAD",
+      cadFile: "street_light.glb (2.8 MB)",
+      sourceDesc: "High-mast aerodynamic die-cast aluminium roadway luminaire with cooling fins",
+      targetScale: 1.6,
+      rotationOffset: [0.25, -Math.PI / 3, 0],
+      positionYOffset: -0.75,
     },
   },
   3: {
@@ -501,9 +501,9 @@ export const PRODUCT_CAD_VARIANTS: Record<
       badge: "Anti-Glare CAD",
       cadFile: "downlight.glb (0.8 MB)",
       sourceDesc: "Precision ceiling downlight canister with parabolic reflector and spring clips",
-      targetScale: 2.2,
-      rotationOffset: [0.4, 0, 0],
-      positionYOffset: 0.1,
+      targetScale: 1.35,
+      rotationOffset: [0.45, 0, 0],
+      positionYOffset: -0.65,
     },
     secondary: {
       key: "spotlight",
@@ -512,9 +512,9 @@ export const PRODUCT_CAD_VARIANTS: Record<
       badge: "Track Spot CAD",
       cadFile: "spotlight.glb (5.0 MB)",
       sourceDesc: "Steel Cut track-mount commercial luminaire with cooling fins and multi-axis swivel",
-      targetScale: 2.3,
+      targetScale: 1.5,
       rotationOffset: [0.3, -Math.PI / 3, 0],
-      positionYOffset: 0.1,
+      positionYOffset: -0.65,
     },
   },
   4: {
@@ -525,8 +525,8 @@ export const PRODUCT_CAD_VARIANTS: Record<
       badge: "RGB IoT CAD",
       cadFile: "bulb.glb (2.0 MB)",
       sourceDesc: "Multi-channel RGB + tunable white IoT connected luminaire",
-      targetScale: 2.15,
-      positionYOffset: 0.1,
+      targetScale: 1.18,
+      positionYOffset: -0.45,
     },
   },
   5: {
@@ -537,9 +537,9 @@ export const PRODUCT_CAD_VARIANTS: Record<
       badge: "Ceiling CAD",
       cadFile: "downlight.glb (0.8 MB)",
       sourceDesc: "Commercial ultra-slim ambient ceiling fixture",
-      targetScale: 2.2,
+      targetScale: 1.35,
       rotationOffset: [0.55, 0, 0],
-      positionYOffset: 0.1,
+      positionYOffset: -0.65,
     },
   },
 };
@@ -599,6 +599,18 @@ export default function ThreeProductRoom() {
   const variantMapRef = useRef(variantMap);
   variantMapRef.current = variantMap;
 
+  const lightingModeRef = useRef(lightingMode);
+  lightingModeRef.current = lightingMode;
+
+  const isPoweredRef = useRef(isPowered);
+  isPoweredRef.current = isPowered;
+
+  const autoRotateRef = useRef(autoRotate);
+  autoRotateRef.current = autoRotate;
+
+  const activeProductRef = useRef(activeProduct);
+  activeProductRef.current = activeProduct;
+
   // Three.js State References
   const sceneRef = useRef<THREE.Scene | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
@@ -622,14 +634,14 @@ export default function ThreeProductRoom() {
 
   // Camera Orbit & Damping
   const cameraOrbitRef = useRef({
-    radius: 4.5,
-    targetRadius: 4.5,
+    radius: 5.6,
+    targetRadius: 5.6,
     theta: 0.35,
-    phi: 1.22,
+    phi: 1.25,
     targetTheta: 0.35,
-    targetPhi: 1.22,
-    panX: 0,
-    targetPanX: 0,
+    targetPhi: 1.25,
+    panX: typeof window !== "undefined" && window.innerWidth >= 1024 ? 1.45 : 0,
+    targetPanX: typeof window !== "undefined" && window.innerWidth >= 1024 ? 1.45 : 0,
   });
 
   const isDraggingRef = useRef(false);
@@ -658,7 +670,7 @@ export default function ThreeProductRoom() {
     setIsExploded(false);
     targetExplodeRatioRef.current = 0.0;
     cameraOrbitRef.current.targetTheta = 0.35;
-    cameraOrbitRef.current.targetPhi = 1.22;
+    cameraOrbitRef.current.targetPhi = 1.25;
   }, [totalProducts]);
 
   // Trigger CAD asset loading whenever active product or variant changes
@@ -668,10 +680,15 @@ export default function ThreeProductRoom() {
     }
   }, [activeIndex, activeCadConfig]);
 
-  // Adjust camera horizontal offset based on drawer state
+  // Adjust camera horizontal offset based on drawer state & screen size
   useEffect(() => {
-    const isDesktop = typeof window !== "undefined" && window.innerWidth > 1024;
-    cameraOrbitRef.current.targetPanX = isPanelOpen && isDesktop ? -0.55 : 0;
+    const updatePan = () => {
+      const isDesktop = typeof window !== "undefined" && window.innerWidth >= 1024;
+      cameraOrbitRef.current.targetPanX = isPanelOpen && isDesktop ? 1.45 : 0;
+    };
+    updatePan();
+    window.addEventListener("resize", updatePan);
+    return () => window.removeEventListener("resize", updatePan);
   }, [isPanelOpen]);
 
   // Lighting & CCT Update
@@ -749,7 +766,7 @@ export default function ThreeProductRoom() {
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.25;
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
     rendererRef.current = renderer;
 
     const scene = new THREE.Scene();
@@ -1325,12 +1342,18 @@ export default function ThreeProductRoom() {
     cadMasterGroupRef.current = cadMasterGroup;
 
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath("/draco/");
+    dracoLoader.setDecoderPath("/draco/gltf/");
     const gltfLoader = new GLTFLoader();
     gltfLoader.setDRACOLoader(dracoLoader);
 
     const loadCadModel = (url: string, config: CadAssetConfig) => {
-      if (loadedCadMapRef.current.has(config.key)) {
+      const existing = loadedCadMapRef.current.get(config.key);
+      if (existing) {
+        if (existing.parent !== cadMasterGroup) {
+          cadMasterGroup.add(existing);
+        }
+        setLoadingCad(false);
+        setCadProgress(100);
         return;
       }
       setLoadingCad(true);
@@ -1338,7 +1361,40 @@ export default function ThreeProductRoom() {
       gltfLoader.load(
         url,
         (gltf) => {
-          const model = gltf.scene;
+          const model = gltf.scene || gltf.scenes[0];
+          if (!model) {
+            setLoadingCad(false);
+            return;
+          }
+
+          // Filter out unwanted background studio planes, backdrop sheets, cameras, lights, or extra clone meshes
+          const toRemove: THREE.Object3D[] = [];
+          model.traverse((child) => {
+            if (child instanceof THREE.Light || child instanceof THREE.Camera) {
+              toRemove.push(child);
+              return;
+            }
+            const name = (child.name || "").toLowerCase();
+            if (
+              name === "light" ||
+              name === "camera" ||
+              name === "lamp" ||
+              name === "sun" ||
+              name.startsWith("plane") ||
+              name.includes("backdrop") ||
+              name.includes("ground_plane") ||
+              name.includes("studio_plane") ||
+              (config.key.includes("bulb") && (name.includes(".001") || name.includes(".002"))) ||
+              (config.key === "batten" && (name.includes("_04") || name.includes("_05")))
+            ) {
+              toRemove.push(child);
+            }
+          });
+          toRemove.forEach((child) => {
+            if (child.parent) {
+              child.parent.remove(child);
+            }
+          });
 
           const box = new THREE.Box3().setFromObject(model);
           const center = box.getCenter(new THREE.Vector3());
@@ -1346,17 +1402,24 @@ export default function ThreeProductRoom() {
           const maxDim = Math.max(size.x, size.y, size.z) || 1;
           const scale = config.targetScale / maxDim;
 
+          // Master wrapper (lerped by renderLoop for smooth scale/visibility transitions)
           const wrapper = new THREE.Group();
-          model.scale.setScalar(scale);
-          model.position.x = -center.x * scale;
-          model.position.y = -center.y * scale + (config.positionYOffset || 0);
-          model.position.z = -center.z * scale;
 
+          // Pivot group: handles rotation and Y elevation around the true geometric center
+          const pivot = new THREE.Group();
+          pivot.position.y = config.positionYOffset || 0;
           if (config.rotationOffset) {
-            model.rotation.set(...config.rotationOffset);
+            pivot.rotation.set(...config.rotationOffset);
           }
 
-          wrapper.add(model);
+          // Inner group: offsets and scales raw geometry so its center is exactly at (0, 0, 0)
+          const inner = new THREE.Group();
+          inner.scale.setScalar(scale);
+          inner.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
+          inner.add(model);
+
+          pivot.add(inner);
+          wrapper.add(pivot);
           wrapper.scale.setScalar(0.0001);
           wrapper.visible = false;
 
@@ -1365,7 +1428,271 @@ export default function ThreeProductRoom() {
             if (child instanceof THREE.Mesh) {
               child.castShadow = true;
               child.receiveShadow = true;
-              if (child.material) {
+              const meshName = (child.name || "").toLowerCase();
+
+              const matName = (
+                child.material && "name" in child.material
+                  ? ((child.material as any).name || "")
+                  : ""
+              ).toLowerCase();
+
+              // Special high-fidelity material handling for Bulb & Smart Bulb
+              if (config.key.includes("bulb")) {
+                if (meshName.includes("metal") || matName.includes("metal")) {
+                  const metalMat = new THREE.MeshStandardMaterial({
+                    color: 0xe2e8f0,
+                    metalness: 0.95,
+                    roughness: 0.22,
+                  });
+                  (metalMat as any)._initiallyTransparent = false;
+                  (metalMat as any)._initialOpacity = 1.0;
+                  child.material = metalMat;
+                  materialsRef.current.push(metalMat);
+                } else if (
+                  meshName.includes("light_plastic") ||
+                  meshName.includes("diffuser") ||
+                  matName.includes("light_plastic") ||
+                  matName.includes("diffuser")
+                ) {
+                  const currentHex =
+                    lightingModeRef.current === "warm"
+                      ? 0xffa500
+                      : lightingModeRef.current === "neutral"
+                      ? 0xffe2b2
+                      : lightingModeRef.current === "daylight"
+                      ? 0xf0f9ff
+                      : 0xa855f7;
+                  const globeMat = new THREE.MeshStandardMaterial({
+                    color: 0xffffff,
+                    roughness: 0.15,
+                    metalness: 0.02,
+                    emissive: new THREE.Color(currentHex),
+                    emissiveIntensity: isPoweredRef.current ? (lightingModeRef.current === "cyber" ? 2.5 : 1.8) : 0.05,
+                  });
+                  (globeMat as any)._initiallyTransparent = false;
+                  (globeMat as any)._initialOpacity = 1.0;
+                  child.material = globeMat;
+                  materialsRef.current.push(globeMat);
+                  emissiveMaterialsRef.current.push(globeMat);
+                } else if (meshName.includes("plastic") || matName.includes("plastic")) {
+                  const bodyMat = new THREE.MeshStandardMaterial({
+                    color: 0xf8fafc,
+                    metalness: 0.05,
+                    roughness: 0.38,
+                  });
+                  (bodyMat as any)._initiallyTransparent = false;
+                  (bodyMat as any)._initialOpacity = 1.0;
+                  child.material = bodyMat;
+                  materialsRef.current.push(bodyMat);
+                }
+              } else if (config.key === "batten") {
+                if (
+                  meshName.includes("03") ||
+                  meshName.includes("diffuser") ||
+                  matName.includes("03") ||
+                  matName.includes("diffuser")
+                ) {
+                  const currentHex =
+                    lightingModeRef.current === "warm"
+                      ? 0xffe2b2
+                      : lightingModeRef.current === "neutral"
+                      ? 0xfff4e6
+                      : lightingModeRef.current === "daylight"
+                      ? 0xdcf0ff
+                      : 0x38bdf8;
+                  const diffMat = new THREE.MeshStandardMaterial({
+                    color: 0xffffff,
+                    roughness: 0.2,
+                    metalness: 0.05,
+                    emissive: new THREE.Color(currentHex),
+                    emissiveIntensity: isPoweredRef.current ? 1.6 : 0.05,
+                  });
+                  (diffMat as any)._initiallyTransparent = false;
+                  (diffMat as any)._initialOpacity = 1.0;
+                  child.material = diffMat;
+                  materialsRef.current.push(diffMat);
+                  emissiveMaterialsRef.current.push(diffMat);
+                } else {
+                  const aluMat = new THREE.MeshStandardMaterial({
+                    color: 0xd8e2ed,
+                    metalness: 0.88,
+                    roughness: 0.28,
+                  });
+                  (aluMat as any)._initiallyTransparent = false;
+                  (aluMat as any)._initialOpacity = 1.0;
+                  child.material = aluMat;
+                  materialsRef.current.push(aluMat);
+                }
+              } else if (config.key.includes("street")) {
+                const currentHex =
+                  lightingModeRef.current === "warm"
+                    ? 0xffe2b2
+                    : lightingModeRef.current === "neutral"
+                    ? 0xfff4e6
+                    : lightingModeRef.current === "daylight"
+                    ? 0xdcf0ff
+                    : 0x38bdf8;
+
+                const isLuminous =
+                  meshName.includes("glass") ||
+                  meshName.includes("lens") ||
+                  meshName.includes("led") ||
+                  meshName.includes("light") ||
+                  meshName.includes("148") ||
+                  meshName.includes("152") ||
+                  matName.includes("148") ||
+                  matName.includes("152") ||
+                  matName.includes("glass") ||
+                  matName.includes("lens") ||
+                  matName.includes("led");
+
+                const isBracket =
+                  meshName.includes("bracket") ||
+                  meshName.includes("mount") ||
+                  meshName.includes("bolt") ||
+                  meshName.includes("154") ||
+                  matName.includes("154") ||
+                  matName.includes("bracket");
+
+                if (isLuminous) {
+                  const lensMat = new THREE.MeshStandardMaterial({
+                    color: 0xffffff,
+                    roughness: 0.1,
+                    metalness: 0.05,
+                    emissive: new THREE.Color(currentHex),
+                    emissiveIntensity: isPoweredRef.current ? 2.2 : 0.05,
+                  });
+                  (lensMat as any)._initiallyTransparent = false;
+                  (lensMat as any)._initialOpacity = 1.0;
+                  child.material = lensMat;
+                  materialsRef.current.push(lensMat);
+                  emissiveMaterialsRef.current.push(lensMat);
+                } else if (isBracket) {
+                  const bracketMat = new THREE.MeshStandardMaterial({
+                    color: 0x94a3b8,
+                    metalness: 0.88,
+                    roughness: 0.25,
+                  });
+                  (bracketMat as any)._initiallyTransparent = false;
+                  (bracketMat as any)._initialOpacity = 1.0;
+                  child.material = bracketMat;
+                  materialsRef.current.push(bracketMat);
+                } else {
+                  // Cast Aluminium Housing with aerodynamic cooling fins - architectural metallic slate
+                  const finMat = new THREE.MeshStandardMaterial({
+                    color: 0x475569,
+                    metalness: 0.82,
+                    roughness: 0.32,
+                  });
+                  (finMat as any)._initiallyTransparent = false;
+                  (finMat as any)._initialOpacity = 1.0;
+                  child.material = finMat;
+                  materialsRef.current.push(finMat);
+                }
+              } else if (config.key === "downlight" || config.key === "ceiling_panel") {
+                const currentHex =
+                  lightingModeRef.current === "warm"
+                    ? 0xffe2b2
+                    : lightingModeRef.current === "neutral"
+                    ? 0xfff4e6
+                    : lightingModeRef.current === "daylight"
+                    ? 0xdcf0ff
+                    : 0x38bdf8;
+
+                const isLuminous =
+                  meshName.includes("cylinder") ||
+                  meshName.includes("diffuser") ||
+                  meshName.includes("glass") ||
+                  meshName.includes("pcylinder5") ||
+                  matName.includes("diffuser") ||
+                  matName.includes("glass");
+
+                const isReflector =
+                  meshName.includes("29") ||
+                  meshName.includes("reflector") ||
+                  matName.includes("29") ||
+                  matName.includes("reflector");
+
+                if (isLuminous) {
+                  const downlightLensMat = new THREE.MeshStandardMaterial({
+                    color: 0xffffff,
+                    roughness: 0.12,
+                    metalness: 0.02,
+                    emissive: new THREE.Color(currentHex),
+                    emissiveIntensity: isPoweredRef.current ? 1.8 : 0.05,
+                  });
+                  (downlightLensMat as any)._initiallyTransparent = false;
+                  (downlightLensMat as any)._initialOpacity = 1.0;
+                  child.material = downlightLensMat;
+                  materialsRef.current.push(downlightLensMat);
+                  emissiveMaterialsRef.current.push(downlightLensMat);
+                } else if (isReflector) {
+                  const specReflectorMat = new THREE.MeshStandardMaterial({
+                    color: 0xf1f5f9,
+                    metalness: 0.95,
+                    roughness: 0.1,
+                  });
+                  (specReflectorMat as any)._initiallyTransparent = false;
+                  (specReflectorMat as any)._initialOpacity = 1.0;
+                  child.material = specReflectorMat;
+                  materialsRef.current.push(specReflectorMat);
+                } else {
+                  // Architectural white canister rim and retention springs
+                  const trimMat = new THREE.MeshStandardMaterial({
+                    color: 0xf8fafc,
+                    metalness: 0.08,
+                    roughness: 0.32,
+                  });
+                  (trimMat as any)._initiallyTransparent = false;
+                  (trimMat as any)._initialOpacity = 1.0;
+                  child.material = trimMat;
+                  materialsRef.current.push(trimMat);
+                }
+              } else if (config.key === "spotlight") {
+                const currentHex =
+                  lightingModeRef.current === "warm"
+                    ? 0xffe2b2
+                    : lightingModeRef.current === "neutral"
+                    ? 0xfff4e6
+                    : lightingModeRef.current === "daylight"
+                    ? 0xdcf0ff
+                    : 0x38bdf8;
+
+                const isLens =
+                  meshName.includes("35") ||
+                  meshName.includes("36") ||
+                  meshName.includes("lens") ||
+                  meshName.includes("led") ||
+                  matName.includes("35") ||
+                  matName.includes("36") ||
+                  matName.includes("led") ||
+                  matName.includes("lens");
+
+                if (isLens) {
+                  const spotLensMat = new THREE.MeshStandardMaterial({
+                    color: 0xffffff,
+                    roughness: 0.12,
+                    metalness: 0.05,
+                    emissive: new THREE.Color(currentHex),
+                    emissiveIntensity: isPoweredRef.current ? 2.4 : 0.05,
+                  });
+                  (spotLensMat as any)._initiallyTransparent = false;
+                  (spotLensMat as any)._initialOpacity = 1.0;
+                  child.material = spotLensMat;
+                  materialsRef.current.push(spotLensMat);
+                  emissiveMaterialsRef.current.push(spotLensMat);
+                } else {
+                  const spotBodyMat = new THREE.MeshStandardMaterial({
+                    color: 0x18181b,
+                    metalness: 0.72,
+                    roughness: 0.32,
+                  });
+                  (spotBodyMat as any)._initiallyTransparent = false;
+                  (spotBodyMat as any)._initialOpacity = 1.0;
+                  child.material = spotBodyMat;
+                  materialsRef.current.push(spotBodyMat);
+                }
+              } else if (child.material) {
                 const mats = Array.isArray(child.material) ? child.material : [child.material];
                 mats.forEach((m) => {
                   if (m instanceof THREE.MeshStandardMaterial) {
@@ -1409,12 +1736,17 @@ export default function ThreeProductRoom() {
       if (!container || !renderer || !camera) return;
       const width = container.clientWidth;
       const height = container.clientHeight;
+      if (width === 0 || height === 0) return;
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
     };
 
     handleResize();
+    const resizeObserver = new ResizeObserver(() => {
+      handleResize();
+    });
+    resizeObserver.observe(container);
     window.addEventListener("resize", handleResize);
 
     // =========================================================================
@@ -1429,7 +1761,7 @@ export default function ThreeProductRoom() {
       const orbit = cameraOrbitRef.current;
 
       // Auto rotation when idle
-      if (autoRotate && !isDraggingRef.current) {
+      if (autoRotateRef.current && !isDraggingRef.current) {
         orbit.targetTheta += 0.0035;
       }
 
@@ -1445,8 +1777,17 @@ export default function ThreeProductRoom() {
       const cy = orbit.radius * Math.cos(orbit.phi);
       const cz = orbit.radius * Math.sin(orbit.phi) * Math.cos(orbit.theta);
 
-      camera.position.set(cx + orbit.panX, cy + 0.15, cz);
-      camera.lookAt(orbit.panX, 0.05, 0);
+      // Camera horizontal right unit vector in XZ plane (orthogonal to view direction)
+      const rLen = Math.hypot(cx, cz) || 1;
+      const rx = cz / rLen;
+      const rz = -cx / rLen;
+
+      // Pan horizontally across screen along camera local right axis
+      const shiftX = rx * orbit.panX;
+      const shiftZ = rz * orbit.panX;
+
+      camera.position.set(cx + shiftX, cy + 0.15, cz + shiftZ);
+      camera.lookAt(shiftX, 0.15, shiftZ);
 
       // Smooth explode animation interpolation
       explodeRatioRef.current += (targetExplodeRatioRef.current - explodeRatioRef.current) * 0.09;
@@ -1494,14 +1835,19 @@ export default function ThreeProductRoom() {
 
       // Update 2D Screen Projections for Hotspots
       if (container && camera) {
-        const currentProductHotspots = activeProduct.hotspots || [];
+        const currentProductHotspots = activeProductRef.current?.hotspots || [];
         const activeCadModel = activeCadKey ? loadedCadMapRef.current.get(activeCadKey) : null;
-        const activeGroup = isCadMode && activeCadModel ? activeCadModel : productGroupsRef.current[curIdx];
+        const targetGroup =
+          isCadMode && activeCadModel && activeCadModel.children[0]
+            ? activeCadModel.children[0]
+            : (activeCadModel || productGroupsRef.current[curIdx]);
 
-        if (activeGroup && activeGroup.visible) {
+        const isVisible = isCadMode ? Boolean(activeCadModel && activeCadModel.visible) : Boolean(targetGroup && targetGroup.visible);
+
+        if (targetGroup && isVisible) {
           const coords = currentProductHotspots.map((hs) => {
             const v = new THREE.Vector3(...hs.position);
-            v.applyMatrix4(activeGroup.matrixWorld);
+            v.applyMatrix4(targetGroup.matrixWorld);
 
             const isBehind = v.dot(camera.getWorldDirection(new THREE.Vector3())) < 0;
 
@@ -1529,7 +1875,12 @@ export default function ThreeProductRoom() {
 
     return () => {
       if (animFrameIdRef.current) cancelAnimationFrame(animFrameIdRef.current);
+      resizeObserver.disconnect();
       window.removeEventListener("resize", handleResize);
+
+      loadedCadMapRef.current.clear();
+      materialsRef.current = [];
+      emissiveMaterialsRef.current = [];
 
       scene.traverse((obj) => {
         if (obj instanceof THREE.Mesh) {
@@ -1543,7 +1894,7 @@ export default function ThreeProductRoom() {
       });
       renderer.dispose();
     };
-  }, [activeIndex, autoRotate, activeProduct]);
+  }, []);
 
   // Orbit Pointer Handlers
   const handlePointerDown = (e: React.PointerEvent) => {
@@ -1567,12 +1918,16 @@ export default function ThreeProductRoom() {
   };
 
   const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    const zoomDelta = e.deltaY * 0.003;
-    cameraOrbitRef.current.targetRadius = Math.max(
-      2.6,
-      Math.min(6.5, cameraOrbitRef.current.targetRadius + zoomDelta)
-    );
+    // Only zoom when Ctrl or Cmd is held (trackpad pinch or intentional zoom),
+    // allowing effortless normal vertical page scrolling past the showroom container
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      const zoomDelta = e.deltaY * 0.003;
+      cameraOrbitRef.current.targetRadius = Math.max(
+        2.6,
+        Math.min(7.2, cameraOrbitRef.current.targetRadius + zoomDelta)
+      );
+    }
   };
 
   // Zoom Button Controls
@@ -1581,25 +1936,29 @@ export default function ThreeProductRoom() {
   };
 
   const zoomOut = () => {
-    cameraOrbitRef.current.targetRadius = Math.min(6.5, cameraOrbitRef.current.targetRadius + 0.6);
+    cameraOrbitRef.current.targetRadius = Math.min(7.2, cameraOrbitRef.current.targetRadius + 0.6);
   };
 
   const resetCamera = () => {
+    const isDesktop = typeof window !== "undefined" && window.innerWidth >= 1024;
     cameraOrbitRef.current.targetTheta = 0.35;
-    cameraOrbitRef.current.targetPhi = 1.22;
-    cameraOrbitRef.current.targetRadius = 4.5;
+    cameraOrbitRef.current.targetPhi = 1.25;
+    cameraOrbitRef.current.targetRadius = 5.6;
+    cameraOrbitRef.current.radius = 5.6;
+    cameraOrbitRef.current.targetPanX = isPanelOpen && isDesktop ? 1.45 : 0;
     setSelectedHotspot(null);
   };
 
   return (
     <div
+      id="three-showroom-canvas"
       ref={containerRef}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
       onWheel={handleWheel}
-      className="relative w-full h-[780px] md:h-[880px] rounded-3xl overflow-hidden bg-[#040c17] border border-white/10 shadow-2xl select-none cursor-grab active:cursor-grabbing group"
+      className="relative w-full h-[560px] md:h-[620px] lg:h-[640px] rounded-3xl overflow-hidden bg-[#040c17] border border-white/10 shadow-2xl select-none cursor-grab active:cursor-grabbing group"
     >
       {/* 3D WebGL Canvas */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full block" />
@@ -1620,7 +1979,11 @@ export default function ThreeProductRoom() {
       )}
 
       {/* TOP BAR: Header & Shading Mode Controls */}
-      <div className="absolute top-6 left-6 right-6 z-20 flex flex-wrap items-center justify-between pointer-events-none gap-3">
+      <div
+        className={`absolute top-6 left-6 z-20 flex flex-wrap items-center justify-between pointer-events-none gap-3 transition-all duration-500 ${
+          isPanelOpen ? "right-6 lg:right-[475px]" : "right-6"
+        }`}
+      >
         {/* Left: Studio Telemetry HUD */}
         <div className="flex flex-col gap-2 pointer-events-auto">
           <div className="flex items-center gap-2 bg-slate-900/85 backdrop-blur-xl px-4 py-2 rounded-full border border-white/10 shadow-xl">
@@ -1654,6 +2017,7 @@ export default function ThreeProductRoom() {
           {/* Model Mode Switcher: Production CAD vs Exploded Cutaway */}
           <div className="flex items-center bg-slate-900/90 backdrop-blur-xl p-1 rounded-2xl border border-white/10 shadow-lg">
             <button
+              id="mode-cad-btn"
               onClick={(e) => {
                 e.stopPropagation();
                 setModelMode("cad");
@@ -1670,6 +2034,7 @@ export default function ThreeProductRoom() {
               <span className="sm:hidden">CAD</span>
             </button>
             <button
+              id="mode-exploded-btn"
               onClick={(e) => {
                 e.stopPropagation();
                 setModelMode("exploded");
@@ -1767,6 +2132,7 @@ export default function ThreeProductRoom() {
 
           {/* Toggle Specs Drawer Button */}
           <button
+            id="toggle-specs-btn"
             onClick={(e) => {
               e.stopPropagation();
               setIsPanelOpen((prev) => !prev);
@@ -1846,7 +2212,11 @@ export default function ThreeProductRoom() {
       })}
 
       {/* BOTTOM CONTROLS BAR: Ergonomic 3-Section Floating Hub */}
-      <div className="absolute bottom-6 left-6 right-6 z-20 flex flex-wrap items-center justify-between gap-3 pointer-events-none">
+      <div
+        className={`absolute bottom-6 left-6 z-20 flex flex-wrap items-center justify-between gap-3 pointer-events-none transition-all duration-500 ${
+          isPanelOpen ? "right-6 lg:right-[475px]" : "right-6"
+        }`}
+      >
         {/* Left: Camera Navigation & Zoom Controls */}
         <div className="flex items-center gap-1.5 bg-slate-900/85 backdrop-blur-2xl p-1.5 rounded-2xl border border-white/10 shadow-xl pointer-events-auto">
           <button
@@ -1864,6 +2234,7 @@ export default function ThreeProductRoom() {
             <ZoomOut className="w-4 h-4" />
           </button>
           <button
+            id="reset-camera-btn"
             onClick={resetCamera}
             className="px-2.5 py-1.5 rounded-xl text-xs font-mono text-white/70 hover:text-white hover:bg-white/10 transition-colors"
             title="Reset Camera Angle"
@@ -1875,6 +2246,7 @@ export default function ThreeProductRoom() {
         {/* Center: Product Family Carousel Pills */}
         <div className="flex items-center gap-1 bg-slate-900/90 backdrop-blur-2xl p-1.5 rounded-2xl border border-white/10 shadow-2xl pointer-events-auto overflow-x-auto max-w-[280px] sm:max-w-none">
           <button
+            id="prev-product-btn"
             onClick={(e) => {
               e.stopPropagation();
               setProduct(activeIndex - 1);
@@ -1890,6 +2262,7 @@ export default function ThreeProductRoom() {
             {ROOM_PRODUCTS.map((p, idx) => (
               <button
                 key={p.name}
+                id={`product-pill-${idx}`}
                 onClick={(e) => {
                   e.stopPropagation();
                   setProduct(idx);
@@ -1906,6 +2279,7 @@ export default function ThreeProductRoom() {
           </div>
 
           <button
+            id="next-product-btn"
             onClick={(e) => {
               e.stopPropagation();
               setProduct(activeIndex + 1);
@@ -1922,6 +2296,7 @@ export default function ThreeProductRoom() {
         <div className="flex items-center gap-1.5 bg-slate-900/85 backdrop-blur-2xl p-1.5 rounded-2xl border border-white/10 shadow-xl pointer-events-auto">
           {/* Exploded / Assembled Toggle */}
           <button
+            id="toggle-exploded-btn"
             onClick={(e) => {
               e.stopPropagation();
               if (modelMode === "cad") {
@@ -1947,6 +2322,7 @@ export default function ThreeProductRoom() {
 
           {/* Light Power Switch */}
           <button
+            id="toggle-power-btn"
             onClick={(e) => {
               e.stopPropagation();
               setIsPowered((prev) => !prev);
