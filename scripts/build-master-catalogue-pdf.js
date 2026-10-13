@@ -428,25 +428,25 @@ function buildCatalogue() {
     const bulbProducts = [
       {
         title: 'Standard A-Type LED Bulb',
-        watts: '5W, 7W, 9W, 12W, 15W',
+        watts: '3W, 5W, 7W, 9W, 12W, 15W, 18W',
         img: 'public/images/led-bulb.png',
         features: [
           'Efficacy: >100 Lumens / Watt',
           'Base Cap: B22d / E27 Nickel Plated',
           'Driver: High-Surge 4KV Isolated Driver',
-          'CCT: 3000K (Warm) / 6500K (Cool Day)',
+          'CCT: 3000K / 4000K / 6500K & 3CCT',
           'Power Factor: >0.90, THD <15%'
         ],
         specHighlight: 'BIS CRS Certified • 25,000h Life'
       },
       {
         title: 'High-Power Commercial Hammer / T-Bulb',
-        watts: '20W, 30W, 40W, 50W',
+        watts: '15W, 18W, 24W, 30W, 36W, 40W, 50W',
         img: 'public/images/products/led-high-power-bulb.png',
         features: [
-          'High Output: Up to 5,000 Lumens',
-          'Heatsink: Heavy Die-Cast Core Insert',
-          'Wide Beam: 220° Glare-Free Spread',
+          'High Output: Up to 5,250 Lumens',
+          'CCT Spectrum: 3000K / 4000K / 6500K',
+          'Wide Beam: 180°-220° Glare-Free Spread',
           'Surge Protection: 4KV / 440V Cutoff',
           'Application: Warehouses, Commercial Retail'
         ],
@@ -523,23 +523,26 @@ function buildCatalogue() {
     });
 
     // Technical Specification Table at Bottom
-    const specTableY = cardGridY + (cardH * 2) + 28;
-    doc.font('Helvetica-Bold').fontSize(11).fillColor(COLORS.navy);
+    const specTableY = cardGridY + (cardH * 2) + 22;
+    doc.font('Helvetica-Bold').fontSize(10.5).fillColor(COLORS.navy);
     doc.text('Detailed Technical & Photometric Specifications', MARGIN, specTableY);
 
     const bulbTable = [
       ['SE-BLB-05W', '5W', 'B22 / E27', '>500 lm', '220-240V', '>0.90', '<15%', '4 KV', '100 pcs'],
       ['SE-BLB-09W', '9W', 'B22 / E27', '>900 lm', '220-240V', '>0.95', '<12%', '4 KV', '100 pcs'],
       ['SE-BLB-12W', '12W', 'B22 / E27', '>1200 lm', '220-240V', '>0.95', '<12%', '4 KV', '50 pcs'],
-      ['SE-BLB-20W-T', '20W', 'B22 / E27', '>2000 lm', '140-300V', '>0.95', '<10%', '4 KV', '30 pcs'],
+      ['SE-BLB-15W', '15W', 'B22 / E27', '>1500 lm', '220-240V', '>0.95', '<12%', '4 KV', '50 pcs'],
+      ['SE-BLB-18W', '18W', 'B22 / E27', '>1800 lm', '220-240V', '>0.95', '<10%', '4 KV', '50 pcs'],
+      ['SE-BLB-24W-T', '24W', 'B22 / E27', '>2400 lm', '140-300V', '>0.95', '<10%', '4 KV', '30 pcs'],
       ['SE-BLB-30W-H', '30W', 'B22 / E27', '>3000 lm', '140-300V', '>0.95', '<10%', '4 KV', '20 pcs'],
+      ['SE-BLB-40W-H', '40W', 'B22 / E27', '>4000 lm', '140-300V', '>0.95', '<10%', '4 KV', '16 pcs'],
       ['SE-BLB-50W-H', '50W', 'B22 / E27', '>5000 lm', '140-300V', '>0.95', '<10%', '4 KV', '12 pcs'],
       ['SE-EMG-09W', '9W AC / 3W DC', 'B22', '>900 lm', '140-280V', '>0.90', '<15%', '4 KV', '50 pcs'],
     ];
 
-    const bthY = specTableY + 16;
-    doc.rect(MARGIN, bthY, CONTENT_W, 18).fill(COLORS.navy);
-    doc.font('Helvetica-Bold').fontSize(7).fillColor(COLORS.white);
+    const bthY = specTableY + 15;
+    doc.rect(MARGIN, bthY, CONTENT_W, 16).fill(COLORS.navy);
+    doc.font('Helvetica-Bold').fontSize(6.8).fillColor(COLORS.white);
     const bCols = [
       { l: 'MODEL NO', x: MARGIN + 6 },
       { l: 'POWER', x: MARGIN + 70 },
@@ -551,30 +554,36 @@ function buildCatalogue() {
       { l: 'SURGE', x: MARGIN + 385 },
       { l: 'CARTON', x: MARGIN + 440 },
     ];
-    bCols.forEach(c => doc.text(c.l, c.x, bthY + 5));
+    bCols.forEach(c => doc.text(c.l, c.x, bthY + 4.5));
 
-    let browY = bthY + 18;
+    let browY = bthY + 16;
     bulbTable.forEach((row, idx) => {
       const isZebra = idx % 2 === 1;
-      const rh = 16;
+      const rh = 14.5;
       if (isZebra) doc.rect(MARGIN, browY, CONTENT_W, rh).fill(COLORS.lightGray);
       doc.rect(MARGIN, browY, CONTENT_W, rh).lineWidth(0.5).strokeColor(COLORS.border).stroke();
 
-      doc.font('Helvetica-Bold').fontSize(7).fillColor(COLORS.ink);
-      doc.text(row[0], MARGIN + 6, browY + 4);
+      doc.font('Helvetica-Bold').fontSize(6.8).fillColor(COLORS.ink);
+      doc.text(row[0], MARGIN + 6, browY + 3.5);
 
-      doc.font('Helvetica').fontSize(7).fillColor(COLORS.slateDark);
-      doc.text(row[1], MARGIN + 70, browY + 4);
-      doc.text(row[2], MARGIN + 120, browY + 4);
-      doc.text(row[3], MARGIN + 175, browY + 4);
-      doc.text(row[4], MARGIN + 230, browY + 4);
-      doc.text(row[5], MARGIN + 295, browY + 4);
-      doc.text(row[6], MARGIN + 340, browY + 4);
-      doc.text(row[7], MARGIN + 385, browY + 4);
-      doc.text(row[8], MARGIN + 440, browY + 4);
+      doc.font('Helvetica').fontSize(6.8).fillColor(COLORS.slateDark);
+      doc.text(row[1], MARGIN + 70, browY + 3.5);
+      doc.text(row[2], MARGIN + 120, browY + 3.5);
+      doc.text(row[3], MARGIN + 175, browY + 3.5);
+      doc.text(row[4], MARGIN + 230, browY + 3.5);
+      doc.text(row[5], MARGIN + 295, browY + 3.5);
+      doc.text(row[6], MARGIN + 340, browY + 3.5);
+      doc.text(row[7], MARGIN + 385, browY + 3.5);
+      doc.text(row[8], MARGIN + 440, browY + 3.5);
 
       browY += rh;
     });
+
+    // CCT Spectrum Note below table
+    doc.font('Helvetica-Bold').fontSize(6.5).fillColor(COLORS.accent);
+    doc.text('* CCT Spectrum Available:', MARGIN, browY + 5);
+    doc.font('Helvetica').fontSize(6.5).fillColor(COLORS.slateDark);
+    doc.text('3000K (Warm White), 4000K (Natural / Neutral White), 6500K (Cool Daylight) & 3CCT Tunable Driver across all models.', MARGIN + 95, browY + 5);
 
     drawRunningFooter(3);
   }
@@ -627,7 +636,7 @@ function buildCatalogue() {
         desc: 'Compact linear fittings engineered for cove lighting, wardrobe under-cabinet illumination, stairwells, and compact utility areas.',
         points: [
           'Compact cross-section for concealed cove pockets',
-          'Available in Warm White (3000K) & Day Light (6500K)',
+          'Available in Warm White (3000K), Neutral (4000K) & Day Light (6500K)',
           'High color rendering index (CRI >85)',
           'Pre-wired with quick-connect terminal clips',
           'Low total harmonic distortion (THD <15%)'

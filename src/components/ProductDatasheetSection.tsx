@@ -14,6 +14,7 @@ import {
   ZoomIn,
   ZoomOut,
   RotateCcw,
+  Sun,
 } from "lucide-react";
 import { ProductDatasheet } from "@/data/productDatasheets";
 
@@ -98,6 +99,79 @@ export default function ProductDatasheetSection({
         </div>
       )}
 
+      {/* Factory Available CCT Temperatures (Kelvin Spectrum) Bar */}
+      {(() => {
+        const hasCct =
+          datasheet.columns?.some((c) => c.toLowerCase().includes("cct")) ||
+          datasheet.highlights?.some(
+            (h) =>
+              h.label.toLowerCase().includes("cct") ||
+              h.label.toLowerCase().includes("color")
+          );
+
+        if (!hasCct) return null;
+
+        return (
+          <div className="my-6 p-4 md:p-5 rounded-sm bg-gradient-to-r from-amber-500/10 via-yellow-500/5 to-sky-500/10 border border-steel/20">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+              <div className="flex items-center gap-2">
+                <Sun className="w-4 h-4 text-amber-500" />
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-ink">
+                  Factory Available CCT Temperatures (Kelvin Spectrum)
+                </span>
+              </div>
+              <span className="text-[11px] font-mono text-steel">
+                Custom Kelvin (2700K–6500K) & 3CCT drivers supported on demand
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {/* 3000K Warm White */}
+              <div className="flex items-start gap-3 p-3 bg-white border border-amber-300/80 rounded-sm shadow-xs">
+                <span className="w-4 h-4 mt-0.5 rounded-full bg-[#f59e0b] ring-2 ring-amber-200 flex-shrink-0" />
+                <div>
+                  <div className="text-xs font-bold text-ink font-mono flex items-center gap-1.5">
+                    <span>3000K Warm White</span>
+                    <span className="text-[10px] text-amber-700 font-sans font-semibold">(WW)</span>
+                  </div>
+                  <p className="text-[11px] text-steel mt-0.5">
+                    Living rooms, bedrooms, hospitality corridors, restaurants & dining
+                  </p>
+                </div>
+              </div>
+
+              {/* 4000K Neutral White */}
+              <div className="flex items-start gap-3 p-3 bg-white border border-yellow-300/80 rounded-sm shadow-xs">
+                <span className="w-4 h-4 mt-0.5 rounded-full bg-[#fde047] ring-2 ring-yellow-200 flex-shrink-0" />
+                <div>
+                  <div className="text-xs font-bold text-ink font-mono flex items-center gap-1.5">
+                    <span>4000K Neutral White</span>
+                    <span className="text-[10px] text-stone-600 font-sans font-semibold">(NW)</span>
+                  </div>
+                  <p className="text-[11px] text-steel mt-0.5">
+                    Modern corporate offices, task areas, retail showrooms & study tables
+                  </p>
+                </div>
+              </div>
+
+              {/* 6500K Cool Daylight */}
+              <div className="flex items-start gap-3 p-3 bg-white border border-sky-300/80 rounded-sm shadow-xs">
+                <span className="w-4 h-4 mt-0.5 rounded-full bg-[#38bdf8] ring-2 ring-sky-200 flex-shrink-0" />
+                <div>
+                  <div className="text-xs font-bold text-ink font-mono flex items-center gap-1.5">
+                    <span>6500K Cool Daylight</span>
+                    <span className="text-[10px] text-sky-700 font-sans font-semibold">(CDL)</span>
+                  </div>
+                  <p className="text-[11px] text-steel mt-0.5">
+                    Industrial sheds, warehousing, healthcare cleanrooms & high-clarity spaces
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
       {/* The Tabular Wattage / Matrix Specification Table */}
       {datasheet.columns && datasheet.rows && datasheet.rows.length > 0 && (
         <div className="mt-6">
@@ -131,16 +205,39 @@ export default function ProductDatasheetSection({
                     key={rIdx}
                     className="hover:bg-accent/5 transition-colors odd:bg-white even:bg-[#f9fafb]"
                   >
-                    {row.map((cell, cIdx) => (
-                      <td
-                        key={cIdx}
-                        className={`py-3 px-4 text-ink whitespace-nowrap border-r border-steel/10 last:border-r-0 ${
-                          cIdx === 1 ? "font-semibold text-accent font-mono" : ""
-                        }`}
-                      >
-                        {cell}
-                      </td>
-                    ))}
+                    {row.map((cell, cIdx) => {
+                      const isWattage = cIdx === 1;
+                      const isCct = datasheet.columns[cIdx]?.toLowerCase().includes("cct");
+
+                      if (isCct && (cell.includes("3000K") || cell.includes("4000K") || cell.includes("6500K"))) {
+                        return (
+                          <td
+                            key={cIdx}
+                            className="py-3 px-4 text-ink whitespace-nowrap border-r border-steel/10 last:border-r-0"
+                          >
+                            <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-slate-50 border border-steel/20 rounded-sm font-mono text-xs">
+                              <div className="flex items-center gap-1">
+                                <span className="w-2.5 h-2.5 rounded-full bg-[#f59e0b]" title="3000K Warm White" />
+                                <span className="w-2.5 h-2.5 rounded-full bg-[#fde047] border border-amber-300" title="4000K Neutral White" />
+                                <span className="w-2.5 h-2.5 rounded-full bg-[#38bdf8]" title="6500K Cool Daylight" />
+                              </div>
+                              <span className="font-semibold text-ink">{cell}</span>
+                            </div>
+                          </td>
+                        );
+                      }
+
+                      return (
+                        <td
+                          key={cIdx}
+                          className={`py-3 px-4 text-ink whitespace-nowrap border-r border-steel/10 last:border-r-0 ${
+                            isWattage ? "font-bold text-accent font-mono" : ""
+                          }`}
+                        >
+                          {cell}
+                        </td>
+                      );
+                    })}
                   </tr>
                 ))}
               </tbody>
